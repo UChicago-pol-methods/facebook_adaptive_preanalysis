@@ -1,0 +1,253 @@
+\documentclass[letterpaper, 12pt, parskip=full, headsepline]{scrartcl}
+% Title and Subtitle added in .tex file
+\title{Facebook Adaptive Experiments}
+\subtitle{Preanalysis plan}
+\author{ }
+\date{\today}
+
+\input{template_MOW.sty}
+
+
+\begin{document}%
+\normalsize%
+\maketitle%
+\tableofcontents%
+\clearpage%
+
+
+\begin{abstract}
+This pre-analysis plan outlines \dots
+\end{abstract}
+
+
+
+
+\clearpage
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\clearpage
+\appendix
+
+\section{Policy learning and evaluation}
+
+Following experimental data collection, personalized policies are estimated and evaluated modifying the method explained in \cite{athey2017efficient} and also in \cite{zhou2018offline}; in those approaches, data is collected non-adaptively and is assumed to be iid. In the adaptive setting, we can not make this assumption about the data. Instead, the sample is split into an initial training period on which we learn the optimal policy: given a class of functions $\Pi$, we fit an optimal policy that satisfies
+\begin{align}
+  \hat{\pi}_{EST} = \arg\max_{\pi \in \Pi} \frac{1}{n}\sum_{i} \langle \pi(X_{i}), \hat{\Gamma}_{i,\cdot} \rangle
+\end{align}
+where $\{\hat{\Gamma}_{i,k}\}_{k=1}^{|\mathcal{W}|}$ are doubly robust scores. 
+%{\color{red}In this experiment, we will restrict our policy class $\Pi$ to be the set multinomial logistic cost-sensitive classifiers with L1-penalty.}
+
+We then estimate the value of the policy on the remaining observations. This approach is described in further detail below. 
+
+{\color{red} [This section needs to be clarified once we decide on an approach to policy learning.] }
+
+
+\begin{enumerate}
+%
+  \item Divide the data in half, and then within each half, divide the data again into $K$ folds, denoted by $S_{[1]k}$ and $S_{[2]k}$ for $k = 1, \dots, K$. (We will assume without loss of generality that $n$ is even)
+  %
+  \item Within each fold $k$, estimate $\hat{\mu}_{w}(X_{i})$ from a model fit on the K-1 remaining folds. This model could be produced, e.g., using generalized random forests with sample splitting \citep{athey2016generalized}; {\color{red}[[Confirm how we're fitting at this point]]} 
+  
+  Also within each fold $k$, calculate balancing weights $\gamma$ from the procedure described in \ref{appendix:sample_balancing}. 
+  
+  \item Construct doubly-robust scores $\hat{\Gamma}_{i,w}$ within each fold from the $\hat{\mu}_{w}(X_{i})$ and $\gamma$ from the previous step, following the procedure described in \ref{appendix:doubly-robust}.  
+  
+  \item Concatenate doubly-robust scores within each half of the data to generate the $\frac n 2 \times |\mathcal{W}|$ matrices $\hat{\Gamma}_{[1]}$ and $\hat{\Gamma}_{[2]}$. 
+  
+  \item Estimate the optimal personalized policy within each half of the data for the given policy class, e.g., for the first half:
+  \begin{align}
+      \hat{\pi}_{[1]} := \arg\max_{\pi \in \Pi} \frac{1}{|S_{[1]}|} \sum_{i \in S_{[1]}} \langle \pi(X_{i}), \hat{\Gamma}_{[1]i,\cdot} \rangle
+  \end{align}
+
+  \item For each observation $i$, compute the predicted optimal assignment
+      \begin{align}
+       \hat{\pi}_{(-i)}(X_{i})
+      \end{align}
+  \noindent where the subscript indicates that we used the policy from the half of the data that did not contain $i$.
+ 
+ \item For each half of the data, estimate {\color{red}value} $\widehat{Q}_1$ and $\widehat{Q}_2$, where, e.g., 
+  \begin{align}
+     \widehat{Q}_{1} := \frac{1}{|S_{[1]}|} \sum_{i \in S_{[1]}} \langle \hat{\pi}_{[2]}(X_{i}), \hat{\Gamma}_{[1]i,\cdot} \rangle
+  \end{align}
+
+\item Finally, we estimate the average value for the optimal personalized policy:
+
+  {\color{red}
+  \begin{align}
+     \widehat{Q}(\widehat{\pi}) := \frac{1}{2} \left(   \widehat{Q}_{1} +   \widehat{Q}_{2}\right)
+  \end{align}}
+
+\end{enumerate}
+
+
+
+\section{Matrix method, outcome model, and balancing weights}
+\subsection{Matrix method} 
+To estimate the value of a given policy, we may use an outcome model, weights, or both. Here, the estimated counterfactual rewards, $\{\hat{\Gamma}_{i,k}\}_{k=1}^{|\mathcal{W}|}$, may be estimated via,
+\begin{itemize}
+\item \textbf{Inverse probability weighted estimation}, using a version of Horvitz-Thompson estimator \citep{horvitz1952}
+\begin{align}
+\hat{\Gamma}_w^{HT} & =  \frac{1}{n} \sum_{i = 1}^n 1 \{ W_i = w\} \gamma_i Y_i. 
+\end{align}
+\item \textbf{Adaptively weighted doubly-robust estimation}. 
+\label{appendix:doubly-robust}
+\textcolor{red}{[To be further filled in, with reference to LFO paper.]}\\
+We estimate an $n \times |\mathcal{W}|$ matrix of \textit{doubly-robust scores} $\hat{\Gamma}_{i,w}$. For each treatment $w$ and observation $i$, we compute    
+      \begin{align}
+        \hat{\Gamma}_{i,w} = \hat{\mu}_{w}(X_{i}) + 1 \{W_i = w \} \gamma_{i}(Y_{i} - \hat{\mu}_w(X_i))
+    \end{align}
+  The term involving the balancing weights, $\gamma_i$, is a correction that mitigates selection bias arising from not collecting the data by assigning treatments uniformly at random; approaches are discussed in Appendix~\ref{appendix:sample_balancing}. Each element of this matrix is a (corrected) estimate of the average reward that the observation $i$ would have received had they been given treatment $w$.
+\end{itemize}
+
+
+
+\subsection{Outcome model} The {outcome model} refers to the underlying statistical model used to predict the conditional mean and variance of rewards, $\hat{\mu}_w(X_{i}), \ \hat{\sigma}_w^2(X_{i})$ for all arms $w$, used in doubly-robust estimation. In simulations, we align the outcome model of the estimated policy with the agent assigned above. 
+
+\begin{itemize}
+\item \textbf{Ridge.} We use a linear model with treatment indicators, covariates, and treatment and covariates interacted:
+\begin{align}
+\hat{\mu}_w(X_{i}) = \hat{\beta}_{0} +
+			\sum_{w} 1\{W_i = w\}\hat\beta_w  +
+			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
+         \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.
+         \label{eq:linear_model_full}
+\end{align} 
+The model is estimated using $L_{2}$ %or $L_{2}$ 
+penalties for regularization, exclusive of the main treatment effects $\beta_{W,\cdot}$.
+
+\item \textbf{Generalized random forest}.  Alternatively, we may train a random forest  %\footnote{Using the function \texttt{regression\_forest} from R package \texttt{grf}} 
+on the entire history of subjects assigned to each arm $w$. Point predictions and their conditional variances are computed as described in \citet[section 4]{athey2016generalized}. 
+\end{itemize}
+
+
+
+\subsection{Balancing weights} To account for unequal treatment assignment probabilities, we use balancing weights, $\gamma_i$. 
+\begin{itemize}\setlength\itemsep{0em}
+\item \textbf{Batch-wise inverse probability weights} are detailed in Appendix~\ref{appendix:probability}. 
+\item \textbf{Stabilized inverse probability weights} are detailed in Appendix~\ref{appendix:stabilized}.
+\item \textbf{Approximate residual balancing weights} are detailed in Appendix~\ref{appendix:sample_balancing}.
+\end{itemize}
+
+
+
+%\subsection{Variance estimation}
+%\textcolor{red}{[TBD]}
+
+
+
+\subsection{Sample balancing}
+\label{appendix:sample_balancing}
+
+\subsubsection{Batch-wise inverse probability weighting} \label{appendix:probability}
+Given a specific policy $\pi$, we can consider the probability of being assigned a treatment arm $w$ given a contextual variable $X_{i}$.
+\begin{align}
+e^{\pi}_{w}(X_i) := P(\pi(X_i) = w )
+\label{eq:weighted_optimization}
+\end{align}
+
+In a bandit problem, this probability varies with the batch under which observation $i$ was collected, as the agent updates the probabilistic policy assigned using the past history. However, within each batch the policy is fixed. %, allowing us to decompose this probability as follows. 
+
+Suppose that the data contains $J$ batches. Now, let $B_{i}$ be a random variable on $\{1,\cdots, J\}$ whose realization indicates the batch to which observation $i$ belongs. Let $\pi^{(b)}$ be the policy that was trained using all observations up to batch $b-1$ (with $\pi^{(1)}$ as the random policy).
+
+
+%Also, let $\pi^{j}$ be the policy that was trained using all observations up to batch $j-1$ (with $\pi^{1}$ as the random policy).
+%\begin{align}
+%P(W_i=w \ | \ X_i)
+%&= \sum_{j}^{J} P(W_i=w, B=j \ | \ X_i) \\
+%&= \sum_{j}^{J} P(W_i = w \ | \  B=j, X_i =x)\\
+%&= \sum_{j}^{J} \underbrace{P(\pi^{(j)}(X_i) = w)}_{\substack{\text{Within-batch assignment prob}}} \underbrace{P(B = j)}_{\text{Batch prob.}} \\
+%&= \frac{1}{J} \sum_{j}^{J} e^{\pi^{j-1}}_{w}(X_i)  \label{eq:batch-probability_weight} \\
+%&=: e_{w}(X_{i}) \label{eq:pool-probability_weight}
+%\end{align}
+
+%The quantity in expression ($\eqref{eq:batch-probability_weight}$) is the \textit{batch-wise probability weight} while the quantity in expression ($\eqref{eq:pool-probability_weight}$) is the \textit{pooled probability weight}. %(even when we did not explicitly use the \textit{pooled} qualifier). 
+%%At the end of the experiment or simulation, compute it for every observation and available arm.
+
+Each individual observation is weighted by the inverse probability of receiving their own treatment. The inverse probability weights are thus defined by:
+\begin{align}
+%g(x, w) = \frac{1\{W_{i} = w\}}{e_{w}(x)}
+\gamma^{IPW}(x, w, b) = \frac{1}{e_{w}^{\pi^{(b)}}(x)}
+\end{align}
+
+\subsubsection{Batch-wise stabilized inverse probability weighting} \label{appendix:stabilized}
+Instead of using the raw inverse probability weights from above, we may normalize the weights to one, which can improve mean squared error of the associated estimator. 
+
+\begin{align}
+\left.
+\gamma^{SIPW}(x, w, b) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+\middle/ 
+{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} }
+\right.
+\end{align}
+
+Note that when using rolling estimates incorporating these weights, we adjust $T$ accordingly, and must re-calculate all weights up to $i$ for every $i$\textsuperscript{th} estimate. \textcolor{red}{[Do we want to normalize these within batches, or across the whole experiment?]}
+
+\subsubsection{Approximate residual balancing} \label{appendix:arb}
+%\textcolor{red}{[Account for rolling weights?]}
+
+\cite{athey2018approximate} introduce \textit{approximate residual balancing} as a method for unconfounded average
+treatment effect estimation in high-dimensional linear models. The residuals from fitting a linear, potentially sparse model are used to rebalance the sample. Here, our weights solve the following optimization problem:
+\begin{align}
+\begin{split}
+\gamma_w = \arg\min_{\tilde{\gamma}}& (1 - \zeta) ||\tilde{\gamma}||_2^2 +\zeta ||\bar{X} - \boldmath{X_w}^T\tilde{\gamma}||_{\infty}^2\\
+\text{s.t}& \quad \sum\limits_{i:W_i=w} \tilde{\gamma}_i = \frac{1}{|\mathcal{W}|} \\
+&\quad 0\leq \tilde{\gamma}_i \leq n_w^{-\frac{2}{3}}
+\label{eq:arb_problem}
+\end{split}
+\end{align}
+
+where $X$ is the matrix of contexts, $\bar{X}$ represents column means $\frac{1}{n}\sum_{i} X_{i}$, and $X_w$ contains the rows of the context matrix $X$ that were assigned arm $w$. $\gamma$ represents the vector of length $n$ of individual balancing weights indexed to correspond to the ordering of the data. We use $\zeta = 0.5$, and the solution to the optimization objective is found using the MOSEK solver \citep{mosek2019}. %{\color{red}[[This is the citation for the R package, is this going to be implemented in another way?]]}
+
+
+
+\section{Agent methods} \label{subsec:exploration_methods}
+
+\textcolor{red}{[Will need to update this based on the details of the algorithm we actually use.]}
+
+
+We use the following variation on the \textit{Thompson sampling} \citep{dimakopoulou2017estimation, dimakopoulou2019balanced} method:
+
+\paragraph{Batch $1$:}
+
+Assign arms uniformly at random during this batch. At the end of the batch, follows these steps.
+
+\begin{enumerate}
+	
+ \item If using a linear model for outcome estimation, use cross-validation to compute the optimal value of the penalization factor $\lambda_{CV}$ using the entire observed history.
+
+  \item \label{step:draw} Draw $M$ bootstrap samples of the data,\footnote{We use 100 bootstrap draws.} with samples indexed by $m = 1, \dots, M$, so that data from sample $m$ is represented by $D^{(m)} := (X^{(m)}, W^{(m)}, O^{(m)})$
+
+  \item Within each sample, for each possible context $x$, arm $w$ and bootstrap sample, estimate conditional means  $\hat{\mu}_w^{(m)}(x)$ for each arm using the selected outcome model.  If using a linear model for outcome estimation, the penalization value is fixed as $\lambda_{CV}$, without performing any additional cross-validation.
+  {\color{red} [Are we doing online updating with newly observed contexts per Dimakopoulou? or pre-specifying per Cameroon?]}
+  
+%    Note how the difference in estimates across bootstrap samples reveal uncertainty around the estimate: if a particular arm $w$ consistently has much higher estimated value than any other arm, that is strong indication that this arm is the best arm (for context $x$), so we should assign it with higher probability and exploit that knowledge; in an alternative case where arm rankings switch often we will be less sure that an arm is best, so we should give higher assignment probability to different arms and keep exploring. The next step explains how we do that in practice.
+%
+
+  \item For each context $x$ and available arm $w$, compute and store the following statistics representing the average value of each arm, and the uncertainty associated with this statistic.
+    \begin{equation}
+      \begin{aligned}
+        \hat{\mu}_w(x)         &= \frac{1}{M}\sum_{m} \hat{\mu}_w^{(m)}(x) \\
+         \hat{\sigma}^{2}_w(x) &= \frac{1}{M(M-1)} \sum_{m} (\hat{\mu}_w^{(m)}(x) - \hat{\mu}_w(x))^2
+      \end{aligned}
+    \end{equation}
+
+  \item \label{step:prob} Approximate the probability that each arm $w$ is maximal for each possible context $x$. In order to do that, we draw from the following probability distribution a large number $S$ times
+  \begin{align}
+    \theta_{w}(x) \sim \mathcal{N}(\hat{\mu}_w(x), \hat{\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and arm }w
+    \text{ for all arms }w
+  \end{align}
+
+  and compute the fraction of times that arm $w$ was the largest for each $s$ set of draws
+  \begin{align}
+    q_{1}(x, w) = \frac{1}{S} \sum_{s} 1\left\{ \theta_{w}^{(s)}(x) = \max \{\theta_{1}^{(s)}(x), \dots, \theta_{|\mathcal{W}|}^{(s)}(x) \}  \right\}
+  \end{align}
+
+  we call these the \textit{Thompson Sampling} probabilities associated with the pair $(x, w)$. 
+\end{enumerate}
+
+\paragraph{Batch $k > 1$:} For every new subject, collect data on their contexts $x$ and use the probabilities computed in the previous batch to assign arms. Note that in this setting, the mapping $x \mapsto q_{1}(x, \cdot)$ is a \hyperlink{policy}{policy}. At the end of each batch, repeat steps \ref{step:draw}-\ref{step:prob} to update the Thompson sampling probabilities to $q_{k}$ using all the data so far.
+
+
+
+\end{document}
