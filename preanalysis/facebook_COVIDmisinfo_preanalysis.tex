@@ -1,8 +1,8 @@
 \documentclass[letterpaper, 12pt, parskip=full, headsepline]{scrartcl}
 % Title and Subtitle added in .tex file
-\title{Facebook Adaptive Experiments}
+\title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
 \subtitle{Preanalysis plan}
-\author{ }
+\author{Susan Athey, Molly Offer-Westort, Leah R. Rosenzweig}
 \date{\today}
 
 \input{template_MOW.sty}
@@ -16,7 +16,7 @@
 
 
 \begin{abstract}
-This pre-analysis plan outlines \dots
+Alongside the outbreak of Coronavirus, much of the world’s population is also experiencing an “infodemic” -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. While many false cures are largely harmless (e.g., drinking lemon water), others have devastating consequences, such as taking chloroquine. As a result, governments struggling to prepare healthcare systems and encourage citizens to comply with best practices also need to tackle misinformation. Building upon the experimental literature on combating fake news, we evaluate the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. Our aim is to find the context-aware intervention policy that will assign individuals the intervention that is most effective for them, based on their covariate profile. Using a contextual adaptive experimental design to sequentially assign treatment probabilities, we are able to learn the optimal contextual policy, and minimize assignment to ineffective or counter-productive interventions within the experiment. Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. Finally, we bring comparative data to a global problem for which the existing research has largely been limited to the Global North. This pre-analysis plan describes the research design and outlines the key hypotheses that we will evaluate.
 \end{abstract}
 
 
@@ -24,11 +24,90 @@ This pre-analysis plan outlines \dots
 
 \clearpage
 \bibliographystyle{apalike}
-\bibliography{references}
+\bibliography{fb_misinfo_references}
 
 \clearpage
 \appendix
 
+\section{Motivation and Research Questions}
+[LR: Have this mostly outlined - will integrate tomorrow]
+
+
+
+\section{Case Selection}
+% Why kenya + Nigeria?
+
+We examine these questions using a study focused on online social media users in two of the major hubs of online communication in sub-Saharan Africa, Kenya and Nigeria. Collectively, these countries host 38 million Facebook users who are 18 years and older (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. 
+
+%% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
+
+\section{Research Design and Hypotheses}
+
+
+
+\subsection{Sample recruitment}
+We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. 
+
+%% LR: do we want to achieve balance on any other demographics? Maybe some of the key variables we care about for the contextual bandit..? In my experience if we just create male/female country-level ads we'll also get mostly young, educated, urban respondents. But that's also largely who the FB population is (at least in kenya). But we could easily create more ads to get fill other quotas, but not sure if/how that will affect the randomization in the chatbot
+
+After clicking on our advertisement that will offer users with the opportunity to ``Take a short COVID-19 survey for airtime,'' users will be directed to our Facebook page [link?] to interact with a Facebook Messenger chatbot. In contrast to sending users to a Qualtrics survey, the chatbot has the benefit of keeping users on the Facbeook platform, with which they are likely more familiar, and maintaining a realistic setting in which users might encounter online misinformation.\footnote{INCLUDE IN APPENDIX IMAGE OF AD + CHATBOT.} Respondents who complete the \textbf{20} minute survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. 
+
+\subsection{Experimental setup}
+The survey conducted through the chatbot involves an adaptive design to test the best performing intervention to tackle Covid misinformation. 
+
+\subsubsection{Treatment}
+Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. 
+
+%% LR: I can clean this up later - I wonder if we also want to have a column for previous studies that have used these treatments + their findings?
+\begin{table}[htb]
+\begin{tabular}{l|l|l}
+\multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
+Facebook tips                                                                                                           & Respondent                                                                                                   & Show Facebook's ``Tips to Spot False News'' \\
+AfricaCheck's tips                                                                                                         & Respondent                                                                                                   & Show \url{Africacheck.org}'s Guide on how to vet information during a pandemic                                                                                                                                                                                                                                                                                                                             \\
+Emotions                                                                                                       & Respondent                                                                                                   & \begin{tabular}[c]{@{}l@{}}Emotion suppression (Gross 1998): ``As you view and read the headlines,\\ if you have any feelings, please try your best not to let those feelings show. \\ Read all of the headlines carefully, \\but try to behave so that someone watching you would not know that you are feeling anything at all.”\end{tabular} \\
+Video training                                                                                                     & Respondent                                                                                                   & (\url{https://www.bbc.com/news/av/embed/p088bh96/52118949})                                                                                                                                                                                                                                                                                                                                                                                      \\
+Accuracy nudge                                                                                 & Respondent                                                                                                   & "Do you think this headline accurately describes an event that actually happened"? yes/no                                                                                                                                                                                                                                                                                        \\
+Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[c]{@{}l@{}}Facebook context button; if you click the info button on an article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered, maybe a wikipedia link if it's a large outlet (e.g., Guardian).\\ ALSO has a flag if article is more than 90 days old\end{tabular}                                                                          \\
+Flag                                                                                                           & Headline                                                                                                     & Facebook style "disputed" flag; has a flag next to headline                                                                                                                                                                                                                                                                                                                                                     \\
+Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link, show two other stories which may confirm or correct the story                                                                                                                                                                                                                                                                                               \\
+Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party; could also vary source, e.g., in-house Facebook fact-checkers vs. third party vs. crowd-sourced                                                                                                                                                                                                                                                                             \\
+Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
+\end{tabular}
+\caption{Description of interventions included in the experiment}
+\end{table}
+
+% contextual bandit
+
+% optimizing strategy/algorithm
+
+\subsubsection{Outcomes}
+We have two main outcomes of interest:
+
+\begin{enumerate}
+\item Willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?''
+\item Interest in sharing the article, as measured by two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. 
+\end{enumerate}
+
+In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and a the end of the survey provide links to the \textit{true} information. At this point we debrief the respondent, informing them that some (if any) of the headlines they wanted to share are \textit{false} and for that reason they are unable to share them. Instead, we provide links to tips for spotting misinformation online and links to the true pieces of information that they saw. By embedding variables in these urls we will be able to track if and how respondents shared these articles.
+
+
+%% rather than it's own section we could also integrate hypotheses into the next section (analytic strategy)--e.g. say how we will analyze results and what we expect
+\subsection{Hypotheses}
+\subsubsection{Optimal interventions:}
+\textbf{H1:} ...
+
+\subsubsection{Heterogeneity:}
+Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis.
+ 
+\textbf{H4:}...
+
+\section{Analytic Strategy}
+\subsection{Estimating Optimal}
+
+
+
+
+%% below is leftover from the original adaptive preanalysis plan
 \section{Policy learning and evaluation}
 
 Following experimental data collection, personalized policies are estimated and evaluated modifying the method explained in \cite{athey2017efficient} and also in \cite{zhou2018offline}; in those approaches, data is collected non-adaptively and is assumed to be iid. In the adaptive setting, we can not make this assumption about the data. Instead, the sample is split into an initial training period on which we learn the optimal policy: given a class of functions $\Pi$, we fit an optimal policy that satisfies
