@@ -22,15 +22,23 @@ Alongside the outbreak of Coronavirus, much of the world’s population is also 
 
 
 
-\clearpage
-\bibliographystyle{apalike}
-\bibliography{fb_misinfo_references}
-
-\clearpage
-\appendix
 
 \section{Motivation and Research Questions}
-[LR: Have this mostly outlined - will integrate tomorrow]
+
+% motivation
+Alongside the outbreak of Coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures, some of which are largely harmless, such as drinking lemon water, while others can have devastating consequences if adopted, such as taking chloroquine or drinking bleach. As a result, governments struggling to prepare healthcare systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
+
+% what we do 
+This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. We test interventions targeted at both the respondent level, such as general warnings and headline-level treatments, such as flags and ``false'' tags (treatments are described in table \ref{tab:treatments}). 
+
+Using a contextual adaptive experimental design, we sequentially assign treatment probabilities in order to learn the optimal contextual policy, and minimize assignment to ineffective or counter-productive interventions within the experiment. Our aim is to find the context-aware intervention policy that will assign individuals the intervention that is most effective for them, based on their covariate profile. Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
+
+%% LR: we will also interact/factorialize the treatments and evaluate the best "policy" -which could be a combination of both respondent and headline-level interventions, right? If so, that's also a selling point!
+
+
+% how we build on existing lit
+This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem for which the existing research has largely been limited to the Global North. Finally, This pre-analysis plan describes the research design and outlines the key hypotheses that we will evaluate.
+
 
 
 
@@ -40,6 +48,14 @@ Alongside the outbreak of Coronavirus, much of the world’s population is also 
 We examine these questions using a study focused on online social media users in two of the major hubs of online communication in sub-Saharan Africa, Kenya and Nigeria. Collectively, these countries host 38 million Facebook users who are 18 years and older (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. 
 
 %% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
+
+\begin{figure}[htb]
+\centering
+\caption{Map illustrating the volume of fact-checks in \url{poynter.org}'s global coronavirus facts database.}
+\label{fig:poynter}
+\includegraphics[width=.95\textwidth]{poynter2.png}
+\end{figure}
+
 
 \section{Research Design and Hypotheses}
 
@@ -59,21 +75,27 @@ The survey conducted through the chatbot involves an adaptive design to test the
 Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. 
 
 %% LR: I can clean this up later - I wonder if we also want to have a column for previous studies that have used these treatments + their findings?
-\begin{table}[htb]
+\begin{table}[htb!]
 \begin{tabular}{l|l|l}
 \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
-Facebook tips                                                                                                           & Respondent                                                                                                   & Show Facebook's ``Tips to Spot False News'' \\
-AfricaCheck's tips                                                                                                         & Respondent                                                                                                   & Show \url{Africacheck.org}'s Guide on how to vet information during a pandemic                                                                                                                                                                                                                                                                                                                             \\
-Emotions                                                                                                       & Respondent                                                                                                   & \begin{tabular}[c]{@{}l@{}}Emotion suppression (Gross 1998): ``As you view and read the headlines,\\ if you have any feelings, please try your best not to let those feelings show. \\ Read all of the headlines carefully, \\but try to behave so that someone watching you would not know that you are feeling anything at all.”\end{tabular} \\
-Video training                                                                                                     & Respondent                                                                                                   & (\url{https://www.bbc.com/news/av/embed/p088bh96/52118949})                                                                                                                                                                                                                                                                                                                                                                                      \\
-Accuracy nudge                                                                                 & Respondent                                                                                                   & "Do you think this headline accurately describes an event that actually happened"? yes/no                                                                                                                                                                                                                                                                                        \\
-Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[c]{@{}l@{}}Facebook context button; if you click the info button on an article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered, maybe a wikipedia link if it's a large outlet (e.g., Guardian).\\ ALSO has a flag if article is more than 90 days old\end{tabular}                                                                          \\
-Flag                                                                                                           & Headline                                                                                                     & Facebook style "disputed" flag; has a flag next to headline                                                                                                                                                                                                                                                                                                                                                     \\
-Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link, show two other stories which may confirm or correct the story                                                                                                                                                                                                                                                                                               \\
-Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party; could also vary source, e.g., in-house Facebook fact-checkers vs. third party vs. crowd-sourced                                                                                                                                                                                                                                                                             \\
+Facebook tips                                                                                                           & Respondent                                                                                                   &  Facebook's ``Tips to Spot False News'' 
+\\
+AfricaCheck tips                                                                                                         & Respondent                                                                                                   &  \url{Africacheck.org}'s guide: \\ & & ``How to vet information during a pandemic''                                                                                                                                                                                                                                                                                                                             \\
+Video training                                                                                                     & Respondent                                                                                                   &  \href{https://www.bbc.com/news/av/embed/p088bh96/52118949}{BBC Video training}                                                                                                                                                                                                                                                                                                                                                                                  \\
+Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all.” \citep{gross1998emerging}\end{tabular}
+\\
+Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``Do you think this headline accurately\\& & describes an event that actually  happened?'' \\& &  \citep{pennycook2020fighting}.
+\\
+Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[t]{@{}l@{}}Facebook context button; if you click the info button on an\\ article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered,\\ and has a flag if article is more than 90 days old\end{tabular}
+\\
+Flag                                                                                                           & Headline                                                                                                     &  "Disputed" flag on the headline                                                                                                                                                                                                                                                                                                                                                     \\
+Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link,\\ & & show two other stories which may confirm or correct the story                                                                                                                                                                                                                                                                                               \\
+Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party\\ & & (e.g., Facebook, AFP, AfricaCheck, etc)
+ \\
 Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
 \end{tabular}
 \caption{Description of interventions included in the experiment}
+\label{tab:treatments}
 \end{table}
 
 % contextual bandit
@@ -327,6 +349,12 @@ Assign arms uniformly at random during this batch. At the end of the batch, foll
 
 \paragraph{Batch $k > 1$:} For every new subject, collect data on their contexts $x$ and use the probabilities computed in the previous batch to assign arms. Note that in this setting, the mapping $x \mapsto q_{1}(x, \cdot)$ is a \hyperlink{policy}{policy}. At the end of each batch, repeat steps \ref{step:draw}-\ref{step:prob} to update the Thompson sampling probabilities to $q_{k}$ using all the data so far.
 
+\clearpage
+\bibliographystyle{apalike}
+\bibliography{fb_misinfo_references}
+
+\clearpage
+\appendix
 
 
 \end{document}
