@@ -27,7 +27,7 @@ Alongside the outbreak of Coronavirus, much of the world’s population is also 
 \section{Motivation and Research Questions}
 
 % motivation
-Alongside the outbreak of Coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures, some of which are largely harmless, such as drinking lemon water, while others can have devastating consequences if adopted, such as taking chloroquine or drinking bleach. As a result, governments struggling to prepare healthcare systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
+Alongside the outbreak of Coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures, some of which are largely harmless, such as drinking lemon water, while others can have devastating consequences if adopted, such as taking chloroquine or drinking bleach. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
 
 % what we do 
 This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. We test interventions targeted at both the respondent level, such as general warnings, as well as headline-level treatments, such as flags and ``false'' tags (treatments are described in Table~\ref{tab:treatments}). 
@@ -35,7 +35,7 @@ This project evaluates the effect of interventions designed to decrease sharing 
 Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign individuals the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 % how we build on existing lit
-This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem for which the existing research has largely been limited to the Global North. Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
+This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research is limited to the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}. Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
 
 
 
@@ -43,7 +43,7 @@ This work builds on the experimental literature on combating fake news in severa
 \section{Case Selection}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on online social media users in two of the major hubs of online communication in sub-Saharan Africa, Kenya and Nigeria. Collectively, these countries host 38 million Facebook users who are 18 years and older (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. 
+We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, these countries host 38 million Facebook users who are 18 years and older (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified Coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global Coronavirus facts database, which demonstrates that Kenya and Nigeria are the top sources of factchecks in sub-Saharan Africa. Thus, there is a large database of verified information from which we can draw stimulit for our experiment in these two countries. 
 
 \todo{citations demonstrating Kenya + Nigeria are hubs of misinfo}
 \todo{major English media sources}
@@ -71,9 +71,11 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 \subsection{Experimental setup}
 
 \subsubsection{Treatment}
-Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. Treatments are presented in Table~\ref{tab:treatments}. 
+Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
 
-%% LR: I can clean this up later - I wonder if we also want to have a column for previous studies that have used these treatments + their findings?
+% interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
+
+
 \begin{table}[htb!]
 \begin{tabular}{l|l|l}
 \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
@@ -97,9 +99,6 @@ Control                                                                         
 \label{tab:treatments}
 \end{table}
 
-% contextual bandit
-
-% optimizing strategy/algorithm
 
 \subsubsection{Outcomes}
 We have two main outcomes of interest:
@@ -109,7 +108,7 @@ We have two main outcomes of interest:
 \item Interest in sharing the article, as measured by two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. 
 \end{enumerate}
 
-In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and a the end of the survey provide links to the \textit{true} information. At this point we debrief the respondent, informing them that some (if any) of the headlines they wanted to share are \textit{false} and for that reason they are unable to share them. Instead, we provide links to tips for spotting misinformation online and links to the true pieces of information that they saw. By embedding variables in these urls we will be able to track if and how respondents shared these articles.
+In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and a the end of the survey provide links to the \textit{true} information. At this point we debrief the respondent, informing them that some (if any) of the headlines they wanted to share are \textit{false} and for that reason they are unable to share them. Instead, we provide links to tips for spotting misinformation online and links to the true pieces of information that they saw. By embedding variables in these urls we will be able to track if and how respondents shared these articles.\todo{make sure we can do this!}
 
 
 
@@ -215,13 +214,15 @@ Following experimental data collection, personalized policies are estimated and 
 
 %% rather than it's own section we could also integrate hypotheses into the next section (analytic strategy)--e.g. say how we will analyze results and what we expect
 \subsection{Hypotheses}
+
+\todo{LR: do we want to add hypotheses about which treatment we think will be the "best" / which covariates matter?}
 \subsubsection{Optimal interventions:}
 
 Our primary hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$ and the value of fixed policies $\pi_{W}$ to control $\pi_{CTR}$.
 
 \begin{enumerate}
 \item[ ] 
-We determine whether any of the treatments improve over the control. 
+We determine whether any of the treatments improve over the control. \todo{LR: do we need to define what "higher value" means. e.g. optimizing for a treatment that increases/no change of sharing of TRUE info but decreases sharing of FALSE info ?}
 \begin{hypothesis} The best fixed policy ($\pi_{w_{\textrm{max} } }$) achieves higher value than the control policy ($\pi_{CTR}$)   \label{eq:control_null}
 \begin{align*}
 H_{0}: Q(\pi_{w_{\textrm{max} } }) = Q(\pi_{CTR}) \qquad H_{a}:  Q(\pi_{w_{\textrm{max} } }) > Q(\pi_{CTR})
