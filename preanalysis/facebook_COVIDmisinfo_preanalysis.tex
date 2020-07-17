@@ -35,7 +35,7 @@ This project evaluates the effect of interventions designed to decrease sharing 
 Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign individuals the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 % how we build on existing lit
-This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research is limited to the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}. Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
+This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research is limited to the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
 
 
 
@@ -43,10 +43,8 @@ This work builds on the experimental literature on combating fake news in severa
 \section{Case Selection}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, these countries host 38 million Facebook users who are 18 years and older (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified Coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global Coronavirus facts database, which demonstrates that Kenya and Nigeria are the top sources of factchecks in sub-Saharan Africa. Thus, there is a large database of verified information from which we can draw stimulit for our experiment in these two countries. 
+We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, there are 38 million Facebook users who are 18 years and older from these two countries (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified Coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global Coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. 
 
-\todo{citations demonstrating Kenya + Nigeria are hubs of misinfo}
-\todo{major English media sources}
 %% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
 
 \begin{figure}[htb]
@@ -62,11 +60,12 @@ We examine these questions using a study focused on online social media users in
 
 
 \subsection{Sample recruitment}
-We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. 
+We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot and 5,000 respondents in each country for the full scale survey.\todo{Revise after power calculations...}
 
-%% LR: do we want to achieve balance on any other demographics? Maybe some of the key variables we care about for the contextual bandit..? In my experience if we just create male/female country-level ads we'll also get mostly young, educated, urban respondents. But that's also largely who the FB population is (at least in kenya). But we could easily create more ads to get fill other quotas, but not sure if/how that will affect the randomization in the chatbot
+\todo{Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondet and headline correlations.}
 
-Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 15 minute study about COVID-19 on Messenger'' in exchange for the equivalent of USD 0.55 in mobile phone airtime. When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey. The page, In contrast to sending users to an external survey platform such as Qualtrics, the chatbot has the benefit of keeping users on the Facebook platform, with which they are likely more familiar, and maintaining a realistic setting in which users might encounter online misinformation.\footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{recruitment}. \color{red}{[[Add images of chatbot once linked to page]]}} Respondents who complete the 15 minute survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
+
+Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a \textcolor{red}{15} minute study about COVID-19 on Messenger'' in exchange for the equivalent of USD \textcolor{red}{0.55} in mobile phone airtime. When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey. In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.\footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{recruitment}. \color{red}{[[Add images of chatbot once linked to page]]}} Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
 
 \subsection{Experimental setup}
 
@@ -83,13 +82,15 @@ Facebook tips                                                                   
 \\
 AfricaCheck tips                                                                                                         & Respondent                                                                                                   &  \url{Africacheck.org}'s guide: \\ & & ``How to vet information during a pandemic''                                                                                                                                                                                                                                                                                                                             \\
 Video training                                                                                                     & Respondent                                                                                                   &  \href{https://www.bbc.com/news/av/embed/p088bh96/52118949}{BBC Video training}                                                                                                                                                                                                                                                                                                                                                                                  \\
-Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all.” \citep{gross1998emerging}\end{tabular}
+Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all” \citep{gross1998emerging}.\end{tabular}
 \\
 Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``Do you think this headline accurately\\& & describes an event that actually  happened?'' \\& &  \citep{pennycook2020fighting}.
 \\
-Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[t]{@{}l@{}}Facebook context button; if you click the info button on an\\ article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered,\\ and has a flag if article is more than 90 days old\end{tabular}
+Deliberation nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``In a few words, please say \textit{why} you would\\ & & like to share or why you would not like to share this headline.''\\ & & [open text response]
 \\
-Flag                                                                                                           & Headline                                                                                                     &  ``Disputed" flag on the headline                                                                                                                                                                                                                                                                                                                                                     \\
+%Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[t]{@{}l@{}}Facebook context button; if you click the info button on an\\ article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered,\\ and has a flag if article is more than 90 days old\end{tabular}
+%\\
+%Flag                                                                                                           & Headline                                                                                                     &  ``Disputed" flag on the headline                                                                                                                                                                                                                                                                                                                                                     \\
 Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link,\\ & & show two other stories which may confirm or correct the story                                                                                                                                                                                                                                                                                               \\
 Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party\\ & & (e.g., Facebook, AFP, AfricaCheck, etc)
  \\
@@ -104,7 +105,7 @@ Control                                                                         
 We have two main outcomes of interest:
 
 \begin{enumerate}
-\item Willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?''
+\item Willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?'' \textcolor{red}{LR: since this is not our primary outcome do we want to delete or keep even though we're not optimizing for it and still analyze?}
 \item Interest in sharing the article, as measured by two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. 
 \end{enumerate}
 
@@ -199,10 +200,8 @@ Probability floor & [0.01, 0.025, 0.5]\\
 \end{table}
 
 \section{Analytic Strategy}
+
 \subsection{Estimating Optimal Policies}
-
-
-
 
 
 
@@ -215,14 +214,16 @@ Following experimental data collection, personalized policies are estimated and 
 %% rather than it's own section we could also integrate hypotheses into the next section (analytic strategy)--e.g. say how we will analyze results and what we expect
 \subsection{Hypotheses}
 
-\todo{LR: do we want to add hypotheses about which treatment we think will be the "best" / which covariates matter?}
+
 \subsubsection{Optimal interventions:}
 
 Our primary hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$ and the value of fixed policies $\pi_{W}$ to control $\pi_{CTR}$.
 
+\todo{Response function: optimize to reduce sharing of fake news, while accounting for sharing of true news (willing to tolerate reduction in sharing of true news). Latter is primary interest, what happens with sharing true info of secondary interest.}
+
 \begin{enumerate}
 \item[ ] 
-We determine whether any of the treatments improve over the control. \todo{LR: do we need to define what "higher value" means. e.g. optimizing for a treatment that increases/no change of sharing of TRUE info but decreases sharing of FALSE info ?}
+We determine whether any of the treatments improve over the control. 
 \begin{hypothesis} The best fixed policy ($\pi_{w_{\textrm{max} } }$) achieves higher value than the control policy ($\pi_{CTR}$)   \label{eq:control_null}
 \begin{align*}
 H_{0}: Q(\pi_{w_{\textrm{max} } }) = Q(\pi_{CTR}) \qquad H_{a}:  Q(\pi_{w_{\textrm{max} } }) > Q(\pi_{CTR})
@@ -251,7 +252,7 @@ We then estimate the value of the policy on the remaining observations. To evalu
 
 
 
-
+\textcolor{red}{TO ADD?: 1. covariates - which to include and whether discrete or continuous. LR: I think the only one I would think that might not be binary but have a few categories is age (cohorts) and religiosity (frequency of attendance).\\ 2. Do we want to specify that among the control group we will analyze the predictors of willingness to share fake news (maybe in this case more than true info, bc we want to predict ppl most susceptible to sharing falsities rather than just "always sharers")? -- some thing we might hypothesize: belief in science/religiosity/COVID knowledge will be negatively correlated with sharing false cures... Age/trust in media will be positively correlated with sharing false cures. gender? [I dont have strong priors]. Unlike the US I think there will NOT be a strong correlation btw partisanship and willingness to share cures.}
 
 
 
@@ -304,5 +305,6 @@ Instead of using the raw inverse probability weights, we normalize the weights t
 \right.
 \end{align}
 
+\todo{Add survey instrument}
 
 \end{document}
