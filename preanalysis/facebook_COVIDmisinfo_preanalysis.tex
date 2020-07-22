@@ -1,4 +1,8 @@
-\documentclass[letterpaper, 12pt, parskip=full,DIV=12]{scrartcl}
+%\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+% The next three lines are temporary, for todo notes, remove after notes are removed
+\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+\setlength{\marginparwidth}{4.5cm}
+\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 % Title and Subtitle added in .tex file
 \title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
 \subtitle{Preanalysis plan}
@@ -60,12 +64,32 @@ We examine these questions using a study focused on online social media users in
 
 
 \subsection{Sample recruitment}
-We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot and 5,000 respondents in each country for the full scale survey.\todo{Revise after power calculations...}
-
-\todo{Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondet and headline correlations.}
+We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\textcolor{red}{[TK]}.
 
 
 Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a \textcolor{red}{15} minute study about COVID-19 on Messenger'' in exchange for the equivalent of USD \textcolor{red}{0.55} in mobile phone airtime. When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey. In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.\footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{recruitment}. \color{red}{[[Add images of chatbot once linked to page]]}} Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
+
+\subsection{Covariates}
+
+We include the below covariates in analysis. The full list of covariates and question wording is in Appendix~\textcolor{red}{[TK]}. \todo{Do we want to do secondary analyses with all covariates? We can conduct this ex-post, we just can't update using the full model. }
+\begin{table}[H]
+\begin{tabular}{p{0.4\linewidth}p{0.6\linewidth}}
+\textbf{Covariate}                   & \textbf{Coded as}                                     \\
+\hline
+Gender                      & 1   if male, 0 otherwise                     \\
+Age                         & Indicators   for population quartiles        \\
+Education                                   & Categorical: no/informal schooling, any   primary school, any secondary school, post-seconday qualifications, any   university \\
+Religion                    & Categorical: Muslim, Christian, other                     \\
+Religiousity                                & Categorical: less than a week, more than once   a week but less than daily, daily                                              \\
+No.   people in household   & Indicators   for population quartiles        \\
+Index   of scientific views & Indicators for integers 0:2                  \\
+Concern regarding COVID-19  & Categorical: ery/somewhat/not worried \\
+Perceived government efficacy   on COVID-19 & Categorical:  positive,   neutral, negative                                                                     
+\end{tabular}
+\end{table}
+
+\todo{Discuss covariates. As is, this is 38,880 unique covariate combinations; is that feasible for implementation with zapier/google sheets/bootstrapping? In practice, make sure we can run this process if we see a category we've never observed before. }
+\todo{LR: I think the only one I would think that might not be binary but have a few categories is age (cohorts) and religiosity (frequency of attendance).}
 
 \subsection{Experimental setup}
 
@@ -74,8 +98,8 @@ Drawing on the literature on experimental interventions to combat misinformation
 
 % interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
 
-
-\begin{table}[htb!]
+\textcolor{red}{[Table to be updated]}
+\begin{table}[H]
 \begin{tabular}{l|l|l}
 \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
 Facebook tips                                                                                                           & Respondent                                                                                                   &  Facebook's ``Tips to Spot False News'' 
@@ -91,7 +115,7 @@ Deliberation nudge                                                              
 %Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[t]{@{}l@{}}Facebook context button; if you click the info button on an\\ article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered,\\ and has a flag if article is more than 90 days old\end{tabular}
 %\\
 %Flag                                                                                                           & Headline                                                                                                     &  ``Disputed" flag on the headline                                                                                                                                                                                                                                                                                                                                                     \\
-Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link,\\ & & show two other stories which may confirm or correct the story                                                                                                                                                                                                                                                                                               \\
+Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link,\\ & & show one other stories which corrects a false news story                                                                                                                                                                                                                                                                                             \\
 Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party\\ & & (e.g., Facebook, AFP, AfricaCheck, etc)
  \\
 Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
@@ -100,31 +124,58 @@ Control                                                                         
 \label{tab:treatments}
 \end{table}
 
+Respondent-level treatments and headline-level treatments are treated as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. Procedures for calculating treatments assignment probabilities are discussed in section \textcolor{red}{[TK]}. 
 
-\subsubsection{Outcomes}
-We have two main outcomes of interest:
 
-\begin{enumerate}
-\item Willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?'' \textcolor{red}{LR: since this is not our primary outcome do we want to delete or keep even though we're not optimizing for it and still analyze?}
-\item Interest in sharing the article, as measured by two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. 
-\end{enumerate}
+\subsubsection{Outcomes and Response Function}
 
-In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and a the end of the survey provide links to the \textit{true} information. At this point we debrief the respondent, informing them that some (if any) of the headlines they wanted to share are \textit{false} and for that reason they are unable to share them. Instead, we provide links to tips for spotting misinformation online and links to the true pieces of information that they saw. By embedding variables in these urls we will be able to track if and how respondents shared these articles.\todo{make sure we can do this!}
+We are interested in decreasing sharing of harmful false information about COVID-19 cures and treatments while not negatively impacting sharing of useful information about transmission and best practices from verified sources. 
+
+\paragraph{Primary Response Function}
+
+We measure interest in sharing information through two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. By using a pretest-posttest design \textcolor{red}{[citation]} and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our design. 
+
+Prior to treatment, we show respondents two articles randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions. They are then randomly assigned treatment. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported interest questions.
+
+
+We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of individual $i$'s pre-treatment responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of individual $i$'s pre-treatment responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2,3,4}$. 
+
+Our response function is then:
+\[
+Y_i = -(M_i^2 - M_i^1) + 0.5 \times (T_i^2 - T_i^1)
+\]\todo{LR:Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondent and headline correlations.\\
+MOW: Let's discuss, I'm not sure what this would look like for our adaptive agent model. }
+
+Because of random assignment, we expect to see no systematic differences in interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-treatment compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-treatment compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
+
+This response function will be the variable which we optimize for in our adaptive algorithm described in Section~\textcolor{red}{[TK]}, and in our policy learning described in Section~\textcolor{red}{[TK]}. 
+
+\paragraph{Secondary Outcomes}
+Additionally, we measure several secondary outcomes, which we will also report. \todo{Formalize how these secondary outcomes are analyzed, based on eventual below linear model.}
+
+These include willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?'' As above, we code responses as 1 if the respondent affirms and 0 otherwise. We separately calculate post-treatment minus pre-treatment differences for misinformation and true informational stimuli, and report regressions in the format \textcolor{red}{[TK]}. 
+
+Additionally, we record behavioral measures. At the end of the survey, for each true informational stimuli that the respondent reported they would be interested in sharing, we offer respondents the opportunity to actually share this information as a Facebook post, which has been created on our project Facebook page. We are able to measure whether respondents click on a button which opens a pop-up screen to share the post on Facebook, however, we cannot measure directly whether they then actually follow through to the second step and post the article on their own timeline. Consequently, we report rates of clicking the initial share button in the format \textcolor{red}{[TK]}. Additionally, we report the \textit{aggregate} number of times the associated post for each stimuli was shared. \todo{We \textit{could} actually create a separate post for each treatment combination, and measure sharing that way, but this seems like overkill for a secondary outcome in an already complicated project. } 
+
+And, in order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and at the end of the survey provide links to the \textit{true} information. 
+
+At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online. 
 
 
 
 
 \section{Data Collection and Design Parameters}
 
-We will collect data using a contextual adaptive experimental design, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, outcomes, and covariates. Our objective is to learn and evaluate an optimal contextual policy, under which we assign the most effective treatment conditional on covariates. To do this, we use a \textit{contextual bandit} algorithm, which balances \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on covariates.  This allows us to continue to learn about treatment effect heterogeneity while improving outcomes over time \textit{within} the frame of the experiment. 
+\subsection{Adaptive data collection}
+We will collect data using a contextual adaptive experimental design, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, $W_i \in \ww$\footnote{Our treatments is composed of two separate factors, but here we use $W$ to represent combined treatment conditions. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. Our objective is to learn and evaluate an optimal contextual policy, under which we assign the most effective treatment conditional on covariates. To do this, we use a \textit{contextual bandit} algorithm, which balances \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on covariates, with batches $b = 1, \dots, B$.  This allows us to continue to learn about treatment effect heterogeneity while improving outcomes over time \textit{within} the frame of the experiment. 
 
 We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each arm is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We discuss size of batches below. 
 
 % \label{subsec:exploration_methods}
-We use a version of the balanced linear Thompson sampling method described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced} :
+Our implementation is based on the balanced linear Thompson sampling method described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced} :
 
 \begin{enumerate}
-\item In the first batch, $b = 1$, assign treatment uniformly at random. 
+\item In the first batch, $b = 1$, we assign treatment uniformly at random. 
 
 
 \item For batches $b = 2, \dots, B-1$, as determined by the number of batches described in Table~\ref{tab:design}:
@@ -132,17 +183,20 @@ We use a version of the balanced linear Thompson sampling method described in \c
 \begin{enumerate}
 	
  \item Fit a ridge regression model. Use cross-validation to compute the optimal value of the penalization factor $\lambda_{CV}$ using the entire observed history of data.\footnote{For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
+ 
 \begin{align*}
-\hat{\mu}_w(X_{i}) = \hat{\beta}_{0} +
-			\sum_{w} 1\{W_i = w\}\hat\beta_w  +
-			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
-         \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.
+\hat{\mu}_w(X_{i}) & =
+			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
+			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
+			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  \hat w^H\}\hat\beta_{w^{R,H}} +  \\
+			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
+        &  \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.
          \label{eq:linear_model_full}
 \end{align*} 
-The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{W,\cdot}$. Observations are weighted according to stabilized inverse probabilities weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}. Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}
-}
+The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$. Observations are weighted according to stabilized inverse probabilities weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}. Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}
+}\todo{Have James review model and discuss.}
 
-  \item \label{step:draw} Draw $M$ random samples with replacement from the data, with samples indexed by $m = 1, \dots, M$, so that data from sample $m$ is represented by $D^{(m)} := (X^{(m)}, W^{(m)}, O^{(m)})$.\footnote{We set M = 100.} 
+  \item \label{step:draw} Draw $M$ random samples with replacement from the data, with samples indexed by $m = 1, \dots, M$, so that data from sample $m$ is represented by $D^{(m)} := (X^{(m)}, W^{(m)}, Y^{(m)})$.\footnote{We set M = 100.} 
 
   \item Within each sample, for each possible context $x$, arm $w$ and bootstrap sample, estimate conditional means  $\hat{\mu}_w^{(m)}(x)$ for each arm using the fitted outcome model. The penalization value is fixed as $\lambda_{CV}$ from step 1, without performing any additional cross-validation.
   
@@ -183,21 +237,26 @@ The model is estimated using $L_{2}$ penalties for regularization, exclusive of 
 \end{enumerate}
 
 
+\subsection{Simulations and design parameters}
+
+\textcolor{red}{[TK]}
+\todo{Describe simulation procedures.}
+
 \begin{table}[H]
 \centering
-\caption{Design parameters}
+\caption{Design parameters} 
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
 First batch size & [100, 200, 400, 800] \\
-Subsequent batch size & [100, 200, 500] \\
-Total experiment size & [2000, 2500, 3000] \\
+Number of batches & [3, 4, 5] \\
+Total experiment size & [2500, 3750, 5000] \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
 Probability floor & [0.01, 0.025, 0.5]\\
 \hline
 \end{tabular}
-\end{table}
+\end{table} \todo{Have James review design parameters and discuss.}
 
 \section{Analytic Strategy}
 
@@ -219,7 +278,7 @@ Following experimental data collection, personalized policies are estimated and 
 
 Our primary hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$ and the value of fixed policies $\pi_{W}$ to control $\pi_{CTR}$.
 
-\todo{Response function: optimize to reduce sharing of fake news, while accounting for sharing of true news (willing to tolerate reduction in sharing of true news). Latter is primary interest, what happens with sharing true info of secondary interest.}
+\todo{Update hypotheses}
 
 \begin{enumerate}
 \item[ ] 
@@ -252,7 +311,8 @@ We then estimate the value of the policy on the remaining observations. To evalu
 
 
 
-\textcolor{red}{TO ADD?: 1. covariates - which to include and whether discrete or continuous. LR: I think the only one I would think that might not be binary but have a few categories is age (cohorts) and religiosity (frequency of attendance).\\ 2. Do we want to specify that among the control group we will analyze the predictors of willingness to share fake news (maybe in this case more than true info, bc we want to predict ppl most susceptible to sharing falsities rather than just "always sharers")? -- some thing we might hypothesize: belief in science/religiosity/COVID knowledge will be negatively correlated with sharing false cures... Age/trust in media will be positively correlated with sharing false cures. gender? [I dont have strong priors]. Unlike the US I think there will NOT be a strong correlation btw partisanship and willingness to share cures.}
+\textcolor{red}{LR: Secondary hypotheses: Do we want to specify that among the control group we will analyze the predictors of willingness to share fake news (maybe in this case more than true info, bc we want to predict ppl most susceptible to sharing falsities rather than just "always sharers")? -- some thing we might hypothesize: belief in science/religiosity/COVID knowledge will be negatively correlated with sharing false cures... Age/trust in media will be positively correlated with sharing false cures. gender? [I dont have strong priors]. Unlike the US I think there will NOT be a strong correlation btw partisanship and willingness to share cures.\\
+MOW: I don't really have a position on this...happy to include if we think it is of interest.}
 
 
 
