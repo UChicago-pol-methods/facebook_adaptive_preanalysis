@@ -84,6 +84,7 @@
 \RequirePackage{amsthm}
 \RequirePackage{bbm}
 \RequirePackage{array}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
@@ -104,6 +105,8 @@
 \def\Cor{{\textrm{Cor} }\,}
 \def\N{{\textrm N}\,}
 \def\Supp{{\textrm {Supp} }\,}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 %--------------------------------------------------------------------------
 % Math boldface shortcuts, etc. ----------------------------------

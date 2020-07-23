@@ -21,7 +21,7 @@
 
 \centerline{\textbf{ABSTRACT}}
 \begin{abstract}
-Alongside the outbreak of Coronavirus, much of the world’s population is also experiencing an “infodemic” -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. While many false cures are largely harmless (e.g., drinking lemon water), others have devastating consequences, such as taking chloroquine. As a result, governments struggling to prepare healthcare systems and encourage citizens to comply with best practices also need to tackle misinformation. Building upon the experimental literature on combating fake news, we evaluate the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. Our aim is to find the context-aware intervention policy that will assign individuals the intervention that is most effective for them, based on their covariate profile. Using a contextual adaptive experimental design to sequentially assign treatment probabilities, we are able to learn the optimal contextual policy, and minimize assignment to ineffective or counter-productive interventions within the experiment. Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. Finally, we bring comparative data to a global problem for which the existing research has largely been limited to the Global North. This pre-analysis plan describes the research design and outlines the key hypotheses that we will evaluate.
+Alongside the outbreak of Coronavirus, much of the world’s population is also experiencing an “infodemic” -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation is spreading through online media outlets and social media platforms. While many false cures are largely harmless (e.g., drinking lemon water), others have devastating consequences, such as taking chloroquine. As a result, governments struggling to prepare healthcare systems and encourage citizens to comply with best practices also need to tackle misinformation. Building upon the experimental literature on combating fake news, we evaluate the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. Our aim is to find the context-aware intervention policy that will assign respondents the intervention that is most effective for them, based on their covariate profile. Using a contextual adaptive experimental design to sequentially assign treatment probabilities, we are able to learn the optimal contextual policy, and minimize assignment to ineffective or counter-productive interventions within the experiment. Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. Finally, we bring comparative data to a global problem for which the existing research has largely been limited to the Global North. This pre-analysis plan describes the research design and outlines the key hypotheses that we will evaluate.
 \end{abstract}
 
 
@@ -31,12 +31,12 @@ Alongside the outbreak of Coronavirus, much of the world’s population is also 
 \section{Motivation and Research Questions}
 
 % motivation
-Alongside the outbreak of Coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. Covid-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures, some of which are largely harmless, such as drinking lemon water, while others can have devastating consequences if adopted, such as taking chloroquine or drinking bleach. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
+Alongside the outbreak of Coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures, some of which are largely harmless, such as drinking lemon water, while others can have devastating consequences if adopted, such as taking chloroquine or drinking bleach. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
 
 % what we do 
 This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. We test interventions targeted at both the respondent level, such as general warnings, as well as headline-level treatments, such as flags and ``false'' tags (treatments are described in Table~\ref{tab:treatments}). 
 
-Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign individuals the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
+Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 % how we build on existing lit
 This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings and use an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research is limited to the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
@@ -47,7 +47,7 @@ This work builds on the experimental literature on combating fake news in severa
 \section{Case Selection}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, there are 38 million Facebook users who are 18 years and older from these two countries (as reported on Facebook's advertising platform). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified Coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global Coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. 
+We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, there are 38 million Facebook users who are 18 years and older from these two countries (as reported on Facebook's advertising platform).\todo{link?} Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to COVID-19-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified Coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global Coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. Our full set of stimuli for each country is presented in Appendix~\ref{appendis:stimuli}. 
 
 %% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
 
@@ -64,32 +64,31 @@ We examine these questions using a study focused on online social media users in
 
 
 \subsection{Sample recruitment}
-We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\textcolor{red}{[TK]}.
+We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}.
 
 
-Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a \textcolor{red}{15} minute study about COVID-19 on Messenger'' in exchange for the equivalent of USD \textcolor{red}{0.55} in mobile phone airtime. When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey. In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.\footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{recruitment}. \color{red}{[[Add images of chatbot once linked to page]]}} Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
+Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a \textcolor{red}{15} minute study about COVID-19 on Messenger'' in exchange for the equivalent of USD \textcolor{red}{0.55} in mobile phone airtime.\todo{Finalize advertisement text} When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey. In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.\footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{recruitment}. \color{red}{[[TK: images of chatbot once linked to page]]}} Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
 
 \subsection{Covariates}
-
-We include the below covariates in analysis. The full list of covariates and question wording is in Appendix~\textcolor{red}{[TK]}. \todo{Do we want to do secondary analyses with all covariates? We can conduct this ex-post, we just can't update using the full model. }
+Through the chatbot, we collect demographic and other information on respondents. 
+We include the below covariates in analysis. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. \todo{Do we want to do policy analyses with all covariates? We can conduct this ex-post, we just can't update using the full model. }
 \begin{table}[H]
 \begin{tabular}{p{0.4\linewidth}p{0.6\linewidth}}
 \textbf{Covariate}                   & \textbf{Coded as}                                     \\
 \hline
 Gender                      & 1   if male, 0 otherwise                     \\
 Age                         & Indicators   for population quartiles        \\
-Education                                   & Categorical: no/informal schooling, any   primary school, any secondary school, post-seconday qualifications, any   university \\
-Religion                    & Categorical: Muslim, Christian, other                     \\
-Religiousity                                & Categorical: less than a week, more than once   a week but less than daily, daily                                              \\
+Education                                   & Indicators: No/informal schooling, any   primary school, any secondary school, post-secondary qualifications, any   university \\
+Religion                    & Indicators: Muslim, Christian, other                     \\
+Religiousity                                & Indicators: less than a week, more than once   a week but less than daily, daily                                              \\
 No.   people in household   & Indicators   for population quartiles        \\
 Index   of scientific views & Indicators for integers 0:2                  \\
-Concern regarding COVID-19  & Categorical: ery/somewhat/not worried \\
-Perceived government efficacy   on COVID-19 & Categorical:  positive,   neutral, negative                                                                     
+Concern regarding COVID-19  & Indicators: Very/somewhat/not worried \\
+Perceived government efficacy   on COVID-19 & Indicators:  Positive,   neutral, negative                                                                     
 \end{tabular}
 \end{table}
 
 \todo{Discuss covariates. As is, this is 38,880 unique covariate combinations; is that feasible for implementation with zapier/google sheets/bootstrapping? In practice, make sure we can run this process if we see a category we've never observed before. }
-\todo{LR: I think the only one I would think that might not be binary but have a few categories is age (cohorts) and religiosity (frequency of attendance).}
 
 \subsection{Experimental setup}
 
@@ -124,7 +123,7 @@ Control                                                                         
 \label{tab:treatments}
 \end{table}
 
-Respondent-level treatments and headline-level treatments are treated as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. Procedures for calculating treatments assignment probabilities are discussed in section \textcolor{red}{[TK]}. 
+Respondent-level treatments and headline-level treatments are implemented as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. 
 
 
 \subsubsection{Outcomes and Response Function}
@@ -133,12 +132,18 @@ We are interested in decreasing sharing of harmful false information about COVID
 
 \paragraph{Primary Response Function}
 
-We measure interest in sharing information through two questions. The first asks whether the respondent would like to post the article to their Facebook timeline and the second asks whether the respondent would like to send the article to a friend on Facebook. By using a pretest-posttest design \textcolor{red}{[citation]} and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our design. 
+We measure interest in sharing information through two questions:
+\begin{itemize}
+\item Would you like to share this post on your timeline? 
+\item Would you like to send this post to a friend on Messenger?
+\end{itemize}
 
-Prior to treatment, we show respondents two articles randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions. They are then randomly assigned treatment. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported interest questions.
+Prior to treatment, we show respondents two articles randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported interest questions. 
+
+By using a pretest-posttest design \textcolor{red}{[TK: citation]} and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our design. 
 
 
-We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of individual $i$'s pre-treatment responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of individual $i$'s pre-treatment responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2,3,4}$. 
+We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-treatment responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-treatment responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2,3,4}$. 
 
 Our response function is then:
 \[
@@ -148,12 +153,12 @@ MOW: Let's discuss, I'm not sure what this would look like for our adaptive agen
 
 Because of random assignment, we expect to see no systematic differences in interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-treatment compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-treatment compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
 
-This response function will be the variable which we optimize for in our adaptive algorithm described in Section~\textcolor{red}{[TK]}, and in our policy learning described in Section~\textcolor{red}{[TK]}. 
+This response function will be the variable which we optimize for in our adaptive algorithm described in Section~\ref{adaptiveagent}, and in our policy learning described in Section~\ref{analysis}. 
 
 \paragraph{Secondary Outcomes}
 Additionally, we measure several secondary outcomes, which we will also report. \todo{Formalize how these secondary outcomes are analyzed, based on eventual below linear model.}
 
-These include willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?'' As above, we code responses as 1 if the respondent affirms and 0 otherwise. We separately calculate post-treatment minus pre-treatment differences for misinformation and true informational stimuli, and report regressions in the format \textcolor{red}{[TK]}. 
+These include willingness to read the article, as measured by the question: ``If it were possible, would you click this headline to read the full story?'' As above, we code responses as 1 if the respondent affirms and 0 otherwise. We separately calculate post-treatment minus pre-treatment differences for misinformation and true informational stimuli, and report estimates in the format \textcolor{red}{[TK]}. 
 
 Additionally, we record behavioral measures. At the end of the survey, for each true informational stimuli that the respondent reported they would be interested in sharing, we offer respondents the opportunity to actually share this information as a Facebook post, which has been created on our project Facebook page. We are able to measure whether respondents click on a button which opens a pop-up screen to share the post on Facebook, however, we cannot measure directly whether they then actually follow through to the second step and post the article on their own timeline. Consequently, we report rates of clicking the initial share button in the format \textcolor{red}{[TK]}. Additionally, we report the \textit{aggregate} number of times the associated post for each stimuli was shared. \todo{We \textit{could} actually create a separate post for each treatment combination, and measure sharing that way, but this seems like overkill for a secondary outcome in an already complicated project. } 
 
@@ -166,23 +171,72 @@ At this point we also debrief respondents, informing them about the headlines th
 
 \section{Data Collection and Design Parameters}
 
-\subsection{Adaptive data collection}
-We will collect data using a contextual adaptive experimental design, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, $W_i \in \ww$\footnote{Our treatments is composed of two separate factors, but here we use $W$ to represent combined treatment conditions. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. Our objective is to learn and evaluate an optimal contextual policy, under which we assign the most effective treatment conditional on covariates. To do this, we use a \textit{contextual bandit} algorithm, which balances \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on covariates, with batches $b = 1, \dots, B$.  This allows us to continue to learn about treatment effect heterogeneity while improving outcomes over time \textit{within} the frame of the experiment. 
 
-We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each arm is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We discuss size of batches below. 
+
+Our data is described by treatments $W_i \in \ww$\footnote{Our treatments are composed of two separate factors, but here we use $W$ to represent combined treatment conditions. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively. As each factor includes a baseline level absent intervention, the cardinality $|\ww| = |\ww^H|\times |\ww^R|$.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. 
+
+We assume the data is indexed by $i = 1, \dots, N$ where indexing represents the order in which respondents entered the experiment; this allows us to use $i$ to also represent relative chronological relationships in our sequential adaptive design. 
+
+We use potential outcome notation, where $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$, and by experimental design,  we have strong ignorability of potential outcomes to treatment conditional on observed covariates. 
+
+
+We would like to learn and evaluate an optimal contextual policy, under which we assign the most effective treatment conditional on covariates. Formally, a policy maps a set of covariates to a decision \citep{athey2017efficient}, \todo{Update reference}
+\begin{align}
+  \pi: \xx \rightarrow \ww. 
+  \label{eq:policy}
+\end{align}
+In our setting, we will learn this policy, $\hat \pi$, and evaluate its value. The value of a policy is defined as, 
+\begin{align}
+V(\pi) =  \E[Y(\pi(X_{i}))],
+  \label{eq:policy_value}
+\end{align}
+where the expectation is taken over the distribution of $X$.\footnote{Here we will only consider deterministic policies, but for a random policy, the expectation will be taken over the joint distribution. }
+
+\subsection{Hypotheses}\label{hypotheses}
+
+Our hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$, where under each fixed policy we would assign all respondents the relevant treatment $w$. The control policy is the fixed policy $\pi_{w_{C}}$
+
+Our primary hypothesis is that we are able to estimate from the data an optimal contextual policy that improves over the control. 
+  \begin{hypothesis}
+  The best contextual policy that can be estimated from the data achieves higher value than the control treatment \label{eq:optctr_null}.
+\begin{align}
+  H_{0}: V(\pi_{opt}) = V(\pi_{w_{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w_{C}})
+\end{align}
+\end{hypothesis}
+This is the hypothesis that we aim to optimize for in our adaptive data collection. 
+
+We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
+  \begin{hypothesis}
+  The best contextual policy that can be estimated from the data achieves higher value than the best fixed policy, i.e., the fixed policy with the highest associated value. 
+  \label{eq:optmax_null}
+\begin{align}
+  H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
+\end{align}
+\end{hypothesis}
+
+\clearpage
+\subsubsection{\textcolor{red}{Provisional: additional pre-registered secondary hypotheses}}
+\todo{LR: Do we want to specify that among the control group we will analyze the predictors of willingness to share fake news (maybe in this case more than true info, bc we want to predict ppl most susceptible to sharing falsities rather than just "always sharers")? -- some thing we might hypothesize: belief in science/religiosity/COVID knowledge will be negatively correlated with sharing false cures... Age/trust in media will be positively correlated with sharing false cures. gender? [I dont have strong priors]. Unlike the US I think there will NOT be a strong correlation btw partisanship and willingness to share cures}
+\todo{MOW: I don't really have a position on this...happy to include if we think it is of interest.}
+
+
+\subsection{Adaptive data collection}\label{adaptiveagent}
+
+To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
+
+We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We discuss size of batches and other design parameters below in Section~\ref{simulations}. 
 
 % \label{subsec:exploration_methods}
 Our implementation is based on the balanced linear Thompson sampling method described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced} :
 
+\todo{Have James review notation and discuss}
 \begin{enumerate}
-\item In the first batch, $b = 1$, we assign treatment uniformly at random. 
+\item In the first batch, $b = 1$, we assign treatment uniformly at random. \todo{The bootstrapping aspect of this is taken from the Cameroon PAP. Check wording and ensure that appropriate attribution is given. }
 
-
-\item For batches $b = 2, \dots, B-1$, as determined by the number of batches described in Table~\ref{tab:design}:
+\item For equally sized batches $b = 2, \dots, B-1$:
 
 \begin{enumerate}
-	
- \item Fit a ridge regression model. Use cross-validation to compute the optimal value of the penalization factor $\lambda_{CV}$ using the entire observed history of data.\footnote{For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
+ \item Fit a ridge regression model. Compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data.\footnote{For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
  
 \begin{align*}
 \hat{\mu}_w(X_{i}) & =
@@ -190,57 +244,150 @@ Our implementation is based on the balanced linear Thompson sampling method desc
 			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
 			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  \hat w^H\}\hat\beta_{w^{R,H}} +  \\
 			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
-        &  \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.
+        &  \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
          \label{eq:linear_model_full}
 \end{align*} 
-The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$. Observations are weighted according to stabilized inverse probabilities weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}. Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}
-}\todo{Have James review model and discuss.}
+The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$. 
+Observations are weighted according to stabilized inverse probabilities weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}. Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}
+}\todo{Have James review model and discuss. }
+\todo{Option: Have separate penalty factors. Currently thinking one for just covariates, one for interactions of treatment x treatment and treatment x covariates jointly. }
 
   \item \label{step:draw} Draw $M$ random samples with replacement from the data, with samples indexed by $m = 1, \dots, M$, so that data from sample $m$ is represented by $D^{(m)} := (X^{(m)}, W^{(m)}, Y^{(m)})$.\footnote{We set M = 100.} 
 
-  \item Within each sample, for each possible context $x$, arm $w$ and bootstrap sample, estimate conditional means  $\hat{\mu}_w^{(m)}(x)$ for each arm using the fitted outcome model. The penalization value is fixed as $\lambda_{CV}$ from step 1, without performing any additional cross-validation.
+  \item Within each sample, for each possible context $x$, treatment $w$ and bootstrap sample, estimate conditional means  $\hat{\mu}_w^{(m)}(x)$ for each treatment using the fitted outcome model. The penalization value is fixed as $\lambda_{CV}$ from step 1, without performing any additional cross-validation.\todo{Can we simplify implementation here by using lasso instead of ridge, and collapsing our $\xx$ to include only covariates that remain in the model?}
   
-  \item For each context $x$ and available arm $w$, compute and store the following statistics representing the average value of each arm, and the uncertainty associated with this statistic.
-    \begin{equation*}
+  \item For each context $x$ and available treatment $w$, compute and store the following statistics representing the average value of each treatment, and the uncertainty associated with this statistic.
+    \begin{equation}
       \begin{aligned}
         \hat{\mu}_w(x)         &= \frac{1}{M}\sum_{m} \hat{\mu}_w^{(m)}(x) \\
          \hat{\sigma}^{2}_w(x) &= \frac{1}{M(M-1)} \sum_{m} (\hat{\mu}_w^{(m)}(x) - \hat{\mu}_w(x))^2
       \end{aligned}
-    \end{equation*}
+    \end{equation}
 
-  \item \label{step:prob} Approximate the probability that each arm $w$ is maximal for each possible context $x$. In order to do that, we draw from the following probability distribution a large number $S$ times\footnote{We set S = 1,000.}
-  \begin{align*}
-    \theta_{w}(x) \sim \mathcal{N}(\hat{\mu}_w(x), \hat{\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and arm }w
-    \text{ for all arms }w
-  \end{align*}
+  \item \label{step:prob} Approximate the probability that each treatment $w$ is maximal for each possible context $x$. In order to do that, we draw from the following probability distribution a large number $S$ times\footnote{We set S = 1,000.}
+  \begin{align}
+    \theta_{w}(x) \sim \mathcal{N}(\hat{\mu}_w(x), \hat{\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and treatment }w
+    \text{ for all treatments }w
+  \end{align}
 
-  and compute the fraction of times that arm $w$ was the largest for each $s$ set of draws
-  \begin{align*}
+  and compute the fraction of times that treatment $w$ was the largest for each $s$ set of draws
+  \begin{align}
     q_{b}(x, w) = \frac{1}{S} \sum_{s} 1\left\{ \theta_{w}^{(s)}(x) = \max \{\theta_{1}^{(s)}(x), \dots, \theta_{|\mathcal{W}|}^{(s)}(x) \}  \right\}. 
-  \end{align*}
+  \end{align}
 
   These are the Thompson sampling probabilities associated with the pair $(x, w)$. 
   
-  \item Collect data for the batch: For every new subject, collect data on their contexts $x$ and use the probabilities computed in the previous batch to assign arms.
+  \item Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{b}(x, w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
+  \begin{align}
+  \breve{q}_{b}(x, w) & =\max\Biggr\{\frac{ q_{b}(x, w)}{\sum\limits_{w \neq w_{C}}q_{b}(x, w) } , p\Biggr\} \\
+  \tilde{q}_{b}(x, w) & = \frac{ \breve q_{b}(x, w)}{\sum\limits_{w \neq w_{C}}\breve q_{b}(x, w) }. 
+  \end{align}
+  
+  \item Collect data for the batch: For every new respondent, collect data on their contexts $x$ and use the probabilities $\tilde{q}_{b-1}(x, w)$ computed in the previous batch to assign treatments.
 \end{enumerate}
 
 \item For the final batch,  $b = $ B, collect data on-policy:
 \begin{enumerate}
-  \item Fit a random forest estimator on the entire data set collected through batch $B-1$.
+  \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. 
   \item Fit a point-wise optimal policy  by taking the maximum of predicted values for each possible context $x$ 
-    \begin{equation*}
-     \hat{\pi}_{x} = \arg\max_{ w } \hat{\mu}_{w}(x) . 
-    \end{equation*} 
+    \begin{equation}
+     \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
+    \end{equation} 
   Store the policy. 
-  \item Collect data for the batch: For every new subject, collect data on their contexts, and assign treatment deterministically consistent with $\hat{\pi}_{x}$. 
+  \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment deterministically consistent with $\hat{\pi}_{x}$. 
 \end{enumerate}
 \end{enumerate}
 
+\subsection{Analysis}\label{analysis}\todo{Here, we can use a richer covariate set and e.g., information on stimuli. Specify. }
 
-\subsection{Simulations and design parameters}
+To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eqn:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores. 
 
-\textcolor{red}{[TK]}
-\todo{Describe simulation procedures.}
+      \begin{align*}
+        \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \gamma_w(X_i)(Y_{i} - \mu_w(X_i)) \numberthis\label{eqn:DR}\\
+         \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
+    \end{align*}
+
+We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach is described in Appendix~\ref{appendix:grf}. $\gamma_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights , as described in Appendix~\ref{appendix:stabilized}. \todo{Could add note about bias in adaptively collected data, per e.g. Nie et al.. }
+
+Our methods for analysis will differ depending on how the data is collected. 
+
+\subsubsection{Policy learning and evaluation on randomly collected data}\label{randomlearning}
+For randomly collected data, as in the pilot, we conduct policy learning and evaluation as below:
+
+\begin{enumerate}
+  \item Collect data by assigning treatment uniformly at random.
+  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\gamma_w(X_i)$, use assigned probabilities $1/|\ww|$. 
+  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eqn:DR}). 
+  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
+    \begin{equation*}
+\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
+    \end{equation*}
+  \item To evaluate the policies, take the average scores :
+    \begin{align*}
+          \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
+      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{N} \sum_{i}^N\langle \hat{\pi}_{X_i}, \hat{\Gamma}_{i, \cdot}  \rangle
+          \end{align*}\todo{Add a clarification on angle notation}
+   \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
+\end{enumerate}
+
+
+\subsubsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}
+For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
+
+\begin{enumerate}
+\item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
+\item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\gamma_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
+\item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eqn:DR}). 
+\item We have already fitted and stored a point-wise optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
+  \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
+      \begin{align}
+          \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w} \\
+                     \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{i \in \mathcal{I}_{B} }
+                      Y_i  
+    \end{align}
+   \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
+\end{enumerate}
+
+To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. 
+
+The data collected from this study will be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, but those methods will not be discussed in this pre-registration.\todo{Vitor and Ruohan: what should we say about confidence intervals paper?}
+
+
+
+\subsection{Simulations and design parameters}\label{simulations}\todo{Finalize how we're setting penalties}
+
+To carry out implementation, the above description requires setting of several design parameters, including total experiment size $N$, number of batches $B$,  size of first batch $|\mathcal{I}_1|$, size of last batch $|\mathcal{I}_B|$, and probability floor $p$. 
+
+We set these parameters by learning from our pilot data of 1500 observations from each country. In the pilot data, treatment is assigned uniformly at random. 
+
+We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}), but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
+
+We refer to the heterogeneity ``ratio'' as the ratio of the mean value of the best contextual policy over the mean value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
+
+\textcolor{red}{As of EOD 7/22/2020, Molly is working on the below section. This section is a WIP. }
+
+\begin{enumerate}
+\item Define a grid of potential $\lambda$ values, $S$, as \textcolor{red}{[TK]}. 
+\item Estimate heterogeneity ratios on the pilot data under each element $s$ of $S$:
+\begin{enumerate}
+\item Using leave-one-out cross validation, fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor and store estimates of response under each unique treatment condition for each observation. 
+  \item Fit a point-wise optimal policy by taking the maximum of predicted values for each individual context $x_i$ 
+    \begin{equation}
+     \hat{\pi}_{x_i} = \argmax_{ w } \hat{\mu}_{w}(x_i) . 
+    \end{equation} 
+    \item Estimate the value of the policy as
+    \begin{equation}
+     \hat{\pi}_{x_i} = \argmax_{ w } \hat{\mu}_{w}(x_i) . 
+    \end{equation}     
+  Store the estimate. 
+\end{enumerate}
+\item We can learn about performance of our algorithm with a small amount of heterogeneity by setting our heterogeneity ration at approximately 1.05. We search the grid for the penalty factor that results in an estimated heterogeneity ratio on the pilot data closes
+\end{enumerate}
+
+
+To learn about performance under a small amount of heterogeneity, we search the grid 
+
+We can also learn the largest heterogeneity ratio plausibly consistent with the data by considering the largest penalty factor 
 
 \begin{table}[H]
 \centering
@@ -248,71 +395,17 @@ The model is estimated using $L_{2}$ penalties for regularization, exclusive of 
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
+Heterogeneity ratio & [1, ] \\
 First batch size & [100, 200, 400, 800] \\
 Number of batches & [3, 4, 5] \\
 Total experiment size & [2500, 3750, 5000] \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
-Probability floor & [0.01, 0.025, 0.5]\\
+Probability floor & [0.01, 0.025, 0.5]$\times |\ww|$ \\
 \hline
 \end{tabular}
 \end{table} \todo{Have James review design parameters and discuss.}
 
-\section{Analytic Strategy}
-
-\subsection{Estimating Optimal Policies}
-
-
-
-%% below is leftover from the original adaptive preanalysis plan
-\section{Policy learning and evaluation}
-
-Following experimental data collection, personalized policies are estimated and evaluated modifying the method explained in \cite{athey2017efficient} and also in \cite{zhou2018offline}; in those approaches, data is collected non-adaptively and is assumed to be iid. In the adaptive setting, we can not make this assumption about the data. Instead, the sample is split into an initial training period on which we learn the optimal policy using the adaptive agent, and a period of on-policy evaluation. 
-
-
-%% rather than it's own section we could also integrate hypotheses into the next section (analytic strategy)--e.g. say how we will analyze results and what we expect
-\subsection{Hypotheses}
-
-
-\subsubsection{Optimal interventions:}
-
-Our primary hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$ and the value of fixed policies $\pi_{W}$ to control $\pi_{CTR}$.
-
-\todo{Update hypotheses}
-
-\begin{enumerate}
-\item[ ] 
-We determine whether any of the treatments improve over the control. 
-\begin{hypothesis} The best fixed policy ($\pi_{w_{\textrm{max} } }$) achieves higher value than the control policy ($\pi_{CTR}$)   \label{eq:control_null}
-\begin{align*}
-H_{0}: Q(\pi_{w_{\textrm{max} } }) = Q(\pi_{CTR}) \qquad H_{a}:  Q(\pi_{w_{\textrm{max} } }) > Q(\pi_{CTR})
-\end{align*}
-\end{hypothesis}
-  \item[ ]
-  
-  Analyzing heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis.
-  \begin{hypothesis}
-  The best contextual policy that can be estimated from the data ($\pi_{opt}$) achieves higher value than the best fixed policy ($\pi_{w_{\textrm{max} } }$)\label{eq:bestfix_null}
-\begin{align*}
-  H_{0}: Q(\pi_{opt}) = Q(\pi_{w_{\textrm{max}}}) \qquad H_{a}:  Q(\pi_{opt}) > Q(\pi_{w_{\textrm{max}}})
-\end{align*}
-\end{hypothesis}
-\end{enumerate}
-
-
-
-We then estimate the value of the policy on the remaining observations. To evaluate the policies, take the average scores :
-    \begin{align*}
-          \widehat{Q}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{t \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \widehat{\Gamma}_{w,t} \quad \text{for fixed policies $w$}\\
-                     \widehat{Q}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{t \in \mathcal{I}_{B} }
-                      \langle \hat{\pi}_{t}, \widehat{\Gamma}_{\cdot, t}  \rangle 
-    \end{align*}
-
-
-
-
-\textcolor{red}{LR: Secondary hypotheses: Do we want to specify that among the control group we will analyze the predictors of willingness to share fake news (maybe in this case more than true info, bc we want to predict ppl most susceptible to sharing falsities rather than just "always sharers")? -- some thing we might hypothesize: belief in science/religiosity/COVID knowledge will be negatively correlated with sharing false cures... Age/trust in media will be positively correlated with sharing false cures. gender? [I dont have strong priors]. Unlike the US I think there will NOT be a strong correlation btw partisanship and willingness to share cures.\\
-MOW: I don't really have a position on this...happy to include if we think it is of interest.}
 
 
 
@@ -335,36 +428,99 @@ MOW: I don't really have a position on this...happy to include if we think it is
 \end{figure}
 
 
-\section{Matrix method, outcome model, and balancing weights}
-\subsection{Matrix method} 
-To estimate the value of a given policy, we may use an outcome model, weights, or both. Here, the estimated counterfactual rewards, $\{\hat{\Gamma}_{i,k}\}_{k=1}^{|\mathcal{W}|}$, may be estimated via,
-\begin{itemize}
-\item \textbf{Inverse probability weighted estimation}, using a version of Horvitz-Thompson estimator \citep{horvitz1952}
-\begin{align}
-\hat{\Gamma}_w^{HT} & =  \frac{1}{n} \sum_{i = 1}^n 1 \{ W_i = w\} \gamma_i Y_i. 
-\end{align}
-\item \textbf{Adaptively weighted doubly-robust estimation}. 
-\label{appendix:doubly-robust}
-\textcolor{red}{[To be further filled in, with reference to LFO paper.]}\\
-We estimate an $n \times |\mathcal{W}|$ matrix of \textit{doubly-robust scores} $\hat{\Gamma}_{i,w}$. For each treatment $w$ and observation $i$, we compute    
-      \begin{align}
-        \hat{\Gamma}_{i,w} = \hat{\mu}_{w}(X_{i}) + 1 \{W_i = w \} \gamma_{i}(Y_{i} - \hat{\mu}_w(X_i))
-    \end{align}
-  The term involving the balancing weights, $\gamma_i$, is a correction that mitigates selection bias arising from not collecting the data by assigning treatments uniformly at random; we use stabilized inverse probabilities weights described below. Each element of this matrix is a (corrected) estimate of the average reward that the observation $i$ would have received had they been given treatment $w$.
-\end{itemize}
+\section{Survey and data}\label{appendix:data}
+\subsection{Covariates}\label{appendix:covariates}
+\textcolor{red}{[TK: Full list of covariate questions and response options]}
+\todo{Optional: include link to full survey script? Would need to do some tidying}
+
+\subsection{Stimuli}\label{appendis:stimuli}
+\textcolor{red}{[TK]}
+\todo{Include as google doc link?}
 
 
-\subsubsection{Batch-wise stabilized inverse probability weighting} \label{appendix:stabilized}
-Instead of using the raw inverse probability weights, we normalize the weights to one, which can improve mean squared error of the associated estimator. 
+\subsection{Treatments}
+\textcolor{red}{[TK]}
+\todo{Include mockups for headlines, full questions for respondent-level treatments, add deliberation stimuli and describe}
 
+
+\section{Estimation Considerations}
+
+\subsection{Stabilized inverse probability weighting} \label{appendix:stabilized}
+Inverse probability weighted estimation typically uses weights as follows, 
+\begin{align*}
+\gamma^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eqn:IPW} \numberthis\\
+e_{w}(x) = \Pr[W_i = w|X_i = x].
+\end{align*}
+Here, we could directly plug in the respective treatment assignment probabilities from the experimental design for the $e_{w}(X_i)$. 
+
+We use the stabilized version of this weights, normalizing weights to sum to one on the empirical data. This may improve RMSE of the estimator \textcolor{red}{[TK:citation]}.
 \begin{align}
 \left.
-\gamma^{SIPW}(x, w, b) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+\gamma^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
 \middle/ 
-{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} }
+{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_i)} } \label{eqn:SIPW} \numberthis
 \right.
 \end{align}
 
-\todo{Add survey instrument}
+For adaptively collected data, when we use stabilized weights in our algorithm, we use rolling weights that are updated with each batch.  \todo{Is this how we want to do this? }
+
+%\begin{align}
+%\left.
+%\gamma^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+%\middle/ 
+%{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eqn:IPW} \numberthis
+%\right.
+%\end{align}
+
+\subsection{Random forest estimation}\label{appendix:grf}
+For policy learning and evaluation, we estimate conditional means using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
+
+For a given dataset, we estimate conditional means under each treatment condition $w$:
+\begin{enumerate}
+\item Fit a random forest estimator on the observations assigned $w$ . 
+\item For observations assigned $w$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
+\item For observation not assigned $w$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
+\end{enumerate}
+
+\subsection{Adaptively weighted doubly-robust estimation} \todo{Add appropriate reference to LFO paper.}\label{appendix:DRlfo}
+For adaptively collected data, we use doubly robust scores as in (\ref{eqn:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates. This means that in each batch we estimate the nuisance components only using data up to and including the current batch. 
+
+To estimate conditional means, we follow the steps above in \ref{appendix:grf}, with minor adjustments. For each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:\todo{Have Erik review for terminology. }
+\begin{enumerate}
+\item Fit a random forest estimator on the observations assigned $w$ in batches up to and including batch $b$. 
+\item For observations assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
+\item For observation not assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
+\end{enumerate}
+
+We use the rolling version of the stabilized inverse probability weights from (\ref{eqn:SIPW}), substituting the current maximum index value for $N$. 
+Doubly robust scores are then formed from the relevant component parts. 
+
+
+\subsection{Random best fixed policies}\label{appendix:bestfixed}
+We are interested in learning and evaluating the best fixed policy. However, if we learn which fixed policy is best by taking the fixed policy with the highest mean, we get a biased estimate of the best fixed policy. To see this, consider:
+\begin{align*}
+\E[\max(X_1, \dots, X_N)] \ge \max(\E[X_1],\dots, \E[X_N]). 
+\end{align*}
+
+To address this concern, we consider instead a \textit{random} best fixed policy. 
+\begin{enumerate}
+\item For each observation $i>1$ in the experiment, we calculate the value of fixed policies as the average of scores up to time $i-1$. 
+\begin{align*}
+\hat{V}_{i-1}({\pi}_{w})  &:= \frac{1}{i-1 } \sum_{j = 1 }^{i-1} \hat{\Gamma}_{j,w} \quad \text{for fixed policies $w$}
+\end{align*}
+\item The ``best'' fixed policy in period $i$ is the treatment with the highest estimate:
+\begin{align*}
+w_i^* =  \argmax_w \ \hat{V}_{i-1}({\pi}_{w})
+\end{align*}
+\item The score for the random best fixed policy in time $i$ is then the score in that period for the selected arm, $\hat{\Gamma}_{i, w^*}$ 
+ \item To evaluate the policies, we again take the average scores. The evaluation set $\mathcal{I}^*$ will be the entire data set for data collected under the procedures for the random agent as described above in Section~\ref{randomlearning}, and up through batch $B-1$ for data collected under the procedures for the adaptive agent--excluding the first observation. 
+    \begin{align*}
+          \hat{V}(\hat{\pi}_{w^*})  &:= \frac{1}{\big{\lvert} \mathcal{I}^* \big{\rvert}} \sum_{i \in \mathcal{I}^* } 
+          \hat{\Gamma}_{i, w_i^*} 
+  \end{align*}
+\end{enumerate}
+
+
+
 
 \end{document}
