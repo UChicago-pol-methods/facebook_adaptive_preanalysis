@@ -76,7 +76,7 @@ To collect stimuli we adopted several criteria to search for both false and true
 
 
 \FloatBarrier
-\section{Research Design and Hypotheses}
+\section{Experimental Setup}
 
 
 
@@ -107,9 +107,7 @@ Perceived government efficacy   on COVID-19 & Indicators:  Positive,   neutral, 
 
 \todo{Discuss covariates. As is, this is 38,880 unique covariate combinations; is that feasible for implementation with zapier/google sheets/bootstrapping? In practice, make sure we can run this process if we see a category we've never observed before. }
 
-\subsection{Experimental setup}
-
-\subsubsection{Treatment}
+\subsection{Treatment}
 Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
 
 % interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
@@ -131,8 +129,10 @@ Deliberation nudge                                                              
 %Context                                                                                                        & Headline                                                                                                     & \begin{tabular}[t]{@{}l@{}}Facebook context button; if you click the info button on an\\ article, a pop-up tells you a few facts about the source: \\ how long the Facebook page has been registered,\\ and has a flag if article is more than 90 days old\end{tabular}
 %\\
 %Flag                                                                                                           & Headline                                                                                                     &  ``Disputed" flag on the headline                                                                                                                                                                                                                                                                                                                                                     \\
-Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: next to story link,\\ & & show one other stories which corrects a false news story                                                                                                                                                                                                                                                                                             \\
-Factcheck                                                                                                      & Headline                                                                                                     & Fact checking score by third party\\ & & (e.g., Facebook, AFP, AfricaCheck, etc)
+Related articles                                                                                                       & Headline                                                                                                     & Facebook-style related stories: below story,\\ & & show one other story which corrects a false news story                                                                                                                                                                                                                                                                                             \\
+Factcheck                                                                                                      & Headline                                                                                                     & Fact checking flag from third party\\ & & (e.g., Facebook, AFP, AfricaCheck, etc)
+ \\
+More information                                                                                                      & Headline                                                                                                     & Provides a link to "Get the facts about COVID-19''\\ & & as per Twitter flags
  \\
 Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
 \end{tabular}
@@ -143,7 +143,7 @@ Control                                                                         
 Respondent-level treatments and headline-level treatments are implemented as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. 
 
 
-\subsubsection{Outcomes and Response Function}
+\subsection{Outcomes and Response Function}
 
 We are interested in decreasing sharing of harmful false information about COVID-19 cures and treatments while not negatively impacting sharing of useful information about transmission and best practices from verified sources. 
 
@@ -184,7 +184,7 @@ At this point we also debrief respondents, informing them about the headlines th
 
 
 
-\section{Data Collection and Design Parameters}
+\section{Hypotheses and Data Collection}
 
 
 
@@ -213,7 +213,7 @@ Our hypotheses of interest relate the value of an estimated optimal contextual p
 
 Our primary hypothesis is that we are able to estimate from the data an optimal contextual policy that improves over the control. 
   \begin{hypothesis}
-  The best contextual policy that can be estimated from the data achieves higher value than the control treatment \label{eq:optctr_null}.
+  The best contextual policy that can be estimated from the data achieves higher value than the control treatment \label{eq:optctr}.
 \begin{align}
   H_{0}: V(\pi_{opt}) = V(\pi_{w_{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w_{C}})
 \end{align}
@@ -223,7 +223,7 @@ This is the hypothesis that we aim to optimize for in our adaptive data collecti
 We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
   \begin{hypothesis}
   The best contextual policy that can be estimated from the data achieves higher value than the best fixed policy, i.e., the fixed policy with the highest associated value. 
-  \label{eq:optmax_null}
+  \label{eq:optmax}
 \begin{align}
   H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
 \end{align}
@@ -239,7 +239,9 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
 
 To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
 
-We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We discuss size of batches and other design parameters below in Section~\ref{simulations}. 
+We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. 
+
+This algorithm requires us to se a number of design parameters; the procedures to select these parameters are discussed below in Section~\ref{simulations}. 
 
 % \label{subsec:exploration_methods}
 Our implementation is based on the balanced linear Thompson sampling method described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced} :
@@ -313,12 +315,13 @@ Observations are weighted according to stabilized inverse probabilities weights 
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Analysis}\label{analysis}\todo{Here, we can use a richer covariate set and e.g., information on stimuli. Specify. }
 
-To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eqn:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores. 
+\section{Analysis}\label{analysis}\todo{Here, we can use a richer covariate set and e.g., information on stimuli. Specify. }
+
+To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores. 
 
       \begin{align*}
-        \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \gamma_w(X_i)(Y_{i} - \mu_w(X_i)) \numberthis\label{eqn:DR}\\
+        \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \gamma_w(X_i)(Y_{i} - \mu_w(X_i)) \numberthis\label{eq:DR}\\
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
@@ -326,13 +329,13 @@ We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random fore
 
 Our methods for analysis will differ depending on how the data is collected. 
 
-\subsubsection{Policy learning and evaluation on randomly collected data}\label{randomlearning}
+\subsection{Policy learning and evaluation on randomly collected data}\label{randomlearning}
 For randomly collected data, as in the pilot, we conduct policy learning and evaluation as below:
 
 \begin{enumerate}
   \item Collect data by assigning treatment uniformly at random.
   \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\gamma_w(X_i)$, use assigned probabilities $1/|\ww|$. 
-  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eqn:DR}). 
+  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
   \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
     \begin{equation*}
 \hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
@@ -341,18 +344,18 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
     \begin{align*}
           \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
       \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{N} \sum_{i}^N\langle \hat{\pi}_{X_i}, \hat{\Gamma}_{i, \cdot}  \rangle
-          \end{align*}\todo{Add a clarification on angle notation}
+          \end{align*}\todo{Add a clarification on angle notation--or just change it, it's not obvious here. }
    \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
 
 
-\subsubsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}
+\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}
 For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
 
 \begin{enumerate}
 \item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
 \item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\gamma_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
-\item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eqn:DR}). 
+\item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
 \item We have already fitted and stored a point-wise optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
   \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
@@ -371,38 +374,63 @@ The data collected from this study will be used for eventual application of a co
 
 \subsection{Simulations and design parameters}\label{simulations}\todo{Finalize how we're setting penalties}
 
+\textit{\textbf{Note:} This section provides an overview of our approach to making data-driven design decisions. We will update this pre-analysis plan \textit{after} collecting pilot data and running simulations, to document simulation results and our final design parameters, prior to implementing the eventual adaptive experiments. }
+
 To carry out implementation, the above description requires setting of several design parameters, including total experiment size $N$, number of batches $B$,  size of first batch $|\mathcal{I}_1|$, size of last batch $|\mathcal{I}_B|$, and probability floor $p$. 
 
-We set these parameters by learning from our pilot data of 1500 observations from each country. In the pilot data, treatment is assigned uniformly at random. 
+We set these parameters by learning from our pilot data of 1500 observations from each country. In the pilot data, treatment is assigned uniformly at random. We conduct the below simulations \textit{separately} for each country, meaning that we may end up with meaningfully different designs in the two countries. 
 
-We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}), but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
+We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}),\todo{Determine if our data generating model should be more complex. Discuss with James. }  but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
 
-We refer to the heterogeneity ``ratio'' as the ratio of the mean value of the best contextual policy over the mean value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
+We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
-\textcolor{red}{As of EOD 7/22/2020, Molly is working on the below section. This section is a WIP. }
 
+\todo{James to review for notational consistency; refer to our implementation of the bandit agent. }
+\paragraph{Data generating processes}
 \begin{enumerate}
-\item Define a grid of potential $\lambda$ values, $S$, as \textcolor{red}{[TK]}. 
-\item Estimate heterogeneity ratios on the pilot data under each element $s$ of $S$:
+\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
+\item  Sample $M=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(M)}$. 
+\item Estimate heterogeneity ratios under each element the vector of penalty factors:
 \begin{enumerate}
-\item Using leave-one-out cross validation, fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor and store estimates of response under each unique treatment condition for each observation. 
-  \item Fit a point-wise optimal policy by taking the maximum of predicted values for each individual context $x_i$ 
+\item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.
+  \item Calculate conditional means $\mu_{w}(X^{(m)})$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(M)}$. 
+  \item Estimate and store values for fixed policies for each $w$
+      \begin{align*}
+          \hat{V}({\pi}_{w})  &:= \frac{1}{M} \sum_{m} \mu_{w}(x^{(m)}) \\
+          \end{align*}
+  \item Fit a point-wise optimal policy on the resampled data by taking the maximum conditional mean for each individual context $x^{(m)}$ 
     \begin{equation}
-     \hat{\pi}_{x_i} = \argmax_{ w } \hat{\mu}_{w}(x_i) . 
+     \pi_{x^{(m)}} = \argmax_{ w } \mu_{w}(x^{(m)}) . 
     \end{equation} 
-    \item Estimate the value of the policy as
-    \begin{equation}
-     \hat{\pi}_{x_i} = \argmax_{ w } \hat{\mu}_{w}(x_i) . 
-    \end{equation}     
-  Store the estimate. 
+    \item Estimate and store value for the optimal policy:
+    \begin{align*}
+      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{M} \sum_m \hat{\mu}_{\hat{\pi}_{x^{(m)}}}(x^{(m)}) 
+          \end{align*}
+  \item Estimate the heterogeneity ratio as $\hat{V}(\hat{\pi}_{opt})/\hat{V}(\hat{\pi}_{w_{max}})$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates. 
 \end{enumerate}
-\item We can learn about performance of our algorithm with a small amount of heterogeneity by setting our heterogeneity ration at approximately 1.05. We search the grid for the penalty factor that results in an estimated heterogeneity ratio on the pilot data closes
+\item Search over the vector of potential penalty factors to find:
+\begin{enumerate}
+\item The factor with an associated heterogeneity ratio that is closest in absolute distance to 1.05. This will allow us to learn about the performance of our algorithm in a case with a small amount of heterogeneity. 
+\item The largest penalty factor within one standard deviation of cross validated error from no penalization. \todo{Does this make sense? Maybe plot hetereogeneity ratio and see what it looks like?}
+\item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 1.05 and the above near-largest heterogeneity ratio. 
+\end{enumerate}
+\end{enumerate}
+
+\paragraph{Simulations}
+This then gives us four conditional mean models. We then generate data from these models by:
+\begin{enumerate}
+\item  Sampling covariates from the empirical distribution from the pilot data and assigning response as the conditional mean + a noise term, where the noise term is based on the mean error between the fitted model and the pilot data, estimated separately for each treatment. 
+\item We run a series of simulated experiments using data from each of the DGPs, randomly applying parameters from Table~\ref{tab:design} so that we have 500 iterations of experiments run under each unique combination of design parameters for each DGP. 
 \end{enumerate}
 
 
-To learn about performance under a small amount of heterogeneity, we search the grid 
-
-We can also learn the largest heterogeneity ratio plausibly consistent with the data by considering the largest penalty factor 
+\paragraph{Parameter choice}
+Our objective in selecting design parameters is to optimize power for Hypothesis~\ref{eq:optctr}, while minimizing the size of the experiment and the number of batches. From the simulations we should be able to learn about power conditional on each combination of design parameters. Our decision rule is as follows:
+\begin{enumerate}
+\item Estimate power for Hypothesis~\ref{eq:optctr} under each unique combination of design parameters for each DGP. Take the average power across DGPs, conditional on each unique set of design parameters. 
+\item If there is one or fewer combinations of design parameters with average power $\ge.8$, select the set of design parameters which optimizes Hypothesis~\ref{eq:optctr}. To break ties, select the set with smallest experiment size, or, if of equal size, select with smallest number of batches. If experiment size and batch size are equal, select randomly. 
+\item If there is more than one combination of design parameters with average power $\ge.8$, constrain choices to only those sets with average power $\ge.8$. Then constrain choices to only those sets with the smallest experiment size, and then to the smallest number of batches. Among the remaining sets, optimize for power of Hypothesis~\ref{eq:optctr}. To break ties, select randomly. 
+\end{enumerate}
 
 \begin{table}[H]
 \centering
@@ -410,7 +438,6 @@ We can also learn the largest heterogeneity ratio plausibly consistent with the 
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
-Heterogeneity ratio & [1, ] \\
 First batch size & [100, 200, 400, 800] \\
 Number of batches & [3, 4, 5] \\
 Total experiment size & [2500, 3750, 5000] \\
@@ -464,7 +491,7 @@ All of the stimuli used in the experiment are available at this link:\\
 \subsection{Stabilized inverse probability weighting} \label{appendix:stabilized}
 Inverse probability weighted estimation typically uses weights as follows, 
 \begin{align*}
-\gamma^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eqn:IPW} \numberthis\\
+\gamma^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eq:IPW} \numberthis\\
 e_{w}(x) = \Pr[W_i = w|X_i = x].
 \end{align*}
 Here, we could directly plug in the respective treatment assignment probabilities from the experimental design for the $e_{w}(X_i)$. 
@@ -474,7 +501,7 @@ We use the stabilized version of this weights, normalizing weights to sum to one
 \left.
 \gamma^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
 \middle/ 
-{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_i)} } \label{eqn:SIPW} \numberthis
+{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_i)} } \label{eq:SIPW} \numberthis
 \right.
 \end{align}
 
@@ -484,14 +511,14 @@ For adaptively collected data, when we use stabilized weights in our algorithm, 
 %\left.
 %\gamma^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
 %\middle/ 
-%{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eqn:IPW} \numberthis
+%{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:IPW} \numberthis
 %\right.
 %\end{align}
 
 \subsection{Random forest estimation}\label{appendix:grf}
 For policy learning and evaluation, we estimate conditional means using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
 
-For a given dataset, we estimate conditional means under each treatment condition $w$:
+For a given dataset, we estimate conditional means under each treatment condition $w$:\todo{Have Erik review for terminology. }
 \begin{enumerate}
 \item Fit a random forest estimator on the observations assigned $w$ . 
 \item For observations assigned $w$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
@@ -499,16 +526,16 @@ For a given dataset, we estimate conditional means under each treatment conditio
 \end{enumerate}
 
 \subsection{Adaptively weighted doubly-robust estimation} \todo{Add appropriate reference to LFO paper.}\label{appendix:DRlfo}
-For adaptively collected data, we use doubly robust scores as in (\ref{eqn:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates. This means that in each batch we estimate the nuisance components only using data up to and including the current batch. 
+For adaptively collected data, we use doubly robust scores as in (\ref{eq:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates. This means that in each batch we estimate the nuisance components only using data up to and including the current batch. 
 
-To estimate conditional means, we follow the steps above in \ref{appendix:grf}, with minor adjustments. For each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:\todo{Have Erik review for terminology. }
+To estimate conditional means, we follow the steps above in \ref{appendix:grf}, with minor adjustments. For each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:
 \begin{enumerate}
 \item Fit a random forest estimator on the observations assigned $w$ in batches up to and including batch $b$. 
 \item For observations assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
 \item For observation not assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
 \end{enumerate}
 
-We use the rolling version of the stabilized inverse probability weights from (\ref{eqn:SIPW}), substituting the current maximum index value for $N$. 
+We use the rolling version of the stabilized inverse probability weights from (\ref{eq:SIPW}), substituting the current maximum index value for $N$. 
 Doubly robust scores are then formed from the relevant component parts. 
 
 
