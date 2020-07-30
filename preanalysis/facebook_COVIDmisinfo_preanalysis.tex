@@ -114,9 +114,10 @@ AfricaCheck tips                                                                
 Video training                                                                                                     & Respondent                                                                                                   &  \href{https://www.bbc.com/news/av/embed/p088bh96/52118949}{BBC Video training}                                                                                                                                                                                                                                                                                                                                                                                  \\
 Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all” \citep{gross1998emerging}.\end{tabular}
 \\
-Pledge                                                                                 & Respondent                                                                                                   & Prompt: \textcolor{red}{TBD} 
+Pledge                                                                                 & Respondent                                                                                                   &  \begin{tabular}[t]{@{}l@{}} Prompt: Respondents will be asked if they think misinformation \\ is a problem, if they're willing to help stop it, and finally if they're \\willing to take either a \textit{private} or \textit{public} pledge to stop the spread \\of false COVID-19 cures online (see exact text in \ref{sec:pledge}).
+\end{tabular}
 \\
-Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``Do you think this headline accurately\\& & describes an event that actually  happened?'' \\& &  \citep{pennycook2020fighting}.
+Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``To the best of your knowledge, is this headline \\& & accurate?'' \citep{pennycook2020fighting}.
 \\
 Deliberation nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``In a few words, please say \textit{why} you would\\ & & like to share or why you would not like to share this headline.''\\ & & [open text response]
 \\
@@ -161,8 +162,7 @@ Our pre-test outcome is then:
 \[
 Y^1_i = M_i^1 + 0.5 T_i^1,
 %Y_i = -(M_i^2 - M_i^1) + 0.5 \times (T_i^2 - T_i^1)
-\]\todo{LR:Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondent and headline correlations.\\
-MOW: Let's discuss, I'm not sure what this would look like for our adaptive agent model. }
+\]%\todo{LR:Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondent and headline correlations.\MOW: Let's discuss, I'm not sure what this would look like for our adaptive agent model. }
 And the respective post-test response function is $Y^2_i$ with the relevant terms on the righthand side. In our approach to analysis, we will condition on $Y^1$ on the righthand side of the equation, keeping $Y^2$ on the lefthand side. For notational convenience, we will refer to $Y^2$ as $Y$ going forward. This response function will be the variable which we optimize for in our adaptive algorithm described in Section~\ref{adaptiveagent}, and in our policy learning described in Section~\ref{analysis}. Because of random assignment, we expect to see no systematic differences in pre-test interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. %For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-test compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-test compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
 
 
@@ -453,9 +453,8 @@ Probability floor (p)& [0.01, 0.025, 0.5]$\times 1/ |\ww|$ \\
 \centering
 \caption{Advertisement as run in Facebook timeline.}
 \label{fig:ad}
-\includegraphics[width=.5\textwidth]{../irb/recruitment_advert_v2.png}
+\includegraphics[width=.75\textwidth]{../irb/ad_073020.png}
 \end{figure}
-\todo{Is there a version with updated stock images?}
 
 \section{Survey and data}\label{appendix:data}
 \subsection{Covariates}\label{appendix:covariates}
@@ -478,6 +477,27 @@ All of the stimuli used in the experiment are available at this link:\\
 \subsection{Treatments}
 \textcolor{red}{[TK]}
 \todo{Include mockups for headlines, full questions for respondent-level treatments, add deliberation stimuli and describe}
+
+\subsubsection{Pledge Treatment}
+\label{sec:pledge}
+\begin{enumerate}
+
+\item Do you think that the spread of false information about COVID-19 is [dangerous/a problem] and should be stopped? (yes, no)
+
+\item IF 1=YES: Are you committed to stopping the spread of harmful/dangerous false information about COVID-19 online? (yes, no)
+\item IF 1=NO: Why not? [open response]
+
+
+\textbf{Respondents in pledge treatment will be randomized (equal and static assignment probability) to either see the public or private pledge below}
+
+\item \textbf{public pledge:}\\
+IF 2=YES:  Great! Please take our pledge by posting this pledge to your timeline now. \\ IF 2=NO: Why not? [open response]
+
+\item \textbf{private pledge:}\\
+IF 2=YES:  Great! Please take our pledge now by posting it here. \\
+IF 2=NO: Why not? [open response]
+
+\end{enumerate}
 
 
 \section{Estimation Considerations}
