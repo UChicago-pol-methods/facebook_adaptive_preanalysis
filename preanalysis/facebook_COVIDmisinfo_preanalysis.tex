@@ -32,15 +32,17 @@ Alongside the outbreak of the new coronavirus, much of the world’s population 
 \section{Motivation and Research Questions}
 
 % motivation
-Alongside the outbreak of the new coronavirus, much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation is spreading through online media outlets and social media platforms. These falsities range from incorrect information about government action to hoax cures. Unproven cures vary from mostly harmless, such as drinking lemon water, to those that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach.\footnote{For instance, dozens of people in Iran died from alcohol poisoning after ingesting methanol to stave off the coronavirus (\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020), and multiple people were hospitalized for chloroquine poisoning in Nigeria following statements by US president Trump in support of the medication to treat COVID-19 (\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}, Mar. 23, 2020) .} As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of misinformation.
+Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation has been spreading through online media outlets and social media platforms. Falsities and conspiracy theories cover topics from government activities to scam opportunities for aid and hoax cures. In some places citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
+
+Though challenging to calculate the $R_0$ of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations such as drinking lemon water and inhaling steam, but also include others that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19. \footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} Though connecting the causal chain on blame from online rumors to offline behaviors, activity on social media has been linked to offline behaviors such as hate crimes \citep{muller2019fanning}. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
 
 % what we do 
-This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting. We test interventions targeted at both the respondent level, such as general warnings, as well as headline-level treatments, such as flags and ``false'' tags (treatments are described in Table~\ref{tab:treatments}). 
+This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting and environment where such stories have appeared. We test interventions targeted at both the respondent level, such as tips for spotting fake news, a video training and nudges, as well as headline-level treatments, such as ``false'' tags and related articles. All of the treatments are described in Table~\ref{tab:treatments}. 
 
 Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 % how we build on existing lit
-This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings using an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research has been focused on the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} Finally, this pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
+This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings using an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research has been focused on the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} This pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
 
 
 
@@ -50,23 +52,24 @@ This work builds on the experimental literature on combating fake news in severa
 
 We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on \href{https://www.facebook.com/business/insights/tools/audience-insights?ref=ens_rdr}{Facebook's advertising platform}). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. 
 
-
-For this experiment, we focus on COVID-19 prevention and cure-related information because this comprises a large proportion of the overall coronavirus-related information that has been fact-checked by experts (see Figure \ref{fig:poynter_cures}) and also serves as some of the most dangerous misinformation. Some hoax cures, when adopted, can be deadly. Moreover, even if not adopted when claims about the existence of a cure circulate widely they may deter people from taking preventative measures. We acknowledge that interventions will likely need to be specific to the particular type of misinformation being targeted, whether political, health-related, etc. The focus of this paper is on prevention and cure-related (mis)information that is currently relevant for the ongoing pandemic. 
-%\todo{Should this be moved to a new 3.3.2 Stimuli section?} - kept here and changed section heading
-
-To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that spoke to some of the misinformation we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is presented in Appendix~\ref{appendis:stimuli}. 
-
-%% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
-
-\begin{figure}[t]
+\begin{figure}[!htb]
 \centering
 \caption{Map illustrating the volume of fact-checks in \url{poynter.org}'s global coronavirus facts database.}
 \label{fig:poynter}
 \includegraphics[width=.95\textwidth]{poynter2.png}
 \end{figure}
 
+For this experiment, we focus on COVID-19 prevention and cure-related information because this comprises a large proportion of the overall coronavirus-related information that has been fact-checked by experts (see Figure \ref{fig:poynter_cures}) and also serves as some of the most dangerous misinformation. Some hoax cures, when adopted, can be deadly. Moreover, even if not adopted when claims about the existence of a cure circulate widely they may deter people from taking preventative measures. We acknowledge that interventions will likely need to be specific to the particular type of misinformation being targeted, whether political, health-related, etc. The focus of this paper is on prevention and cure-related (mis)information that is immediately relevant for the ongoing pandemic. 
+%\todo{Should this be moved to a new 3.3.2 Stimuli section?} - kept here and changed section heading
 
-\begin{figure}[htb]
+To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is presented in Appendix~\ref{appendis:stimuli}. 
+
+%% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
+
+
+
+
+\begin{figure}[t]
 \centering
 \caption{Map illustrating the volume of COVID-19 cure-related fact-checks in \url{poynter.org}'s global coronavirus database.}
 \label{fig:poynter_cures}
@@ -85,7 +88,7 @@ We will recruit respondents in Kenya and Nigeria using Facebook advertisements t
 To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}.
 
 
-Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 15 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
+Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 20 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
 \footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{appendix:recruitment}.} %
  When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey.%
  \footnote{\color{red}{[[TK: images of chatbot once linked to page]]}} % 
@@ -93,15 +96,14 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 
 
 \subsection{Covariates}
-Through the chatbot, we collect demographic and other information on respondents. 
-We use the below covariates for learning conditional treatment assignment probabilities in the chatbot. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. \todo{Full approach to implementation of treatment assignment probabilities in progress. }
+Through the chatbot, we collect demographic and other information on respondents.  We use the below covariates for learning conditional treatment assignment probabilities in the chatbot. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. %\todo{Full approach to implementation of treatment assignment probabilities in progress. } %% LR: commented out for now...
 
 \input{covariates_shortform.tex}
 
 For missing covariate information, we will follow the procedures in \cite{greensop1.05}: for a given covariate, if no more than 10 percent of total covariate values are missing, recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, introduce a missingness flag. 
 
 \subsection{Treatment}
-Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the headline level and respondent level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
+Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the respondent level and headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
 
 % interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
 
@@ -150,7 +152,7 @@ We measure interest in sharing information through two questions:
 \item Would you like to send this post to a friend on Messenger?
 \end{itemize}
 
-Prior to treatment, we show respondents two articles from their country randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported interest questions. 
+Prior to treatment, we show respondents two articles from their country randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported sharing intention questions. 
 
 By using a pre-test / post-test design  \citep{davidian2005semiparametric} %https://declaredesign.org/library/articles/pretest_posttest.html
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
@@ -453,7 +455,7 @@ Probability floor (p)& [0.01, 0.025, 0.5]$\times 1/ |\ww|$ \\
 \centering
 \caption{Advertisement as run in Facebook timeline.}
 \label{fig:ad}
-\includegraphics[width=.75\textwidth]{../irb/ad_073020.png}
+\includegraphics[width=.75\textwidth]{../irb/round_2_submission_07302020/ad_073020.png}
 \end{figure}
 
 \section{Survey and data}\label{appendix:data}
@@ -465,7 +467,7 @@ We also include indicators for individual stimuli in models where we use full co
 
 \subsection{Survey Instrument}\label{appendix:survey}\todo{Update to public-facing survey instrument.}
 The survey script is available at this link:\\
-\url{https://docs.google.com/spreadsheets/d/1hhWv_ZxVJA1xcfnK3URFWjN4awJjL1DvSc1HcSW9-sk/edit?usp=sharing}
+\url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=1253244358&range=A2}
 
 
 \subsection{Stimuli}\label{appendis:stimuli}
@@ -480,6 +482,8 @@ All of the stimuli used in the experiment are available at this link:\\
 
 \subsubsection{Pledge Treatment}
 \label{sec:pledge}
+This treatment draws on the psychological evidence around commitment and consistency, the idea that getting someone to commit to an action, especially publicly will help reinforce that behavior in the future \citep{cialdini1987influence,costa2018walking}.
+
 \begin{enumerate}
 
 \item Do you think that the spread of false information about COVID-19 is [dangerous/a problem] and should be stopped? (yes, no)
