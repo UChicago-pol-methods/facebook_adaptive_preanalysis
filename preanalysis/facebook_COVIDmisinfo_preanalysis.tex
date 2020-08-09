@@ -4,7 +4,7 @@
 \setlength{\marginparwidth}{4.5cm}
 \usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 % Title and Subtitle added in .tex file
-\usepackage{placeins} % for FloatBarrier to keep figures in right section
+
 \title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
 \subtitle{Preanalysis plan}
 \author{Molly Offer-Westort, Leah R. Rosenzweig, Susan Athey}
@@ -96,9 +96,9 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 
 
 \subsection{Covariates}
-Through the chatbot, we collect demographic and other information on respondents.  We use the below covariates for learning conditional treatment assignment probabilities in the chatbot. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. %\todo{Full approach to implementation of treatment assignment probabilities in progress. } %% LR: commented out for now...
-
-\input{covariates_shortform.tex}
+Through the chatbot, we collect demographic and other information on respondents. % We use the below covariates for learning conditional treatment assignment probabilities in the chatbot. 
+The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.
+%\input{covariates_shortform.tex}
 
 For missing covariate information, we will follow the procedures in \cite{greensop1.05}: for a given covariate, if no more than 10 percent of total covariate values are missing, recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, introduce a missingness flag. 
 
@@ -152,20 +152,20 @@ We measure interest in sharing information through two questions:
 \item Would you like to send this post to a friend on Messenger?
 \end{itemize}
 
-Prior to treatment, we show respondents two articles from their country randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released here on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported sharing intention questions. 
+Prior to treatment, we show respondents two articles from their country randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported sharing intention questions. 
 
 By using a pre-test / post-test design  \citep{davidian2005semiparametric} %https://declaredesign.org/library/articles/pretest_posttest.html
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
 
 
-We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2,3,4}$. 
+We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2}$. 
 
-Our pre-test outcome is then:
+We control for strata of pre-test responses in our analyses, i.e., $S=\{(m^1, r^1)\in M^1 \times R^1\}$. 
+We formalize our response function in terms of post-test measures:
 \[
-Y^1_i = M_i^1 + 0.5 T_i^1,
-%Y_i = -(M_i^2 - M_i^1) + 0.5 \times (T_i^2 - T_i^1)
-\]%\todo{LR:Made me wonder whether we want to, for power sake, use random effects model w/respondent and headline level REs? so rather than using DV that sums shares across all 4 headlines seen ? This is how psych misinfo studies usually analyze headline-level outcomes and deal with respondent and headline correlations.\MOW: Let's discuss, I'm not sure what this would look like for our adaptive agent model. }
-And the respective post-test response function is $Y^2_i$ with the relevant terms on the righthand side. In our approach to analysis, we will condition on $Y^1$ on the righthand side of the equation, keeping $Y^2$ on the lefthand side. For notational convenience, we will refer to $Y^2$ as $Y$ going forward. This response function will be the variable which we optimize for in our adaptive algorithm described in Section~\ref{adaptiveagent}, and in our policy learning described in Section~\ref{analysis}. Because of random assignment, we expect to see no systematic differences in pre-test interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. %For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-test compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-test compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
+Y_i = -M^2_i + 0.5 T^2_i.
+\]
+This response function will be the metric that we optimize for in our adaptive algorithm described in Section~\ref{adaptiveagent}, and in our policy learning described in Section~\ref{analysis}. Because of random assignment, we expect to see no systematic differences in pre-test interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. %For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-test compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-test compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
 
 
 
@@ -178,18 +178,18 @@ In order to obtain a behavioral measure of sharing, we collect the articles the 
 At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online and also offer them the opportunity to share these tips on their timeline or on messenger; we measure intention to share these tips and aggregate number of shares of tips by treatment condition as well. 
 
 
-\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, all types of post-test responses will be coded as zero.\todo{Alternatively, could use \cite{davidian2005semiparametric} Robins/Rotnitzky/Zhao approach in final analysis.}
+\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, all types of post-test responses will be coded as zero.\footnote{An alternative approach to analysis in a pre-test/post-test design, accounting for missing data, would be to follow \cite{davidian2005semiparametric}'s implementation of estimators developed by \cite{robins1994estimation}.}
 
 
 \section{Hypotheses and Data Collection}
 
 
 
-Our data is described by treatments $W_i \in \ww$\footnote{Our treatments are composed of two separate factors, but here we use $W$ to represent combined treatment conditions. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively. As each factor includes a baseline level absent intervention, the cardinality $|\ww| = |\ww^H|\times |\ww^R|$.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. 
+Our data is described by treatments $W_i \in \ww$\footnote{Our treatments are composed of two separate factors, but here we use $W$ to represent combined treatment conditions, i.e., the unique combination of one respondent-level and one headline-level treatment. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively. Each factor includes a baseline level absent intervention, and the cardinality $|\ww| = |\ww^H|\times |\ww^R|$.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. 
 
 We assume the data is indexed by $i = 1, \dots, N$ where indexing represents the order in which respondents entered the experiment; this allows us to use $i$ to also represent relative chronological relationships in our sequential adaptive design. 
 
-We use potential outcome notation, where $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$, and by experimental design,  we have strong ignorability of potential outcomes to treatment conditional on observed covariates. 
+We use potential outcome notation, where $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$.%, and by experimental design,  we have strong ignorability of potential outcomes to treatment conditional on observed covariates. 
 
 
 We would like to learn and evaluate an optimal contextual policy, under which we assign the most effective treatment conditional on covariates. Formally, a policy maps a set of covariates to a decision \citep{athey2017efficient}, %\todo{Update reference}
@@ -215,7 +215,7 @@ Our primary hypothesis is that we are able to estimate from the data an optimal 
   H_{0}: V(\pi_{opt}) = V(\pi_{w_{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w_{C}})
 \end{align}
 \end{hypothesis}
-This is the hypothesis that we aim to optimize for in our adaptive data collection. 
+This is the hypothesis that we aim to optimize power for in our adaptive data collection. 
 
 We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
   \begin{hypothesis}
@@ -231,72 +231,71 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
 
 To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
 
-We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. 
+We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we assume there is some unknown coefficient vector $\theta_w\in R^{|\xx|}$ for each arm $w \in \ww$, such that $Y_i(w) = x_i^\top \theta_w + \epsilon_i$, and $\epsilon_i\sim \mathcal{N}(0, \sigma_w)$, i.e., variance is constant under each arm. The conditional mean is $\mu_w(x) = \E[Y(w)|X=x] = x^T \theta_w$. 
 
-This algorithm requires us to se a number of design parameters; the procedures to select these parameters are discussed below in Section~\ref{simulations}. 
+%We assume the variance is constant within arms, i.e., $\V[Y(w)|X = x] = \sigma^2_w$. The conditional reward function is modeled as being distributed,
+%  \begin{align}
+%    \mu_w(x) \sim \mathcal{N}({\mu}_w(x), {\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and treatment }w
+%    \text{ for all treatments }w \in \ww
+%  \end{align}
 
-% \label{subsec:exploration_methods}
-Our implementation is based on the balanced linear Thompson sampling method described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced} :
+
+Our implementation closely follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta_w$ and $\hat\sigma^2_w$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the algorithm are provided in Algorithm~\ref{algg:bblts}, we present an overview below. 
+
+\paragraph{Adaptive agent}
 
 \begin{enumerate}
-\item In the first batch, $b = 1$, we assign treatment uniformly at random. \todo{The bootstrapping aspect of this algorithm is adapted from the Cameroon PAP. Check wording and ensure that appropriate attribution is given. }
+\item In the first batch, $b = 1$, we assign treatment uniformly at random. 
 
 \item For equally sized batches $b = 2, \dots, B-1$:
 
 \begin{enumerate}
- \item Fit a ridge regression model. Compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data.\footnote{For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
+   \item \label{step:fit} Fit a ridge regression with balancing weights. Compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data.%
+ \footnote{We set M = $1,000$.}
+ \footnote{For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
  
+%\begin{align*}
+%\hat{\mu}_w(X_{i}) & =
+%			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
+%			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
+%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}} +  \\
+%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
+%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}, \ell}.\numberthis
+%         \label{eq:linear_model_full}
+%\end{align*} 
+
 \begin{align*}
 \hat{\mu}_w(X_{i}) & =
-			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
-			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
-			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  \hat w^H\}\hat\beta_{w^{R,H}} +  \\
-			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
-        &  \sum_{w,\ell} 1\{ W_{i} = w\} X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
+			\sum_{w} 1\{W = w\}\hat\beta_{w}  +
+			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
+			\sum_{w}1\{W =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
          \label{eq:linear_model_full}
 \end{align*} 
-The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$. 
-Observations are weighted according to rolling stabilized inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}. Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. Recall that the pre-test response is implicitly included on the righthand side of the model. }
-\todo{Alternative option: Have separate penalty factors, e.g., one for just covariates, one for interactions of treatment x treatment and treatment x covariates jointly. }
-\todo{Comment for Vitor: does it even make sense to do batch-wise stabilized weights? Do we have recorded implementation in bandits or adaptive-inference repo?}
 
-  \item \label{step:draw} Draw $M$ random samples with replacement from the data, with samples indexed by $m = 1, \dots, M$, so that data from sample $m$ is represented by $D^{(m)} := (X^{(m)}, W^{(m)}, Y^{(m)})$.\footnote{We set M = 100.} 
-
-  \item Within each sample, for each possible context $x$\footnote{We note that for the adaptive agent, we only use the restricted covariate set described in Table~\ref{cov_short}. }, treatment $w$ and bootstrap sample, estimate conditional means  $\hat{\mu}_w^{(m)}(x)$ for each treatment using the fitted outcome model, where $\mu_w(x) = \E[Y(w)|X=x]$. The penalization value is fixed as $\lambda_{CV}$ from step 1, without performing any additional cross-validation.
+%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
+The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
+Observations are weighted according to inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}, as in Equation~(\ref{eq:IPW}) in Appendix~\ref{appendix:stabilized}. %Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. 
+}
   
-  \item For each context $x$ and available treatment $w$, compute and store the following statistics representing the average value of each treatment, and the uncertainty associated with this statistic.
-    \begin{equation}
-      \begin{aligned}
-        \hat{\mu}_w(x)         &= \frac{1}{M}\sum_{m} \hat{\mu}_w^{(m)}(x) \\
-         \hat{\sigma}^{2}_w(x) &= \frac{1}{M(M-1)} \sum_{m} (\hat{\mu}_w^{(m)}(x) - \hat{\mu}_w(x))^2
-      \end{aligned}
-    \end{equation}
-
-  \item \label{step:prob} Approximate the probability that each treatment $w$ is maximal for each possible context $x$. In order to do that, we draw from the following probability distribution a large number $S$ times\footnote{We set S = 1,000.}
-  \begin{align}
-    \theta_{w}(x) \sim \mathcal{N}(\hat{\mu}_w(x), \hat{\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and treatment }w
-    \text{ for all treatments }w
-  \end{align}
-
-  and compute the fraction of times that treatment $w$ was the largest for each $s$ set of draws
-  \begin{align}
-    q_{b}(x, w) = \frac{1}{S} \sum_{s} 1\left\{ \theta_{w}^{(s)}(x) = \max \{\theta_{1}^{(s)}(x), \dots, \theta_{|\mathcal{W}|}^{(s)}(x) \}  \right\}. 
-  \end{align}
-
-  These are the Thompson sampling probabilities associated with the pair $(x, w)$. 
   
-  \item Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{b}(x, w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
-  \begin{align}
-  \breve{q}_{b}(x, w) & =\max\Biggr\{\frac{ q_{b}(x, w)}{\sum\limits_{w \neq w_{C}}q_{b}(x, w) } , p\Biggr\} \\
-  \tilde{q}_{b}(x, w) & = \frac{ \breve q_{b}(x, w)}{\sum\limits_{w \neq w_{C}}\breve q_{b}(x, w) }. 
-  \end{align}
-  
-  \item Collect data for the batch: For every new respondent, collect data on their contexts $x$ and use the probabilities $\tilde{q}_{b-1}(x, w)$ computed in the previous batch to assign treatments.
+ This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta_w$ and an associated estimated variance, $\V[\hat\theta_{w}] $ for each arm $w\in \ww$ . 
+
+ \item For each observation, we draw $M$ draws from $\tilde \theta ^{(m)}_w \sim \mathcal{N}(\hat \theta_w),\V[\hat\theta_{w}]$ for each condition $w$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{Note that we slightly abuse notation here, as for each $ x_i^\top \tilde \theta ^{(m)}_w$ the $x_i$ term is modified to the appropriate format for relevant treatment indicators and interactions for each hypothetical treatment $w$. I.e., we are producing predictions given the observed covariates under each counterfactual treatment condition. }
+				\begin{align}
+    q_i(w) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
+				\end{align}
+\item Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{i}(w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
+      \begin{align}
+          \breve{q}_{i}(w) & =\max\Biggr\{\frac{ q_{i}(w)}{\sum\limits_{w \neq w_{C}}q_{i}(w) } , p\Biggr\} \\
+          \tilde{q}_{i}(w) & = \frac{ \breve q_{i}(w)}{\sum\limits_{w \neq w_{C}}\breve q_{i}(w) }. 
+      \end{align}
+\item Assign treatment  according to the calculated probabilities: $w_i \sim \textrm{Multinom}(\tilde{q}_{i}(1), \dots, \tilde{q}_{i}(|\ww|))$
 \end{enumerate}
 
 \item For the final batch,  $b = $ B, collect data on-policy:
 \begin{enumerate}
-  \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. Here, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}.
+  \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. 
+%  Here, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}.
   \item Fit a point-wise optimal policy  by taking the maximum of predicted values for each possible context $x$ 
     \begin{equation}
      \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
@@ -316,8 +315,8 @@ To estimate the value of a policy, we take the average of doubly robust scores $
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
-We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach is described in Appendix~\ref{appendix:grf}. $\gamma_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}. \todo{Could add note about bias in adaptively collected data, per e.g. Nie et al.. }
-Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response on the righthand side of hte model.
+We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach is described in Appendix~\ref{appendix:grf}. $\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}. \todo{Could add note about bias in adaptively collected data, per e.g. Nie et al.. }
+Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
 
 Our methods for analysis will differ depending on how the data is collected. 
 
@@ -326,7 +325,7 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
 
 \begin{enumerate}
   \item Collect data by assigning treatment uniformly at random.
-  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\gamma_w(X_i)$, use assigned probabilities $1/|\ww|$. 
+  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
   \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
   \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
     \begin{equation*}
@@ -335,8 +334,8 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
   \item To evaluate the policies, take the average scores :
     \begin{align*}
           \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
-      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{N} \sum_{i}^N\langle \hat{\pi}_{X_i}, \hat{\Gamma}_{i, \cdot}  \rangle
-          \end{align*}\todo{Add a clarification on angle notation--or just change it, it's not obvious here. }
+      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
+          \end{align*}
    \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
 
@@ -346,7 +345,7 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 
 \begin{enumerate}
 \item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
-\item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\gamma_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
+\item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\xi_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
 \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
 \item We have already fitted and stored a point-wise optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
   \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
@@ -360,7 +359,7 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 
 To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. 
 
-The data collected from this study will be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, but those methods will not be discussed in this pre-registration.\todo{Vitor and Ruohan: what should we say about confidence intervals paper?}
+The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
 
 
@@ -372,7 +371,7 @@ To carry out implementation, the above description requires setting of several d
 
 We set these parameters by learning from our pilot data of 1500 observations from each country. In the pilot data, treatment is assigned uniformly at random. We conduct the below simulations \textit{separately} for each country, meaning that we may end up with meaningfully different designs in the two countries. 
 
-We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors.\todo{Finalize how we're setting penalties} In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
+We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
 
 We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
@@ -380,29 +379,29 @@ We refer to the heterogeneity ``ratio'' as the ratio of the value of the best co
 \paragraph{Data generating processes}
 \begin{enumerate}
 \item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
-\item  Sample $M=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(M)}$. 
+\item  Sample $S=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
 \item Estimate heterogeneity ratios under each element of the vector of penalty factors:
 \begin{enumerate}
 \item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.
-  \item Calculate conditional means $\mu_{w}(X^{(m)})$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(M)}$. 
+  \item Calculate conditional means $\mu_{w}(X^{(s)})$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(S)}$. 
   \item Estimate and store values for fixed policies for each $w$
       \begin{align}
-          \hat{V}({\pi}_{w})  &:= \frac{1}{M} \sum_{m} \mu_{w}(x^{(m)}) \\
+          \hat{V}({\pi}_{w})  &:= \frac{1}{S} \sum_{s = 1}^S \mu_{w}(x^{(s)}) \\
           \end{align}
-  \item Fit a point-wise optimal policy on the resampled data by taking the maximum conditional mean for each individual context $x^{(m)}$ 
+  \item Fit a point-wise optimal policy on the resampled data by taking the maximum conditional mean for each individual context $x^{(s)}$ 
     \begin{equation}
-     \pi_{x^{(m)}} = \argmax_{ w } \mu_{w}(x^{(m)}) . 
+     \pi_{x^{(s)}} = \argmax_{ w } \mu_{w}(x^{(s)}) . 
     \end{equation} 
     \item Estimate and store value for the optimal policy:
     \begin{align}
-      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{M} \sum_m \hat{\mu}_{\hat{\pi}_{x^{(m)}}}(x^{(m)}) 
+      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{M} \sum_m \hat{\mu}_{\hat{\pi}_{x^{(s)}}}(x^{(s)}) 
           \end{align}
   \item Estimate the heterogeneity ratio as $\hat{V}(\hat{\pi}_{opt})/\hat{V}(\hat{\pi}_{w_{max}})$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates. 
 \end{enumerate}
 \item Search over the vector of potential penalty factors to find:
 \begin{enumerate}
 \item The factor with an associated heterogeneity ratio that is closest in absolute distance to 1.05. This will allow us to learn about the performance of our algorithm in a case with a small amount of heterogeneity. 
-\item The largest penalty factor within one standard deviation of cross validated error from no penalization. \todo{Does this make sense? Identify the model that takes full advantage of heterogeneity of the data, while minimizing over-fit.}
+\item The largest penalty factor within one standard deviation of cross validated error from no penalization. 
 \item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 1.05 and the above near-largest heterogeneity ratio. 
 \end{enumerate}
 \end{enumerate}
@@ -430,12 +429,12 @@ Our objective in selecting design parameters is to optimize power for Hypothesis
 \begin{tabular}{l | l}
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
 Total experiment size ($N$)& [2500, 3750, 5000] \\
-Number of batches ($B$)& [3, 4, 5] \\
+Number of batches ($B$)& [10, 15, 20] \\
 First batch size ($|\mathcal{I}_1|$) & N $\times$ [1/10, 3/10, 1/5] \\
 Last batch size ($|\mathcal{I}_B|$) & N $\times$ [1/10, 3/10, 1/5] \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
-Probability floor (p)& [0.01, 0.025, 0.5]$\times 1/ |\ww|$ \\
+Probability floor (p)& [0.05, 0.1, 0.25]$\times 1/ |\ww|$ \\
 \hline
 \end{tabular}
 \end{table}\todo{Finalize choice set}
@@ -463,9 +462,9 @@ Probability floor (p)& [0.01, 0.025, 0.5]$\times 1/ |\ww|$ \\
 
 \input{covariates_longform.tex}
 
-We also include indicators for individual stimuli in models where we use full covariates.\todo{Confirm, and mention this anywhere else?}
+In all analyses, we include the pre-test response strata and indicators for individual stimuli.
 
-\subsection{Survey Instrument}\label{appendix:survey}\todo{Update to public-facing survey instrument.}
+\subsection{Survey Instrument}\label{appendix:survey}\todo{Check for update to public-facing survey instrument.}
 The survey script is available at this link:\\
 \url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=1253244358&range=A2}
 
@@ -506,37 +505,78 @@ IF 2=NO: Why not? [open response]
 
 \section{Estimation Considerations}
 
-\subsection{Stabilized inverse probability weighting} \label{appendix:stabilized}
+\subsection{Inverse probability weighting} \label{appendix:stabilized}
 Inverse probability weighted estimation typically uses weights as follows, 
 \begin{align*}
-\gamma^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eq:IPW} \numberthis\\
+\xi^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eq:IPW} \numberthis\\
 e_{w}(x) = \Pr[W_i = w|X_i = x].
 \end{align*}
 Here, we could directly plug in the respective treatment assignment probabilities from the experimental design for the $e_{w}(X_i)$. 
 
-We use the stabilized version of this weights, normalizing weights to sum to one on the empirical data. This may improve RMSE of the estimator \textcolor{red}{[TK:citation]}.
+In ex post evaluation, we use the stabilized version of these weights, normalizing weights to sum to one on the empirical data. This may improve RMSE of the estimator \citep{cole2008constructing}. 
 \begin{align}
 \left.
-\gamma^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
+\xi^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
 \middle/ 
 { \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_i)} } \label{eq:SIPW} \numberthis
 \right.
 \end{align}
 
-For adaptively collected data, when we use stabilized weights in our algorithm, we use rolling weights that are updated with each batch.  \todo{Is this how we want to do this? }
+For adaptively collected data we use cumulative moving stabilized weights. If data were collected in an online manner (i.e., if Thompson sampling probabilities were updated with each observation), $N$ in the above formula would be replaced by $i$. In the batched version, all observations in the same batch share the same history, and so instead, we sum over all observations in batches \textit{up to and including} the batch that includes observation $i$. \todo{Could formalize this.}
 
 %\begin{align}
 %\left.
-%\gamma^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+%\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
 %\middle/ 
 %{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:IPW} \numberthis
 %\right.
 %\end{align}
 
+\subsection{Adaptive agent}\label{appendix:agent}
+
+
+\begin{algorithm}
+    \caption{Batch-wise balanced linear Thompson sampling}
+    \label{algg:bblts}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+    	\State$\Xi_w \leftarrow$ empty matrix; $X_w \leftarrow$ empty matrix; $r_w \leftarrow$ empty vector for $w \in \ww$. 
+	\Comment{Initialize weight matrices, covariate matrices, and reward vectors, for each treatment condition separately. }
+    	\For{$i = 1, \dots, N$}
+		\If{$i \in \mathcal{I}_1$}
+			\State Assign $w_i\sim \text{Uniform}(\ww)$
+			\State Compute inverse probability weights $\xi_i$ following (\ref{eq:IPW}).
+			\State $\Xi_{w_i} \leftarrow \diag \left(\Xi_{w_i}, \xi_i\right)$
+			\State $X_{w_i} \leftarrow [X_{w_i}:x_i^\top]$ \Comment{The covariate vector is in the appropriate format for the relevant treatment indicators and interactions.}
+			\State $r_{w_i} \leftarrow  [r_{w_i}: y_i]$
+		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B-1$}
+			\If{$i$ first observation in $\mathcal{I}_b$}
+				\For{$w\in \ww$}
+					\State $B_w \leftarrow X^\top \Xi_w X + \lambda^{CV} \mathbf{I}$ \Comment{$\lambda^{CV}$ is the penalty factor with the minimum mean cross-validated error using the entire observed history of data.}
+					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
+					\State $\hat\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
+				\EndFor
+			\EndIf
+			\State 				\State Draw $M$ times from $\mathcal{N}\left(\hat\theta_{w}, \hat\V[\hat\theta_{w}] \right)$ indexed by $m = 1, \dots, M$, so that draw $m$ is represented by $\tilde \theta ^{(s)}_w$ for all $w \in \ww$
+				\State Compute for all $w \in \ww$:
+				\begin{align}
+    q_i(w) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(s)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(s)} \}  \right\}. 
+  				\end{align}
+			\State Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{i}(w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
+                          \begin{align}
+                          \breve{q}_{i}(w) & =\max\Biggr\{\frac{ q_{i}(w)}{\sum\limits_{w \neq w_{C}}q_{i}(w) } , p\Biggr\} \\
+                          \tilde{q}_{i}(w) & = \frac{ \breve q_{i}(w)}{\sum\limits_{w \neq w_{C}}\breve q_{i}(w) }. 
+                          \end{align}
+                          \State Assign $w_i \sim \textrm{Multinom}(\tilde{q}_{i}(1), \dots, \tilde{q}_{i}(|\ww|))$
+		\EndIf
+	\EndFor
+    \end{algorithmic}
+\end{algorithm}
+\clearpage
+
 \subsection{Random forest estimation}\label{appendix:grf}
 For policy learning and evaluation, we estimate conditional means using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
 
-For a given dataset, we estimate conditional means under each treatment condition $w$:\todo{Have Erik review for terminology. }
+For a given dataset, we estimate conditional means under each treatment condition $w$:
 \begin{enumerate}
 \item Fit a random forest estimator on the observations assigned $w$ . 
 \item For observations assigned $w$, calculate $\hat\mu_w(X_i, W_i = w)$ using out-of-bag predictions. 
@@ -553,7 +593,7 @@ To estimate conditional means, we follow the steps above in \ref{appendix:grf}, 
 \item For observation not assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
 \end{enumerate}
 
-We use the rolling version of the stabilized inverse probability weights from (\ref{eq:SIPW}), substituting the current maximum index value for $N$. 
+We use the cumulative moving version of the stabilized inverse probability weights from (\ref{eq:SIPW}), substituting the current maximum index value for $N$. 
 Doubly robust scores are then formed from the relevant component parts. 
 
 

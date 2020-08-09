@@ -14,7 +14,7 @@
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
 % Captions will be left justified
 \RequirePackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
-
+\usepackage{placeins} % for FloatBarrier to keep figures in right section
 
 % Tables
 \RequirePackage{float}
@@ -79,6 +79,10 @@
 \RequirePackage{footnote}
 \deffootnote[1.5em]{.5em}{1em}{\textsuperscript{\thefootnotemark}}
 
+% Algorithms
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 % Equation formatting
 \RequirePackage{amsmath,amssymb,amsfonts} 
@@ -108,6 +112,7 @@
 \def\Supp{{\textrm {Supp} }\,}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+\def\diag{{\textrm {diag} }\,}
 
 %--------------------------------------------------------------------------
 % Math boldface shortcuts, etc. ----------------------------------
