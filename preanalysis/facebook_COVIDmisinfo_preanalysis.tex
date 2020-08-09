@@ -34,10 +34,10 @@ Alongside the outbreak of the new coronavirus, much of the world’s population 
 % motivation
 Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation has been spreading through online media outlets and social media platforms. Falsities and conspiracy theories cover topics from government activities to scam opportunities for aid and hoax cures. In some places citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
 
-Though challenging to calculate the $R_0$ of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations such as drinking lemon water and inhaling steam, but also include others that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19. \footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} If the spread of COVID-related information follows the trajectory of other types of online information, we might expect false information to spread more than true information \citep{vosoughi2018spread}. Though identifying the causal link between online rumors and offline behaviors is challenging, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
+Though challenging to calculate the $R_0$ of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations such as drinking lemon water and inhaling steam, but also include others that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19.\footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} If the spread of COVID-related information follows the trajectory of other types of online information, we might expect false information to spread more than true information \citep{vosoughi2018spread}. Though identifying the causal link between online rumors and offline behaviors is challenging, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
 
 % what we do 
-This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting and environment where such stories have appeared. Other studies have demonstrated that sharing behavior in online surveys mirror those of real-world social media users \citep(mosleh2020self). We test interventions targeted at both the respondent level, such as tips for spotting fake news, a video training and nudges, as well as headline-level treatments, such as ``false'' tags and related articles. All of the treatments are described in Table~\ref{tab:treatments}. 
+This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting and environment where such stories have appeared. Other studies have demonstrated that sharing behavior in online surveys mirror those of real-world social media users \citep{mosleh2020self}. We test interventions targeted at both the respondent level, such as tips for spotting fake news, a video training and nudges, as well as headline-level treatments, such as ``false'' tags and related articles. All of the treatments are described in Table~\ref{tab:treatments}. 
 
 Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
@@ -62,7 +62,7 @@ We examine these questions using a study focused on online social media users in
 For this experiment, we focus on COVID-19 prevention and cure-related information because this comprises a large proportion of the overall coronavirus-related information that has been fact-checked by experts (see Figure \ref{fig:poynter_cures}) and also serves as some of the most dangerous misinformation. Some hoax cures, when adopted, can be deadly. Moreover, even if not adopted when claims about the existence of a cure circulate widely they may deter people from taking preventative measures. We acknowledge that interventions will likely need to be specific to the particular type of misinformation being targeted, whether political, health-related, etc. The focus of this paper is on prevention and cure-related (mis)information that is immediately relevant for the ongoing pandemic. 
 %\todo{Should this be moved to a new 3.3.2 Stimuli section?} - kept here and changed section heading
 
-To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is presented in Appendix~\ref{appendis:stimuli}. 
+To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is provided in Appendix~\ref{appendis:stimuli}. 
 
 %% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
 
@@ -84,8 +84,8 @@ To collect stimuli we adopted several criteria to search for both false and true
 
 
 \subsection{Sample recruitment}
-We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate. We will also ask a location screening question to ensure our respondents live in our countries of interest.} %
-To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}.
+We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate \citep{Rosenzweig_2020}. We will also ask a location screening question to ensure our respondents live in our countries of interest.} %
+To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}. We anticipate that our sample will look similar to the overall Facebook population in these countries, which tends to be more male, more urban, and more educated than the overall population \citep{Rosenzweig_2020}. We will analyze how our sample compares to both the Facebook population and the general population in Kenya and Nigeria using Facebook's advertising API data and the nationally representative Afrobarometer survey that is conducted in both countries. 
 
 
 Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 20 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
@@ -476,12 +476,80 @@ All of the stimuli used in the experiment are available at this link:\\
 
 
 \subsection{Treatments}
-\textcolor{red}{[TK]}
-\todo{Include mockups for headlines, full questions for respondent-level treatments, add deliberation stimuli and describe}
+%\todo{Include mockups for headlines, full questions for respondent-level treatments, add deliberation stimuli and describe}
 
+\subsubsection{Facebook Tips}\label{sec:fbtips}
+The script for the Facebook tips respondent-level treatment is as follows:
+
+As we're learning more about the Coronavirus, new information can spread quickly, and it's hard to know what information and sources to trust. Facebook has some tips for how to be smart about what information to trust. 
+
+1. Be skeptical of headlines. False news stories often have catchy headlines in all caps with exclamation points. If shocking claims in the headline sound unbelievable, they probably are.
+
+2. Look closely at the link. A phony or look-alike link may be a warning sign of false news. Many false news sites mimic authentic news sources by making small changes to the link. You can go to the site to compare the link to established sources.
+
+3. Investigate the source. Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.
+
+4. Watch for unusual formatting. Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.
+
+5. Consider the photos. False news stories often contain manipulated images or videos. Sometimes the photo may be authentic, but taken out of context. You can search for the photo or image to verify where it came from.
+
+6. Inspect the dates. False news stories may contain timelines that make no sense, or event dates that have been altered.
+
+7. Check the evidence. Check the author's sources to confirm that they are accurate. Lack of evidence or reliance on unnamed experts may indicate a false news story.
+
+8. Look at other reports. If no other news source is reporting the same story, it may indicate that the story is false. If the story is reported by multiple sources you trust, it's more likely to be true.
+
+9. Is the story a joke? Sometimes false news stories can be hard to distinguish from humor or satire. Check whether the source is known for parody, and whether the story's details and tone suggest it may be just for fun.
+
+10. Some stories are intentionally false. Think critically about the stories you read, and only share news that you know to be credible.
+
+
+
+\subsubsection{AfricaCheck Tips}\label{sec:actips}
+The script for the AfricaCheck tips respondent-level treatment is as follows:
+
+As we're learning more about the Coronavirus, new information can spread quickly, and it's hard to know what information and sources to trust. AfricaCheck.org has some tips for how to be smart about what information to trust. 
+
+1. Pause, particularly if the post, tweet or message makes you scared or angry. 
+
+False or unverified information can spread quickly, especially if it makes you feel particular emotions.
+
+2. Consider the source
+
+When a friend or contact shares new information on Covid-19, it’s good to ask them: “How do you know that?” The answer can help you work out if they have first-hand knowledge of the information.
+
+3. Try to find a trusted source
+
+Check if fact-checking organisations have debunked the claim. For Covid-19, these are some good options:
+
+First Draft\\
+Africa Check\\
+AFP Fact Check
+
+\subsubsection{Accuracy and Deliberation Nudge Treatments}\label{sec:nudge}
+
+For both the accuracy and deliberation nudge treatments, respondents will see the below placebo headline and asked the nudge question about it.For the accuracy nudge respondents are asked to think about whether the headline is true. The deliberation nudge asks respondents to think about why they would either choose to share or not share this headline.
+
+\begin{figure}[htb]
+\centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{placebo_ng.png} 
+        \caption{Placebo headline for Nigerian respondents}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{placebo_ky.png} 
+        \caption{Placebo headline for Kenyan respondents}
+    \end{minipage}
+\end{figure} 
+
+\FloatBarrier
 \subsubsection{Pledge Treatment}
 \label{sec:pledge}
 This treatment draws on the psychological evidence around commitment and consistency, the idea that getting someone to commit to an action, especially publicly will help reinforce that behavior in the future \citep{cialdini1987influence,costa2018walking}.
+
+
 
 \begin{enumerate}
 
@@ -501,6 +569,28 @@ IF 2=YES:  Great! Please take our pledge now by posting it here. \\
 IF 2=NO: Why not? [open response]
 
 \end{enumerate}
+
+\subsubsection{Headline Level Treatments}
+Samples of the three headline-level treatments appear below:
+
+\begin{figure}[htb]
+\centering
+    \begin{minipage}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{treat_relatedarticles.png} 
+        \caption*{Related Articles}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{treat_factcheck.png} 
+        \caption*{Factcheck}
+    \end{minipage}
+    \begin{minipage}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{treat_moreinfo.png} 
+        \caption*{More information}
+    \end{minipage}
+\end{figure}
 
 
 \section{Estimation Considerations}
