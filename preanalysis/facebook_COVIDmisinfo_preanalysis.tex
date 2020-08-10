@@ -242,7 +242,7 @@ We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. U
 
 Our implementation closely follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta_w$ and $\hat\sigma^2_w$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data in batches and then updating treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the algorithm are provided in Algorithm~\ref{algg:bblts}, we present an overview below. 
 
-\paragraph{Adaptive agent}
+\paragraph{Adaptive agent}\todo{This needs to be tweaked slightly to match Algorithm~\ref{algg:bblts}. }
 
 \begin{enumerate}
 \item In the first batch, $b = 1$, we assign treatment uniformly at random. 
@@ -266,9 +266,9 @@ Our implementation closely follows the balanced linear Thompson sampling algorit
 
 \begin{align*}
 \hat{\mu}_w(X_{i}) & =
-			\sum_{w} 1\{W = w\}\hat\beta_{w}  +
+			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
 			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
-			\sum_{w}1\{W =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
+			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
          \label{eq:linear_model_full}
 \end{align*} 
 
@@ -282,12 +282,12 @@ Observations are weighted according to inverse probability weights using known a
 
  \item For each observation, we draw $M$ draws from $\tilde \theta ^{(m)}_w \sim \mathcal{N}(\hat \theta_w),\V[\hat\theta_{w}]$ for each condition $w$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{Note that we slightly abuse notation here, as for each $ x_i^\top \tilde \theta ^{(m)}_w$ the $x_i$ term is modified to the appropriate format for relevant treatment indicators and interactions for each hypothetical treatment $w$. I.e., we are producing predictions given the observed covariates under each counterfactual treatment condition. }
 				\begin{align}
-    q_i(w) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
+    q_w(X_i) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
 				\end{align}
-\item Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{i}(w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
+\item Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{w_C} = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
       \begin{align}
-          \breve{q}_{i}(w) & =\max\Biggr\{\frac{ q_{i}(w)}{\sum\limits_{w \neq w_{C}}q_{i}(w) } , p\Biggr\} \\
-          \tilde{q}_{i}(w) & = \frac{ \breve q_{i}(w)}{\sum\limits_{w \neq w_{C}}\breve q_{i}(w) }. 
+          \tilde{q}_w(X_i) & =\max\Biggr\{\frac{ q_{i}(w)}{\sum\limits_{w \neq w_{C}}q_{i}(w) } , p\Biggr\} \\
+          e_{w}(X_i) & = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w \neq w_{C}}\tilde{q}_w(X_i) }. 
       \end{align}
 \item Assign treatment  according to the calculated probabilities: $w_i \sim \textrm{Multinom}(\tilde{q}_{i}(1), \dots, \tilde{q}_{i}(|\ww|))$
 \end{enumerate}
@@ -430,8 +430,8 @@ Our objective in selecting design parameters is to optimize power for Hypothesis
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
 Total experiment size ($N$)& [2500, 3750, 5000] \\
 Number of batches ($B$)& [10, 15, 20] \\
-First batch size ($|\mathcal{I}_1|$) & N $\times$ [1/10, 3/10, 1/5] \\
-Last batch size ($|\mathcal{I}_B|$) & N $\times$ [1/10, 3/10, 1/5] \\
+First batch size ($|\mathcal{I}_1|$) & $N \times$ [1/10, 3/10, 1/5] \\
+Last batch size ($|\mathcal{I}_B|$) & $N/ |\ww| \times$ [1, 1.1, 1.25] \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
 Probability floor (p)& [0.05, 0.1, 0.25]$\times 1/ |\ww|$ \\
@@ -487,7 +487,7 @@ As we're learning more about the Coronavirus, new information can spread quickly
 
 2. Look closely at the link. A phony or look-alike link may be a warning sign of false news. Many false news sites mimic authentic news sources by making small changes to the link. You can go to the site to compare the link to established sources.
 
-3. Investigate the source. Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their "About" section to learn more.
+3. Investigate the source. Ensure that the story is written by a source that you trust with a reputation for accuracy. If the story comes from an unfamiliar organization, check their ``About'' section to learn more.
 
 4. Watch for unusual formatting. Many false news sites have misspellings or awkward layouts. Read carefully if you see these signs.
 
@@ -593,6 +593,49 @@ Samples of the three headline-level treatments appear below:
 \end{figure}
 
 
+\section{Batch-wise balanced linear Thompson sampling}\label{appendix:agent}
+
+A note on notation: while $X_i$ represents the covariates observed for individual $i$, the covariate vector $X_{[W]i}$ is in the appropriate format for the relevant counterfactual treatment indicators and interactions.
+
+
+\begin{algorithm} \footnotesize
+    \caption{Batch-wise balanced linear Thompson sampling}
+    \label{algg:bblts}
+    \begin{algorithmic}[1] % The number tells where the line numbering should start
+    	\State$\Xi_w \leftarrow$ empty matrix; $\X_w \leftarrow$ empty matrix; $r_w \leftarrow$ empty vector for $w \in \ww$. 
+	\Comment{Initialize weight matrices, covariate matrices, and reward vectors, for each treatment condition separately. Denote the control condition $w_{C}$. }
+    	\For{$i = 1, \dots, N$}
+		\If{$i \in \mathcal{I}_1$}
+			 \State $e_{w}(X_i) \leftarrow \frac{1 }{|\ww| } \ \ \forall w \in \ww $ 
+		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B-1$}
+			\If{$i$ is the first observation in $\mathcal{I}_b$}
+				\For{$w\in \ww$}
+					\State $B_w \leftarrow X^\top \Xi_w X + \lambda^{CV} \mathbf{I}$ 
+					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
+					\State $\hat\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
+				\EndFor
+			\EndIf
+			\For{$m = 1, \dots, M$}
+				\State Sample $\tilde \theta ^{(m)}_w \sim \mathcal{N}\left(\hat\theta_{w}, \hat\V[\hat\theta_{w}] \right) \ \   \forall w \in \ww$
+			 \EndFor
+				\State $q_w(X_i) \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ X_{[1]i}^\top \tilde \theta ^{(m)}_1, \dots, X_{[|\ww|]i}^\top\tilde \theta_{|\ww|}^{(s)} \}  \right\}$ \Comment{ Compute TS probabilities.}
+			\State $\tilde{q}_{w_C}  \leftarrow 1/|\ww| + {q}_{w_C}/(1-1/|\ww|) $ \Comment{Augment the control with a fixed probability. }
+                         \State $ \tilde{q}_w(X_i)  \leftarrow\max\Biggr\{\frac{ q_{i}(w)}{(1-1/|\ww|)} , p\Biggr\} \ \ \forall w \in \ww \setminus \{w_C\}$ \Comment{Impose floors on remaining probabilities. }
+                          \State $e_{w}(X_i) \leftarrow \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w \in \ww }\tilde{q}_w(X_i) } \ \ \forall w \in \ww $ \Comment{Ensure probabilities sum to 1.}  
+		\EndIf
+		\State Assign $w_i \sim \textrm{Multinom}( e_{1}(X_i) , \dots,  e_{|\ww|}(X_i) )$
+		\State $\xi^{IPW}_w(X_i) \leftarrow \frac{ 1 }{e_{w}(X_i)}$ \Comment{Assign inverse probability weights.}
+		\State $\Xi_{w_i} \leftarrow \diag \left(\Xi_{w_i}, \xi_i\right)$ \Comment{Augment relevant weight matrix.}
+		\State $\X_{w_i} \leftarrow [\X_{w_i}:x_{w_i}^\top]$ \Comment{Augment relevant covariate matrix.}
+		\State $r_{w_i} \leftarrow  [r_{w_i}: y_i]$ \Comment{Augment relevant reward vector.}
+
+	\EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+\clearpage
+
+
 \section{Estimation Considerations}
 
 \subsection{Inverse probability weighting} \label{appendix:stabilized}
@@ -608,60 +651,19 @@ In ex post evaluation, we use the stabilized version of these weights, normalizi
 \left.
 \xi^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
 \middle/ 
-{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_i)} } \label{eq:SIPW} \numberthis
+{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_j)} } \label{eq:SIPW} \numberthis
 \right.
 \end{align}
 
 For adaptively collected data we use cumulative moving stabilized weights. If data were collected in an online manner (i.e., if Thompson sampling probabilities were updated with each observation), $N$ in the above formula would be replaced by $i$. In the batched version, all observations in the same batch share the same history, and so instead, we sum over all observations in batches \textit{up to and including} the batch that includes observation $i$. \todo{Could formalize this.}
 
-%\begin{align}
-%\left.
-%\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
-%\middle/ 
-%{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:IPW} \numberthis
-%\right.
-%\end{align}
-
-\subsection{Adaptive agent}\label{appendix:agent}
-
-
-\begin{algorithm}
-    \caption{Batch-wise balanced linear Thompson sampling}
-    \label{algg:bblts}
-    \begin{algorithmic}[1] % The number tells where the line numbering should start
-    	\State$\Xi_w \leftarrow$ empty matrix; $X_w \leftarrow$ empty matrix; $r_w \leftarrow$ empty vector for $w \in \ww$. 
-	\Comment{Initialize weight matrices, covariate matrices, and reward vectors, for each treatment condition separately. }
-    	\For{$i = 1, \dots, N$}
-		\If{$i \in \mathcal{I}_1$}
-			\State Assign $w_i\sim \text{Uniform}(\ww)$
-			\State Compute inverse probability weights $\xi_i$ following (\ref{eq:IPW}).
-			\State $\Xi_{w_i} \leftarrow \diag \left(\Xi_{w_i}, \xi_i\right)$
-			\State $X_{w_i} \leftarrow [X_{w_i}:x_i^\top]$ \Comment{The covariate vector is in the appropriate format for the relevant treatment indicators and interactions.}
-			\State $r_{w_i} \leftarrow  [r_{w_i}: y_i]$
-		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B-1$}
-			\If{$i$ first observation in $\mathcal{I}_b$}
-				\For{$w\in \ww$}
-					\State $B_w \leftarrow X^\top \Xi_w X + \lambda^{CV} \mathbf{I}$ \Comment{$\lambda^{CV}$ is the penalty factor with the minimum mean cross-validated error using the entire observed history of data.}
-					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
-					\State $\hat\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
-				\EndFor
-			\EndIf
-			\State 				\State Draw $M$ times from $\mathcal{N}\left(\hat\theta_{w}, \hat\V[\hat\theta_{w}] \right)$ indexed by $m = 1, \dots, M$, so that draw $m$ is represented by $\tilde \theta ^{(s)}_w$ for all $w \in \ww$
-				\State Compute for all $w \in \ww$:
-				\begin{align}
-    q_i(w) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(s)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(s)} \}  \right\}. 
-  				\end{align}
-			\State Denote the control condition $w_{C}$, and assign a fixed probability $1/|\ww|$ to the pure control condition, i.e., $\tilde{q}_{i}(w_{C}) = 1/|\ww|$. For the remaining probabilities given each possible context $x$, update assignment probabilities so that they sum to 1, constraining the minimum assignment probability to a pre-determined probability floor, $p$
-                          \begin{align}
-                          \breve{q}_{i}(w) & =\max\Biggr\{\frac{ q_{i}(w)}{\sum\limits_{w \neq w_{C}}q_{i}(w) } , p\Biggr\} \\
-                          \tilde{q}_{i}(w) & = \frac{ \breve q_{i}(w)}{\sum\limits_{w \neq w_{C}}\breve q_{i}(w) }. 
-                          \end{align}
-                          \State Assign $w_i \sim \textrm{Multinom}(\tilde{q}_{i}(1), \dots, \tilde{q}_{i}(|\ww|))$
-		\EndIf
-	\EndFor
-    \end{algorithmic}
-\end{algorithm}
-\clearpage
+\begin{align}
+\left.
+\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+\middle/ 
+{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:IPW} \numberthis
+\right.
+\end{align}
 
 \subsection{Random forest estimation}\label{appendix:grf}
 For policy learning and evaluation, we estimate conditional means using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
