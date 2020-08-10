@@ -91,7 +91,7 @@ To achieve balance on gender within our sample we create separate ads targeting 
 Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 20 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
 \footnote{The recruitment advertisement is shown in Figure~\ref{fig:ad} in Appendix~\ref{appendix:recruitment}.} %
  When users click on the ``Send Message'' button on our advertisement, a Messenger conversation will open with our Facebook page, starting a conversation with a chatbot programmed to implement the survey.%
- \footnote{\color{red}{[[TK: images of chatbot once linked to page]]}} % 
+ \footnote{See Figure \ref{fig:chatbot} in Appendix~\ref{appendix:recruitment}.} % 
  In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.  Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
 
 
@@ -449,12 +449,22 @@ Probability floor (p)& [0.05, 0.1, 0.25]$\times 1/ |\ww|$ \\
 \appendix
 
 \section{Recruitment}\label{appendix:recruitment}
+Respondents will be recruited through Facebook advertisements (Figure \ref{fig:ad}) that appear on their news feed, mobile application, and instagram. 
 
 \begin{figure}[htb]
 \centering
 \caption{Advertisement as run in Facebook timeline.}
 \label{fig:ad}
-\includegraphics[width=.75\textwidth]{../irb/round_2_submission_07302020/ad_073020.png}
+\includegraphics[width=.6\textwidth]{../irb/round_2_submission_07302020/ad_073020.png}
+\end{figure}
+
+After clicking on the ad, respondents are directed to the Chatbot (Figure \ref{fig:chatbot}) to take the survey.
+
+\begin{figure}[htb]
+\centering
+\caption{Screenshot of Chatbot interface}
+\label{fig:chatbot}
+\includegraphics[width=.25\textwidth]{chatbot_image.png}
 \end{figure}
 
 \section{Survey and data}\label{appendix:data}
@@ -464,9 +474,9 @@ Probability floor (p)& [0.05, 0.1, 0.25]$\times 1/ |\ww|$ \\
 
 In all analyses, we include the pre-test response strata and indicators for individual stimuli.
 
-\subsection{Survey Instrument}\label{appendix:survey}\todo{Check for update to public-facing survey instrument.}
+\subsection{Survey Instrument}\label{appendix:survey}%\todo{Check for update to public-facing survey instrument.}
 The survey script is available at this link:\\
-\url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=1253244358&range=A2}
+\url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=82697177&range=A2}
 
 
 \subsection{Stimuli}\label{appendis:stimuli}
@@ -559,7 +569,7 @@ This treatment draws on the psychological evidence around commitment and consist
 \item IF 1=NO: Why not? [open response]
 
 
-\textbf{Respondents in pledge treatment will be randomized (equal and static assignment probability) to either see the public or private pledge below}
+\textit{Respondents in pledge treatment will be randomized (equal and static assignment probability) to either see the public or private pledge below}
 
 \item \textbf{public pledge:}\\
 IF 2=YES:  Great! Please take our pledge by posting this pledge to your timeline now. \\ IF 2=NO: Why not? [open response]
@@ -567,6 +577,12 @@ IF 2=YES:  Great! Please take our pledge by posting this pledge to your timeline
 \item \textbf{private pledge:}\\
 IF 2=YES:  Great! Please take our pledge now by posting it here. \\
 IF 2=NO: Why not? [open response]
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.5\textwidth]{pledge.png}
+\caption{Pledge infographic respondents are asked to post \textit{privately} to the chatbot or \textit{publicly} to their timeline.}
+\end{figure}
 
 \end{enumerate}
 
