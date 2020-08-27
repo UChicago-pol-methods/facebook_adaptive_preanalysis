@@ -34,7 +34,9 @@ Alongside the outbreak of the new coronavirus, much of the world’s population 
 % motivation
 Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation has been spreading through online media outlets and social media platforms. Falsities and conspiracy theories cover topics from government activities to scam opportunities for aid and hoax cures. In some places citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
 
-Though challenging to calculate the $R_0$ of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations such as drinking lemon water and inhaling steam, but also include others that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19.\footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} If the spread of COVID-related information follows the trajectory of other types of online information, we might expect false information to spread more than true information \citep{vosoughi2018spread}. Though identifying the causal link between online rumors and offline behaviors is challenging, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
+Though it is challenging to calculate the infection rate ($R_0$) of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations, such as drinking lemon water and inhaling steam, as well as those that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19.\footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} If the spread of COVID-related information follows the trajectory of other types of online information, we might expect false information to spread more than true information \citep{vosoughi2018spread}. Indeed, recent research on COVID-19 conspiracy theories suggests that stories reinforcing conspiracy theories had a higher virality than neutral or debunking stories \textbf{[add ref to this]}. %https://misinforeview.hks.harvard.edu/wp-content/uploads/2020/08/HKSMR_Journal_Article_Conspiracies_Copyedtis_OP_CSC.pdf 
+
+Though identifying the causal chain between online rumors and offline behaviors is challenging, research suggests that online information can have offline consequences.  For instance, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. \textbf{[insert finding from misinfo health study here]} As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
 
 % what we do 
 This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting and environment where such stories have appeared. Other studies have demonstrated that sharing behavior in online surveys mirror those of real-world social media users \citep{mosleh2020self}. We test interventions targeted at both the respondent level, such as tips for spotting fake news, a video training and nudges, as well as headline-level treatments, such as ``false'' tags and related articles. All of the treatments are described in Table~\ref{tab:treatments}. 
@@ -95,12 +97,7 @@ Advertisements will appear within Facebook or Instagram, offering users with the
  In contrast to sending users to an external survey platform such as Qualtrics, the benefit of the chatbot is that we keep users on the Facebook platform, with which they are likely more familiar, and maintain a realistic setting in which users might encounter online misinformation.  Respondents who complete the survey in the chatbot will receive compensation in the form of mobile phone airtime sent to their phone. %%MOW: confirm survey completion time--and update advertisement accordingly
 
 
-\subsection{Covariates}
-Through the chatbot, we collect demographic and other information on respondents. % We use the below covariates for learning conditional treatment assignment probabilities in the chatbot. 
-The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.
-%\input{covariates_shortform.tex}
 
-For missing covariate information, we will follow the procedures in \cite{greensop1.05}: for a given covariate, if no more than 10 percent of total covariate values are missing, recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, introduce a missingness flag. 
 
 \subsection{Treatment}
 Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the respondent level and headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
@@ -116,7 +113,7 @@ AfricaCheck tips                                                                
 Video training                                                                                                     & Respondent                                                                                                   &  \href{https://www.bbc.com/news/av/embed/p088bh96/52118949}{BBC Video training}                                                                                                                                                                                                                                                                                                                                                                                  \\
 Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all” \citep{gross1998emerging}.\end{tabular}
 \\
-Pledge                                                                                 & Respondent                                                                                                   &  \begin{tabular}[t]{@{}l@{}} Prompt: Respondents will be asked if they think misinformation \\ is a problem, if they're willing to help stop it, and finally if they're \\willing to take either a \textit{private} or \textit{public} pledge to stop the spread \\of false COVID-19 cures online (see exact text in \ref{sec:pledge}).
+Pledge                                                                                 & Respondent                                                                                                   &  \begin{tabular}[t]{@{}l@{}} Prompt: Respondents will be asked if they want to keep their\\ family and friends safe from COVID-19, if they knew \\COVID-19 misinformation can be dangerous, and if they're\\ willing to take either a \textit{private} or \textit{public} pledge to help \\identify and call out COVID-19 misinformation online (see \ref{sec:pledge}).
 \end{tabular}
 \\
 Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``To the best of your knowledge, is this headline \\& & accurate?'' \citep{pennycook2020fighting, pennycook_epstein_mosleh_arechar_eckles_rand_2019}.
@@ -131,6 +128,8 @@ Factcheck                                                                       
  \\
 More information                                                                                                      & Headline                                                                                                     & Provides a link to ``Get the facts about COVID-19''\\ & & as per Twitter flags
  \\
+ Real information                                                                                                      & Headline                                                                                                     & Provides a \textit{true} statement: ``According to the WHO,\\ & & there is currently \textbf{no proven} cure for COVID-19.
+ \\
 Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
 \end{tabular}
 \caption{Description of interventions included in the experiment}
@@ -138,6 +137,37 @@ Control                                                                         
 \end{table}
 
 Respondent-level treatments and headline-level treatments are implemented as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. 
+
+
+\subsection{Covariates}
+
+Covariate measurement plays an important role in our contextual adaptive experiment. This section describes the covariates we measure pre-treatment that will inform treatment assignment probabilities. The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars not that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatment described in the previous section and explicitly plan for this in our experimental design by prespecifying the covariates that we anticipate will interact with the different treatments.
+
+
+Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, heterogeneous treatment effects generally come second to main effects in misinformation research. In the existing misinformation literature, largely concentrated around studies conducted with respondents in the North America and Europe, the heterogeneity of interest usually includes either i) political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, ii) cognition and inclination to deliberate \citep{bago2020fake}, and iii) digital media literacy \citep{guess2020digital}.  
+
+This project brings comparative data to bear on a global problem and expands the aspects of heterogeneity among individuals. The question for us is: outside of contexts where partisanship is a salient identity and lens through which individuals interpret news/information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation?
+
+
+
+
+\textcolor{red}{Psychological need for control + uncertainty of pandemic → superstitious beliefs / magical thinking
+Locus of control is defined as “a generalized attitude, belief, or expectancy regarding the nature of the causal relationship between one’s own behavior and its consequences” (Rotter, 1966).
+ An individual with an internal locus of control will “attribute outcomes to their own actions” while an individual with an external locus of control will attribute it “to circumstances beyond their control” (Rotter, 1966).
+Understand differences in effort/motivation
+More internal locus of control associated with higher education/income
+Health outcomes (cite psych paper)
+}
+
+
+Through the chatbot, we collect demographic and other information on respondents. We use these covariates to inform our treatment assignment probabilities.\todo{@Molly pls improve language :)} The demographic covariates commonly used in social science research, along with specific questions regarding and index of scientific views, concern regarding COVID-19, beliefs about government efficacy in the current coronavirus pandemic, religious beliefs, and digital literacy \citep{guess2020digital}. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. %\input{covariates_shortform.tex}
+
+These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. 
+
+% Several of our treatments also target these features, such as analytic thinking (the deliberation and emotion suppression treatments).  
+
+
+When covariate information is missing, we will follow the procedures in \cite{greensop1.05}: for a given covariate, if no more than 10 percent of total covariate values are missing, recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, introduce a missingness flag. 
 
 
 \subsection{Outcomes and Response Function}
@@ -469,7 +499,7 @@ After clicking on the ad, respondents are directed to the Chatbot (Figure \ref{f
 
 \section{Survey and data}\label{appendix:data}
 \subsection{Covariates}\label{appendix:covariates}
-
+\todo{ADD new covariates to this table (belief, locus of control, etc.)}
 \input{covariates_longform.tex}
 
 In all analyses, we include the pre-test response strata and indicators for individual stimuli.
@@ -557,30 +587,37 @@ For both the accuracy and deliberation nudge treatments, respondents will see th
 \FloatBarrier
 \subsubsection{Pledge Treatment}
 \label{sec:pledge}
-This treatment draws on the psychological evidence around commitment and consistency, the idea that getting someone to commit to an action, especially publicly will help reinforce that behavior in the future \citep{cialdini1987influence,costa2018walking}.
-
+This treatment draws on the psychological evidence around commitment and consistency \citep{cialdini1987influence,costa2018walking}. Knowing that people, as much as possible, want to appear consistent with their prior words and actions, we want to see whether we can first get them to commit to an ``easy ask'' and then lead them down a path towards a public (or private) pledge.
 
 
 \begin{enumerate}
 
-\item Do you think that the spread of false information about COVID-19 is [dangerous/a problem] and should be stopped? (yes, no)
+\item Do you want to keep your family, friends and community safe from COVID-19? (Yes!, No)
+\\\textit{If "No" $\rightarrow$ end}
 
-\item IF 1=YES: Are you committed to stopping the spread of harmful/dangerous false information about COVID-19 online? (yes, no)
-\item IF 1=NO: Why not? [open response]
+\item Did you know that false information about ways to prevent or cure COVID-19 threaten the health and well-being of everyone around us?  (Yes, No)
 
+\item Are you committed to keeping your family, friends, and community safe from COVID-19 misinformation? (Yes!, No)
+\\\textit{If "No" $\rightarrow$ end}
 
-\textit{Respondents in pledge treatment will be randomized (equal and static assignment probability) to either see the public or private pledge below}
+\item Great! Take our pledge by posting this image [here/to your timeline] now.
+\\NOTE: \textit{Respondents are randomized to either be asked to take the pledge privately, within the chatbot, or to post the pledge publicly to their timeline.}
 
-\item \textbf{public pledge:}\\
-IF 2=YES:  Great! Please take our pledge by posting this pledge to your timeline now. \\ IF 2=NO: Why not? [open response]
-
-\item \textbf{private pledge:}\\
-IF 2=YES:  Great! Please take our pledge now by posting it here. \\
-IF 2=NO: Why not? [open response]
+%\item IF 1=YES: Are you committed to stopping the spread of harmful/dangerous false information about COVID-19 online? (yes, no)
+%\item IF 1=NO: Why not? [open response]
+%
+%\textit{Respondents in pledge treatment will be randomized (equal and static assignment probability) to either see the public or private pledge below}
+%
+%\item \textbf{public pledge:}\\
+%IF 2=YES:  Great! Please take our pledge by posting this pledge to your timeline now. \\ IF 2=NO: Why not? [open response]
+%
+%\item \textbf{private pledge:}\\
+%IF 2=YES:  Great! Please take our pledge now by posting it here. \\
+%IF 2=NO: Why not? [open response]
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.5\textwidth]{pledge.png}
+\includegraphics[width=.5\textwidth]{pledge_image.png}
 \caption{Pledge infographic respondents are asked to post \textit{privately} to the chatbot or \textit{publicly} to their timeline.}
 \end{figure}
 
@@ -591,17 +628,17 @@ Samples of the three headline-level treatments appear below:
 
 \begin{figure}[htb]
 \centering
-    \begin{minipage}{0.30\textwidth}
+    \begin{minipage}{0.50\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_relatedarticles.png} 
         \caption*{Related Articles}
     \end{minipage}\hfill
-    \begin{minipage}{0.30\textwidth}
+    \begin{minipage}{0.50\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_factcheck.png} 
         \caption*{Factcheck}
     \end{minipage}
-    \begin{minipage}{0.30\textwidth}
+    \begin{minipage}{0.50\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_moreinfo.png} 
         \caption*{More information}
