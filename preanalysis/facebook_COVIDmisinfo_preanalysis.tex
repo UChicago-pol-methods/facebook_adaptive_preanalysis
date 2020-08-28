@@ -31,12 +31,30 @@ Alongside the outbreak of the new coronavirus, much of the world’s population 
 
 \section{Motivation and Research Questions}
 
-% motivation
-Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of myths and hoax cures related to the virus. COVID-19 misinformation has been spreading through online media outlets and social media platforms. Falsities and conspiracy theories cover topics from government activities to scam opportunities for aid and hoax cures. In some places citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
+% infodemic - what it is
+Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of misinformation related to the virus. The COVID-19 misinformation spreading on social media platforms involve a range of topics including rumors about the origin of the virus, government activities, scam opportunities for aid, and hoax cures. In some places, citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
 
-Though it is challenging to calculate the infection rate ($R_0$) of these falsities, evidence suggests that the spread of hoax cures can be particularly deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations, such as drinking lemon water and inhaling steam, as well as those that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol to stave off the coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19.\footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} If the spread of COVID-related information follows the trajectory of other types of online information, we might expect false information to spread more than true information \citep{vosoughi2018spread}. Indeed, recent research on COVID-19 conspiracy theories suggests that stories reinforcing conspiracy theories had a higher virality than neutral or debunking stories \textbf{[add ref to this]}. %https://misinforeview.hks.harvard.edu/wp-content/uploads/2020/08/HKSMR_Journal_Article_Conspiracies_Copyedtis_OP_CSC.pdf 
+%  covid misinfo spreading! / shared
+Much like the actual virus, COVID-19 misinformation is not bounded by state borders. Though the infection rate ($R_0$) of these falsities is difficult to calculate, if the spread follows the trajectory of other types of online information, we should expect COVID-19 misinformation to spread faster and farther than true information \citep{vosoughi2018spread}. For instance, misinformation about the Zika virus was three times more likely to be shared on social media than verified information on several social media sites \citep{sharma2017zika}. Indeed, recent research on COVID-19 conspiracy theories suggests that these stories had a higher virality than neutral or debunking stories \citep{HKS_whatsapp}. %
+ 
 
-Though identifying the causal chain between online rumors and offline behaviors is challenging, research suggests that online information can have offline consequences.  For instance, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. \textbf{[insert finding from misinfo health study here]} As a result, governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
+% infodemic - why it matters --> real consequences
+We might be particularly worries about the spread of COVID-19 hoax cures because they can be deadly. Purported cures for COVID-19 that have circulated on social media include both benign recommendations, such as drinking lemon water and inhaling steam, as well as those that can have devastating consequences if adopted, such as misusing chloroquine or drinking bleach. In Iran, dozens of people died from alcohol poisoning after ingesting methanol supposedly due to the rumor that alcohol could prevent coronavirus.\footnote{\href{https://nationalpost.com/news/world/rumours-that-alcohol-kills-covid-19-leaves-21-iranians-dead-from-poisoning}{Bloomberg News}, Mar. 10, 2020.} In Nigeria, multiple people were hospitalized for chloroquine poisoning following statements by president Trump suggesting the medication could be used to treat COVID-19.\footnote{\href{https://www.cnn.com/2020/03/23/africa/chloroquine-trump-nigeria-intl/index.html}{CNN}, Mar. 23, 2020.} 
+
+Though identifying the causal link between online rumors and offline behaviors is challenging, online information has been shown to have offline consequences. For instance, activity on social media and the internet more generally has been linked to offline behaviors such as hate crimes \citep{muller2019fanning, chan2016internet}. Health misinformation can have particularly harmful consequences for one's wellbeing and risk of mortality \citep{swire2020public}. As a result of the ``infodemic'', governments struggling to prepare health care systems and encourage citizens to comply with best practices are also struggling to tackle a pandemic of online misinformation.
+
+
+% why it's hard to combat:
+% what's new about this context
+Curbing the spread of online misinformation is challenging in ``normal'' times, but is particularly difficult in the context of a global pandemic. Unlike political misinformation covid-19 misinformation arises in an uncertain environment where facts are rapidly-changing as more information and evidence become available and where longstanding preexisting beliefs do not exist. %(in contrast to say beliefs about climate change, etc.) 
+The human need for certainty, security, and stability is strong \textbf{(CITE)}. Thus, people turn to multiple sources for health information in addition to scientific experts \citep{swire2020public}.  % -- nowadays ppl get health info from many sources --> covid times harder to 
+% swire - health: similarly hard to evaluate "cause"/"effect" of misinfo online
+Also worrying, one study found that COVID-19 misinformation on whatsapp continued to circulate among users in India and Brazil even \textit{after} the information had been debunked by fact-checking organizations. Given the absence of a vaccine or full proof prevention method, it is unsurprising that people are searching in desperation for any kind of ``cure,'' even those that have been labelled as false, and sharing these with their friends and family. Given the importance of understanding how to curb the spread of these kinds of false information, this project seeks to understand what different types of people are influenced by different mechanisms targeted to reduce the spread of false information.
+
+%Furthermore, during the COVID-19 pandemic, there has been an uptick in rumours and conspiracies spreading through online platforms (Ferrara, 2020). 
+
+\textbf{More context motivation here + Section 3.3...}
+
 
 % what we do 
 This project evaluates the effect of interventions designed to decrease sharing of false COVID-19 cures. Using Facebook advertisements to recruit social media users in Kenya and Nigeria, we deliver our interventions using a Facebook Messenger chatbot, allowing us to observe treatment effects in a realistic setting and environment where such stories have appeared. Other studies have demonstrated that sharing behavior in online surveys mirror those of real-world social media users \citep{mosleh2020self}. We test interventions targeted at both the respondent level, such as tips for spotting fake news, a video training and nudges, as well as headline-level treatments, such as ``false'' tags and related articles. All of the treatments are described in Table~\ref{tab:treatments}. 
@@ -44,7 +62,7 @@ This project evaluates the effect of interventions designed to decrease sharing 
 Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. Exploring heterogeneity in treatment effects allows us to learn whether different interventions are more effective for different people, improving our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 % how we build on existing lit
-This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings using an adaptive design to observe the best intervention policy. Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research has been focused on the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} This pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
+This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings using an adaptive design to observe the best intervention policy.\todo{bring in heterogeneity focus here.} Second, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research has been focused on the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} This pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
 
 
 
@@ -64,9 +82,8 @@ We examine these questions using a study focused on online social media users in
 For this experiment, we focus on COVID-19 prevention and cure-related information because this comprises a large proportion of the overall coronavirus-related information that has been fact-checked by experts (see Figure \ref{fig:poynter_cures}) and also serves as some of the most dangerous misinformation. Some hoax cures, when adopted, can be deadly. Moreover, even if not adopted when claims about the existence of a cure circulate widely they may deter people from taking preventative measures. We acknowledge that interventions will likely need to be specific to the particular type of misinformation being targeted, whether political, health-related, etc. The focus of this paper is on prevention and cure-related (mis)information that is immediately relevant for the ongoing pandemic. 
 %\todo{Should this be moved to a new 3.3.2 Stimuli section?} - kept here and changed section heading
 
-To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is provided in Appendix~\ref{appendis:stimuli}. 
+To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck website for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is provided in Appendix~\ref{appendis:stimuli}.\footnote{In addition to realism of the study, we use actual stimuli circulating online to avoid manufacturing our own ``cures'' and adding to the spread of online misinformation. Given that we use real media posts, some of our respondents may be familiar with these stories. To examine whether people were differentially discerning \citep{nyhan2020facts} or had different sharing preferences because they had previously seen these stimuli, at the end of the survey, before the debrief, we ask respondents whether they had previously seen the stimuli.}
 
-%% LR: I'm looking for citations to demonstrate these are hubs of misinfo - another way to go is that they are major english media sources and other countries in the region often also read news from ky/ng...
 
 
 
@@ -113,10 +130,10 @@ AfricaCheck tips                                                                
 Video training                                                                                                     & Respondent                                                                                                   &  \href{https://www.bbc.com/news/av/embed/p088bh96/52118949}{BBC Video training}                                                                                                                                                                                                                                                                                                                                                                                  \\
 Emotion suppression                                                                                                       & Respondent                                                                                                   & \begin{tabular}[t]{@{}l@{}}Prompt: ``As you view and read the headlines, if you have any \\feelings, please try your best not to let those feelings show.  \\Read all of the headlines carefully, but try to behave so that \\someone watching you would not know that you are feeling\\ anything at all” \citep{gross1998emerging}.\end{tabular}
 \\
-Pledge                                                                                 & Respondent                                                                                                   &  \begin{tabular}[t]{@{}l@{}} Prompt: Respondents will be asked if they want to keep their\\ family and friends safe from COVID-19, if they knew \\COVID-19 misinformation can be dangerous, and if they're\\ willing to take either a \textit{private} or \textit{public} pledge to help \\identify and call out COVID-19 misinformation online (see \ref{sec:pledge}).
+Pledge                                                                                 & Respondent                                                                                                   &  \begin{tabular}[t]{@{}l@{}} Prompt: Respondents will be asked if they want to keep their\\ family and friends safe from COVID-19, if they knew \\COVID-19 misinformation can be dangerous, and if they're\\ willing to take either a \textit{private} or \textit{public} pledge to help identify\\and call out COVID-19 misinformation online (see \ref{sec:pledge}).
 \end{tabular}
 \\
-Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``To the best of your knowledge, is this headline \\& & accurate?'' \citep{pennycook2020fighting, pennycook_epstein_mosleh_arechar_eckles_rand_2019}.
+Accuracy nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``To the best of your knowledge, is this\\& &headline accurate?'' \citep{pennycook2020fighting, pennycook_epstein_mosleh_arechar_eckles_rand_2019}.
 \\
 Deliberation nudge                                                                                 & Respondent                                                                                                   & Placebo headline: ``In a few words, please say \textit{why} you would\\ & & like to share or why you would not like to share this headline.''\\ & & [open text response]
 \\
@@ -139,35 +156,57 @@ Control                                                                         
 Respondent-level treatments and headline-level treatments are implemented as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. 
 
 
+%\textbf{MORE on why these treatments:}
+%1. Guess et al - forthcoming - who find that FB tips for spotting fake news improved discernment in the US + India (Nyhan 2020, p.231)
+%2. nigeria data suggest correlation between feeling sad and afraid with improved discernment between true/false stimuli and associated with greater sharing intentions of true (more than false) stimuli -- but other work from US (non-covid) suggests emotion regulation can help improve discernment -- 
+% Feeling happy and experiencing cognitive ease provides people with a signal that everything is going well—and it leads them to rely on their intuition. Feeling sad or experiencing metacognitive difficulty, in contrast, signals that everything is not going well. This can trigger the motivation to be more careful and deliberate (Alter, Oppenheimer, Epley, & Eyre, 2007; Bless, Schwarz, & Wieland, 1996; Isen, Nygren, & Ashby, 1988, but see Meyer et al., 2015 and Thompson et al., 2013).
+
+
 \subsection{Covariates}
 
-Covariate measurement plays an important role in our contextual adaptive experiment. This section describes the covariates we measure pre-treatment that will inform treatment assignment probabilities. The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars not that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatment described in the previous section and explicitly plan for this in our experimental design by prespecifying the covariates that we anticipate will interact with the different treatments.
+Covariate measurement plays an important role in our contextual adaptive experiment. We measure pre-treatment covariates that we use to assign treatment probabilities (as detailed in Section X).\todo{@Molly pls improve language :)} 
+The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to interact with and influence the effectiveness of the treatments.
+
+Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally treats heterogeneous treatment effects as secondary analyses. In the existing misinformation literature, centered around studies conducted with respondents in the North America and Europe, the covariates of interest include political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guess2020digital}.  
+
+This project expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation? We highlight several key covariates that we predict will inform the effectiveness/suitability of our interventions for individuals with respect to countering the spread of COVID-19 misinformation. 
 
 
-Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, heterogeneous treatment effects generally come second to main effects in misinformation research. In the existing misinformation literature, largely concentrated around studies conducted with respondents in the North America and Europe, the heterogeneity of interest usually includes either i) political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, ii) cognition and inclination to deliberate \citep{bago2020fake}, and iii) digital media literacy \citep{guess2020digital}.  
-
-This project brings comparative data to bear on a global problem and expands the aspects of heterogeneity among individuals. The question for us is: outside of contexts where partisanship is a salient identity and lens through which individuals interpret news/information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation?
-
-
-
-
-\textcolor{red}{Psychological need for control + uncertainty of pandemic → superstitious beliefs / magical thinking
-Locus of control is defined as “a generalized attitude, belief, or expectancy regarding the nature of the causal relationship between one’s own behavior and its consequences” (Rotter, 1966).
- An individual with an internal locus of control will “attribute outcomes to their own actions” while an individual with an external locus of control will attribute it “to circumstances beyond their control” (Rotter, 1966).
-Understand differences in effort/motivation
-More internal locus of control associated with higher education/income
-Health outcomes (cite psych paper)
-}
-
-
-Through the chatbot, we collect demographic and other information on respondents. We use these covariates to inform our treatment assignment probabilities.\todo{@Molly pls improve language :)} The demographic covariates commonly used in social science research, along with specific questions regarding and index of scientific views, concern regarding COVID-19, beliefs about government efficacy in the current coronavirus pandemic, religious beliefs, and digital literacy \citep{guess2020digital}. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. %\input{covariates_shortform.tex}
-
+In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.\footnote{When covariate information is missing, we will follow the procedures in \cite{greensop1.05}: for a given covariate. If no more than 10 percent of total covariate values are missing, we will recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, we will introduce a missingness flag.}  %\input{covariates_shortform.tex}
 These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. 
+
+
+
+%\textcolor{red}{EDITING...Psychological need for control + uncertainty of pandemic → superstitious beliefs / magical thinking
+%Locus of control is defined as ``a generalized attitude, belief, or expectancy regarding the nature of the causal relationship between one's own behavior and its consequences'' (Rotter, 1966).
+% An individual with an internal locus of control will ``attribute outcomes to their own actions'' while an individual with an external locus of control will attribute it ``to circumstances beyond their control'' (Rotter, 1966).
+%Understand differences in effort/motivation
+%More internal locus of control associated with higher education/income
+%Health outcomes (cite psych paper)
+%}
 
 % Several of our treatments also target these features, such as analytic thinking (the deliberation and emotion suppression treatments).  
 
 
-When covariate information is missing, we will follow the procedures in \cite{greensop1.05}: for a given covariate, if no more than 10 percent of total covariate values are missing, recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, introduce a missingness flag. 
+
+
+\textbf{Predictions about covariates/heterogeneity:}\todo{@Molly do you think we should include this kind of thing here?}
+\textcolor{red}{
+\begin{enumerate}
+\item At a high level, we expect to see results such as individuals with low digital media literacy will be most affected by the respondent-level false news video training combined with the factcheck headline treatment. Younger respondents who have a high level of concern about COVID-19 will be most affected by the pledge treatment combined with the related articles or factcheck headline treatments.
+\item Individuals who are more literate with respect to digital media will be most affected by the headline-level treatments. We also expect more educated and less religious individuals to be more influenced by these treatments.
+\item More educated and less religious individuals will be less influenced by our accuracy nudge or deliberation nudge treatments.
+\item Emotion suppression and accuracy nudge treatments will be more effective for low CRT and older respondents.
+\item Contrary to existing research based in the US, we do not expect partisanship to interact with our treatments.
+\item Sides 2016 + Gilens 2001 (information treatment more effective on high knowledge ppl)
+\item we expect that religiosity and religious beliefs - as well as locus of control - to matter...
+\item in US social distancing measures adopted at higher rates in areas with more climate change believers %https://www.researchgate.net/profile/David_Van_Dijcke/publication/341001499_Belief_in_Science_Influences_Physical_Distancing_in_Response_to_COVID-19_Lockdown_Policies/links/5ea96a1e92851cb267633a3d/Belief-in-Science-Influences-Physical-Distancing-in-Response-to-COVID-19-Lockdown-Policies.pdf
+\end{enumerate}
+}
+
+% - include more covariates in the pilot and then subset for actual survey
+%	- include a couple different measures of covariates
+
 
 
 \subsection{Outcomes and Response Function}
@@ -506,11 +545,9 @@ In all analyses, we include the pre-test response strata and indicators for indi
 
 \subsection{Survey Instrument}\label{appendix:survey}%\todo{Check for update to public-facing survey instrument.}
 The survey script is available at this link:\\
-\url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=82697177&range=A2}
-
+\url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=366167997&range=A1}
 
 \subsection{Stimuli}\label{appendis:stimuli}
-
 All of the stimuli used in the experiment are available at this link:\\
 \url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit?usp=sharing}
 
@@ -624,28 +661,35 @@ This treatment draws on the psychological evidence around commitment and consist
 \end{enumerate}
 
 \subsubsection{Headline Level Treatments}
-Samples of the three headline-level treatments appear below:
+%Samples of the three headline-level treatments appear below:
 
 \begin{figure}[htb]
 \centering
-    \begin{minipage}{0.50\textwidth}
+    \caption{Headline treatments}
+    \label{headline_treatments}
+    \begin{minipage}{0.4\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_relatedarticles.png} 
         \caption*{Related Articles}
     \end{minipage}\hfill
-    \begin{minipage}{0.50\textwidth}
+    \begin{minipage}{0.4\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_factcheck.png} 
         \caption*{Factcheck}
     \end{minipage}
-    \begin{minipage}{0.50\textwidth}
+    \begin{minipage}{0.4\textwidth}
         \centering
         \includegraphics[width=\textwidth]{treat_moreinfo.png} 
         \caption*{More information}
+    \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{treat_realinfo.png} 
+        \caption*{Real information}
     \end{minipage}
 \end{figure}
 
-
+\FloatBarrier
 \section{Batch-wise balanced linear Thompson sampling}\label{appendix:agent}
 
 A note on notation: while $X_i$ represents the covariates observed for individual $i$, the covariate vector $X_{[W]i}$ is in the appropriate format for the relevant counterfactual treatment indicators and interactions.

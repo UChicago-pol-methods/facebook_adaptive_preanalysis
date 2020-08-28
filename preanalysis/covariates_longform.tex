@@ -8,18 +8,28 @@ Education &
   No   formal schooling, Informal schooling only, Some primary school, Primary   school completed, Some secondary school, Secondary school completed,   Post-secondary qualifications, Some university, University completed,   Post-graduate &
   1:8 \\
 Geography                                   & Urban, Rural                                 & 1 if urban, 0 otherwise \\
-Religion                                    & None,   Christian, Muslim, Other                           & Indicators              \\
+Religion                                    & None,   Christian, Muslim, Traditionalis, Other                           & Indicators              \\
+Denomination (Christian)  & Catholic, Mainline Protestant, Pentecostal, Other  & Indicator (coded 1 if Pentecostal, 0 otherwise)\\
 Religiosity   (freq. of attendance) &
   Never,   Less than once a month, One to three times per month, Once a week, More than   once a week but less than daily, Daily &
   1:6 \\
-Index of household possessions:   radio, tv, motorvehicle/motorcycle, computer/laptop, bank account, mobile   phone, bicycle &
-  I/my household owns, Do not own &
+ Belief in God's control & 1. God will grant wealth and good health to all believers who have enough faith, 2. God doesn't always give wealth and good health even to believers who have deep faith & \textcolor{red}{1:2}\\
+ Locus of control & 
+% Some people feel they have completely free choice and control over their lives, while other people feel that what they do has no real effect on what happens to them. Please enter a number between 1 and 10, where 1 means "no choice at all" and 10 means "a great deal of choice" to indicate how much freedom of choice and control you feel you have over the way your life turns out 
+[See survey instrument for full list] & 1:10\\
+% Cognitive Reflection Test & First three questions of standard scare & Score n/3\\
+\textcolor{red}{Digital Literacy Index }& & \\
+Index of household possessions%:   radio, tv, motorvehicle/motorcycle, computer/laptop, bank account, mobile   phone, bicycle 
+&
+  I/my household owns, Do not own [See survey instrument for items] &
   Continuous, sum of owned items \\
 Job   with cash income                      & Yes,   No                                                  & 1 if yes                \\
 Occupation                                  & {[}See   survey instrument for full list{]}                & Indicators              \\
 Number   of people in household             & Integers                                                   & Continuous              \\
 Index   of scientific views                 & {[}See   survey instrument for full questions and response options{]} & 0:2                     \\
+Political affiliation & Governing party v. opposition & \textcolor{red}{0:1}\\
 Concern regarding COVID-19                  & Very   worried, Somewhat worried, Not at all worried       & 1:3                     \\
+COVID-19 information & 3 True/False questions & 0:3\\
 Perceived government efficacy   on COVID-19 & Very   well, Somewhat well, Somewhat poorly, Very poorly   & 1:4                    
 \end{tabular}
 \caption{Long form covariates}
