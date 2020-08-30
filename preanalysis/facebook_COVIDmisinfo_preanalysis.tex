@@ -164,16 +164,15 @@ Respondent-level treatments and headline-level treatments are implemented as sep
 
 \subsection{Covariates}
 
-Covariate measurement plays an important role in our contextual adaptive experiment. We measure pre-treatment covariates that we use to assign treatment probabilities (as detailed in Section X).\todo{@Molly pls improve language :)} 
-The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to interact with and influence the effectiveness of the treatments.
+Covariate measurement plays an important role in our contextual adaptive experiment. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}.)
+The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
 
 Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally treats heterogeneous treatment effects as secondary analyses. In the existing misinformation literature, centered around studies conducted with respondents in the North America and Europe, the covariates of interest include political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guess2020digital}.  
 
 This project expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation? We highlight several key covariates that we predict will inform the effectiveness/suitability of our interventions for individuals with respect to countering the spread of COVID-19 misinformation. 
 
 
-In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.\footnote{When covariate information is missing, we will follow the procedures in \cite{greensop1.05}: for a given covariate. If no more than 10 percent of total covariate values are missing, we will recode missing values to the overall mean; if greater than 10 percent of covariate values are missing, we will introduce a missingness flag.}  %\input{covariates_shortform.tex}
-These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. 
+In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. 
 
 
 
@@ -190,7 +189,7 @@ These variables capture what other researchers have suggested are primary source
 
 
 
-\textbf{Predictions about covariates/heterogeneity:}\todo{@Molly do you think we should include this kind of thing here?}
+\textbf{Predictions about covariates/heterogeneity:}\todo{@Molly do you think we should include this kind of thing here?}\todo{@Leah, I would if anything put a few of these in a paragraph form, and say, "However, our objective is to learn an optimal policy conditional on covariates, and not to determine which covariates matter, and by how much. For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity." What do you think?}
 \textcolor{red}{
 \begin{enumerate}
 \item At a high level, we expect to see results such as individuals with low digital media literacy will be most affected by the respondent-level false news video training combined with the factcheck headline treatment. Younger respondents who have a high level of concern about COVID-19 will be most affected by the pledge treatment combined with the related articles or factcheck headline treatments.
@@ -227,7 +226,7 @@ By using a pre-test / post-test design  \citep{davidian2005semiparametric} %http
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
 
 
-We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2}$. 
+We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2, 3, 4}$. 
 
 We control for strata of pre-test responses in our analyses, i.e., $S=\{(m^1, r^1)\in M^1 \times R^1\}$. 
 We formalize our response function in terms of post-test measures:
@@ -384,8 +383,7 @@ To estimate the value of a policy, we take the average of doubly robust scores $
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
-We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach is described in Appendix~\ref{appendix:grf}. $\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}. \todo{Could add note about bias in adaptively collected data, per e.g. Nie et al.. }
-Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
+We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach is described in Appendix~\ref{appendix:grf}. $\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}.  Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
 
 Our methods for analysis will differ depending on how the data is collected. 
 
@@ -447,7 +445,7 @@ We refer to the heterogeneity ``ratio'' as the ratio of the value of the best co
 
 \paragraph{Data generating processes}
 \begin{enumerate}
-\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
+%\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
 \item  Sample $S=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
 \item Estimate heterogeneity ratios under each element of the vector of penalty factors:
 \begin{enumerate}
@@ -499,16 +497,26 @@ Our objective in selecting design parameters is to optimize power for Hypothesis
 \textbf{Parameter} & \textbf{Choice set} \\ \hline
 Total experiment size ($N$)& [2500, 3750, 5000] \\
 Number of batches ($B$)& [10, 15, 20] \\
-First batch size ($|\mathcal{I}_1|$) & $N \times$ [1/10, 3/10, 1/5] \\
-Last batch size ($|\mathcal{I}_B|$) & $N/ |\ww| \times$ [1, 1.1, 1.25] \\
+First batch size ($|\mathcal{I}_1|$) & $N \times$ [1/10, 1/5, 3/10] \\
+Last batch size ($|\mathcal{I}_B|$) &  $N \times$ [1/10, 1/5, 3/10] \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
 Probability floor (p)& [0.05, 0.1, 0.25]$\times 1/ |\ww|$ \\
 \hline
 \end{tabular}
-\end{table}\todo{Finalize choice set}
+\end{table}
 
 
+\section{Power Calculations}
+The ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions. We assume there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
+\begin{itemize}
+\item \textbf{Relative size of the groups.} We allow the largest group to be 0.8, 0.6, and 0.4 of the underlying population, with the two remaining groups approximately equally sized
+\item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership
+\item \textbf{Heterogeneity ratio.} We vary the relative value of the best contextual policy to the best fixed policy to be 1.05, 1.5, or 1.95. 
+\end{itemize}
+
+
+\todo{Figures TK}
 
 \clearpage
 \bibliographystyle{apalike}
