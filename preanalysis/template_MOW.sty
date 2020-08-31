@@ -14,7 +14,8 @@
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
 % Captions will be left justified
 \RequirePackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
-\usepackage{placeins} % for FloatBarrier to keep figures in right section
+\RequirePackage{placeins} % for FloatBarrier to keep figures in right section
+\RequirePackage{subcaption}
 
 % Tables
 \RequirePackage{float}
@@ -22,6 +23,7 @@
 \RequirePackage{array}
 %\RequirePackage{minipage}
 \RequirePackage{booktabs,threeparttable}
+\RequirePackage{adjustbox}
 
 % Author
 \RequirePackage[blocks]{authblk}
@@ -44,11 +46,11 @@
 %\setkomafont{descriptionlabel}{\normalfont\bfseries} % article fonts
 
 % Bibliography and citation formatting
-\RequirePackage[colorlinks=true, citecolor=blue]{hyperref}
+\PassOptionsToPackage{hyphens}{url}\RequirePackage[colorlinks=true, citecolor=blue]{hyperref}
 
 \RequirePackage{nameref}
 \RequirePackage[round]{natbib} 
-\bibliographystyle{chicago}
+\bibliographystyle{apalike}
 
 % Title and Subtitle added in .tex file
 %\author{Molly Offer-Westort}
@@ -80,9 +82,9 @@
 \deffootnote[1.5em]{.5em}{1em}{\textsuperscript{\thefootnotemark}}
 
 % Algorithms
-\usepackage{algorithmicx}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\RequirePackage{algorithmicx}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
 
 % Equation formatting
 \RequirePackage{amsmath,amssymb,amsfonts} 
