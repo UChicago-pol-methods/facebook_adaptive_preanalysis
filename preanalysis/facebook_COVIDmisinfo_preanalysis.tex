@@ -1,8 +1,8 @@
-\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+%\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
 % The next three lines are temporary, for todo notes, remove after notes are removed
-%\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
-%\setlength{\marginparwidth}{4.5cm}
-%\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
+\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+\setlength{\marginparwidth}{4.5cm}
+\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 % Title and Subtitle added in .tex file
 
 \title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
@@ -45,8 +45,8 @@ What individuals see and experience online can have offline consequences. For in
 
 
 % why misinformation hard to combat -- what's new about this context
-
-Mitigating the spread of misinformation is a problem that has long eluded social scientists. Designing messages, trainings and other interventions to curb the spread of online misinformation is challenging in ``normal'' times, but is particularly difficult in the context of a global pandemic. Unlike political misinformation COVID-19 misinformation arises in an environment plagued by uncertainty where facts are rapidly-changing as more evidence becomes available, and longstanding preexisting beliefs do not exist. Given humans' need for certainty, security, and stability \citep{leotti2010born}, people often turn to multiple sources for health information outside of scientific experts and are susceptible to following unproven remedies \citep{swire2020public}. In the absence of a vaccine or fully effective prevention method, people are desperate for any kind of ``cure,'' and may even be willing to share those that have been labeled as false with their friends and family. Indeed, one study found that COVID-19 misinformation on WhatsApp continued to circulate among users in India and Brazil even \textit{after} the information had been debunked by fact-checking organizations. 
+\todo{SA: when information is getting discovered quickly, it is more plausible that you might hear about it first through rumors before “official sources.”  So that is another reason that fast-changing situations are prone to misinformation.  You might also have a view that various interests might want to keep information from you, e.g. you think health organization is captured by drug companies, or governments are against rural citizens.  There could be a nod to this type of theory.}
+Mitigating the spread of misinformation is a problem that has long eluded social scientists. Designing messages, trainings and other interventions to curb the spread of online misinformation is challenging in ``normal'' times, but is particularly difficult in the context of a global pandemic. Unlike political misinformation COVID-19 misinformation arises in an environment plagued by uncertainty where facts are rapidly-changing as more evidence becomes available, and longstanding preexisting beliefs do not exist. Given humans' need for certainty, security, and stability \citep{leotti2010born}, people often turn to multiple sources for health information outside of scientific experts and are susceptible to following unproven remedies \citep{swire2020public}. In the absence of a vaccine or fully effective prevention method, people are desperate for any kind of ``cure,'' and may even be willing to share those that have been labeled as false with their friends and family. Indeed, one study found that COVID-19 misinformation on WhatsApp continued to circulate among users in India and Brazil even \textit{after} the information had been debunked by fact-checking organizations. \todo{SA: it is not clear what users knew about fact-checking, so sentence confusing}
 
 
  %(in contrast to say beliefs about climate change, etc.) 
@@ -78,7 +78,7 @@ This work builds on the experimental literature on combating fake news in severa
 \section{Case Selection and Stimuli}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on \href{https://www.facebook.com/business/insights/tools/audience-insights?ref=ens_rdr}{Facebook's advertising platform}). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. 
+We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on \href{https://www.facebook.com/business/insights/tools/audience-insights?ref=ens_rdr}{Facebook's advertising platform}). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are main factcheck sources on the continent. Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. \todo{SA: First para of section 2, it is not clear what it means for a country to be a main fact check source.  It is a source of misinformation, or a source of truth?  Clarify.}
 
 \begin{figure}[!htb]
 \centering
@@ -128,7 +128,7 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the respondent level and headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
 
 % interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
-
+\todo{Add justification for emotion suppression treatment, per 9/1 meeting? Provide minimal justification for \textit{all}?}
 \begin{table}[H]
 \begin{tabular}{l|l|l}
 \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
@@ -218,7 +218,7 @@ In addition to the demographic covariates commonly used in social science resear
 
 We are interested in decreasing sharing of harmful false information about COVID-19 cures and treatments while not negatively impacting sharing of useful information about transmission and best practices from verified sources. Specifically, we are interested in three outcomes: (1) Self-reported intention to share a given story, (2) Actual behavior with respect to sharing that story\footnote{Though this is only measured for the \textit{true} headlines as respondents are mostly prevented from sharing the falsehoods.}, (3) Willingness to share tips and information about misinformation more generally. For all reported outcomes and responses (excluding aggregated tallies discussed below), analysis will be conducted as described in Section~\ref{analysis}.  
 
-\subsubsection{Primary Response Function}
+\subsubsection{Primary Response Function}\todo{SA: the description in 3.4.1 is hard to read.  I think a diagram would make it much easier to follow.}
 
 We measure interest in sharing information through two questions:
 \begin{itemize}
@@ -230,9 +230,10 @@ Prior to treatment, we show respondents two articles from their country randomly
 
 By using a pre-test / post-test design  \citep{davidian2005semiparametric} %https://declaredesign.org/library/articles/pretest_posttest.html
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
-
+\todo{SA: on the randomization of the pre-treatment exposures, we can reduce variance by pre-randomizing combinations of pre-treatment exposures and treatments to ensure balance; this is a form of stratification.  For example, we create a set of vectors of pre-treatment exposures and treatment assignments that have the desired proportions, and then randomly assign participants to a member of the set (without replacement) upon arrival.  As Guido and I discuss in our handbook chapter on experimental design, it is always better to plan an experiment to avoid balance problems than to adjust for them afterwards.}
 
 We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2, 3, 4}$. 
+\todo{SA: the superscripts look like exponents.  Either change to letters or use double subscript, e.g. $M_{2,i}$.}
 
 We control for strata of pre-test responses in our analyses, i.e., $S=\{(m^1, r^1)\in M^1 \times R^1\}$. 
 We formalize our response function in terms of post-test measures:
@@ -298,7 +299,7 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
 \begin{align}
   H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
 \end{align}
-\end{hypothesis}
+\end{hypothesis}\todo{Further secondary hypotheses?}
 
 
 \subsection{Adaptive data collection}\label{adaptiveagent}
@@ -387,7 +388,7 @@ $w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
 \end{enumerate}
 
 
-\section{Analysis}\label{analysis}
+\section{Analysis}\label{analysis}\todo{Include factorial model for effects?}
 
 To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores, 
 
@@ -420,7 +421,7 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
 \end{enumerate}
 
 
-\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}
+\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}\todo{SA: the covariate distributions may be a little different between the last batch and the rest of the batches, just due to sampling variation; one might mention that if they are, we might reweight the last batch so that the mean values of x’s are the same.  This is mainly an issue if the X’s are very important and the covariate space has high dimension.}
 For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
 
 \begin{enumerate}
@@ -456,7 +457,7 @@ We then simulate data generating processes (DGPs) based on the pilot data, with 
 We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
 
-\paragraph{Data generating processes}
+\paragraph{Data generating processes}\todo{Consider an approach to bootstrapping here, where we have a set of DGPs; potentially sample a smaller number, and do this a number of times.}
 \begin{enumerate}
 %\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
 \item  Sample $S=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
@@ -505,7 +506,7 @@ This then gives us four conditional mean models. We then generate data from thes
 \paragraph{Hyperparameter choice}
 Our objective in selecting design hyperparameters is to optimize power for Hypothesis~\ref{eq:optctr}, while minimizing the size of the experiment and the number of batches. From the simulations we should be able to learn about power conditional on each combination of design hyperparameters. Our decision rule is as follows:
 \begin{enumerate}
-\item Estimate power for Hypothesis~\ref{eq:optctr} under each unique combination of design hyperparameters for each DGP. Take the average power across DGPs, conditional on each unique set of design hyperparameters. 
+\item Estimate power for Hypothesis~\ref{eq:optctr} under each unique combination of design hyperparameters for each DGP. Take the average power across DGPs, conditional on each unique set of design hyperparameters. \todo{Consider subsetting to those where power is greater than 0.85 (we have some uncertainty) and/or otherwise consider \textit{distributions} across bootstrapped DGPs. }
 \item If there is one or fewer combinations of design hyperparameters with average power $\ge.8$, select the set of design hyperparameters which optimizes Hypothesis~\ref{eq:optctr}. To break ties, select the set with smallest experiment size, or, if of equal size, select with smallest number of batches. If experiment size and batch size are equal, select randomly. 
 \item If there is more than one combination of design hyperparameters with average power $\ge.8$, constrain choices to only those sets with average power $\ge.8$. Then constrain choices to only those sets with the smallest experiment size, and then to the smallest number of batches. Among the remaining sets, optimize for power of Hypothesis~\ref{eq:optctr}. To break ties, select randomly. 
 \end{enumerate}
@@ -516,7 +517,7 @@ Our objective in selecting design hyperparameters is to optimize power for Hypot
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Hyperparameter} & \textbf{Choice set} \\ \hline
-Total experiment size ($N$)& [2500, 3750, 5000] \\
+Total experiment size ($N$)& [1500:5000 (steps of 500)] \\
 Number of batches ($B$)& [10, 15, 20] \\
 First batch size ($|\mathcal{I}_1|$) & $N \times$ [1/10, 1/5, 3/10] \\
 Last batch size ($|\mathcal{I}_B|$) &  $N \times$ [1/10, 1/5, 3/10] \\
@@ -529,7 +530,7 @@ Probability floor (p)& [0.1, 0.15, 0.2]$\times 1/ |\ww|$ \\
 
 
 \section{Power Calculations}
-The ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions. We assume there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
+The ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions with hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
 \begin{itemize}
 \item \textbf{Relative size of the groups.} We allow the largest group to be 0.4, 0.6, and 0.8 share of the underlying population, with the two remaining groups approximately equally sized
 \item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership, over 3, 5, and 10 covariates. 
@@ -915,13 +916,13 @@ In ex post evaluation, we use the stabilized version of these weights, normalizi
 \right.
 \end{align}
 
-For adaptively collected data we use cumulative moving stabilized weights. If data were collected in an online manner (i.e., if Thompson sampling probabilities were updated with each observation), $N$ in the above formula would be replaced by $i$. In the batched version, all observations in the same batch share the same history, and so instead, we sum over all observations in batches \textit{up to and including} the batch that includes observation $i$. %todo{Could formalize this.}
+For batched adaptively collected data, we sum over all observations in the same batch. %todo{Could formalize this.}
 
 \begin{align}
 \left.
-\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(x)}   
+\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(X_i)}   
 \middle/ 
-{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:IPW} \numberthis
+{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:SIPWb} \numberthis
 \right.
 \end{align}
 
@@ -945,7 +946,7 @@ To estimate conditional means, we follow the steps above in \ref{appendix:grf}, 
 \item For observation not assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
 \end{enumerate}
 
-We use the cumulative moving version of the stabilized inverse probability weights from (\ref{eq:SIPW}), substituting the current maximum index value for $N$. 
+We use the batched version of the stabilized inverse probability weights from (\ref{eq:SIPWb}). 
 Doubly robust scores are then formed from the relevant component parts. 
 
 
