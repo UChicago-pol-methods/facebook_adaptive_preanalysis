@@ -1,0 +1,81 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{}
+
+\usetheme{Boadilla}
+\usecolortheme{beaver}
+
+%Information to be included in the title page:
+\title{Facebook Project Simulations}
+\author{James Li}
+\date{1 September 2020}
+
+\begin{document}
+\begin{frame}{Data Generating Process}
+
+Objective for DGPs:
+\begin{itemize}
+    \item Create multiple clusters, where distributions of covariates are different across clusters
+    \item Each cluster has a different arm that produces highest reward
+    \item Generate "lumpy" reward functions that cannot be straightforwardly recovered by a linear model
+    \item Allow levers to move:
+    \begin{itemize}
+        \item number of covariates used to define clusters
+        \item relative size of clusters
+        \item \textit{Heterogeneity ratio} (value of best contextual/best fixed policy)
+    \end{itemize} 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Data Generating Process}
+Requirements for DGPs:
+\begin{itemize}
+    \item The difference between the best contextual policy \& the control is fixed across DGPs
+    \begin{itemize}
+        \item[$\rightarrow$] Differences in power curves between DGPs are based on ability of agent to learn the DGP, not differences in effect sizes
+    \end{itemize}
+    \item The best fixed arm is always the same arm across DGPs
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Data Generating Process}
+
+\textbf{Generate Baseline Dataset ($N = 10000, p = 15$)}
+\begin{itemize}
+    \item Parameter \begin{itemize}
+        \item Number of useful covariates $p' \in \{3, 5, 10\}$
+        \item Largest cluster size ratio $c \in \{0.4, 0.6, 0.8\}$
+        \item Heterogeneity ratio $h \in \{1.05, 1.5, 1.95\}$
+    \end{itemize}
+    \item Generate large covariate matrix $X$ using correlated multivariate normal distribution, covariance matrix generated from $\frac{Beta(2,2) - 0.5}{2}$
+    \item Use iterative KNN to group covariates observed into $k = 3$ clusters with cluster size [$N*c, \frac{N * (1-c)}{2}, \frac{N * (1-c)}{2}$], where $c$ = largest cluster size ratio
+    
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Data Generating Process}
+\textbf{Reward Generation}
+\begin{itemize}
+    \item Generate reward for best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best, i}, c_i} = 0.6 - X_{1, c_i}$$
+    \item Reward for 2nd best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best_2, i}, c_i} = R_{w_{best, i}, c_i} + \epsilon $$ where $\epsilon \sim \mathcal{N}(\mu, 0.01), \mu <= 0$. 
+    \item Reward for the rest of the arm
+    $$R_{w, c_i} = -X_{1, c_i} \mbox{ for }  w \not\in \{w_{best, i}, w_{best_2, i}\}, i = 1, .., 3,$$
+    \item We vary $\mu$ to search for the level of desired heterogeneity ratio $h$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Generating Process}
+\textbf{Note}
+\begin{itemize}
+    \item 0.6 was chosen to simulate an average treatment effect between best-fixed policy and control policy; assume control policy is not the best arm for any cluster. (See PAP for justification of magnitude.)
+    \item In the simulations, arm 0 is chosen as the best arm for the largest cluster. It is also chosen as the 2nd best arm for the other two clusters to ensure it is the best-fixed policy.
+\end{itemize}
+\end{frame}
+
+\end{document}
