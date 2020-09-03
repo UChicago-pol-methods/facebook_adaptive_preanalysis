@@ -238,13 +238,13 @@ By using a pre-test / post-test design  \citep{davidian2005semiparametric} %http
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
 \todo{SA: on the randomization of the pre-treatment exposures, we can reduce variance by pre-randomizing combinations of pre-treatment exposures and treatments to ensure balance; this is a form of stratification.  For example, we create a set of vectors of pre-treatment exposures and treatment assignments that have the desired proportions, and then randomly assign participants to a member of the set (without replacement) upon arrival.  As Guido and I discuss in our handbook chapter on experimental design, it is always better to plan an experiment to avoid balance problems than to adjust for them afterwards.}
 
-We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^1$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^2$ and $T_i^2$ are the respective post-treatment responses. Then $M_i^1, T_i^1, M_i^2, T_i^2 \in {0,1,2, 3, 4}$. 
-\todo{SA: the superscripts look like exponents.  Either change to letters or use double subscript, e.g. $M_{2,i}$.}
+We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^a$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^a$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^b$ and $T_i^b$ are the respective post-treatment responses. Then $M_i^a, T_i^a, M_i^b, T_i^b \in {0,1,2, 3, 4}$. 
+%\todo{SA: the superscripts look like exponents.  Either change to letters or use double subscript, e.g. $M_{2,i}$.} 
 
-We control for strata of pre-test responses in our analyses, i.e., $S=\{(m^1, r^1)\in M^1 \times R^1\}$. 
+We control for strata of pre-test responses in our analyses, i.e., $S=\{(m^a, r^a)\in M^a \times R^a\}$. 
 We formalize our response function in terms of post-test measures:
 \[
-Y_i = -M^2_i + 0.5 T^2_i.
+Y_i = -M^b_i + 0.5 T^b_i.
 \]
 This response function will be the metric that we optimize for in our adaptive algorithm described in Section~\ref{adaptiveagent}, and in our policy learning described in Section~\ref{analysis}. Because of random assignment, we expect to see no systematic differences in pre-test interest in sharing either true or untrue stimuli across treatment conditions, conditional on covariates. %For a given treatment condition, all else equal, if respondents share misinformation at lower rates post-test compared to control, this will result in a relatively higher response variable. If respondents share true information at lower rates post-test compared to control, this will result in a relatively lower response variable, but the relative impacts are only half as large as those for the misinformation stimuli. 
 
@@ -259,7 +259,7 @@ In order to obtain a behavioral measure of sharing, we collect the articles the 
 At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online and also offer them the opportunity to share these tips on their timeline or on messenger; we measure intention to share these tips and aggregate number of shares of tips by treatment condition as well. 
 
 
-\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, all types of post-test responses will be coded as zero.\footnote{An alternative approach to analysis in a pre-test/post-test design, accounting for missing data, would be to follow \cite{davidian2005semiparametric}'s implementation of estimators developed by \cite{robins1994estimation}.}
+\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, all types of post-test responses will be coded as zero.\footnote{An alternative approach to analysis in a pre-test/post-test design, accounting for missing data, would be to follow \cite{davidian2005semiparametric}'s implementation of estimators developed by \cite{robins1994estimation}.}\todo{Maybe for missing responses we pre-fill for sharing as 50\% for each?}
 
 
 \section{Hypotheses and Data Collection}
@@ -305,7 +305,7 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
 \begin{align}
   H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
 \end{align}
-\end{hypothesis}\todo{Further secondary hypotheses?}
+\end{hypothesis}\todo{Add general thoughts about secondary hypotheses/ treatment effect heterogeneity here?}
 
 
 \subsection{Adaptive data collection}\label{adaptiveagent}
@@ -383,18 +383,25 @@ $w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
 \item For the final batch,  $b = $ B, collect data on-policy:
 \begin{enumerate}
   \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. 
-%  Here, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}.
-  \item Fit a point-wise optimal policy  by taking the maximum of predicted values for each possible context $x$ 
-    \begin{equation}
-     \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
-    \end{equation} 
+%$ Point-wise optimal policy
+%  \item Fit a point-wise optimal policy  by taking the maximum of predicted values for each possible context $x$ 
+%    \begin{equation}
+%     \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
+%    \end{equation} 
+  \item Fit an optimal depth\textcolor{red}{-two} policy tree:
+    \begin{align*}
+      \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
+      \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
+      \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
+       \text{where } \Pi \text{ is the class of depth-\textcolor{red}{two} policy trees.}
+    \end{align*}
   Store the policy. 
   \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment deterministically consistent with $\hat{\pi}_{x}$. 
 \end{enumerate}
 \end{enumerate}
 
 
-\section{Analysis}\label{analysis}\todo{Include factorial model for effects?}
+\section{Analysis}\label{analysis}
 
 To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores, 
 
@@ -414,14 +421,26 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
   \item Collect data by assigning treatment uniformly at random.
   \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
   \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
-    \begin{equation*}
-\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
-    \end{equation*}
+  \item Separating the data into $k$ folds, fit optimal depth\textcolor{red}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+    \begin{align*}
+      \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
+       \sum_{i \in \mathcal{I}_{-k}}
+      \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
+       \text{where } \Pi \text{ is the class of depth-\textcolor{red}{two} policy trees.}
+    \end{align*}
+%% Point-wise optimal random forest  
+%  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
+%    \begin{equation*}
+%\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
+%    \end{equation*}
   \item To evaluate the policies, take the average scores :
     \begin{align*}
           \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
-      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
+      \hat{V}(\hat{\pi}_{opt})  
+      %% Point-wise optimal random forest  
+      % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
+					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
+          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \widehat{\Gamma}_{i, \cdot} \rangle
           \end{align*}
    \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
@@ -434,7 +453,7 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 \item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
 \item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\xi_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
 \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-\item We have already fitted and stored a point-wise optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
+\item We have already fitted and stored an optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
   \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
           \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w} \\
@@ -444,13 +463,39 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
    \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
 
+\subsubsection{Hypothesis testing}
 To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. 
+
+
+\textcolor{red}{Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluate split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity. }
 
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
+\todo{Add factorial model?}
+%In addition to the policy tree, we estimate a factorial model
+% 
+%\begin{align*}
+%\hat{\mu}_w(X_{i}) & =
+%			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
+%			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
+%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}} +  \\
+%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
+%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}, \ell}.\numberthis
+%         \label{eq:linear_model_full}
+%\end{align*} 
 
+%\begin{align*}
+%\hat{\mu}_w(X_{i}) & =
+%			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
+%			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
+%			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
+%         \label{eq:linear_model_full}
+%\end{align*} 
 
-\subsection{Simulations and design hyperparameters}\label{simulations}
+%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
+%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
+
+\section{Simulations and design hyperparameters}\label{simulations}
 
 \textit{\textbf{Note:} This section provides an overview of our approach to making data-driven design decisions. We will update this pre-analysis plan \textit{after} collecting pilot data and running simulations, to document simulation results and our final design hyperparameters, prior to implementing the eventual adaptive experiments. }
 
