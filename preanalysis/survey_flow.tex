@@ -24,7 +24,7 @@
 %  \node (onCreateBlock)     [process, below of=start]          {onCreate()};
 %  \node (onStartBlock)      [process, below of=onCreateBlock]   {onStart()};
 %  \node (onResumeBlock)     [process, below of=onStartBlock]   {onResume()};
-  \node (distract)      [process, below of=pretreat]
+  \node (distract)      [process, below of=pretreat, yshift=-.5in]
                                                       {Distraction Module};
   \node (treat)      [activityRuns, below of=distract]
                                                       {Treatment};
@@ -48,7 +48,8 @@
   % with aditional nodes for description 
 %  \draw[->]             (pretreat) -- node[text width=3in]
 %                                   {4 random stimuli (2 true/2 false)}(treat);
-     \draw[->]             (pretreat) -- (distract);
+     \draw[->]             (pretreat) -- node[text width=4in]
+                                   {1. Would you like to share this post on your timeline?\\2. Would you like to send this post to a friend?}(distract);
      \draw[->]             (distract) -- (treat);    
      \draw[->]             (treat) -- (posttreat);                                 
 %   \draw[->]             (treat) -- node[text width=3in]
