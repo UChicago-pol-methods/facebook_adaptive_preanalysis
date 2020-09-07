@@ -1,5 +1,4 @@
-\documentclass[border=10pt]{standalone}
-\usepackage{tikz}
+\documentclass[border=10pt, tikz]{standalone}
 \usetikzlibrary{arrows.meta}
 \tikzset{%
   >={Latex[width=2mm,length=2mm]},
@@ -13,6 +12,7 @@
          process/.style = {base, minimum width=2.5cm, fill=orange!15},
                           % font=\ttfamily},
 }
+\usepackage{amsmath}
 \begin{document}    
 % Drawing part, node distance is 1.5 cm and every node
 % is prefilled with white background
@@ -20,16 +20,20 @@
 \begin{tikzpicture}[node distance=1.5cm,
     every node/.style={fill=white, font=\sffamily}, align=center]
   % Specification of nodes (position, etc.)
- \node (pretreat)             [activityStarts]              {Pre-Treatment Stimuli \\ \small{[Random: 2 true/2 false]}};
+ \node (pre)      [draw=none,rectangle, fill=none]
+                                                      {\ \ $\cdots$ };    
+ \node (pretreat)             [activityStarts, below of = pre]              {Pre-Treatment Stimuli \\ \small{[Random: 2 true/2 false]}};
 %  \node (onCreateBlock)     [process, below of=start]          {onCreate()};
 %  \node (onStartBlock)      [process, below of=onCreateBlock]   {onStart()};
 %  \node (onResumeBlock)     [process, below of=onStartBlock]   {onResume()};
-  \node (distract)      [process, below of=pretreat, yshift=-.5in]
-                                                      {Distraction Module};
+  \node (distract)      [process, below of=pretreat, yshift=-.7in]
+                                                      {Intermediate Modules};
   \node (treat)      [activityRuns, below of=distract]
                                                       {Treatment};
   \node (posttreat)      [activityStarts, below of=treat]
-                                                      {Post-Treatment Stimuli \\ \small{[Random: 2 true/2 false]}};                                                      
+                                                      {Post-Treatment Stimuli \\ \small{[Random: 2 true/2 false]}};  
+  \node (etc)      [below of=posttreat, yshift=-.7in, draw=none,rectangle, fill=none]
+                                                      {\ \ $\cdots$ };    
 %  \node (onPauseBlock)      [process, below of=activityRuns, yshift=-1cm]
 %                                                                {onPause()};
 %  \node (onStopBlock)       [process, below of=onPauseBlock, yshift=-1cm]
@@ -48,10 +52,30 @@
   % with aditional nodes for description 
 %  \draw[->]             (pretreat) -- node[text width=3in]
 %                                   {4 random stimuli (2 true/2 false)}(treat);
-     \draw[->]             (pretreat) -- node[text width=4in]
-                                   {1. Would you like to share this post on your timeline?\\2. Would you like to send this post to a friend?}(distract);
+     \draw[->]             (pre) -- (pretreat);    
+     \draw[->]             (pretreat) -- node[text width=4.5in]
+     				{
+                                                $M_i^a, T_i^a
+                                                \left\lbrace
+                                                \begin{tabular}{ l} 
+                                                1. Would you like to share this post on your timeline?\\
+                                                2. Would you like to send this post to a friend?
+                                                \end{tabular}\right.
+                                                $
+						 }(distract);
      \draw[->]             (distract) -- (treat);    
-     \draw[->]             (treat) -- (posttreat);                                 
+     \draw[->]             (treat) -- (posttreat);       
+     \draw[->]             (posttreat) -- (etc);                      
+     \draw[->]             (posttreat) -- node[text width=4.5in]
+                                   {
+                                                $M_i^b, T_i^b 
+                                                \left\lbrace
+                                                \begin{tabular}{ l} 
+                                                1. Would you like to share this post on your timeline?\\
+                                                2. Would you like to send this post to a friend?
+                                                \end{tabular}\right.
+                                                $
+                                                }(etc);
 %   \draw[->]             (treat) -- node[text width=3in]
 %                                   {4 random stimuli (2 true/2 false)}(posttreat);                                 
 %  \draw[->]     (onCreateBlock) -- (onStartBlock);
