@@ -11,6 +11,10 @@
 \RequirePackage{listings}
 \RequirePackage{verbatim} 
 \RequirePackage{color} 
+\RequirePackage[export]{adjustbox}
+\usepackage{standalone}% requires -shell-escape
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
 % Captions will be left justified
 \RequirePackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
@@ -23,7 +27,7 @@
 \RequirePackage{array}
 %\RequirePackage{minipage}
 \RequirePackage{booktabs,threeparttable}
-\RequirePackage{adjustbox}
+
 
 % Author
 \RequirePackage[blocks]{authblk}

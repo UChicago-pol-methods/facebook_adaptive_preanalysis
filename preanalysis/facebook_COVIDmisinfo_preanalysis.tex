@@ -1,8 +1,8 @@
-%\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
 % The next three lines are temporary, for todo notes, remove after notes are removed
-\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
-\setlength{\marginparwidth}{4.5cm}
-\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
+%\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+%\setlength{\marginparwidth}{4.5cm}
+%\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 % Title and Subtitle added in .tex file
 
 \title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
@@ -11,6 +11,19 @@
 \date{\today}
 
 \input{template_MOW.sty}
+
+\tikzset{%
+  >={Latex[width=2mm,length=2mm]},
+  % Specifications for style of nodes:
+            base/.style = {rectangle, rounded corners, draw=black,
+                           minimum width=4cm, minimum height=1cm,
+                           text centered, font=\sffamily},
+  activityStarts/.style = {base, fill=blue!30},
+       startstop/.style = {base, fill=red!30},
+    activityRuns/.style = {base, fill=green!20},
+         process/.style = {base, minimum width=2.5cm, fill=orange!15},
+                          % font=\ttfamily},
+}
 
 \begin{document}%
 \normalsize%
@@ -34,7 +47,7 @@ Alongside the outbreak of the new coronavirus, much of the world’s population 
 Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of misinformation related to the virus. The COVID-19 misinformation spreading on social media platforms involve a range of topics including rumors about the origin of the virus, government activities, scam opportunities for aid, and hoax cures. In some places, citizens remain in disbelief and denial of the very existence of the virus.\footnote{\url{https://www.bbc.com/news/world-africa-53403818}} 
 
 %  covid misinfo spreading! / shared
-Much like the actual virus, COVID-19 misinformation is not bounded by state borders. Though the infection rate ($R_0$) of these falsities is difficult to calculate, if the spread follows the trajectory of other types of online information, COVID-19 \textit{mis}information may spread faster and farther than true information \citep{vosoughi2018spread}. For instance, misinformation about the Zika virus was three times more likely to be shared on social media than verified information on several social media sites \citep{sharma2017zika}. Indeed, recent research on COVID-19 conspiracy theories suggests that these stories had a higher virality than neutral or debunking stories \citep{HKS_whatsapp}. %
+Much like the actual virus, COVID-19 misinformation is not bounded by state borders. Though the infection rate ($R_0$) of these falsities is difficult to calculate, if the spread follows the trajectory of other types of online information, COVID-19 \textit{mis}information may spread faster and farther than true information \citep{vosoughi2018spread}. For instance, misinformation about the Zika virus was three times more likely to be shared on social media as compared to verified information on several social media sites \citep{sharma2017zika}. Indeed, recent research on COVID-19 conspiracy theories suggests that these stories had a higher virality than neutral or debunking stories \citep{HKS_whatsapp}. %
  
 
 % infodemic - why it matters --> real consequences
@@ -114,7 +127,7 @@ To collect stimuli we adopted several criteria to search for both false and true
 
 \subsection{Sample recruitment}
 We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate \citep{Rosenzweig_2020}. We will also ask a location screening question to ensure our respondents live in our countries of interest.} %
-To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}. We anticipate that our sample will look similar to the overall Facebook population in these countries, which tends to be more male, more urban, and more educated than the overall population \citep{Rosenzweig_2020}. We will analyze how our sample compares to both the Facebook population and the general population in Kenya and Nigeria using Facebook's advertising API data and the nationally representative Afrobarometer survey that is conducted in both countries. 
+To achieve balance on gender within our sample, we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}. We anticipate that our sample will look similar to the overall Facebook population in these countries, which tends to be more male, more urban, and more educated than the overall population \citep{Rosenzweig_2020}. We will analyze how our sample compares to both the Facebook population and the general population in Kenya and Nigeria using Facebook's advertising API data and the nationally representative Afrobarometer survey that is conducted in both countries. 
 
 
 Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 20 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
@@ -127,7 +140,7 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 
 
 \subsection{Treatment}
-Drawing on the literature on experimental interventions to combat misinformation, we include several interventions designed to reduce the spread of misinformation online, which are targeted both at the respondent level and headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
+Drawing on the literature on experimental interventions to combat misinformation, we include a set interventions designed to reduce the spread of misinformation online, which are targeted both at the respondent level and headline level. This list of treatments also draws on real-world interventions that social media companies have instituted on their own platforms to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
 
 \textcolor{red}{
 Treatments 1, 2, 3, 8, 9 and 10 are taken from interventions being used by social media platforms including Facebook, Twitter. and WhatsApp. \textbf{cite study finds FB tips effective...} Treatment 11 (real information) is a similar headline-level treatment that could be adopted by industry partners -- rather than flagging or presenting warnings we test whether providing a simple true statement improves our sharing outcomes of interest (E.g. reduces sharing of false information). \textbf{[Cite nyhan study that finds more true info helpful]} %depending on what video treatment used could also go here
@@ -137,6 +150,7 @@ Treatments 4, 6, and 7 are taken from academic studies. The accuracy nudge treat
 % interesting point to maybe incorporate: Facebook, 24% of false-rated content in our sample remains up without warning labels \citep{brennen2020types}
 %\todo{Add justification for emotion suppression treatment, per 9/1 meeting? Provide minimal justification for \textit{all}?}
 \begin{table}[H]
+\begin{adjustbox}{max width = \textwidth}
 \begin{tabular}{l|l|l}
 \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}c@{}}Shorthand\\ Name\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Treatment\\ Level\end{tabular}}} & \textbf{Treatment}                                                                                                                                                                                                                                                                                                                                                                                              \\ \hline
 1. Facebook tips                                                                                                           & Respondent                                                                                                   &  Facebook's ``Tips to Spot False News'' 
@@ -164,6 +178,7 @@ Treatments 4, 6, and 7 are taken from academic studies. The accuracy nudge treat
  \\
 12. Control                                                                                                        & N/A                                                                                                          & Control condition                                                                                                                                                                                                                                                                                                                                                                                              
 \end{tabular}
+\end{adjustbox}
 \caption{Description of interventions included in the experiment}
 \label{tab:treatments}
 \end{table}
@@ -179,13 +194,13 @@ Respondent-level treatments and headline-level treatments are implemented as sep
 
 \subsection{Covariates}
 
-Covariate measurement plays an important role in our contextual adaptive experiment. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}.)
+Covariate measurement plays an important role in our contextual adaptive experiment. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}; the full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.)
 The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in an individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
 
 Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guess2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation? 
 
 
-In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
+In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
 
 
 
@@ -227,11 +242,11 @@ In addition to the demographic covariates commonly used in social science resear
 
 
 
-\subsection{Outcomes and Response Function}
+\subsection{Outcomes and Response Function}\label{response}
 
-We are interested in decreasing sharing of harmful false information about COVID-19 cures and treatments while not negatively impacting sharing of useful information about transmission and best practices from verified sources. Specifically, we are interested in three outcomes: (1) Self-reported intention to share a given story, (2) Actual behavior with respect to sharing that story\footnote{Though this is only measured for the \textit{true} headlines as respondents are mostly prevented from sharing the falsehoods.}, (3) Willingness to share tips and information about misinformation more generally. For all reported outcomes and responses (excluding aggregated tallies discussed below), analysis will be conducted as described in Section~\ref{analysis}.  
+We are interested in decreasing sharing of harmful false information about COVID-19 cures and treatments while not negatively impacting sharing of useful information about transmission and best practices from verified sources. Specifically, we are interested in three outcomes: (1) Self-reported intention to share a given story, (2) Actual behavior with respect to sharing that story\footnote{Although this is only measured for the \textit{true} headlines as respondents are not asked to share the falsehoods.}, (3) Willingness to share tips and information about misinformation more generally. For the primary response function below, we conduct analysis as discussed throughout Section~\ref{analysis}. For secondary outcomes, (excluding aggregated tallies discussed below), analysis will be conducted as described in Section~\ref{ridge}.  
 
-\subsubsection{Primary Response Function}\todo{SA: the description in 3.4.1 is hard to read.  I think a diagram would make it much easier to follow.}
+\subsubsection{Primary Response Function}%\todo{SA: the description in 3.4.1 is hard to read.  I think a diagram would make it much easier to follow.}
 
 We measure interest in sharing information through two questions:
 \begin{itemize}
@@ -239,15 +254,20 @@ We measure interest in sharing information through two questions:
 \item Would you like to send this post to a friend on Messenger?
 \end{itemize}
 
-Prior to treatment, we show respondents two articles from their country randomly sourced from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported sharing intention questions. 
-
-
-\todo{Add survey flow here?}
-% \input{survey_flow.tex}
-
 By using a pre-test / post-test design  \citep{davidian2005semiparametric} %https://declaredesign.org/library/articles/pretest_posttest.html
 and an index of repeated measures \citep{broockman2017design}, we aim to improve the efficiency of our effect estimation. 
-\todo{SA: on the randomization of the pre-treatment exposures, we can reduce variance by pre-randomizing combinations of pre-treatment exposures and treatments to ensure balance; this is a form of stratification.  For example, we create a set of vectors of pre-treatment exposures and treatment assignments that have the desired proportions, and then randomly assign participants to a member of the set (without replacement) upon arrival.  As Guido and I discuss in our handbook chapter on experimental design, it is always better to plan an experiment to avoid balance problems than to adjust for them afterwards.}
+
+\begin{figure}[ht]
+\centering
+\includestandalone{survey_flow}
+\caption{Survey flow}
+\label{fig:flow}
+\end{figure}
+
+Prior to treatment, we show respondents two articles from their country drawn from our misinformation stimuli and two articles randomly sourced from our true information stimuli, in random order, and for each stimuli we ask the above self-reported interest questions. Respondents are then asked a series of unrelated questions, and are then randomly assigned treatment according to the experimental design. If assigned one of the respondent-level treatments, they are administered the relevant treatment. They are then shown two additional misinformation stimuli and two additional true information stimuli, selected from the remaining stimuli that they were \textit{not} shown pre-treatment. If the respondent is assigned a headline-level treatment, this treatment is applied only to the misinformation stimuli, as flags and fact-checking labels are not generally applied to true information from verified sources.\footnote{The initial implementation of Twitter's labeling of coronavirus-related tweets with links to additional information was deemed to be overly broad, and was applied to some tweets that did not include misinformation. Twitter revised their labeling in late June of 2020. A company message was released on June 26: \url{https://twitter.com/TwitterSupport/status/1276661483561029632}. } For each of the stimuli we again ask the same self-reported sharing intention questions. 
+
+
+%\todo{SA: on the randomization of the pre-treatment exposures, we can reduce variance by pre-randomizing combinations of pre-treatment exposures and treatments to ensure balance; this is a form of stratification.  For example, we create a set of vectors of pre-treatment exposures and treatment assignments that have the desired proportions, and then randomly assign participants to a member of the set (without replacement) upon arrival.  As Guido and I discuss in our handbook chapter on experimental design, it is always better to plan an experiment to avoid balance problems than to adjust for them afterwards.}
 
 We code response to the self-reported interest questions as 1 if the respondent affirms and 0 otherwise. Let $M_i^a$ be the sum of respondent $i$'s pre-test responses to the \textit{misinformation} stimuli and let $T_i^a$ be the sum of respondent $i$'s pre-test responses to the \textit{true} informational stimuli. $M_i^b$ and $T_i^b$ are the respective post-treatment responses. Then $M_i^a, T_i^a, M_i^b, T_i^b \in {0,1,2, 3, 4}$. 
 %\todo{SA: the superscripts look like exponents.  Either change to letters or use double subscript, e.g. $M_{2,i}$.} 
@@ -267,10 +287,10 @@ Additionally, we measure secondary behavioral outcomes which allows us to furthe
 
 In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and at the end of the survey provide links to the \textit{true} information. For these true stimuli, we offer respondents the opportunity to actually share this information as a Facebook post, which has been created on our project Facebook page. We are able to measure whether respondents click on a button which opens a pop-up screen to share the post on Facebook, however, we cannot measure directly whether they then actually follow through to the second step and post the article on their own timeline. Consequently, we report only rates of clicking the initial share button. The response function here is measured as the percent of true stimili that the respondent said they wanted to share during the survey for which they later click the button to share on Facebook. (We do not differentiate between stimuli presented pre- and post- treatment here, since the behavioral response measurement for all stimuli is all post-treatment.) To provide some insight on the extent to which respondents followed up on an intention to share, we report the \textit{aggregate} number of times the associated post for each stimuli was shared. %We \textit{could} actually create a separate post for each treatment combination, and measure sharing that way, but this seems like overkill for a secondary outcome in an already complicated project.
 
-At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online and also offer them the opportunity to share these tips on their timeline or on messenger; we measure intention to share these tips and aggregate number of shares of tips by treatment condition as well. 
+At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online and also offer them the opportunity to share these tips on their timeline or on messenger; we measure intention to share these tips as click-through-rates and aggregate number of shares of tips by treatment condition as well. 
 
 
-\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, all types of post-test responses will be coded as zero.\footnote{An alternative approach to analysis in a pre-test/post-test design, accounting for missing data, would be to follow \cite{davidian2005semiparametric}'s implementation of estimators developed by \cite{robins1994estimation}.}\todo{Maybe for missing responses we pre-fill for sharing as 50\% for each?}
+\subsubsection{Attrition} We will include in analysis all respondents for whom we have collected complete pre-test responses. As treatment is not revealed at this point, attrition should be independent of treatment assignment conditional on covariates. For respondents who attrit after collection of pre-test responses and before collection of post-test responses, the post-test interest in sharing response function will be coded as identical to the individual pre-test value; for behavioral sharing outcomes, we impute zeros for click-through-rates.\footnote{An alternative approach to analysis in a pre-test/post-test design, accounting for missing data, would be to follow \cite{davidian2005semiparametric}'s implementation of estimators developed by \cite{robins1994estimation}.}
 
 
 \section{Hypotheses and Data Collection}
@@ -316,7 +336,8 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
 \begin{align}
   H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
 \end{align}
-\end{hypothesis}\todo{Add general thoughts about secondary hypotheses/ treatment effect heterogeneity here?}
+\end{hypothesis}
+%\todo{Add general thoughts about secondary hypotheses/ treatment effect heterogeneity here?}
 
 
 \subsection{Adaptive data collection}\label{adaptiveagent}
@@ -399,12 +420,12 @@ $w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
 %    \begin{equation}
 %     \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
 %    \end{equation} 
-  \item Fit an optimal depth\textcolor{red}{-two} policy tree:
+  \item Fit an optimal depth\textcolor{black}{-two} policy tree:
     \begin{align*}
       \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
       \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
       \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
-       \text{where } \Pi \text{ is the class of depth-\textcolor{red}{two} policy trees.}
+       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
   Store the policy. 
   \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment deterministically consistent with $\hat{\pi}_{x}$. 
@@ -432,12 +453,12 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
   \item Collect data by assigning treatment uniformly at random.
   \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
   \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-  \item Separating the data into $k$ folds, fit optimal depth\textcolor{red}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+  \item Separating the data into $k$ folds, fit optimal depth\textcolor{black}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
     \begin{align*}
       \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
        \sum_{i \in \mathcal{I}_{-k}}
       \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
-       \text{where } \Pi \text{ is the class of depth-\textcolor{red}{two} policy trees.}
+       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
 %% Point-wise optimal random forest  
 %  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
@@ -457,7 +478,7 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
 \end{enumerate}
 
 
-\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}\todo{SA: the covariate distributions may be a little different between the last batch and the rest of the batches, just due to sampling variation; one might mention that if they are, we might reweight the last batch so that the mean values of x’s are the same.  This is mainly an issue if the X’s are very important and the covariate space has high dimension.}
+\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}%\todo{SA: the covariate distributions may be a little different between the last batch and the rest of the batches, just due to sampling variation; one might mention that if they are, we might re-weight the last batch so that the mean values of x’s are the same.  This is mainly an issue if the X’s are very important and the covariate space has high dimension.}
 For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
 
 \begin{enumerate}
@@ -474,26 +495,25 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
    \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
 
-\subsubsection{Hypothesis testing}
+\subsection{Hypothesis testing}
 To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. 
 
-
-\textcolor{red}{Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluate split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity. }
+Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluaion split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
-\todo{Add factorial model?}
-%In addition to the policy tree, we estimate a factorial model
-% 
-%\begin{align*}
-%\hat{\mu}_w(X_{i}) & =
-%			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
-%			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
-%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}} +  \\
-%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
-%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}, \ell}.\numberthis
-%         \label{eq:linear_model_full}
-%\end{align*} 
+\subsection{Conditional means model}\label{ridge}
+For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report coefficient estimates from  a factorial conditional means model,
+ 
+\begin{align*}
+\hat{\mu}_w(X_{i}) & =
+			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
+			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
+			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
+			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}} +  \\
+			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}. \ell}.\numberthis
+         \label{eq:linear_model_full}
+\end{align*} 
 
 %\begin{align*}
 %\hat{\mu}_w(X_{i}) & =
@@ -503,8 +523,7 @@ The data collected from this study may be used for eventual application of a con
 %         \label{eq:linear_model_full}
 %\end{align*} 
 
-%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
-%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
+The model is estimated on the data from batches up to $B-1$, using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$; regularization is hierarchically constrained over two levels of penalties, so that the penalty on covariate coefficients, the $\hat{\beta}_{\ell}$ terms, is less than or equal to the penalty on interaction of treatments or interaction of treatment with covariates, the $\hat\beta_{w^{R,H}}$ and $\hat{\beta}_{w^{R,H}, \ell}$ terms.  
 
 \section{Simulations and design hyperparameters}\label{simulations}
 
@@ -512,17 +531,18 @@ The data collected from this study may be used for eventual application of a con
 
 To carry out implementation, the above description requires setting of several design hyperparameters, including total experiment size $N$, number of batches $B$,  size of first batch $|\mathcal{I}_1|$, size of last batch $|\mathcal{I}_B|$, and probability floor $p$. 
 
-We set these hyperparameters by learning from our pilot data of 1500 observations from each country. In the pilot data, treatment is assigned uniformly at random. We conduct the below simulations \textit{separately} for each country, meaning that we may end up with meaningfully different designs in the two countries. 
+We set these hyperparameters by learning from our pilot data of 1,500 observations from each country. In the pilot data, treatment is assigned uniformly at random. We conduct the below simulations \textit{separately} for each country, meaning that we may end up with meaningfully different designs in the two countries. 
 
 We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
 
 We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
 
-\paragraph{Data generating processes}\todo{Consider an approach to bootstrapping here, where we have a set of DGPs; potentially sample a smaller number, and do this a number of times.}
+\paragraph{Data generating processes} 
+The below procedures are bootstrapped 1,000 times. 
 \begin{enumerate}
 %\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
-\item  Sample $S=10,000$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
+\item  Sample $S=1,500$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
 \item Estimate heterogeneity ratios under each element of the vector of penalty factors:
 \begin{enumerate}
 \item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.\footnote{The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
@@ -558,19 +578,17 @@ We refer to the heterogeneity ``ratio'' as the ratio of the value of the best co
 \end{enumerate}
 
 \paragraph{Simulations}
-This then gives us four conditional mean models. We then generate data from these models by:
-\begin{enumerate}
-\item  Sampling covariates from the empirical distribution from the pilot data and assigning response as the conditional mean + a noise term, where the noise term is based on the mean error between the fitted model and the pilot data, estimated separately for each treatment. 
-\item We run a series of simulated experiments using data from each of the DGPs, randomly applying hyperparameters from Table~\ref{tab:design} so that we have 500 iterations of experiments run under each unique combination of design hyperparameters for each DGP. 
-\end{enumerate}
+This then gives us four conditional mean models for \textit{each} bootstrap iteration. We then generate data from these models by sampling covariates from the empirical distribution from the pilot data and assigning response as the conditional mean from a given DGP + a noise term, where the noise term is based on the mean error between the fitted model and the pilot data, estimated separately for each treatment. 
+
+We run a series of simulated experiments using synthesized data from each of the DGPs, randomly applying hyperparameters from Table~\ref{tab:design}. 
 
 
 \paragraph{Hyperparameter choice}
 Our objective in selecting design hyperparameters is to optimize power for Hypothesis~\ref{eq:optctr}, while minimizing the size of the experiment and the number of batches. From the simulations we should be able to learn about power conditional on each combination of design hyperparameters. Our decision rule is as follows:
 \begin{enumerate}
-\item Estimate power for Hypothesis~\ref{eq:optctr} under each unique combination of design hyperparameters for each DGP. Take the average power across DGPs, conditional on each unique set of design hyperparameters. \todo{Consider subsetting to those where power is greater than 0.85 (we have some uncertainty) and/or otherwise consider \textit{distributions} across bootstrapped DGPs. }
-\item If there is one or fewer combinations of design hyperparameters with average power $\ge.8$, select the set of design hyperparameters which optimizes Hypothesis~\ref{eq:optctr}. To break ties, select the set with smallest experiment size, or, if of equal size, select with smallest number of batches. If experiment size and batch size are equal, select randomly. 
-\item If there is more than one combination of design hyperparameters with average power $\ge.8$, constrain choices to only those sets with average power $\ge.8$. Then constrain choices to only those sets with the smallest experiment size, and then to the smallest number of batches. Among the remaining sets, optimize for power of Hypothesis~\ref{eq:optctr}. To break ties, select randomly. 
+\item Estimate average power for Hypothesis~\ref{eq:optctr} under each unique combination of design hyperparameters, averaging across DGPs. 
+\item If there is one or fewer combinations of design hyperparameters with average power $\ge.85$, select the set of design hyperparameters which optimizes Hypothesis~\ref{eq:optctr}. To break ties, select the set with smallest experiment size, or, if of equal size, select with smallest number of batches. If experiment size and batch size are equal, select randomly. 
+\item If there is more than one combination of design hyperparameters with average power $\ge.85$, constrain choices to only those sets with average power $\ge.8$. Then constrain choices to only those sets with the smallest experiment size, and then to the smallest number of batches. Among the remaining sets, optimize for power of Hypothesis~\ref{eq:optctr}. To break ties, select randomly. 
 \end{enumerate}
 
 \begin{table}[H]
@@ -602,6 +620,8 @@ The ensure the robustness of our adaptive design, we consider performance of our
 We simulate effect sizes that are equivalent to 0.6 in the scale of our response function. This would be the effect if respondents decreased their propensity to share misinformation stimuli by .1, and increased their propensity to share true information stimuli by .1. This is the magnitude of the average effect for the \textit{most effective treatment arm} within each group as compared to the control condition. Consequently, this is also the average treatment effect for the best contextual policy relative to the control. The average treatment effect for the best fixed policy then changes with heterogeneity ratios and relative group sizes, but it is strictly less than 0.6. 
 
 We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where a measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
+
+A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}
 
 \FloatBarrier
 \subsection{Overall power}
@@ -999,7 +1019,8 @@ For a given dataset, we estimate conditional means under each treatment conditio
 \item For observation not assigned $w$, calculate $\hat\mu_w(X_i, W_i \neq w)$ using regression forest predictions from the model in step 1. 
 \end{enumerate}
 
-\subsection{Adaptively weighted doubly-robust estimation} \todo{Add appropriate reference to LFO paper.}\label{appendix:DRlfo}
+\subsection{Adaptively weighted doubly-robust estimation} %\todo{Add appropriate reference to LFO paper.}
+\label{appendix:DRlfo}
 For adaptively collected data, we use doubly robust scores as in (\ref{eq:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates. This means that in each batch we estimate the nuisance components only using data up to and including the current batch. 
 
 To estimate conditional means, we follow the steps above in \ref{appendix:grf}, with minor adjustments. For each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:
@@ -1038,6 +1059,49 @@ w_i^* =  \argmax_w \ \hat{V}_{i-1}({\pi}_{w})
 \end{enumerate}
 
 
+\section{Pre-experimental simulation DGP}\label{appendix:dgp}
+
+Objective for DGPs:
+\begin{itemize}
+    \item Create multiple clusters, where distributions of covariates are different across clusters
+    \item Each cluster has a different arm that produces highest reward
+    \item Generate "lumpy" reward functions that cannot be straightforwardly recovered by a linear model
+    \item Allow levers to move:
+    \begin{itemize}
+        \item number of covariates used to define clusters
+        \item relative size of clusters
+        \item \textit{Heterogeneity ratio} (value of best contextual/best fixed policy)
+    \end{itemize} 
+\end{itemize}
+
+Requirements for DGPs:
+\begin{itemize}
+    \item The difference between the best contextual policy \& the control is fixed across DGPs
+    \begin{itemize}
+        \item[$\rightarrow$] Differences in power curves between DGPs are based on ability of agent to learn the DGP, not differences in effect sizes
+    \end{itemize}
+    \item The best fixed arm is always the same arm across DGPs
+\end{itemize}
+
+\textbf{Generate Baseline Dataset ($N = 10000, p = 15$)}
+\begin{itemize}
+    \item Parameter \begin{itemize}
+        \item Number of useful covariates $p' \in \{3, 5, 10\}$
+        \item Largest cluster size ratio $c \in \{0.4, 0.6, 0.8\}$
+        \item Heterogeneity ratio $h \in \{1.05, 1.5, 1.95\}$
+    \end{itemize}
+    \item Generate large covariate matrix $X$ using correlated multivariate normal distribution, covariance matrix generated from $\frac{Beta(2,2) - 0.5}{2}$
+    \item Use iterative KNN to group covariates observed into $k = 3$ clusters with cluster size [$N*c, \frac{N * (1-c)}{2}, \frac{N * (1-c)}{2}$], where $c$ = largest cluster size ratio
+\end{itemize}
+
+\textbf{Reward Generation}
+\begin{itemize}
+    \item Generate reward for best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best, i}, c_i} = 0.6 - X_{1, c_i}$$
+    \item Reward for 2nd best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best_2, i}, c_i} = R_{w_{best, i}, c_i} + \epsilon $$ where $\epsilon \sim \mathcal{N}(\mu, 0.01), \mu <= 0$. 
+    \item Reward for the rest of the arm
+    $$R_{w, c_i} = -X_{1, c_i} \mbox{ for }  w \not\in \{w_{best, i}, w_{best_2, i}\}, i = 1, .., 3,$$
+    \item We vary $\mu$ to search for the level of desired heterogeneity ratio $h$.
+\end{itemize}
 
 
 \end{document}
