@@ -94,7 +94,7 @@ This work builds on the experimental literature on combating fake news in severa
 \section{Case Selection and Stimuli}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on \href{https://www.facebook.com/business/insights/tools/audience-insights?ref=ens_rdr}{Facebook's advertising platform}). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language fact-checks increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are centers of factchecking activity on the continent.\footnote{The size of the circles in Figure \ref{fig:poynter} is a function of both the supply of misinformation and the prevalence of fact-checking resources in these countries. While other countries on the continent may have more misinformation circulating with fewer fact checkers, our study requires a set of stimuli that have been fact-checked and therefore we chose Kenya and Nigeria as countries with major sources of checked coronavirus misinformation.}  Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. %\todo{SA: First para of section 2, it is not clear what it means for a country to be a main fact check source.  It is a source of misinformation, or a source of truth?  Clarify.}
+We examine these questions using a study focused on online social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on \href{https://www.facebook.com/business/insights/tools/audience-insights?ref=ens_rdr}{Facebook's advertising platform}). Misinformation and fake news are major problems in these countries. AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language ``fact-checks'' (i.e., publicly spread pieces of information deemed false or misleading by fact-checking organizations) increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified coronavirus-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are centers of fact-checking activity on the continent.\footnote{The size of the circles in Figure \ref{fig:poynter} is a function of both the supply of misinformation and the prevalence of fact-checking resources in these countries. While other countries on the continent may have more misinformation circulating with fewer fact checkers, our study requires a set of stimuli that have been fact-checked and therefore we chose Kenya and Nigeria as countries with major sources of checked coronavirus misinformation.}  Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. %\todo{SA: First para of section 2, it is not clear what it means for a country to be a main fact check source.  It is a source of misinformation, or a source of truth?  Clarify.}
 
 \begin{figure}[!htb]
 \centering
@@ -202,7 +202,7 @@ We vary whether the pledge is made in private (within the chatbot) or in public 
 \subsection{Covariates}
 
 Covariate measurement plays an important role in our contextual adaptive experiment. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}; the full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.)
-The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``...not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in an individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
+The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``\dots not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in an individual's susceptibility to misinformation ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
 
 Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation? 
 
@@ -227,7 +227,7 @@ In addition to the demographic covariates commonly used in social science resear
 %\textbf{Predictions about covariates/heterogeneity:}\todo{@Molly do you think we should include this kind of thing here?}\todo{@Leah, I would if anything put a few of these in a paragraph form, and say, "However, our objective is to learn an optimal policy conditional on covariates, and not to determine which covariates matter, and by how much. For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity." What do you think?}
 %\textcolor{red}{
 %\begin{enumerate}
-%\item At a high level, we expect to see results such as individuals with low digital media literacy will be most affected by the respondent-level false news video training combined with the factcheck headline treatment. Younger respondents who have a high level of concern about COVID-19 will be most affected by the pledge treatment combined with the related articles or factcheck headline treatments.
+%\item At a high level, we expect to see results such as individuals with low digital media literacy will be most affected by the respondent-level false news video training combined with the fact-check headline treatment. Younger respondents who have a high level of concern about COVID-19 will be most affected by the pledge treatment combined with the related articles or fact-check headline treatments.
 %\item Individuals who are more literate with respect to digital media will be most affected by the headline-level treatments. We also expect more educated and less religious individuals to be more influenced by these treatments.
 %\item More educated and less religious individuals will be less influenced by our accuracy nudge or deliberation nudge treatments.
 %\item Emotion suppression and accuracy nudge treatments will be more effective for low CRT and older respondents.
@@ -499,9 +499,9 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 \end{enumerate}
 
 \subsection{Hypothesis testing}
-To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. 
+To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. To account for the possibility that covariate distributions may differ between the first and last on-policy split of the data, we will also report results when the last split is reweighted by the relative probability that a given observation was observed in the on-policy split as compared to the adaptively collected split, as predicted by a random forest model using all covariates. 
 
-Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluaion split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
+Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
@@ -625,7 +625,8 @@ We simulate effect sizes that are equivalent to 0.6 in the scale of our response
 
 We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where a measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
 
-A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}
+A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. 
+
 \FloatBarrier
 \subsection{Overall power}
 These simulations provide justification for the choice of design hyperparameters described in Table~\ref{tab:design}. We see that in many of the settings below, the adaptive algorithm achieves power of 0.8 before the random design. However, this is not always the case, and careful choice of design hyperparameters as described in Section~\ref{simulations} will help us to optimize for power. In the figures below, we marginalize over the choice of design hyperparameters; we then consider each hyperparameter in turn. 
@@ -1081,30 +1082,33 @@ Requirements for DGPs:
 \begin{itemize}
     \item The difference between the best contextual policy \& the control is fixed across DGPs
     \begin{itemize}
-        \item[$\rightarrow$] Differences in power curves between DGPs are based on ability of agent to learn the DGP, not differences in effect sizes
+        \item[$\Rightarrow$] Differences in power curves between DGPs are based on ability of agent to learn the DGP, not differences in effect sizes
     \end{itemize}
-    \item The best fixed arm is always the same arm across DGPs
+    \item The best fixed arm is always the same arm across DGPs (In the simulations, arm 0 is chosen as the best arm for the largest cluster. It is also chosen as the 2nd best arm for the other two clusters to ensure it is the best-fixed policy.)
 \end{itemize}
 
-\textbf{Generate Baseline Dataset ($N = 10000, p = 15$)}
+
+\textbf{Generate Baseline Dataset ($N = 10,000, p = 15$)}
 \begin{itemize}
     \item Parameter \begin{itemize}
-        \item Number of useful covariates $p' \in \{3, 5, 10\}$
+        \item Number of useful covariates $p' \in \{3, 5, 10\}$ (i.e., covariates used to determine cluster membership)
         \item Largest cluster size ratio $c \in \{0.4, 0.6, 0.8\}$
         \item Heterogeneity ratio $h \in \{1.05, 1.5, 1.95\}$
     \end{itemize}
-    \item Generate large covariate matrix $X$ using correlated multivariate normal distribution, covariance matrix generated from $\frac{Beta(2,2) - 0.5}{2}$
+    \item Generate large covariate matrix $\X'$ using correlated multivariate normal distribution, covariance matrix generated from $\frac{Beta(2,2) - 0.5}{2}$, where the dimension is $N \times p'$. We then add $p - p'$ columns of noise generated using a standard normal distribution to form the full covariate matrix $\X$.
     \item Use iterative KNN to group covariates observed into $k = 3$ clusters with cluster size [$N*c, \frac{N * (1-c)}{2}, \frac{N * (1-c)}{2}$], where $c$ = largest cluster size ratio
 \end{itemize}
 
 \textbf{Reward Generation}
 \begin{itemize}
-    \item Generate reward for best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best, i}, c_i} = 0.6 - X_{1, c_i}$$
-    \item Reward for 2nd best arm for each cluster $c_i,  i = 1, .., 3$, $$R_{w_{best_2, i}, c_i} = R_{w_{best, i}, c_i} + \epsilon $$ where $\epsilon \sim \mathcal{N}(\mu, 0.01), \mu <= 0$. 
-    \item Reward for the rest of the arm
-    $$R_{w, c_i} = -X_{1, c_i} \mbox{ for }  w \not\in \{w_{best, i}, w_{best_2, i}\}, i = 1, .., 3,$$
+   \item We generate rewards only relying on the first column of the covariate matrix $\X$, denoted as $X_1$
+    \item Generate reward for best arm $w_{best}$ for each cluster $c_i,  \ i = 1, \dots, 3$, \[R_{w_{best, i}, c_i} = 0.6 - X_{1, c_i}\]
+    \item Reward for 2nd best arm, $w_{best_2}$ for each cluster $c_i,  i = 1, \dots, 3$, where we vary $\mu$ to search for the level of desired heterogeneity ratio $h$
+    $$R_{w_{best_2, i}, c_i} = R_{w_{best, i}, c_i} + \epsilon_R $$ where $\epsilon_R \sim \mathcal{N}(\mu, 0.01), -0.6 \le \mu \le 0$. 
+    \item Rewards for the rest of the arms
+    $$R_{w, c_i} = -X_{1, c_i} \mbox{ for }  w \not\in \{w_{best, i}, w_{best_2, i}\}, i = 1, \dots, 3.$$
     \item We vary $\mu$ to search for the level of desired heterogeneity ratio $h$.
+        \item[$\Rightarrow$] Cluster membership defines groups over which there is heterogeneity, and we also have a separate lever to move the magnitude of the heterogeneity in treatment effects, which comes from how we vary the noise reward $\epsilon_R$ to add to the 2nd best arm. 
 \end{itemize}
-
 
 \end{document}
