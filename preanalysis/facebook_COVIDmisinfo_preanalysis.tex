@@ -1048,7 +1048,7 @@ We are interested in learning and evaluating the best fixed policy. However, if 
 \E[\max(X_1, \dots, X_N)] \ge \max(\E[X_1],\dots, \E[X_N]). 
 \end{align*}
 
-To address this concern, we consider instead a \textit{random} best fixed policy. 
+To address this concern, we consider instead a \textit{random} best fixed policy. We use only IPW scores, \textit{not} the doubly robust scores, to avoid the additional dependence in estimates produced by conditional means model. 
 \begin{enumerate}
 \item For each observation $i>1$ in the experiment, we calculate the value of fixed policies as the average of scores up to time $i-1$. 
 \begin{align*}
