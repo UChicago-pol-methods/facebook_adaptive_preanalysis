@@ -1,8 +1,8 @@
-\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+%\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
 % The next three lines are temporary, for todo notes, remove after notes are removed
-%\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
-%\setlength{\marginparwidth}{4.5cm}
-%\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
+\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+\setlength{\marginparwidth}{4.5cm}
+\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
@@ -207,7 +207,7 @@ The motivation for this \textit{contextual} adaptive experiment comes from the w
 Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individual's receptivity to interventions to combat the spread of misinformation? 
 
 
-In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
+In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. The full list of covariates and question wording is in Appendix~\ref{appendix:covariates}. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. %For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
 
 
 
@@ -332,14 +332,28 @@ Our primary hypothesis is that we are able to estimate from the data an optimal 
 \end{hypothesis}
 This is the hypothesis that we aim to optimize power for in our adaptive data collection. 
 
-We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
+
+\todo{Note changes in hypotheses. Targeting best fixed policy seems to be causing a lot of coding problems--and is a more relevant problem for Toronto project anyhow. So I removed it. It also seems that we are going to have a hard time getting around secondary hypotheses about heterogeneity, so proposing one here. Anything you want to formally test around party?}
+We test a secondary hypothesis regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
+
   \begin{hypothesis}
-  The best contextual policy that can be estimated from the data achieves higher value than the best fixed policy, i.e., the fixed policy with the highest associated value. 
+Age will moderate treatment effect of the factcheck headline treatment relative to the control, as compared to respondents of below median age. 
   \label{eq:optmax}
-\begin{align}
-  H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
-\end{align}
+  \begin{align*}
+  H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \\
+   H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] \neq \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \numberthis
+\end{align*}
 \end{hypothesis}
+We note that because we do \textit{not} optimize for power for this hypothesis in our design, if the fact-check headline does not perform particularly well, it may be assigned to very few respondents. In that case, we will not be well powered to test this hypothesis, and failure to reject the null may largely speak to a design under-powered for this test. 
+
+%We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
+%  \begin{hypothesis}
+%  The best contextual policy that can be estimated from the data achieves higher value than the best fixed policy, i.e., the fixed policy with the highest associated value. 
+%  \label{eq:optmax}
+%\begin{align}
+%  H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
+%\end{align}
+%\end{hypothesis}
 %\todo{Add general thoughts about secondary hypotheses/ treatment effect heterogeneity here?}
 
 
@@ -415,7 +429,7 @@ Observations are weighted according to standard inverse probability weights usin
 $w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
 \end{enumerate}
 
-\item For the final batch,  $b = $ B, collect data on-policy:
+\item For the final batch,  $b = $ B, collect data on-policy + $\epsilon$ uniform random assignment:
 \begin{enumerate}
   \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. 
 %$ Point-wise optimal policy
@@ -427,11 +441,11 @@ $w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
     \begin{align*}
       \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
       \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
-      \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
+      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot}) \rangle \\
        \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
   Store the policy. 
-  \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment deterministically consistent with $\hat{\pi}_{x}$. 
+  \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment consistent with $\hat{\pi}_{x}$ + $\epsilon$ uniform random assignment. 
 \end{enumerate}
 \end{enumerate}
 
@@ -460,7 +474,7 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
     \begin{align*}
       \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
        \sum_{i \in \mathcal{I}_{-k}}
-      \langle \pi(X_{i}), \widehat{\Gamma}_{i, \cdot}) \rangle \\
+      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot}) \rangle \\
        \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
 %% Point-wise optimal random forest  
@@ -475,7 +489,7 @@ For randomly collected data, as in the pilot, we conduct policy learning and eva
       %% Point-wise optimal random forest  
       % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
 					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
-          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \widehat{\Gamma}_{i, \cdot} \rangle
+          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
           \end{align*}
    \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
@@ -488,12 +502,13 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 \item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
 \item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\xi_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
 \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-\item We have already fitted and stored an optimal policy to conduct the on-policy evaluation in the final batch $B$ of the adaptive experiment. 
-  \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
+\item We have already fitted and stored an optimal policy to conduct the (nearly) on-policy evaluation in the final batch $B$ of the adaptive experiment. 
+  \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. %We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
           \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w} \\
                      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{i \in \mathcal{I}_{B} }
-                      Y_i  
+%                      Y_i  \\
+          \langle \hat{\pi}_{opt}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
     \end{align}
    \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
@@ -501,11 +516,12 @@ For adaptively collected data, as in the simulations discussed in Section~\ref{s
 \subsection{Hypothesis testing}
 To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors of the policies using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. To account for the possibility that covariate distributions may differ between the first and last on-policy split of the data, we will also report results when the last split is reweighted by the relative probability that a given observation was observed in the on-policy split as compared to the adaptively collected split, as predicted by a random forest model using all covariates. 
 
+We report average outcomes under each headline factor level and separately respondent factor level, marginalizing over an equal distribution of levels of the other factor. We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. 
+
+\subsubsection{Treatment effect heterogeneity}
 Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
-We report average outcomes under each headline factor level and separately respondent factor level, marginalizing over an equal distribution of levels of the other factor. We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. 
-
-To test hypotheses regarding specific heterogeneous treatment effects, e.g., that the headline ``Related articles'' treatment is more effective for those with above vs. below median digital literacy, we would again average across the relevant scores, marginalizing over an equal distribution of levels of the respondent factor, and would compare estimates across the two groups. 
+To test hypotheses regarding specific heterogeneous treatment effects, e.g., that the headline ``Fact-check'' treatment is more effective for those with above vs. below median age, we again average across the relevant scores, marginalizing over an equal distribution of levels of the respondent factor, and compare estimates across the two groups. \todo{Note that we say the factors are equal here, because comparing the two groups, the distributions might not be the same.}
 
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
@@ -723,12 +739,12 @@ In the adaptive algorithm, we use explore randomly in the first batch. A larger 
 
 
 \subsection{Varying last batch size}
-In the adaptive algorithm, we use the last batch for on-policy evaluation. Allowing more time for exploration may allow us to learn a higher-value optimal policy, but a larger last batch means more precise estimation of the policy estimated. The random algorithm does no last-batch on-policy evaluation, but evaluates off-policy over the duration of the experiment. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
+In the adaptive algorithm, we use the last batch for (nearly) on-policy evaluation. Allowing more time for exploration may allow us to learn a higher-value optimal policy, but a larger last batch means more precise estimation of the policy estimated. The random algorithm does no last-batch on-policy evaluation, but evaluates off-policy over the duration of the experiment. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/power_against_control_policy_final_batch_prop.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent the proportion of the experiment assigned on-policy in the last batch.}
+\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent relative size of the last batch used for near on-policy assignment. }
 \label{fig:power_control_final_batch_prop}
 \end{figure}
 
@@ -794,7 +810,8 @@ After clicking on the ad, respondents are directed to the Chatbot (Figure \ref{f
 \subsection{Covariates}\label{appendix:covariates}
 \input{covariates_longform.tex}
 
-In all analyses, we include the pre-test response strata and indicators for individual stimuli.
+In all analyses, we include the pre-test response strata for true and false stimuli and indicators for individual stimuli.\todo{Ok to combine these?} 
+For some continuous covariates, such as education, we include an indicator flag if the respondent skipped the question. For some, such as the Digital Literacy Index or the Cognitive Reflection Test, we we code the index as 0 if the respondent chose not to answer any of the questions. 
 
 \subsection{Survey Instrument}\label{appendix:survey}%\todo{Check for update to public-facing survey instrument.}
 The survey script is available at this link:\\
@@ -858,7 +875,7 @@ AFP Fact Check
 
 \subsubsection{Accuracy and Deliberation Nudge Treatments}\label{sec:nudge}
 
-For both the accuracy and deliberation nudge treatments, respondents will see the below placebo headline and asked the nudge question about it.For the accuracy nudge respondents are asked to think about whether the headline is true. The deliberation nudge asks respondents to think about why they would either choose to share or not share this headline.
+For both the accuracy and deliberation nudge treatments, respondents will see the below placebo headline and asked the nudge question about it. For the accuracy nudge respondents are asked to think about whether the headline is true. The deliberation nudge asks respondents to think about why they would either choose to share or not share this headline.
 
 \begin{figure}[htb]
 \centering
