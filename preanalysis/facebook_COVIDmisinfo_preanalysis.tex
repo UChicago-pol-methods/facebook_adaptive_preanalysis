@@ -345,7 +345,7 @@ Age will moderate treatment effect of the factcheck headline treatment relative 
    H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] \neq \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \numberthis
 \end{align*}
 \end{hypothesis}
-We note that because we do \textit{not} optimize for power for this hypothesis in our design, if the fact-check headline does not perform particularly well, it may be assigned to very few respondents. In that case, we will not be well powered to test this hypothesis, and failure to reject the null may largely speak to a design under-powered for this test. \todo{Rather than partisanship maybe add something based on religiosity - e.g. religiosity (belief + practice) will moderate treatment effect of real info treatment?}
+We note that because we do \textit{not} optimize for power for this hypothesis in our design, if the fact-check headline does not perform particularly well, it may be assigned to very few respondents. In that case, we will not be well powered to test this hypothesis, and failure to reject the null may largely speak to a design under-powered for this test. \todo{Rather than partisanship maybe add something based on religiosity - e.g. religiosity (belief + practice) will moderate treatment effect of real info treatment?} %LR: thinking is that "true believers" might be less influenced by "there is no cure" statement 
 
 %We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
 %  \begin{hypothesis}
@@ -635,7 +635,7 @@ Probability floor (p)& [0.1, 0.15, 0.2]$\times 1/ |\ww|$ \\
 
 
 \section{Power Calculations}
-The ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions with hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
+To ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions with hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
 \begin{itemize}
 \item \textbf{Relative size of the groups.} We allow the largest group to be 0.4, 0.6, and 0.8 share of the underlying population, with the two remaining groups approximately equally sized
 \item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership, over 3, 5, and 10 covariates. 
@@ -644,7 +644,7 @@ The ensure the robustness of our adaptive design, we consider performance of our
 
 We simulate effect sizes that are equivalent to 0.6 in the scale of our response function. This would be the effect if respondents decreased their propensity to share misinformation stimuli by .1, and increased their propensity to share true information stimuli by .1. This is the magnitude of the average effect for the \textit{most effective treatment arm} within each group as compared to the control condition. Consequently, this is also the average treatment effect for the best contextual policy relative to the control. The average treatment effect for the best fixed policy then changes with heterogeneity ratios and relative group sizes, but it is strictly less than 0.6. 
 
-We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where a measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
+We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where their measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
 
 A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. 
 
@@ -707,7 +707,7 @@ We include probability floors in the adaptive algorithm. In the random algorithm
 
 
 \subsection{Varying first batch size}
-In the adaptive algorithm, we use explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but reduces our ability to exploit promising arms. The random algorithm has no set first batch. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
+In the adaptive algorithm, we explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but reduces our ability to exploit promising arms. The random algorithm has no set first batch. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
 
 \begin{figure}[H]
 \centering
