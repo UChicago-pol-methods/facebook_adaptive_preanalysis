@@ -334,7 +334,7 @@ This is the hypothesis that we aim to optimize power for in our adaptive data co
 We test two secondary hypotheses regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
 
   \begin{hypothesis}
-Median age will moderate treatment effect of the factcheck headline treatment relative to the control. 
+Age will moderate treatment effect of the factcheck headline treatment relative to the control. 
   \label{eq:age}
   \begin{align*}
   H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \\
@@ -347,14 +347,14 @@ We note that because we do \textit{not} optimize for power for this hypothesis i
 
 Additionally, we test whether religiosity, as measured by frequency of attendance of religious services, moderates response to the real information headline treatment. In the real information treatment, we explicitly state that there is \textit{no proven cure} for COVID-19. We hypothesize that religiosity will \textit{negatively} correlate with response to this treatment. 
  \begin{hypothesis}
-Median religiosity will moderate treatment effect of the real information headline treatment relative to the control. 
+Religiosity will moderate treatment effect of the real information headline treatment relative to the control. 
   \label{eq:age}
   \begin{align*}
   H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Religiosity] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Religiosity] \\
    H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Religiosity] \le \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Religiosity] \numberthis
 \end{align*}
 \end{hypothesis}
-Again, we note that the adaptive design constrains our power for this test in the case that the real information treatment is relatively ineffective for either subgroup.  
+Again, we note that the adaptive design constrains our power for this test in the case that the real information treatment is relatively ineffective for either subgroup, and we consequently have only small sample size for this treatment in those groups.  
 
 %We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
 %  \begin{hypothesis}
