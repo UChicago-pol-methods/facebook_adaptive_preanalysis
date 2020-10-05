@@ -4,6 +4,7 @@
 \setlength{\marginparwidth}{4.5cm}
 \usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 
+\usepackage{soul} % for highlighting
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \tikzset{%
@@ -50,7 +51,7 @@ Alongside the outbreak of the novel coronavirus, an “infodemic” of myths and
 Alongside the outbreak of the novel coronavirus (SARS-CoV-2), much of the world's population is also experiencing an ``infodemic'' -- the spread of misinformation related to the virus. COVID-19 misinformation spreading on social media platforms covers a range of topics including rumors about the origin of the virus, government activities, scam opportunities for aid, and hoax cures. In some places, citizens even remain in disbelief and denial that the virus exists \citep{mwaura2019why-some}. 
 
 %  covid misinfo spreading! / shared
-Much like the actual virus, COVID-19 misinformation is not bounded by state borders. Though the infection rate ($R_0$) of these falsities is difficult to calculate, if the spread follows the trajectory of other types of online information, COVID-19 \textit{mis}information may spread faster and farther than true information \citep{vosoughi2018spread}. For instance, misinformation about the Zika virus was three times more likely to be shared on social media than verified information on several social media sites \citep{sharma2017zika}. Indeed, recent research on COVID-19 conspiracy theories suggests that these stories had a higher virality than neutral or debunking stories \citep{HKS_whatsapp}. %
+Much like the actual virus, COVID-19 misinformation is not bounded by state borders. If the spread of COVID-19 misinformation follows the trajectory of other types of online information, false information may spread faster and farther than true information \citep{vosoughi2018spread}. For instance, misinformation about the Zika virus was three times more likely to be shared on social media than verified information on several social media sites \citep{sharma2017zika}. Indeed, recent research on COVID-19 conspiracy theories suggests that these stories had a higher virality than neutral or debunking stories \citep{HKS_whatsapp}. %
  
 
 % infodemic - why it matters --> real consequences
@@ -86,13 +87,15 @@ Using a contextual adaptive experimental design, we sequentially assign treatmen
 % how we build on existing lit
 This work builds on the experimental literature on combating fake news in several important ways. First, we examine several prominent interventions that have proven successful in other studies and in other settings using an adaptive design to learn the best intervention policy. Second, we explicitly allow for heterogeneity among individuals' susceptibility to misinformation and reaction to the interventions. We explore aspects of individuals' profiles beyond partisanship and cognitive reflection to also explore whether religiosity, digital media literacy, and other covariates influence the effectiveness of different treatments. Finally, we bring comparative data to a global problem. Despite the global nature of the ``infodemic,'' much of the existing research has been focused on the Global North, particularly the United States \citep{pennycook2020fighting, bursztyn2020misinformation}.\footnote{Two recent exceptions from sub-Saharan Africa include a field experiment in Zimbabwe using Whatsapp messages from a trusted NGO  to counter COVID misinformation \citep{bowles2020center} and a recent survey among traders in Lagos, Nigeria looking at the correlates of belief in COVID-related misinformation \citep{Grossman2020}.} This pre-analysis plan describes the research design, outlines the key hypotheses that we will evaluate, and details our approach to analysis.
 
-
+\hl{We believe that insights gleaned from this experiment will both contribute to generalized knowledge about how to combat the spread of online misinformation and lay a path forward for further exploration of mechanisms. Firstly, our results will help researchers and decision-makers in technology companies and governments to design interventions aimed at combating the spread of COVID-19 misinformation in Kenya and Nigeria - two major producers and consumers of online information in their respective regions of East and West Africa. Secondly, our findings also provide insights into more general knowledge about the way online social media users interact with information and these kinds of interventions frequently used by industry and researchers. Finally, we view this study as a hypothesis-generating exercise and we plan to use the results we obtain with respect to heterogeneity to design future experiments for further explorations of mechanisms, to better understand \textit{why} particular interventions are more successful among certain subgroups.}
 
 
 \section{Case Selection and Stimuli}
 % Why kenya + Nigeria?
 
-We examine these questions using a study focused on social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on the audience insights tool on Facebook's advertising platform). AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language ``fact-checks'' (i.e., publicly spread pieces of information deemed false or misleading by fact-checking organizations) increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified COVID-related information.  Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are centers of fact-checking activity on the continent.\footnote{The size of the circles in Figure \ref{fig:poynter} is a function of both the supply of misinformation and the prevalence of fact-checking resources in these countries. While other countries on the continent may have more misinformation circulating with fewer fact checkers, our study requires a set of stimuli that have been fact-checked and therefore we chose Kenya and Nigeria as major sources of checked coronavirus misinformation.}  Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. %\todo{SA: First para of section 2, it is not clear what it means for a country to be a main fact check source.  It is a source of misinformation, or a source of truth?  Clarify.}
+We examine these questions using a study focused on social media users in two major English-language hubs of online communication in sub-Saharan Africa, Kenya and Nigeria.  Collectively, Facebook estimates there are 30-35 million Facebook users who are 18 years and older from these two countries (as reported on the audience insights tool on Facebook's advertising platform). AfricaCheck.org, a third party verification site, has offices in both countries and has recently created pages devoted to coronavirus-related misinformation circulating online. From January to March, the number of English-language ``fact-checks'' (i.e., publicly spread pieces of information deemed false or misleading by fact-checking organizations) increased by more than 900\% worldwide \citep{brennen2020types}, demonstrating the prevalence of this kind of content and the availability of verified COVID-related information. Figure \ref{fig:poynter} illustrates the volume of fact checks that appear in \url{poynter.org}'s global coronavirus facts database, which demonstrates that Kenya and Nigeria are centers of fact-checking activity on the continent.\footnote{The size of the circles in Figure \ref{fig:poynter} is a function of both the supply of misinformation and the prevalence of fact-checking resources in these countries. While other countries on the continent may have more misinformation circulating with fewer fact checkers, our study requires a set of stimuli that have been fact-checked and therefore we chose Kenya and Nigeria as major sources of checked coronavirus misinformation.}  Thus, there is a large database of verified information from which we can draw stimuli for our experiment in these two countries. %\todo{SA: First para of section 2, it is not clear what it means for a country to be a main fact check source.  It is a source of misinformation, or a source of truth?  Clarify.}
+
+
 
 \begin{figure}[!htb]
 \centering
@@ -332,6 +335,49 @@ This is the hypothesis that we aim to optimize power for in our adaptive data co
 
 
 We test two secondary hypotheses regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
+
+\subsubsection{Heterogeneous treatment effects}
+
+\hl{While our main goal is to learn the best contextual policy - and see how this policy influences different types of people, we also care about the outcome (reducing the spread of COVID-19 misinformation). Therefore, we also plan to examine how a few select treatments interact with particular covariates of interest. We do this in two ways - first by testing industry-motivated hypotheses and second by testing theoretically-motivated hypotheses, as described below.}
+
+\hl{\textbf{Industry-motivated hypotheses:}}
+We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or in the past were, being implemented by social media companies including Facebook and Twitter. These covariates were also selected as those in which social media companies collect or have access to and could more easily target on the basis of. For our covariates of interest we will divide these into two groups for any binary variables (i.e. gender) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). Given that testing these treatments x covariates will result in 5 (treatments) x 6 (covariate subgroup) tests, we will adjust for multiple hypothesis testing using bonferroni corrections.\todo{@Molly - pls adjust to your preferred method of mult. hypothesis adjustment!} 
+
+
+\textbf{Treatments:}
+\begin{itemize}
+\item Facebook tips (respondent)
+\item AfricaCheck tips (respondent)
+\item Factcheck (headline)
+\item More information (headline)
+\item Related articles (headline)
+\end{itemize}
+
+\textbf{Covariates:}
+\begin{itemize}
+\item Age
+\item Gender
+\item Education
+\end{itemize}
+
+We hypothesize that the three headline-level treatments listed above will perform better among more educated respondents and among women, compared to the less educated and men. We expect that the two respondent-level treatments will reduce sharing of misinformation more among less-educated respondents than those with more education. \textcolor{red}{To evaluate these hypotheses we will marginalize over all other treatments.}\footnote{After collecting pilot data we will submit an updated preanalysis plan in which we will specify and formalize exactly how we plan to test these hypotheses.}
+
+
+\hl{\textbf{Theory-motivated hypotheses:}}
+
+
+\hl{\textbf{Best respondent and headline-level treatments:}} In addition to the above heterogeneous treatment hypotheses. We also plan to test heterogeneity with respect to the best performing respondent-level and headline-level treatments, marginalizing over a balanced distribution of the other factors - again taking the median as the splitting point of continuous covariates: 
+
+Specifically, we will test:
+\begin{enumerate}
+\item How locus of control and age interact with the best respondent-level treatment. 
+\item How CRT and education interact with the best headline-level treatment. 
+\end{enumerate}
+
+
+
+\todo{Do we want to delete rest of this subsection below?}
+
 
   \begin{hypothesis}
 Age will moderate treatment effect of the factcheck headline treatment relative to the control. 
