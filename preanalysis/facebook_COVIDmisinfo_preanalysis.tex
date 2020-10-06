@@ -361,7 +361,7 @@ We discuss how we \textit{learn} these policies in Section~\ref{adaptivelearning
 \hl{While our main goal is to learn the best contextual policy -- and to see how this policy influences different types of people, we also care about the outcome (reducing the spread of COVID-19 misinformation) and understanding which types of people are nudged toward this outcome by particular treatments. Therefore, we also plan to examine how a few select treatments interact with particular covariates of interest. We do this in two ways - first by testing industry-motivated hypotheses and second by testing hypotheses driven by intuition and existing theories, as described below.}
 
 \hl{\textbf{Industry-motivated hypotheses:}}
-We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or were previously, used by social media companies such as Facebook and Twitter. The below covariates were selected as those that social media companies collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. indicator for male) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). Given that testing these treatment-covariate combinations will result in 5 (treatments) x 6 (covariate subgroup) $=$ 30 unique tests, \hl{we will adjust for multiple hypothesis testing using simulation procedures under a family-wise sharp null. }
+We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or were previously, used by social media companies such as Facebook and Twitter. The below covariates were selected as those that social media companies collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. indicator for male) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). 
 
 \textbf{Treatments:}
 \begin{itemize}
@@ -466,7 +466,7 @@ We use the below linear model for the length $d$ parameter vector $\theta$,
 \end{align*} 
 The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
 %The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
-Observations are weighted according to standard inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}, as in Equation~(\ref{eq:IPW}) in Appendix~\ref{appendix:stabilized}. %Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. 
+Observations are weighted according to standard inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}, as in Equation~(\ref{eq:IPW}). %Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. 
 
 We assume covariates are mean-centered and scaled to have sample variance of one \citep{marquardt1980you}; in practice, this re-scaling occurs each time we fit the ridge regression. 
 }
@@ -509,7 +509,7 @@ At the beginning of the batch,
 %      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
 %       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
 %    \end{align*}
-  \item Collect data assigning treatment for each observation with equal probability to:\label{step:policies}
+  \item \hl{Collect data assigning treatment for each observation with equal probability to:}\label{step:policies}
   \begin{itemize}
   \item the pure control, 
   \item the best uniform headline level policy, with no respondent-level treatment, 
@@ -608,7 +608,7 @@ For the primary response function as well as secondary outcomes discussed in Sec
 \subsubsection{Treatment effect heterogeneity}
 We report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
-\hl{To test hypotheses regarding specific heterogeneous treatment effects, as described in Section}~\ref{policieshte}\hl{, we again average across the relevant scores, and compare estimates across the two groups.}
+\hl{To test hypotheses regarding specific heterogeneous treatment effects, as described in Section}~\ref{policieshte}\hl{, we again average across the relevant scores, and compare estimates across the two groups. Given that testing these treatment-covariate combinations will result in a large number of unique tests, we will adjust for multiple hypothesis testing for treatment effect heterogeneity by reporting tests under both Bonferroni and Benjamini-Hochberg corrections.}
 
 
 %\subsection{Conditional means model}\label{ridge}
