@@ -204,8 +204,7 @@ We vary whether the pledge is made in private (within the chatbot conversation) 
 Covariate measurement plays an important role in our contextual adaptive design. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}; the full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.)
 The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``\dots not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual susceptibility to misinformation, ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
 
-Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individuals' receptivity to interventions to combat the spread of misinformation? 
-
+Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individuals' receptivity to interventions to combat the spread of misinformation?
 
 In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our primary objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. %For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
 
@@ -322,27 +321,47 @@ where the expectation is taken over the distribution of $X$.\footnote{Here we wi
 
 \subsection{Hypotheses}\label{hypotheses}
 
-Our hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$, where under each fixed policy we would assign all respondents the relevant treatment $w$. The control policy is the fixed policy $\pi_{w_{C}}$
+\subsection{Optimal contextual and non-contextual policies}\label{policiesbest}
+Our hypotheses of interest relate the value of an estimated optimal contextual policy $\pi_{opt}$ to fixed policies $\pi_{W}$, where under each fixed policy we would assign all respondents the relevant treatment $w$. The control policy is the fixed policy $\pi_{w^{C}}$
 
 Our primary hypothesis is that we are able to estimate from the data an optimal contextual policy that improves value over the control. 
   \begin{hypothesis}
-  The best contextual policy that can be estimated from the data achieves higher value than the control treatment \label{eq:optctr}.
+  The best contextual policy that can be estimated from the data achieves higher value than the control treatment. \label{eq:optctr}
 \begin{align}
-  H_{0}: V(\pi_{opt}) = V(\pi_{w_{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w_{C}})
+  H_{0}: V(\pi_{opt}) = V(\pi_{w^{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w^{C}})
 \end{align}
 \end{hypothesis}
 This is the hypothesis that we aim to optimize power for in our adaptive data collection. 
 
+\hl{We would also like to learn how much we gain by exploiting heterogeneity in the data. As secondary hypotheses, we propose that the optimal policy that we are able to estimate from the data improves over the best uniform respondent and headline level treatments; we learn these best uniform policies from the data, and test these hypotheses separately. }
+\setcounter{hypothesis}{2}
+  \begin{subhyp}
+  \hl{The best contextual policy that can be estimated from the data achieves higher value than the best uniform headline-level treatment, i.e., the fixed headline-level treatment with the highest associated value. }
+  \label{eq:optheadline}
+\begin{align}
+  H_{0}: V(\pi_{opt}) = \argmax_{w^H} V(\pi_{w^H}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_{w^H} V(\pi_{w^H})
+\end{align}
+\end{subhyp}
 
-We test two secondary hypotheses regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
+  \begin{subhyp}
+ \hl{ The best contextual policy that can be estimated from the data achieves higher value than the best uniform respondent-level treatment, i.e., the fixed respondent-level treatment with the highest associated value. }
+\begin{align}
+  H_{0}: V(\pi_{opt}) = \argmax_{w^R} V(\pi_{w^R}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_{w^R} V(\pi_{w^R})
+\end{align}
+\end{subhyp}
 
-\subsubsection{Heterogeneous treatment effects}
+We discuss how we \textit{learn} these policies in Section~\ref{adaptivelearning}. 
+%We test two secondary hypotheses regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
 
-\hl{While our main goal is to learn the best contextual policy - and see how this policy influences different types of people, we also care about the outcome (reducing the spread of COVID-19 misinformation) and understanding which types of people are nudged toward this outcome by particular treatments. Therefore, we also plan to examine how a few select treatments interact with particular covariates of interest. We do this in two ways - first by testing industry-motivated hypotheses and second by testing hypotheses driven by intuition and existing theories, as described below.}
+
+
+
+\subsubsection{Heterogeneous treatment effects}\label{policieshte}
+
+\hl{While our main goal is to learn the best contextual policy -- and to see how this policy influences different types of people, we also care about the outcome (reducing the spread of COVID-19 misinformation) and understanding which types of people are nudged toward this outcome by particular treatments. Therefore, we also plan to examine how a few select treatments interact with particular covariates of interest. We do this in two ways - first by testing industry-motivated hypotheses and second by testing hypotheses driven by intuition and existing theories, as described below.}
 
 \hl{\textbf{Industry-motivated hypotheses:}}
-We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or were previously, used by social media companies such as Facebook and Twitter. The below covariates were selected as those that social media companies collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. gender) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). Given that testing these treatment-covariate combinations will result in 5 (treatments) x 6 (covariate subgroup) $=$ 30 unique tests, we will adjust for multiple hypothesis testing using bonferroni corrections.\todo{@Molly - pls adjust to your preferred method of mult. hypothesis adjustment!} 
-
+We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or were previously, used by social media companies such as Facebook and Twitter. The below covariates were selected as those that social media companies collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. indicator for male) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). Given that testing these treatment-covariate combinations will result in 5 (treatments) x 6 (covariate subgroup) $=$ 30 unique tests, \hl{we will adjust for multiple hypothesis testing using simulation procedures under a family-wise sharp null. }
 
 \textbf{Treatments:}
 \begin{itemize}
@@ -356,23 +375,22 @@ We will explore whether the following treatments and covariates have significant
 \textbf{Covariates:}
 \begin{itemize}
 \item Age
-\item Gender
+\item Male
 \item Education
 \end{itemize}
 
-We hypothesize that the three headline-level treatments listed above will perform better among more educated users, older people, and among women, compared to the less educated, younger and male respondents. We expect that the two respondent-level treatments will reduce sharing of misinformation more among less-educated respondents than those with more education. \textcolor{red}{To evaluate these hypotheses we will marginalize over a balanced distribution of all other treatments.}%\footnote{After collecting pilot data we will submit an updated preanalysis plan in which we will specify and formalize exactly how we plan to test these hypotheses.}
-
+We hypothesize that the three headline-level treatments listed above will perform better among more educated users, older people, and among women, compared to the less educated, younger and male respondents. We expect that the two respondent-level treatments will reduce sharing of misinformation more among less-educated respondents than those with more education. %\footnote{After collecting pilot data we will submit an updated preanalysis plan in which we will specify and formalize exactly how we plan to test these hypotheses.}
 
 \hl{\textbf{Intuition-driven hypotheses:}}
 \begin{enumerate}
-\item \textit{We expect the pledge respondent-level treatment to be more effective among more religious respondents (e.g. those who attend religious services more frequently) compared to less religious respondents, as well as among younger respondents compared to older ones. }This intuition is based on the idea that more religious respondents may have more social connections than less religious ones, perhaps more online connections since many religious services moved online due to the pandemic. Similarly, we expect younger people to have larger online networks than older people and therefore those with more online social connections to be more motivated to reduce their sharing of false news after they've taken a (public) pledge, compared to those with fewer friends to monitor their online behavior.
+\item \textit{We expect the pledge respondent-level treatment to be more effective among more religious respondents (i.e. those who attend religious services more frequently) compared to less religious respondents, as well as among younger respondents compared to older ones. }This intuition is based on the idea that more religious respondents may have more social connections than less religious ones, perhaps more online connections since many religious services moved online due to the pandemic. Similarly, we expect younger people to have larger online networks than older people and therefore those with more online social connections to be more motivated to reduce their sharing of false news after they've taken a (public) pledge, compared to those with fewer friends to monitor their online behavior.
 % we may want to include measure of social media use as pretreatment covar
 \item \textit{We expect the real-information headline-level treatment to be more effective among those with a weaker internal locus of control, compared to those with a greater internal locus of control.} We anticipate that perhaps those who believe they have no choice at all over how their life turns out, once told that there is no cure for COVID-19 will be less likely to share ``cures'' with friends. 
 \end{enumerate}
 
 
 
-\hl{\textbf{Best respondent and headline-level treatments:}} In addition to the above hypotheses related to treatment heterogeneity, we also plan to test heterogeneity with respect to the best performing respondent-level and headline-level treatments. To estimate these we will marginalize over a balanced distribution of the other treatment factors - again taking the median as the splitting point of continuous covariates to create ``high'' and ``low'' categories: 
+\hl{\textbf{Best respondent and headline-level treatments:}} In addition to the above hypotheses related to treatment heterogeneity, we also plan to test heterogeneity with respect to the best performing respondent-level and headline-level treatments. To estimate these we again take the median as the splitting point of continuous covariates to create ``high'' and ``low'' categories: 
 
 Specifically, we will test:
 \begin{enumerate}
@@ -380,50 +398,40 @@ Specifically, we will test:
 \item How CRT and education interact with the best uniform headline-level treatment. 
 \end{enumerate}
 
-
-
-\todo{Do we want to delete rest of this subsection below?}
-
-
-  \begin{hypothesis}
-Age will moderate treatment effect of the factcheck headline treatment relative to the control. 
-  \label{eq:age}
-  \begin{align*}
-  H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \\
-   H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Age] \neq \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Age] \numberthis
-\end{align*}
-\end{hypothesis}
-We note that because we do \textit{not} optimize for power for this hypothesis in our design; if the fact-check headline does not perform particularly well for either subgroup, it may be assigned to very few respondents. In that case, we will not be well-powered to test this hypothesis, and failure to reject the null may largely speak to a design under-powered for this test than absence of this heterogeneity. 
-
-
-
-Additionally, we test whether religiosity, as measured by frequency of attendance of religious services, moderates response to the real information headline treatment. In the real information treatment, we explicitly state that there is \textit{no proven cure} for COVID-19. We hypothesize that religiosity will \textit{negatively} correlate with response to this treatment. 
- \begin{hypothesis}
-Religiosity will moderate treatment effect of the real information headline treatment relative to the control. 
-  \label{eq:age}
-  \begin{align*}
-  H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Religiosity] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Religiosity] \\
-   H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age \ge  \emph{median } Religiosity] \le \E[ V(\pi_{w_{FC}}) -V(\pi_{w_{C}})|Age <  \emph{median } Religiosity] \numberthis
-\end{align*}
-\end{hypothesis}
-Again, we note that the adaptive design constrains our power for this test in the case that the real information treatment is relatively ineffective for either subgroup, and we consequently have only small sample size for this treatment in those groups.  
-
-%We would also like to learn how much we gain by exploiting heterogeneity in the data. As a secondary hypothesis, we propose that the optimal policy that we are able to estimate from the data improves over the best fixed policy. 
+%
+%
 %  \begin{hypothesis}
-%  The best contextual policy that can be estimated from the data achieves higher value than the best fixed policy, i.e., the fixed policy with the highest associated value. 
-%  \label{eq:optmax}
-%\begin{align}
-%  H_{0}: V(\pi_{opt}) = \argmax_w V(\pi_{w}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_w V(\pi_{w})
-%\end{align}
+%Age will moderate treatment effect of the factcheck headline treatment relative to the control. 
+%  \label{eq:age}
+%  \begin{align*}
+%  H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age \ge  \emph{median } Age] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age <  \emph{median } Age] \\
+%   H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age \ge  \emph{median } Age] \neq \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age <  \emph{median } Age] \numberthis
+%\end{align*}
 %\end{hypothesis}
-%\todo{Add general thoughts about secondary hypotheses/ treatment effect heterogeneity here?}
+%We note that because we do \textit{not} optimize for power for this hypothesis in our design; if the fact-check headline does not perform particularly well for either subgroup, it may be assigned to very few respondents. In that case, we will not be well-powered to test this hypothesis, and failure to reject the null may largely speak to a design under-powered for this test than absence of this heterogeneity. 
+%
+%
+%
+%Additionally, we test whether religiosity, as measured by frequency of attendance of religious services, moderates response to the real information headline treatment. In the real information treatment, we explicitly state that there is \textit{no proven cure} for COVID-19. We hypothesize that religiosity will \textit{negatively} correlate with response to this treatment. 
+% \begin{hypothesis}
+%Religiosity will moderate treatment effect of the real information headline treatment relative to the control. 
+%  \label{eq:age}
+%  \begin{align*}
+%  H_{0}: \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age \ge  \emph{median } Religiosity] = \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age <  \emph{median } Religiosity] \\
+%   H_{a}:  \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age \ge  \emph{median } Religiosity] \le \E[ V(\pi_{w_{FC}}) -V(\pi_{w^{C}})|Age <  \emph{median } Religiosity] \numberthis
+%\end{align*}
+%\end{hypothesis}
+%Again, we note that the adaptive design constrains our power for this test in the case that the real information treatment is relatively ineffective for either subgroup, and we consequently have only small sample size for this treatment in those groups.  
+
 
 
 \subsection{Adaptive data collection}\label{adaptiveagent}
 
 To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
 
-We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we assume there is some unknown coefficient vector $\theta_w\in R^{|\xx|}$ for each arm $w \in \ww$, such that $Y_i(w) = x_i^\top \theta_w + \epsilon_i$, and $\epsilon_i\sim \mathcal{N}(0, \sigma_w)$, i.e., variance is constant under each arm. The conditional mean is $\mu_w(x) = \E[Y(w)|X=x] = x^T \theta_w$. 
+We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we denote contexts associated with counterfactual potential outcomes as $x_w$, where $x$ is the observed covariate vector, augmented by the treatment indicator(s) consistent with treatment $W =w$, and potentially treatment covariate interactions; let this vector be of length $d$ for all $w \in \ww$. 
+
+\hl{For the agent, we assume a Gaussian distribution, supposing that there is some unknown coefficient vector $\theta\in R^{d}$, such that the $y_i(w) \sim \mathcal{N}\left( x_{[w],i}^\top \theta, \sigma\right)$. The Gaussian assumption is used to implement the bandit agent, but, as }\cite{agrawal2013thompson}\hl{ note, we do not require the true reward distribution to be Gaussian. }
 
 %We assume the variance is constant within arms, i.e., $\V[Y(w)|X = x] = \sigma^2_w$. The conditional reward function is modeled as being distributed,
 %  \begin{align}
@@ -432,9 +440,9 @@ We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. U
 %  \end{align}
 
 
-Our implementation closely follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta_w$ and $\hat\sigma^2_w$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data in batches and then updating the treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the algorithm are provided in Algorithm~\ref{algg:bblts}; we present an overview below. 
+Our implementation roughly follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta$ and $\hat\sigma^2$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data and then updating the treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the Batched linear Thompson sampling algorithm are provided in Algorithm~\ref{algg:bblts}; we present an overview below. 
 
-\paragraph{Adaptive agent}
+\paragraph{Adaptive agent}\label{agent}
 
 \begin{enumerate}
 \item In the first batch, $b = 1$, we assign treatment uniformly at random. 
@@ -442,72 +450,72 @@ Our implementation closely follows the balanced linear Thompson sampling algorit
 \item For equally sized batches $b = 2, \dots, B-1$:
 
 \begin{enumerate}
-   \item \label{step:fit} Let covariates be mean-centered and scaled to have sample variance of one \citep{marquardt1980you}. For each arm, fit a ridge regression of the outcome regressed on an intercept and covariates. Compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data assigned to that arm.%
-% \footnote{We set M = $1,000$.}
- \footnote{%For the agent we use a linear model, with treatment indicators, covariates, and treatment and covariates interacted:
-% 
-%%\begin{align*}
-%%\hat{\mu}_w(X_{i}) & =
-%%			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
-%%			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
-%%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}} +  \\
-%%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
-%%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}, \ell}.\numberthis
-%%         \label{eq:linear_model_full}
-%%\end{align*} 
-%
-%\begin{align*}
-%\hat{\mu}_w(X_{i}) & =
-%			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
-%			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
-%			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
-%         \label{eq:linear_model_full}
-%\end{align*} 
-%
-%%The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
+   \item \label{step:fit} At the beginning of each batch, fit a ridge regression of the outcome regressed on treatment-augmented covariates; compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data. % .%
+% \footnote{We set M = $1,000$.}  
+ This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta$ and variance, $\V[\hat\theta]$.\footnote{
+We use the below linear model for the length $d$ parameter vector $\theta$, 
+\begin{align*}
+{\mu}_w(X) & =
+			\sum_{w^R} 1\{W^R = w^R\}\beta_{w^R}  +
+			\sum_{w^H} 1\{W^H = w^H\}\beta_{w^H}  +\\ 
+			& \sum_{w^R} \sum_{w^H}1\{W^R = w^R\} \times 1\{W^H =  w^H\}\beta_{w^{R,H}} +  \\
+			& \sum_{\ell}  X_{[\ell]}{\beta}_{\ell} +\\
+			& \sum_{w^R} \sum_{w^H}1\{W^R = w^R\} \times 1\{W^H =  w^H\}  X_{[\ell]} {\beta}_{w^{R,H}. \ell}.
+			\numberthis
+         \label{eq:linear_model_full}
+\end{align*} 
+The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
 %The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
 Observations are weighted according to standard inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}, as in Equation~(\ref{eq:IPW}) in Appendix~\ref{appendix:stabilized}. %Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. 
-}
-  
-  
- This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta_w$ and an associated variance, $\V[\hat\theta_{w}] $ for each arm $w\in \ww$. 
 
- \item For each observation, we draw $M$ draws from $\tilde \theta ^{(m)}_w \sim \mathcal{N}(\hat \theta_w),\V[\hat\theta_{w}]$ for each condition $w$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{We set $M = 1000$.}
- %\footnote{Note that we slightly abuse notation here, as for each $ x_i^\top \tilde \theta ^{(m)}_w$ the $x_i$ term is modified to the appropriate format for relevant treatment indicators and interactions for each hypothetical treatment $w$. I.e., we are producing predictions given the observed covariates under each counterfactual treatment condition. }
+We assume covariates are mean-centered and scaled to have sample variance of one \citep{marquardt1980you}; in practice, this re-scaling occurs each time we fit the ridge regression. 
+}
+
+For each observation $i$ in batch $b$,
+\begin{enumerate}
+ \item Draw $M$ draws from $\tilde \theta ^{(m)} \sim \mathcal{N}\left(\hat \theta,\V[\hat\theta]\right)$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{We set $M = 1000$.}
 				\begin{align}
-    q_w(X_i) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
-				\end{align}
+%    q_w(X_i) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
+   q_w = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}
+				\end{align}		
 \item These probabilities are constrained by a pre-determined probability floor, $p$, and rescaled to sum to one. 
 				\begin{align}
-     \tilde{q}_w(X_i) & =\max\Biggr\{q_w{(X_i)}, p\Biggr\} \\
-     \hat{q}_w(X_i)& = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }. 
+     \tilde{q}_w & =\max\left\{q_w, p\right\} \\
+    e_w& = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }. 
 				\end{align}
-\item Denote the control condition $w_{C}$. 20\% of the sample is automatically allocated to the control condition--in addition to the scaled portion of the remaining sample that is assigned under Thompson sampling. The other probabilities are re-scaled accordingly. 
-      \begin{align}
-         e_{w_C}(X_i) & = 0.2 + 0.8\hat{q}_{w_C}(X_i) \\
-          e_{w}(X_i) & = 0.8\hat{q}_w(X_i)\ \ \forall w \in \ww \setminus \{w_C\}. 
-      \end{align}
+%\item Denote the control condition $w^{C}$. 20\% of the sample is automatically allocated to the control condition--in addition to the scaled portion of the remaining sample that is assigned under Thompson sampling. The other probabilities are re-scaled accordingly. \todo{ Remove control over- augmented}
+%      \begin{align}
+%         e_{w_C}(X_i) & = 0.2 + 0.8\hat{q}_{w_C}(X_i) \\
+%          e_{w}(X_i) & = 0.8\hat{q}_w(X_i)\ \ \forall w \in \ww \setminus \{w_C\}. 
+%      \end{align}
 \item Assign treatment  according to the calculated probabilities: \\
-$w_i \sim \textrm{Multinom} \left( e_{1}(X_i), \dots, e_{|\ww|}(X_i)\right)$
+$w_i \sim \textrm{Multinom} \left( e_{1}, \dots, e_{|\ww|} \right)$
+\end{enumerate}
 \end{enumerate}
 
-\item For the final batch,  $b = $ B, collect data on-policy + $\epsilon$ uniform random assignment:
+\item For the final batch,  $b = B$, learn policies and collect data for evaluation. 
+
+At the beginning of the batch, 
 \begin{enumerate}
-  \item Estimate conditional means by fitting a random forest estimator on the entire data set collected through batch $B-1$, following the steps outlined in Appendix~\ref{appendix:grf}, adjusting for adaptively collected data as described in Appendix~\ref{appendix:DRlfo}. 
 %$ Point-wise optimal policy
 %  \item Fit a point-wise optimal policy  by taking the maximum of predicted values for each possible context $x$ 
 %    \begin{equation}
 %     \hat{\pi}_{x} = \argmax_{ w } \hat{\mu}_{w}(x) . 
 %    \end{equation} 
-  \item Fit an optimal depth\textcolor{black}{-two} policy tree:
-    \begin{align*}
-      \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
-      \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
-      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot}) \rangle \\
-       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
-    \end{align*}
-  Store the policy. 
-  \item Collect data for the batch: For every new respondent, collect data on their contexts, and assign treatment consistent with $\hat{\pi}_{x}$ + $\epsilon$ uniform random assignment, where $\epsilon=.1$ . 
+  \item Fit an optimal depth\textcolor{black}{-two} policy tree, and learn the best uniform headline-level policy and the best uniform respondent-level policy. Approaches to learning these policies are described in Section~\ref{analysis}, below. 
+%    \begin{align*}
+%      \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
+%      \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
+%      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
+%       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
+%    \end{align*}
+  \item Collect data assigning treatment for each observation with equal probability to:\label{step:policies}
+  \begin{itemize}
+  \item the pure control, 
+  \item the best uniform headline level policy, with no respondent-level treatment, 
+  \item the best uniform respondent-level policy, with no headline-level treatment, and
+  \item the best best contextual policy, as determined by the policy tree object. 
+  \end{itemize}
 \end{enumerate}
 \end{enumerate}
 
@@ -521,74 +529,86 @@ To estimate the value of a policy, we take the average of doubly robust scores $
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
-We will estimate $\hat\mu_{w}(X_{i})$ for each $w$ using generalized random forests, following the approach described in Appendix~\ref{appendix:grf}. $\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}.  %Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
+We will estimate $\hat\mu_{w}(X_{i})$, the conditional mean for each $w$ using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
+%following the approach described in Appendix~\ref{appendix:grf}. 
+$\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities. %; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}.  %Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
+%Our methods for analysis will differ depending on how the data is collected.
+We use inverse probability weights, 
+\begin{align*}
+\xi^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eq:IPW} \numberthis\\
+e_{w}(x) = \Pr[W_i = w|X_i = x].
+\end{align*}
+Here, we can directly plug in the respective treatment assignment probabilities from the experimental design for the $e_{w}(X_i)$. 
+ 
 
-Our methods for analysis will differ depending on how the data is collected. 
-
-\subsection{Policy learning and evaluation on randomly collected data}\label{randomlearning}
-For randomly collected data, as in the pilot, we conduct policy learning and evaluation as below:
+\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptivelearning}%\todo{SA: the covariate distributions may be a little different between the last batch and the rest of the batches, just due to sampling variation; one might mention that if they are, we might re-weight the last batch so that the mean values of x’s are the same.  This is mainly an issue if the X’s are very important and the covariate space has high dimension.}
+%For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
 
 \begin{enumerate}
-  \item Collect data by assigning treatment uniformly at random.
-  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps detailed in Appendix~\ref{appendix:grf}; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
-  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-  \item Separating the data into $k$ folds, fit optimal depth\textcolor{black}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+%\subsection{Adaptively weighted doubly-robust estimation} %\todo{Add appropriate reference to LFO paper.}
+%\label{appendix:DRlfo}
+\item \textbf{Compute doubly robust scores}. For adaptively collected data, we use doubly robust scores as in (\ref{eq:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates of the nuisance components. 
+
+The weights $\xi^{IPW}_w(X_i)$ are by design only produced from historical data. To estimate conditional means $\hat \mu_w(X_i)$, for each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:
+\begin{enumerate}
+\item Fit a random forest estimator on the observations assigned $w$ in batches up to and including batch $b$. 
+\item For observations assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
+\item For observation \textit{not} assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the fitted model in step a. 
+\end{enumerate}
+
+ Compute doubly robust scores $\hat{\Gamma}_{i,w}$ plugging the estimated nuisance components into (\ref{eq:DR}). 
+\item \textbf{Learn policies}. We learn policies on the data collected up to batch $B-1$, by taking the average of scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$.
+\begin{enumerate}
+\item For the optimal contextual policy, estimate an optimal depth-two policy tree. 
+%We have already fitted and stored an optimal policy to conduct the (nearly) on-policy evaluation in the final batch $B$ of the adaptive experiment. 
     \begin{align*}
-      \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
-       \sum_{i \in \mathcal{I}_{-k}}
-      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot}) \rangle \\
+      \hat{\pi}_{opt} = \arg\max_{\pi \in \Pi}
+      \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} }
+      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
        \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
-%% Point-wise optimal random forest  
-%  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
-%    \begin{equation*}
-%\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
-%    \end{equation*}
-  \item To evaluate the policies, take the average scores :
-    \begin{align*}
-          \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
-      \hat{V}(\hat{\pi}_{opt})  
-      %% Point-wise optimal random forest  
-      % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
-					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
-          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
-          \end{align*}
-   \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
-\end{enumerate}
-
-
-\subsection{Policy learning and evaluation on adaptively collected data}\label{adaptiveearning}%\todo{SA: the covariate distributions may be a little different between the last batch and the rest of the batches, just due to sampling variation; one might mention that if they are, we might re-weight the last batch so that the mean values of x’s are the same.  This is mainly an issue if the X’s are very important and the covariate space has high dimension.}
-For adaptively collected data, as in the simulations discussed in Section~\ref{simulations} and our eventual experiment, we conduct policy learning and evaluation as below:
-
-\begin{enumerate}
-\item Collect data under the adaptive algorithm described in Section~\ref{adaptiveagent}. 
-\item For our nuisance components, due to the dependent nature of the data, we must ensure that our estimation is conducted using only historical data. Estimate nuisance components $\hat{\mu}_{w}(X_i)$  and $\hat\xi_w(X_i)$ for data up to and including batch $B-1$ following the steps outlined in Appendix~\ref{appendix:DRlfo}. 
-\item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-\item We have already fitted and stored an optimal policy to conduct the (nearly) on-policy evaluation in the final batch $B$ of the adaptive experiment. 
-  \item To evaluate the policies, we take the average scores over the relevant evaluation sets $\mathcal{I}$, where $\mathcal{I}_b$ represents the set of all observations within batch $b$. %We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
+    \hl{To ensure we learn an optimal policy that is contextual, if we learn a policy where in the policy tree object, all of the actions are equivalent across leaves (i.e., the policy is not contextual), we remove this fixed treatment and re-learn the tree policy on the remaining treatments; we repeat this until we learn a non-uniform policy. }
+    \todo{\texttt{policy\_tree} doesn't have min node size, as in grf; to-follow up on possible approaches for implementing this. }
+    
+  \item We conduct evaluation of fixed policies on the adaptively collected data. %We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
-          \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w} \\
-                     \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{i \in \mathcal{I}_{B} }
+          \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}
+        \end{align}  
+   \hl{To learn the \textbf{best uniform headline-level policy}, we average over all treatment combinations that include a given headline treatment; effectively, this marginalizes over a balanced distribution of the respondent-level policies. }
+      \begin{align}
+                          \hat{V}({\pi}_{w_H})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}, \ \ w \ni w_H \\
+w_H^* & =  \argmax_{w_H} \  \hat{V}({\pi}_{w_H})
+\intertext{\hl{The procedure is equivalent for learning the \textbf{best uniform respondent-level policy.} }}
+          \hat{V}({\pi}_{w_R})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}, \ \ w \ni w_R  \\
+w_R^* & =  \argmax_{w_R} \  \hat{V}({\pi}_{w_R})
+%                     \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{i \in \mathcal{I}_{B} }
 %                      Y_i  \\
-          \langle \hat{\pi}_{opt}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
+%          \langle \hat{\pi}_{opt}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
     \end{align}
-   \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
+%   \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
+\item \textbf{Evaluate policies} \hl{We hold out the last batch of data for policy evaluation and hypothesis testing. This allows us to learn and evaluate policies on separate splits of the data, whereas we otherwise would be subject to bias in our policy evaluations from over-fitting. Additionally, when using adaptively collected data, we are not able to use standard cross-fitting techniques such as k-fold cross-validation, due to the temporal dependencies. }
 
+The procedures for policy evaluation on random data are described in Appendix~\ref{randomlearning}, but are parallel to the steps outlined above. We again estimate nuisance components and compute doubly robust scores using only the last batch of the data. Note that in this last batch, we have just four policies of interest, as described in Step~\ref{step:policies} of the \hyperref[agent]{Adaptive Agent}. 
+\end{enumerate}
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
 
 \subsection{Hypothesis testing and other analysis}
-To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors of the policies using the standard deviations of the relevant scores, and conduct frequentist hypothesis testing. To account for the possibility that covariate distributions may differ between the first and last on-policy split of the data, we will also report results when the last split is reweighted by the relative probability that a given observation was observed in the on-policy split as compared to the adaptively collected split, as predicted by a random forest model using all covariates. 
+To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors of the (differences in) policies using the standard deviations of the (differences in) relevant scores, and conduct frequentist hypothesis testing. 
 
+For analysis regarding main effects and heterogeneity with respect to the best contextual and best uniform respondent- and headline-level policies, we use only the last batch of the data, calculating doubly robust scores as described in Appendix~\ref{randomlearning}. 
 
-\subsection{Main effects of each factor level}\label{main}
-For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report average outcomes under each headline factor level and separately respondent factor level, marginalizing over an equal distribution of levels of the other factor. We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. 
+\hl{For analysis regarding main effects and heterogeneity with respect to pre-determined factor levels, we use the adaptively collected data up through batch $B-1$, calculating doubly robust scores as described in Section}~\ref{adaptivelearning}\hl{. When considering a specific factor level, we marginalize over a balanced distribution of the other factor.}\footnote{For example, if we are interested in average outcomes under the Pledge respondent-level treatment, we will take an average of scores for the Pledge treatment crossed with each of the headline-level treatments, including the baseline control.} %
+\hl{We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. }
+
+\subsubsection{Main effects of each factor level}\label{main}
+For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report average outcomes under each headline factor level and separately respondent factor level, marginalizing over a balanced distribution of levels of the other factor.
 
 \subsubsection{Treatment effect heterogeneity}
-Following the eventual adaptive experiment, we will report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
+We report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
-To test hypotheses regarding specific heterogeneous treatment effects, e.g., that the headline factcheck treatment is more or less effective for those with above vs. below median age, we again average across the relevant scores, marginalizing over an equal distribution of levels of the respondent factor, and compare estimates across the two groups.
+\hl{To test hypotheses regarding specific heterogeneous treatment effects, as described in Section}~\ref{policieshte}\hl{, we again average across the relevant scores, and compare estimates across the two groups.}
 
 
 %\subsection{Conditional means model}\label{ridge}
@@ -598,13 +618,13 @@ To test hypotheses regarding specific heterogeneous treatment effects, e.g., tha
 %\hat{\mu}_w(X_{i}) & =
 %			\sum_{w^R} 1\{W^R_i = w^R\}\hat\beta_{w^R}  +
 %			\sum_{w^H} 1\{W^H_i = w^H\}\hat\beta_{w^H}  +\\ 
-%%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
+%			& \sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +\\
 %			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}\hat\beta_{w^{R,H}}. %+  \\
-%%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}. \ell}.
+%			& \sum_{w^R} \sum_{w^H}1\{W^R_i = w^R\} \times 1\{W^H_i =  w^H\}  X_{[\ell]i} \hat{\beta}_{w^{R,H}. \ell}.
 %			\numberthis
 %         \label{eq:linear_model_full}
 %\end{align*} 
-
+%
 %\begin{align*}
 %\hat{\mu}_w(X_{i}) & =
 %			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
@@ -612,7 +632,7 @@ To test hypotheses regarding specific heterogeneous treatment effects, e.g., tha
 %			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
 %         \label{eq:linear_model_full}
 %\end{align*} 
-The variable selection model uses $L_{1}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^H}$. The OLS model includes only main effects and interaction terms. The models are estimated on the data from batches up to $B-1$. Covariates are mean-centered and scaled to have sample variance of one \citep{marquardt1980you}. Observations are weighted by their inverse probability weights, following \cite{vanderweele2010marginal}. %; regularization is hierarchically constrained over two levels of penalties, so that the penalty on covariate coefficients, the $\hat{\beta}_{\ell}$ terms, is less than or equal to the penalty on interaction of treatments or interaction of treatment with covariates, the $\hat\beta_{w^{R,H}}$ and $\hat{\beta}_{w^{R,H}, \ell}$ terms.  
+%The variable selection model uses $L_{1}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^H}$. The OLS model includes only main effects and interaction terms. The models are estimated on the data from batches up to $B-1$. Covariates are mean-centered and scaled to have sample variance of one \citep{marquardt1980you}. Observations are weighted by their inverse probability weights, following \cite{vanderweele2010marginal}. %; regularization is hierarchically constrained over two levels of penalties, so that the penalty on covariate coefficients, the $\hat{\beta}_{\ell}$ terms, is less than or equal to the penalty on interaction of treatments or interaction of treatment with covariates, the $\hat\beta_{w^{R,H}}$ and $\hat{\beta}_{w^{R,H}, \ell}$ terms.  
 
 
 \section{Simulations and design hyperparameters}\label{simulations}
@@ -687,16 +707,20 @@ Our objective in selecting design hyperparameters is to optimize power for Hypot
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Hyperparameter} & \textbf{Choice set} \\ \hline
-Total experiment size ($N$)& [1500:5000 (steps of 500)] \\
+Adaptive experiment size ($N^A = \bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}$ )& [1500:4500 (steps of 500)] \\
 Number of batches ($B$)& [10, 15, 20] \\
-First batch size ($|\mathcal{I}_1|$) & $N \times$ [1/10, 1/5, 3/10] \\
-Last batch size ($|\mathcal{I}_B|$) &  $N \times$ [1/10, 1/5, 3/10] \\
+First batch size ($|\mathcal{I}_1|$) & $N^A \times$ [1/10, 1/5, 3/10] \\
+Last batch size ($|\mathcal{I}_B|$) & **  \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
 Probability floor (p)& [0.1, 0.15, 0.2]$\times 1/ |\ww|$ \\
+$N$ & $=N^A + |\mathcal{I}_B| $\\
 \hline
 \end{tabular}
 \end{table}
+\hl{**Last batch size $|\mathcal{I}_B|$ is determined based on power calculations conducted on the pilot data. Using the mean and standard deviation of the control policy estimated on the pilot data, the last batch size is set as sufficient to power a test of Hypothesis}~\ref{eq:optctr}\hl{ where the value of the contextual policy is only 5\% greater than the value of the control policy.}
+
+\hl{In simulations, this calculation is conducted on the fly after the adaptive portion of the experiment. }
 
 
 \section{Power Calculations}
@@ -711,7 +735,7 @@ We simulate effect sizes that are equivalent to 0.6 in the scale of our response
 
 We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where their measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy, where the oracle policy would be the true best policy based on the simulated DGP. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
 
-A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. 
+A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}.
 
 \FloatBarrier
 \subsection{Overall power}
@@ -876,8 +900,8 @@ After clicking on the ad, respondents are directed to the Chatbot (Figure \ref{f
 \subsection{Covariates}\label{appendix:covariates}
 \input{covariates_longform.tex}
 
-In all analyses, we include the pre-test response strata for true and false stimuli and indicators for individual stimuli.\todo{Ok to combine these?} 
-For some continuous covariates, such as education, we include an indicator flag if the respondent skipped the question. For some, such as the Digital Literacy Index or the Cognitive Reflection Test, we we code the index as 0 if the respondent chose not to answer any of the questions. 
+In all analyses, we include the pre-test response strata for true and false stimuli and indicators for individual stimuli.
+For some continuous covariates that describe individual characteristics, such as education, we include an indicator flag if the respondent skipped the question; this is noted in the ``Coded as'' column. For others which require reflection or where there is a ``correct'' or ``best'' response, such as the Cognitive Reflection Test or the COVID-19 information measure, we we code the index as 0 if the respondent chose not to answer any of the questions. 
 
 \subsection{Survey Instrument}\label{appendix:survey}%\todo{Check for update to public-facing survey instrument.}
 The survey script is available at this link:\\
@@ -1029,41 +1053,44 @@ This treatment draws on the psychological evidence around commitment and consist
 \FloatBarrier
 \section{Batch-wise balanced linear Thompson sampling}\label{appendix:agent}
 
-%A note on notation: while $X_i$ represents the covariates observed for individual $i$, the covariate vector $X_{[W]i}$ is in the appropriate format for the relevant counterfactual treatment indicators and interactions.
+A note on notation: while $X_i$ represents the covariates observed for individual $i$, the covariate vector $X_{[W]i}$ is in the appropriate format for the relevant counterfactual treatment indicators and interactions--i.e., for each observation, we can generate this vector for every hypothetical treatment. For ease of notation, we let $\X$ be the covariate matrix for the covariates augmented with thei respective realized treatments. 
 
 
 \begin{algorithm} \footnotesize
     \caption{Batch-wise balanced linear Thompson sampling}
     \label{algg:bblts}
     \begin{algorithmic}[1] % The number tells where the line numbering should start
-    	\State$\Xi_w \leftarrow$ empty matrix; $\X_w \leftarrow$ empty matrix; $r_w \leftarrow$ empty vector for $w \in \ww$. 
-	\Comment{Initialize weight matrices, covariate matrices, and reward vectors, for each treatment condition separately. Denote the control condition $w_{C}$. }
+    	\State$\Xi \leftarrow$ empty matrix; $\X \leftarrow$ empty matrix; $\y \leftarrow$ empty vector. %for $w \in \ww$. 
+	\Comment{Initialize weight matrix, treatment-augmented covariate matrix, and reward vector.  
+	}
     	\For{$i = 1, \dots, N$}
 		\If{$i \in \mathcal{I}_1$}
-			 \State $e_{w}(X_i) \leftarrow \frac{1 }{|\ww| } \ \ \forall w \in \ww $ 
-		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B-1$}
-			\If{$i$ is the first observation in $\mathcal{I}_b$}
-				\For{$w\in \ww$}
-					\State $B_w \leftarrow X^\top_w \Xi_w X_w + \lambda^{CV} \mathbf{I}$ 
-					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
-					\State $\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
-				\EndFor
+			 \State $e_{w} \leftarrow \frac{1 }{|\ww| } \ \ \forall w \in \ww $ \Comment{In first batch, assign treatment uniformly at random.}
+		\ElsIf{$i \in \mathcal{I}_b$ for $b = 2, \dots, B$}
+			\If{$i$ is the first observation in $\mathcal{I}_b$} \Comment{Update estimates of coefficient vector and variance matrix, using ridge regression with determined penalization.}
+%				\For{$w\in \ww$}
+%					\State $B_w \leftarrow X^\top_w \Xi_w X_w + \lambda^{CV} \mathbf{I}$ 
+%					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
+%					\State $\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
+%				\EndFor
+				\State $B \leftarrow \X^\top \Xi \X + \lambda^{CV} \mathbf{I}$  
+				\State $\hat\theta \leftarrow B^{-1} \X^\top \Xi y$
+				\State $\V[\hat\theta] \leftarrow B^{-1} \left(\left( \y - \X^\top\hat\theta \right)^\top \Xi \left( \y - \X^\top\hat\theta \right)\right)$
 			\EndIf
 			\For{$m = 1, \dots, M$}
-				\State Sample $\tilde \theta \V[\hat\theta_{w}]^{(m)}_w \sim \mathcal{N}\left(\hat\theta_{w}, \V[\hat\theta_{w}] \right) \ \   \forall w \in \ww$
+				\State Sample $\tilde \theta^{(m)}  \sim \mathcal{N}\left(\hat\theta, \V[\hat\theta] \right)$
 			 \EndFor
-				\State $q_w(X_i) \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ X_{[1]i}^\top \tilde \theta ^{(m)}_1, \dots, X_{[|\ww|]i}^\top\tilde \theta_{|\ww|}^{(s)} \}  \right\}$ \Comment{ Compute TS probabilities.}
-     			\State $\tilde{q}_w(X_i) =\max\Biggr\{q_w{(X_i)}, p\Biggr\}$ \Comment{Impose probability floors and rescale. }
-     			\State $\hat{q}_w(X_i) = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }$
-			\State $e_{w_C}(X_i)  = 0.2 + 0.8\hat{q}_{w_C}(X_i) $ \Comment{Augment the control with a fixed probability. }
-                         \State $e_{w}(X_i)  = 0.8\hat{q}_w(X_i) \ \ \forall w \in \ww \setminus \{w_C\}$ \Comment{Ensure probabilities sum to 1.}  
+				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
+     			\State $\tilde{q}_w =\max\left\{q_w, p\right\}\ \ \forall w \in \ww$ \Comment{Impose probability floors,}
+     			\State ${e}_w = \frac{ \tilde{q}_w}{\sum\limits_{w }\tilde{q}_w }\ \ \forall w \in \ww$ \Comment{ and rescale. }
+%			\State $e_{w_C}(X_{[W]i})  = 0.2 + 0.8\hat{q}_{w_C}(X_{[W]i}) $ \Comment{Augment the control with a fixed probability. }
+%                         \State $e_{w}(X_{[W]i})  = 0.8\hat{q}_w(X_{[W]i}) \ \ \forall w \in \ww \setminus \{w_C\}$ \Comment{Ensure probabilities sum to 1.}  
 		\EndIf
-		\State Assign $w_i \sim \textrm{Multinom}( e_{1}(X_i) , \dots,  e_{|\ww|}(X_i) )$
-		\State $\xi^{IPW}_w(X_i) \leftarrow \frac{ 1 }{e_{w}(X_i)}$ \Comment{Assign inverse probability weights.}
-		\State $\Xi_{w_i} \leftarrow \diag \left(\Xi_{w_i}, \xi_i\right)$ \Comment{Augment relevant weight matrix.}
-		\State $\X_{w_i} \leftarrow [\X_{w_i}:x_{w_i}^\top]$ \Comment{Augment relevant covariate matrix.}
-		\State $r_{w_i} \leftarrow  [r_{w_i}: y_i]$ \Comment{Augment relevant reward vector.}
-
+		\State Assign $w_i \sim \textrm{Multinom}( e_{1}, \dots,  e_{|\ww|} )$ \Comment{Assign treatment.}
+		\State $\xi_i \leftarrow \frac{ 1 }{e_{w_i}}$ \Comment{Record inverse probability weights based on realized assignment.}
+		\State $\Xi \leftarrow \diag \left(\Xi, \xi_i\right)$ \Comment{Augment weight matrix.}
+		\State $\X \leftarrow [\X:x_{[w_i]i}^\top]$ \Comment{Augment covariate matrix.}
+		\State $\y \leftarrow  [\y: y_i]$ \Comment{Augment reward vector.}
 	\EndFor
     \end{algorithmic}
 \end{algorithm}
@@ -1073,81 +1100,89 @@ This treatment draws on the psychological evidence around commitment and consist
 
 \section{Estimation Considerations}
 
-\subsection{Inverse probability weighting} \label{appendix:stabilized}
-Inverse probability weighted estimation typically uses weights as follows, 
-\begin{align*}
-\xi^{IPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)} \label{eq:IPW} \numberthis\\
-e_{w}(x) = \Pr[W_i = w|X_i = x].
-\end{align*}
-Here, we could directly plug in the respective treatment assignment probabilities from the experimental design for the $e_{w}(X_i)$. 
+%\subsection{Inverse probability weighting} \label{appendix:stabilized}
 
-In ex post evaluation, we use the stabilized version of these weights, normalizing weights to sum to one on the empirical data. This may improve RMSE of the estimator \citep{cole2008constructing}. 
-\begin{align}
-\left.
-\xi^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
-\middle/ 
-{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_j)} } \label{eq:SIPW} \numberthis
-\right.
-\end{align}
+%In ex post evaluation, we use the stabilized version of these weights, normalizing weights to sum to one on the empirical data. This may improve RMSE of the estimator \citep{cole2008constructing}. 
+%\begin{align}
+%\left.
+%\xi^{SIPW}_w(X_i) = \frac{ 1 }{e_{w}(X_i)}
+%\middle/ 
+%{ \sum_{j = 1}^N \frac{1\{W_{j} = w\}}{e_{w}(X_j)} } \label{eq:SIPW} \numberthis
+%\right.
+%\end{align}
+%
+%For batched adaptively collected data, we sum over all observations in the same batch. %todo{Could formalize this.}
+%
+%\begin{align}
+%\left.
+%\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(X_i)}   
+%\middle/ 
+%{ \sum_{j = 1}^\top \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:SIPWb} \numberthis
+%\right.
+%\end{align}
 
-For batched adaptively collected data, we sum over all observations in the same batch. %todo{Could formalize this.}
 
-\begin{align}
-\left.
-\xi^{SIPW}_{b,w}(X_i) = \frac{ 1 }{e_{w}^{\pi^{(b)}}(X_i)}   
-\middle/ 
-{ \sum_{j = 1}^T \frac{1\{W_{j} = w\}}{e_{w}^{\pi^{(B_j)}}(X_i)} } \label{eq:SIPWb} \numberthis
-\right.
-\end{align}
+%\subsection{Random best fixed policies}\label{appendix:bestfixed}
+%We may be interested in learning and evaluating the best fixed policy. However, if we learn which fixed policy is best by taking the fixed policy with the highest mean, we get a biased estimate of the best fixed policy. To see this, consider:
+%\begin{align*}
+%\E[\max(X_1, \dots, X_N)] \ge \max(\E[X_1],\dots, \E[X_N]). 
+%\end{align*}
+%
+%To address this concern, we consider instead a \textit{random} best fixed policy. We use only IPW scores, \textit{not} the doubly robust scores, to avoid the additional dependence in estimates produced by conditional means model. 
+%\begin{enumerate}
+%\item For each observation $i>1$ in the experiment, we calculate the value of fixed policies as the average of scores up to time $i-1$. 
+%\begin{align*}
+%\hat{V}_{i-1}({\pi}_{w})  &:= \frac{1}{i-1 } \sum_{j = 1 }^{i-1} \hat{\Gamma}_{j,w} \quad \text{for fixed policies $w$}
+%\end{align*}
+%\item The ``best'' fixed policy in period $i$ is the treatment with the highest estimate:
+%\begin{align*}
+%w_i^* =  \argmax_w \ \hat{V}_{i-1}({\pi}_{w})
+%\end{align*}
+%\item The score for the random best fixed policy in time $i$ is then the score in that period for the selected arm, $\hat{\Gamma}_{i, w^*}$ 
+% \item To evaluate the policies, we again take the average scores. The evaluation set $\mathcal{I}^*$ will be the entire data set for data collected under the procedures for the random agent as described above in Section~\ref{randomlearning}, and up through batch $B-1$ for data collected under the procedures for the adaptive agent--excluding the first observation. 
+%    \begin{align*}
+%          \hat{V}(\hat{\pi}_{w^*})  &:= \frac{1}{\big{\lvert} \mathcal{I}^* \big{\rvert}} \sum_{i \in \mathcal{I}^* } 
+%          \hat{\Gamma}_{i, w_i^*} 
+%  \end{align*}
+%\end{enumerate}
 
-\subsection{Random forest estimation}\label{appendix:grf}
-For policy learning and evaluation, we estimate conditional means using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
+\subsection{Policy evaluation on randomly collected data}\label{randomlearning}
 
-For a given dataset, we estimate conditional means under each treatment condition $w$:
+%\subsection{Random forest estimation}\label{appendix:grf}
+
 \begin{enumerate}
-\item Fit a random forest estimator on the observations assigned $w$ . 
+  \item Collect data by assigning treatment uniformly at random.
+  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps below; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
+\begin{enumerate}
+\item Fit a random forest estimator on the observations assigned $w$. 
 \item For observations assigned $w$, calculate $\hat\mu_w(X_i, W_i = w)$ using out-of-bag predictions. 
-\item For observation not assigned $w$, calculate $\hat\mu_w(X_i, W_i \neq w)$ using regression forest predictions from the model in step 1. 
+\item For observation not assigned $w$, calculate $\hat\mu_w(X_i, W_i \neq w)$ using regression forest predictions from the fitted model in step a. 
 \end{enumerate}
-
-\subsection{Adaptively weighted doubly-robust estimation} %\todo{Add appropriate reference to LFO paper.}
-\label{appendix:DRlfo}
-For adaptively collected data, we use doubly robust scores as in (\ref{eq:DR}), but due to the dependent nature of the data, to avoid bias, we must ensure that we use only historical data in our estimates. This means that in each batch we estimate the nuisance components only using data up to and including the current batch. 
-
-To estimate conditional means, we follow the steps above in \ref{appendix:grf}, with minor adjustments. For each batch $b$ in $b = 1, \dots, B-1$ and for each treatment $w$:
-\begin{enumerate}
-\item Fit a random forest estimator on the observations assigned $w$ in batches up to and including batch $b$. 
-\item For observations assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
-\item For observation not assigned $w$ in batch $b$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the model in step 1. 
-\end{enumerate}
-
-We use the batched version of the stabilized inverse probability weights from (\ref{eq:SIPWb}). 
-Doubly robust scores are then formed from the relevant component parts. 
-
-
-\subsection{Random best fixed policies}\label{appendix:bestfixed}
-We may be interested in learning and evaluating the best fixed policy. However, if we learn which fixed policy is best by taking the fixed policy with the highest mean, we get a biased estimate of the best fixed policy. To see this, consider:
-\begin{align*}
-\E[\max(X_1, \dots, X_N)] \ge \max(\E[X_1],\dots, \E[X_N]). 
-\end{align*}
-
-To address this concern, we consider instead a \textit{random} best fixed policy. We use only IPW scores, \textit{not} the doubly robust scores, to avoid the additional dependence in estimates produced by conditional means model. 
-\begin{enumerate}
-\item For each observation $i>1$ in the experiment, we calculate the value of fixed policies as the average of scores up to time $i-1$. 
-\begin{align*}
-\hat{V}_{i-1}({\pi}_{w})  &:= \frac{1}{i-1 } \sum_{j = 1 }^{i-1} \hat{\Gamma}_{j,w} \quad \text{for fixed policies $w$}
-\end{align*}
-\item The ``best'' fixed policy in period $i$ is the treatment with the highest estimate:
-\begin{align*}
-w_i^* =  \argmax_w \ \hat{V}_{i-1}({\pi}_{w})
-\end{align*}
-\item The score for the random best fixed policy in time $i$ is then the score in that period for the selected arm, $\hat{\Gamma}_{i, w^*}$ 
- \item To evaluate the policies, we again take the average scores. The evaluation set $\mathcal{I}^*$ will be the entire data set for data collected under the procedures for the random agent as described above in Section~\ref{randomlearning}, and up through batch $B-1$ for data collected under the procedures for the adaptive agent--excluding the first observation. 
+  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
+%  \item Separating the data into $k$ folds, fit optimal depth\textcolor{black}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+%    \begin{align*}
+%      \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
+%       \sum_{i \in \mathcal{I}_{-k}}
+%      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
+%       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
+%    \end{align*}
+%% Point-wise optimal random forest  
+%  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
+%    \begin{equation*}
+%\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
+%    \end{equation*}
+  \item To evaluate the policies, take the average scores :
     \begin{align*}
-          \hat{V}(\hat{\pi}_{w^*})  &:= \frac{1}{\big{\lvert} \mathcal{I}^* \big{\rvert}} \sum_{i \in \mathcal{I}^* } 
-          \hat{\Gamma}_{i, w_i^*} 
-  \end{align*}
+          \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
+      \hat{V}(\hat{\pi}_{opt})  
+      %% Point-wise optimal random forest  
+      % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
+					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
+          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
+          \end{align*}
+%   \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
+
 
 
 \section{Pre-experimental simulation DGP}\label{appendix:dgp}
