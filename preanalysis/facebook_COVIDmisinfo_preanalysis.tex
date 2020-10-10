@@ -81,7 +81,7 @@ This project evaluates the effect of interventions designed to decrease sharing 
 %% in this case, we think that belief may have less to do with behavior/behavior not to be contingent upon belief...
 
 % how we do it
-Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Given variation in individuals' susceptibility to misinformation \citep{wittenberg2020misinformation}, we might also expect there to be heterogeneity in the effectiveness of treatments across individuals. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. In this design, we allow the data to tell us which treatments will be part of the optimal contextual policy and which covariates will be used to split the data, flexibly learning what works best and for whom. By exploring heterogeneity in response to treatment we improve our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
+Using a contextual adaptive experimental design, we sequentially assign treatment probabilities to privilege assignment to the most effective interventions, and minimize assignment to ineffective or counter-productive interventions. Given variation in individuals' susceptibility to misinformation \citep{wittenberg2020misinformation}, we might also expect there to be heterogeneity in the response to treatments across individuals. Our aim is to learn an optimal contextual policy that will assign respondents the intervention that is most effective for them, conditional on their covariate profile. In this design, we allow the data to tell us which treatments will be part of the optimal contextual policy and which covariates will be used to split the data, flexibly learning what works best and for whom. By exploring heterogeneity in response to treatment we improve our understanding of how to tackle harmful misinformation during an ongoing health crisis. 
 
 
 % how we build on existing lit
@@ -133,7 +133,7 @@ To collect stimuli we adopted several criteria to search for both false and true
 
 \subsection{Sample recruitment}
 We will recruit respondents in Kenya and Nigeria using Facebook advertisements targeted to users 18 years and older living in these countries.\footnote{Based on previous work it is clear that Facebook imputes location information for some of its users, which can be inaccurate \citep{Rosenzweig_2020}. We will also ask a location screening question to ensure our respondents live in our countries of interest.} %
-To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot. Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}. We anticipate that our sample will look similar to the overall Facebook population in these countries, which tends to be more male, more urban, and more educated than the overall population \citep{Rosenzweig_2020}. We will analyze how our sample compares to both the Facebook population and the general population in Kenya and Nigeria using Facebook's advertising API data and nationally representative Afrobarometer surveys conducted in both countries. 
+To achieve balance on gender within our sample we create separate ads targeting men and women in both countries. Our target sample size is 1,500 respondents in each country for our pilot.\footnote{\hl{Assuming the maximum feasible variance under our response function, we calculate that this sample size will be sufficient to ensure that our estimate of the variance under the control condition will have an (asymmetric) 95\% confidence interval around the true variance with a width of 15\% of the true variance. This is relevant to ensure that our simulations discussed in Section}~\ref{simulations}\hl{ will be stable and appropriate to the setting.}} Size of the full scale study will be determined following piloting, in procedures described in Section~\ref{simulations}. We anticipate that our sample will look similar to the overall Facebook population in these countries, which tends to be more male, more urban, and more educated than the overall population \citep{Rosenzweig_2020}. We will analyze how our sample compares to both the Facebook population and the general population in Kenya and Nigeria using Facebook's advertising API data and nationally representative Afrobarometer surveys conducted in both countries. 
 
 
 Advertisements will appear within Facebook or Instagram, offering users with the opportunity to ``Take a 20 minute academic survey on Messenger - receive airtime.'' Incentives will be approximately 0.50-0.55 USD, accounting for transaction and messaging fees on the \href{https://africastalking.com/}{Africa's Talking} airtime distribution platform.%
@@ -202,9 +202,9 @@ We vary whether the pledge is made in private (within the chatbot conversation) 
 \subsection{Covariates}
 
 Covariate measurement plays an important role in our contextual adaptive design. We assign treatment conditional on context, where the context is defined by the measured pre-treatment covariates. (Procedures for treatment assignment are detailed in Section ~\ref{adaptiveagent}; the full list of covariates and question wording is in Appendix~\ref{appendix:covariates}.)
-The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``\dots not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual susceptibility to misinformation, ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in the effectiveness of the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate treatment effects.
+The motivation for this \textit{contextual} adaptive experiment comes from the widely shared belief by misinformation scholars that \textit{context matters.} More specifically, scholars note that ``\dots not all misinformation is created equal, nor are all individuals equally susceptible to its influence'' \citep{wittenberg2020misinformation}. In addition to heterogeneity in individual susceptibility to misinformation, ``responses to corrections are likely heterogeneous'' \citep{swire2020searching}. Hence, we expect to observe heterogeneity in response to the treatments described in the previous section and explicitly incorporate this into our experimental design by pre-specifying the covariates that we anticipate to moderate response.
 
-Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous treatment effects to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individuals' receptivity to interventions to combat the spread of misinformation?
+Despite the fact that many prominent scholars emphasize the importance of context and heterogeneity among individuals, misinformation research generally relegates heterogeneous response to secondary analyses. Moreover, the existing misinformation literature centered around studies conducted with respondents in North America and Europe, most often focuses on political ideology \citep{pennycook_epstein_mosleh_arechar_eckles_rand_2019}, cognition or inclination to deliberate \citep{bago2020fake}, and media literacy \citep{guessetal2020digital}. Our study expands this focus to explore heterogeneity with respect to additional respondent covariates. Outside of contexts where partisanship is a salient identity and lens through which individuals interpret news and information, what are the likely sources of heterogeneity in individuals' receptivity to interventions to combat the spread of misinformation?
 
 In addition to the demographic covariates commonly used in social science research, we also include specific questions regarding knoweldge of and concern about COVID-19, an index of scientific views, beliefs about government efficacy in the current coronavirus pandemic, religious behaviors and beliefs, locus of control, and digital literacy. These variables capture what other researchers have suggested are primary sources of heterogeneity in responses to misinformation: age, analytical thinking (captured in our scientific beliefs index), and need for closure (captured in our concern regarding COVID-19 concern measurement and the beliefs about government efficacy measurement) \citep{wittenberg2020misinformation}. However, our primary objective is to learn an optimal policy conditional on covariates, and not to determine \textit{which} covariates matter, and by how much. %For this reason, we refrain from formalizing hypotheses regarding treatment effect heterogeneity.
 
@@ -383,7 +383,7 @@ We hypothesize that the three headline-level treatments listed above will perfor
 
 
 % pledge hypotheses
-We expect the pledge respondent-level treatment to be more effective among people who more frequently post and interact with friends on Facebook, more religious respondents (i.e. those who attend religious services more frequently), and those with high CRT scores. Among respondents who are randomly assigned the \textit{public} pledge treatment, we anticipate this treatment to be more effective among respondents who engage on Facebook regularly (as measured by the number of times they posted in the past 7 days and their frequency of communication with friends on the platform during the same period). In other words, we expect that people who are more engaged on social media, and therefore likely have more meaningful connections on the platform, will face higher audience costs to pledging to fight misinformation and then sharing dubious posts and will therefore reduce their sharing of misinformation. We also hypothesize that more religious respondents and those with high CRT scores, compared to their counterparts, may have stronger motivations to remain consistent with their own behavior. Meaning if they have pledged\todo{Do we want to say anything here - or below - about ITT estimates?} to helps spot misinformation, they will be less inclined to share it -- at least compared to those who may care less about commitment and consistency with their own previous actions.\todo{@Molly - i think you had clearer ideas on this so pls feel free to add in!}
+\hl{We expect the pledge respondent-level treatment to be more effective among people who more frequently post and interact with friends on Facebook, those who are more religious (i.e. those who attend religious services more frequently), and those with high CRT scores. Among respondents who are randomly assigned the \textit{public} pledge treatment, we anticipate this treatment to be more effective among respondents who engage on Facebook regularly (as measured by the number of times they posted in the past 7 days and their frequency of communication with friends on the platform during the same period). In other words, we expect that people who are more engaged on social media, and therefore likely have more meaningful connections on the platform, will face higher audience costs to pledging to fight misinformation and then sharing dubious posts and will therefore reduce their sharing of misinformation. We also hypothesize that more religious respondents and those with high CRT scores, compared to their counterparts, may have stronger motivations to remain consistent with their own behavior. Meaning if they have pledged to helps spot misinformation, they will be less inclined to share it -- at least compared to those who may care less about commitment and consistency with their own previous actions. We evaluate heterogeneity with respect to intention to treat, i.e., individuals who were assigned to the pledge treatment, irrespective of whether they actually took the pledge. However, we will also report rates at which respondents clicked the button to share the pledge across groups under comparison.}
 
 
 
@@ -394,7 +394,7 @@ We expect the pledge respondent-level treatment to be more effective among peopl
 %\item \textit{We expect the real-information headline-level treatment to be more effective among those with a weaker internal locus of control, compared to those with a greater internal locus of control.} We anticipate that perhaps those who believe they have no choice at all over how their life turns out, once told that there is no cure for COVID-19 will be less likely to share ``cures'' with friends. 
 
 
-\hl{\textbf{Best respondent and headline-level treatments:}} \todo{wasnt sure best place for these}In addition to the above hypotheses related to treatment heterogeneity, we also plan to test heterogeneity with respect to the best performing respondent-level and headline-level treatments. To estimate these we again take the median as the splitting point of continuous covariates to create ``high'' and ``low'' categories: 
+\hl{\textbf{Best respondent and headline-level treatments:}} In addition to the above hypotheses related to treatment heterogeneity, we also plan to test heterogeneity with respect to the best performing respondent-level and headline-level treatments. To estimate these we again take the median as the splitting point of continuous covariates to create ``high'' and ``low'' categories: 
 
 Specifically, we will test:
 \begin{enumerate}
@@ -404,7 +404,7 @@ Specifically, we will test:
 
 
 \subsubsection{Baseline levels}\label{baseline_levels}
-In addition to treatment effect heterogeneity, we also anticipate that certain types of people are simply more likely to share false information, compared to true information. In particular, we expect that baseline rates of sharing false posts (compared to true posts) will be higher among these subgroups:\todo{I didnt make this about who will just be more likely to share (anything), period. but focused on false info. but could probably apply to both types of sharing...}
+In addition to response heterogeneity, we also anticipate that certain types of people are simply more likely to share false information, compared to true information. In particular, we expect that baseline rates of sharing false posts (compared to true posts) will be higher among these subgroups:
 \begin{itemize}
 \item young
 \item male
@@ -447,18 +447,19 @@ In addition to treatment effect heterogeneity, we also anticipate that certain t
 
 To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
 
-We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we denote contexts associated with counterfactual potential outcomes as $x_w$, where $x$ is the observed covariate vector, augmented by the treatment indicator(s) consistent with treatment $W =w$, and potentially treatment covariate interactions; let this vector be of length $d$ for all $w \in \ww$. 
+We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we denote contexts associated with counterfactual potential outcomes as $x_{[w]}$, where $x$ is the observed covariate vector, augmented by the treatment indicator(s) consistent with treatment $W =w$, and potentially treatment covariate interactions; let this vector be of length $d$ for all $w \in \ww$. 
 
-\hl{For the agent, we assume a Gaussian distribution, supposing that there is some unknown coefficient vector $\theta\in R^{d}$, such that the $y_i(w) \sim \mathcal{N}\left( x_{[w],i}^\top \theta, \sigma\right)$. The Gaussian assumption is used to implement the bandit agent, but, as }\cite{agrawal2013thompson}\hl{ note, we do not require the true reward distribution to be Gaussian. }
+We implement the linear model under the heuristic that it follows a Gaussian distribution, supposing that there is some unknown coefficient vector $\theta\in R^{d}$, such that the $\E[Y_i(w)|X_i = x] = x_{[w]}^\top \theta$. %\sim \mathcal{N}\left( x_{[w],i}^\top \theta, \nu\right)$.%\footnote{Note that the variance term here is different than the coefficient variance covariance matrix discussed below. We follow \cite{agrawal2013thompson} in setting $\nu$ as a term that accounts for the sample size, the dimensionality of the covariates, and the variance or bounding of the distribution; we note that in this implementation, it does not vary across treatment arms.} 
+We assign treatment under the adaptive agent as if the reward distribution were Gaussian, but, as \cite{agrawal2013thompson} note, we do not require the true reward distribution to be Gaussian for regret bounds to hold. 
 
-%We assume the variance is constant within arms, i.e., $\V[Y(w)|X = x] = \sigma^2_w$. The conditional reward function is modeled as being distributed,
+%We assume the variance is constant within arms, i.e., $\hat\V[Y(w)|X = x] = \sigma^2_w$. The conditional reward function is modeled as being distributed,
 %  \begin{align}
 %    \mu_w(x) \sim \mathcal{N}({\mu}_w(x), {\sigma}_w^{2}(x)) \qquad %\text{for } s \in \{1, \cdots, S\} \text{ and treatment }w
 %    \text{ for all treatments }w \in \ww
 %  \end{align}
 
 
-Our implementation roughly follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta$ and $\hat\sigma^2$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data and then updating the treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the Batched linear Thompson sampling algorithm are provided in Algorithm~\ref{algg:bblts}; we present an overview below. 
+Our implementation roughly follows the balanced linear Thompson sampling algorithm described in \cite{dimakopoulou2017estimation, dimakopoulou2019balanced}, where the estimates $\hat\theta$ and $\hat\V[\hat\theta]$ are produced using weights to account for unequal assignment probabilities. We use a batched approach to updating, collecting data and then updating the treatment assignment model after each batch. We denote batches $\mathcal{I}_b$ for $b = 1, \dots, B$. Full details for the batch-wise linear Thompson sampling algorithm are provided in Algorithm~\ref{algg:bblts}; we present an overview below. 
 
 \paragraph{Adaptive agent}\label{agent}
 
@@ -470,7 +471,7 @@ Our implementation roughly follows the balanced linear Thompson sampling algorit
 \begin{enumerate}
    \item \label{step:fit} At the beginning of each batch, fit a ridge regression of the outcome regressed on treatment-augmented covariates; compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data. % .%
 % \footnote{We set M = $1,000$.}  
- This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta$ and variance, $\V[\hat\theta]$.\footnote{
+ This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta$ and variance, $\hat\V[\hat\theta]$.\footnote{
 We use the below linear model for the length $d$ parameter vector $\theta$, 
 \begin{align*}
 {\mu}_w(X) & =
@@ -482,7 +483,7 @@ We use the below linear model for the length $d$ parameter vector $\theta$,
 			\numberthis
          \label{eq:linear_model_full}
 \end{align*} 
-The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$ and interaction of treatment levels, $\beta_{w^{R,H}}$. 
+The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w^R}$ and $\beta_{w^R}$. 
 %The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
 Observations are weighted according to standard inverse probability weights using known assignment probabilities, following \cite{dimakopoulou2017estimation}, as in Equation~(\ref{eq:IPW}). %Stabilized inverse probability weights are discussed in Appendix~\ref{appendix:stabilized}. 
 
@@ -491,16 +492,16 @@ We assume covariates are mean-centered and scaled to have sample variance of one
 
 For each observation $i$ in batch $b$,
 \begin{enumerate}
- \item Draw $M$ draws from $\tilde \theta ^{(m)} \sim \mathcal{N}\left(\hat \theta,\V[\hat\theta]\right)$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{We set $M = 1000$.}
+ \item Draw $M$ draws from $\tilde \theta ^{(m)} \sim \mathcal{N}\left(\hat \theta,\hat\V[\hat\theta]\right)$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{We set $M = 1000$.}
 				\begin{align}
 %    q_w(X_i) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
    q_w = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}
 				\end{align}		
-\item These probabilities are constrained by a pre-determined probability floor, $p$, and rescaled to sum to one. 
-				\begin{align}
-     \tilde{q}_w & =\max\left\{q_w, p\right\} \\
-    e_w& = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }. 
-				\end{align}
+\item These probabilities are constrained by a pre-determined probability floor, $p$, and rescaled to sum to one, giving us $e_{1}, \dots, e_{|\ww|}$. 
+%				\begin{align}
+%     \tilde{q}_w & =\max\left\{q_w, p\right\} \\
+%    e_w& = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }. 
+%				\end{align}
 %\item Denote the control condition $w^{C}$. 20\% of the sample is automatically allocated to the control condition--in addition to the scaled portion of the remaining sample that is assigned under Thompson sampling. The other probabilities are re-scaled accordingly. \todo{ Remove control over- augmented}
 %      \begin{align}
 %         e_{w_C}(X_i) & = 0.2 + 0.8\hat{q}_{w_C}(X_i) \\
@@ -586,7 +587,7 @@ The weights $\xi^{IPW}_w(X_i)$ are by design only produced from historical data.
        \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
     \hl{To ensure we learn an optimal policy that is contextual, if we learn a policy where in the policy tree object, all of the actions are equivalent across leaves (i.e., the policy is not contextual), we remove this fixed treatment and re-learn the tree policy on the remaining treatments; we repeat this until we learn a non-uniform policy. }
-    \todo{\texttt{policy\_tree} doesn't have min node size, as in grf; to-follow up on possible approaches for implementing this. }
+    %\todo{\texttt{policy\_tree} doesn't have min node size, as in grf; to-follow up on possible approaches for implementing this. }
     
   \item We conduct evaluation of fixed policies on the adaptively collected data. %We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
@@ -1089,18 +1090,28 @@ A note on notation: while $X_i$ represents the covariates observed for individua
 %				\For{$w\in \ww$}
 %					\State $B_w \leftarrow X^\top_w \Xi_w X_w + \lambda^{CV} \mathbf{I}$ 
 %					\State $\hat\theta_{w} \leftarrow B_w^{-1} X_w^\top \Xi_w r_w$
-%					\State $\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
+%					\State $\hat\V[\hat\theta_{w}] \leftarrow B_w^{-1} \left(\left( r_w - X_w^\top\hat\theta_{w} \right)^\top \Xi_w \left( r_w - X_w^\top\hat\theta_{w} \right)\right)$
 %				\EndFor
 				\State $B \leftarrow \X^\top \Xi \X + \lambda^{CV} \mathbf{I}$  
 				\State $\hat\theta \leftarrow B^{-1} \X^\top \Xi y$
-				\State $\V[\hat\theta] \leftarrow B^{-1} \left(\left( \y - \X^\top\hat\theta \right)^\top \Xi \left( \y - \X^\top\hat\theta \right)\right)$
+				\State $\hat\V[\hat\theta] \leftarrow B^{-1} \left(\left( \y - \X^\top\hat\theta \right)^\top \Xi \left( \y - \X^\top\hat\theta \right)\right)$
 			\EndIf
 			\For{$m = 1, \dots, M$}
-				\State Sample $\tilde \theta^{(m)}  \sim \mathcal{N}\left(\hat\theta, \V[\hat\theta] \right)$
+				\State Sample $\tilde \theta^{(m)}  \sim \mathcal{N}\left(\hat\theta, \hat\V[\hat\theta] \right)$
 			 \EndFor
 				\State $q_w \leftarrow \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}$ \Comment{ Compute TS probabilities based on observed context.}
      			\State $\tilde{q}_w =\max\left\{q_w, p\right\}\ \ \forall w \in \ww$ \Comment{Impose probability floors,}
-     			\State ${e}_w = \frac{ \tilde{q}_w}{\sum\limits_{w }\tilde{q}_w }\ \ \forall w \in \ww$ \Comment{ and rescale. }
+			\State $u_{\textrm{total}} = \sum_w \tilde{q}_w - 1$ \Comment{ and rescale. }
+			\State $u_{w} = \tilde{q}_w - p \ \ \forall w \in \ww$
+			\State $ c = u_{\textrm{total}} / \left( \sum_w u_{w} \right)$
+			\State $e_w = \tilde{q}_w -c*u_{w} \ \ \forall w \in \ww$
+%	def apply_floor(a, amin):
+%    new = np.maximum(a, amin)
+%    total_slack = np.sum(new) - 1
+%    individual_slack = new - amin
+%    c = total_slack / np.sum(individual_slack)
+%    return new - c * individual_slack			
+% 			\State ${e}_w = \frac{ \tilde{q}_w}{\sum\limits_{w }\tilde{q}_w }\ \ \forall w \in \ww$ \Comment{ and rescale. }
 %			\State $e_{w_C}(X_{[W]i})  = 0.2 + 0.8\hat{q}_{w_C}(X_{[W]i}) $ \Comment{Augment the control with a fixed probability. }
 %                         \State $e_{w}(X_{[W]i})  = 0.8\hat{q}_w(X_{[W]i}) \ \ \forall w \in \ww \setminus \{w_C\}$ \Comment{Ensure probabilities sum to 1.}  
 		\EndIf
