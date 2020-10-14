@@ -1,8 +1,8 @@
-%\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
 % The next three lines are temporary, for todo notes, remove after notes are removed
-\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
-\setlength{\marginparwidth}{4.5cm}
-\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
+%\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+%\setlength{\marginparwidth}{4.5cm}
+%\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
 
 \usepackage{soul} % for highlighting
 \usepackage{tikz}
@@ -528,12 +528,12 @@ At the beginning of the batch,
 %      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
 %       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
 %    \end{align*}
-  \item \hl{Collect data assigning treatment for each observation with equal probability to:}\label{step:policies}
+  \item For each observation $i$ in the final batch, assign treatment with equal probability to:\label{step:policies}
   \begin{itemize}
   \item the pure control, 
   \item the best uniform headline level policy, with no respondent-level treatment, 
   \item the best uniform respondent-level policy, with no headline-level treatment, and
-  \item the best best contextual policy, as determined by the policy tree object. 
+  \item the best best contextual policy conditional on $x_i$, as determined by the policy tree object. 
   \end{itemize}
 \end{enumerate}
 \end{enumerate}
@@ -541,14 +541,14 @@ At the beginning of the batch,
 
 \section{Analysis}\label{analysis}
 
-To estimate the value of a policy, we take the average of doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores, 
+To learn the best uniform and contextual policies, we must conduct a preliminary evaluation on the adaptively collected data. We then use the last batch for final evaluation and hypothesis testing. To account for unequal treatment assignment probability, we use doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores, 
 
       \begin{align*}
         \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \gamma_w(X_i)(Y_{i} - \mu_w(X_i)). \numberthis\label{eq:DR}\\
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
-We will estimate $\hat\mu_{w}(X_{i})$, the conditional mean for each $w$ using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
+We estimate $\hat\mu_{w}(X_{i})$, the conditional mean for each $w$ using generalized random forests, as implemented by the \texttt{grf} package in \texttt{R} \citep{Tibshirani:2020aa}. 
 %following the approach described in Appendix~\ref{appendix:grf}. 
 $\xi_w(X_i)$ is a weight to account for unequal treatment assignment probabilities. %; we may use inverse probability weights calculated from the actual probabilities assigned under the experimental design; in practice, we use the stabilized versions of these weights, as described in Appendix~\ref{appendix:stabilized}.  %Again, we can use the full covariate set, as described in Appendix~\ref{appendix:covariates}, including the pre-test response measures on the righthand side of the model.
 %Our methods for analysis will differ depending on how the data is collected.
@@ -586,18 +586,18 @@ The weights $\xi^{IPW}_w(X_i)$ are by design only produced from historical data.
       \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
        \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
     \end{align*}
-    \hl{To ensure we learn an optimal policy that is contextual, if we learn a policy where in the policy tree object, all of the actions are equivalent across leaves (i.e., the policy is not contextual), we remove this fixed treatment and re-learn the tree policy on the remaining treatments; we repeat this until we learn a non-uniform policy. }
+    To ensure we learn an optimal policy that is contextual, if we learn a policy where in the policy tree object, all of the actions are equivalent across leaves (i.e., the policy is not contextual), we remove this fixed treatment and re-learn the tree policy on the remaining treatments; we repeat this until we learn a non-uniform policy. 
     %\todo{\texttt{policy\_tree} doesn't have min node size, as in grf; to-follow up on possible approaches for implementing this. }
     
   \item We conduct evaluation of fixed policies on the adaptively collected data. %We note that evaluation of the optimal policy is simplified, due to the on-policy evaluation in the final batch $B$:
       \begin{align}
           \hat{V}({\pi}_{w})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}
         \end{align}  
-   \hl{To learn the \textbf{best uniform headline-level policy}, we average over all treatment combinations that include a given headline treatment; effectively, this marginalizes over a balanced distribution of the respondent-level policies. }
+   To learn the \textbf{best uniform headline-level policy}, we average over all treatment combinations that include a given headline treatment; effectively, this marginalizes over a balanced distribution of the respondent-level policies. 
       \begin{align}
                           \hat{V}({\pi}_{w_H})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}, \ \ w \ni w_H \\
 w_H^* & =  \argmax_{w_H} \  \hat{V}({\pi}_{w_H})
-\intertext{\hl{The procedure is equivalent for learning the \textbf{best uniform respondent-level policy.} }}
+\intertext{ The procedure is equivalent for learning the \textbf{best uniform respondent-level policy.}}
           \hat{V}({\pi}_{w_R})  &:= \frac{1}{\bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}} \sum_{i \in \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} } \hat{\Gamma}_{i,w}, \ \ w \ni w_R  \\
 w_R^* & =  \argmax_{w_R} \  \hat{V}({\pi}_{w_R})
 %                     \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{\big{\lvert}  \mathcal{I}_{B} \big{\rvert}} \sum_{i \in \mathcal{I}_{B} }
@@ -606,9 +606,9 @@ w_R^* & =  \argmax_{w_R} \  \hat{V}({\pi}_{w_R})
     \end{align}
 %   \item To learn and evaluate the best fixed policy on a dataset, we again take the relevant approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
-\item \textbf{Evaluate policies} \hl{We hold out the last batch of data for policy evaluation and hypothesis testing. This allows us to learn and evaluate policies on separate splits of the data, whereas we otherwise would be subject to bias in our policy evaluations from over-fitting. Additionally, when using adaptively collected data, we are not able to use standard cross-fitting techniques such as k-fold cross-validation, due to the temporal dependencies. }
+\item \textbf{Evaluate policies} We hold out the last batch of data for policy evaluation and hypothesis testing. This allows us to learn and evaluate policies on separate splits of the data, whereas we otherwise would be subject to bias in our policy evaluations from over-fitting. Additionally, when using adaptively collected data, we are not able to use standard cross-fitting techniques such as k-fold cross-validation, due to the temporal dependencies. 
 
-The procedures for policy evaluation on random data are described in Appendix~\ref{randomlearning}, but are parallel to the steps outlined above. We again estimate nuisance components and compute doubly robust scores using only the last batch of the data. Note that in this last batch, we have just four policies of interest, as described in Step~\ref{step:policies} of the \hyperref[agent]{Adaptive Agent}. 
+The procedures for policy evaluation on data collected using simple random assignment, as in the pilot and simulations below, are described in Appendix~\ref{randomlearning}, but are parallel to the steps outlined above. %We again estimate nuisance components and compute doubly robust scores using only the last batch of the data. Note that in this last batch, we have just four policies of interest, as described in Step~\ref{step:policies} of the \hyperref[agent]{Adaptive Agent}. 
 \end{enumerate}
 The data collected from this study may be used for eventual application of a contextual implementation of the evaluation weighting method proposed in \cite{hadad2019confidence}, and advanced for contextual cases in \cite{zhan2020retrospective}. However, these methods will not be discussed in this pre-registration. 
 
@@ -616,10 +616,10 @@ The data collected from this study may be used for eventual application of a con
 \subsection{Hypothesis testing and other analysis}
 To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors of the (differences in) policies using the standard deviations of the (differences in) relevant scores, and conduct frequentist hypothesis testing. 
 
-For analysis regarding main effects and heterogeneity with respect to the best contextual and best uniform respondent- and headline-level policies, we use only the last batch of the data, calculating doubly robust scores as described in Appendix~\ref{randomlearning}. 
+For analysis regarding main effects and heterogeneity with respect to the best contextual and best uniform respondent- and headline-level policies, we use only the last batch of the data. %, calculating doubly robust scores as described in Appendix~\ref{randomlearning}. 
 
-\hl{For analysis regarding main effects and heterogeneity with respect to pre-determined factor levels, we use the adaptively collected data up through batch $B-1$, calculating doubly robust scores as described in Section}~\ref{adaptivelearning}\hl{. When considering a specific factor level, we marginalize over a balanced distribution of the other factor.}\footnote{For example, if we are interested in average outcomes under the Pledge respondent-level treatment, we will take an average of scores for the Pledge treatment crossed with each of the headline-level treatments, including the baseline control.} %
-\hl{We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. }
+For analysis regarding main effects and heterogeneity with respect to pre-determined factor levels, we use the adaptively collected data up through batch $B-1$, calculating doubly robust scores as described in Section~\ref{adaptivelearning}. When considering a specific factor level, we marginalize over a balanced distribution of the other factor.\footnote{For example, if we are interested in average outcomes under the Pledge respondent-level treatment, we will take an average of scores for the Pledge treatment crossed with each of the headline-level treatments, including the baseline control.} %
+We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. 
 
 \subsubsection{Main effects of each factor level}\label{main}
 For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report average outcomes under each headline factor level and separately respondent factor level, marginalizing over a balanced distribution of levels of the other factor.
@@ -627,7 +627,7 @@ For the primary response function as well as secondary outcomes discussed in Sec
 \subsubsection{Treatment effect heterogeneity}
 We report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
-\hl{To test hypotheses regarding specific heterogeneous treatment effects, as described in Section}~\ref{policieshte}\hl{, we again average across the relevant scores, and compare estimates across the two groups. Given that testing these treatment-covariate combinations will result in a large number of unique tests, we will adjust for multiple hypothesis testing for treatment effect heterogeneity by reporting tests under both Bonferroni and Benjamini-Hochberg corrections.}
+To test hypotheses regarding specific heterogeneous treatment effects, as described in Section~\ref{policieshte}, we again average across the relevant scores, and compare estimates across the two groups. Given that testing these treatment-covariate combinations will result in a large number of unique tests, we will adjust for multiple hypothesis testing for treatment effect heterogeneity by reporting tests under both Bonferroni and Benjamini-Hochberg corrections.
 
 
 %\subsection{Conditional means model}\label{ridge}
@@ -664,7 +664,7 @@ We set these hyperparameters by learning from our pilot data of 1,500 observatio
 
 We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
 
-We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy. A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
+We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy (where the distribution of possible responses has been shifted to be greater than zero). A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
 
 \paragraph{Data generating processes} 
@@ -674,15 +674,16 @@ The below procedures are bootstrapped 1,000 times.
 \item  Sample $S=1,500$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
 \item Estimate heterogeneity ratios under each element of the vector of penalty factors:
 \begin{enumerate}
-\item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.\footnote{The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
-\begin{align*}
-\hat{\mu}_w(X_{i}) & =
-			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
-			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
-			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
-         \label{eq:linear_model_full}
-\end{align*} 
-}
+\item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.
+%\footnote{The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
+%\begin{align*}
+%\hat{\mu}_w(X_{i}) & =
+%			\sum_{w} 1\{W_i = w\}\hat\beta_{w}  +
+%			\sum_{\ell}  X_{[\ell]i}\hat{\beta}_{\ell} +
+%			\sum_{\ell} \sum_{w}1\{W_i =  w\}  X_{[\ell]i} \hat{\beta}_{w, \ell}.\numberthis
+%         \label{eq:linear_model_full}
+%\end{align*} 
+%}
   \item Calculate conditional means $\mu_{w}(X^{(s)})$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(S)}$. 
   \item Estimate and store values for fixed policies for each $w$
       \begin{align}
@@ -700,7 +701,7 @@ The below procedures are bootstrapped 1,000 times.
 \end{enumerate}
 \item Search over the vector of potential penalty factors to find:
 \begin{enumerate}
-\item The factor with an associated heterogeneity ratio that is closest in absolute distance to 1.05. This will allow us to learn about the performance of our algorithm in a case with a small amount of heterogeneity. 
+\item The factor with an associated heterogeneity ratio that is closest in absolute distance to 1.05. This will allow us to learn about the performance of our algorithm in a case with a very small amount of heterogeneity. 
 \item The largest penalty factor within one standard deviation of cross validated error from no penalization. 
 \item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 1.05 and the above near-largest heterogeneity ratio, so that we have four equally spaced heterogeneity ratios. 
 \end{enumerate}
@@ -726,9 +727,9 @@ Our objective in selecting design hyperparameters is to optimize power for Hypot
 \label{tab:design}
 \begin{tabular}{l | l}
 \textbf{Hyperparameter} & \textbf{Choice set} \\ \hline
-Adaptive experiment size ($N^A = \bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}$ )& [1500:4500 (steps of 500)] \\
+Adaptive experiment size ($N^A = \bigg{\lvert} \bigcup\limits_{b=1}^{B-1} \mathcal{I}_{b} \bigg{\rvert}$ )& [1500:3000 (steps of 500)] \\
 Number of batches ($B$)& [10, 15, 20] \\
-First batch size ($|\mathcal{I}_1|$) & $N^A \times$ [1/10, 1/5, 3/10] \\
+First batch size ($|\mathcal{I}_1|$) & $N^A \times$ [1/5, 1/4, 1/3] \\
 Last batch size ($|\mathcal{I}_B|$) & **  \\
 %Outcome model & [Ridge, Random Forest] \\
 %Balancing weights & [Batch-wise IPW, ARB]\\
@@ -737,10 +738,7 @@ $N$ & $=N^A + |\mathcal{I}_B| $\\
 \hline
 \end{tabular}
 \end{table}
-\hl{**Last batch size $|\mathcal{I}_B|$ is determined based on power calculations conducted on the pilot data. Using the mean and standard deviation of the control policy estimated on the pilot data, the last batch size is set as sufficient to power a test of Hypothesis}~\ref{eq:optctr}\hl{ where the value of the contextual policy is only 5\% greater than the value of the control policy.}
-
-\hl{In simulations, this calculation is conducted on the fly after the adaptive portion of the experiment. }
-
+**Last batch size $|\mathcal{I}_B|$ is set at 2200, to sufficiently power a one-sided hypothesis test, Hypothesis~\ref{eq:optctr}, where the optimal contextual policy is .15 standard deviations greater than the control policy. 
 
 \section{Power Calculations}
 To ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions with hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
@@ -787,7 +785,7 @@ We include probability floors in the adaptive algorithm. In the random algorithm
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/power_against_control_policy_floor.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. }
+\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. A floor of 1/40 = 0.025 represents the random design. }
 \label{fig:power_control_floor}
 \end{figure}
 
@@ -847,15 +845,15 @@ In the adaptive algorithm, we explore randomly in the first batch. A larger firs
 %\end{figure}
 
 
-\subsection{Varying last batch size}
-In the adaptive algorithm, we use the last batch for (nearly) on-policy evaluation. Allowing more time for exploration may allow us to learn a higher-value optimal policy, but a larger last batch means more precise estimation of the policy estimated. The random algorithm does no last-batch on-policy evaluation, but evaluates off-policy over the duration of the experiment. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_final_batch_prop.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent relative size of the last batch used for near on-policy assignment. }
-\label{fig:power_control_final_batch_prop}
-\end{figure}
+%\subsection{Varying last batch size}
+%In the adaptive algorithm, we use the last batch for (nearly) on-policy evaluation. Allowing more time for exploration may allow us to learn a higher-value optimal policy, but a larger last batch means more precise estimation of the policy estimated. The random algorithm does no last-batch on-policy evaluation, but evaluates off-policy over the duration of the experiment. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\textwidth]{figures/power_against_control_policy_final_batch_prop.png}
+%\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent relative size of the last batch used for near on-policy assignment. }
+%\label{fig:power_control_final_batch_prop}
+%\end{figure}
 
 %\begin{figure}[H]
 %\centering
@@ -1178,39 +1176,41 @@ A note on notation: while $X_i$ represents the covariates observed for individua
 \subsection{Policy evaluation on randomly collected data}\label{randomlearning}
 
 %\subsection{Random forest estimation}\label{appendix:grf}
-
+Data is collected by assigning treatment uniformly at random. This means that we do not need to account for historical dependencies in the data when estimating nuisance components. We still split data to learn and evaluate policies on separate splits of the data; for comparison to the adaptively collected data, we also imagine ``batches'' of the same size as those collected in an adaptive experiment, but in practice these are only meaningful for determining the size of the last batch held out for evaluation. 
 \begin{enumerate}
-  \item Collect data by assigning treatment uniformly at random.
-  \item Estimate nuisance components $\hat{\mu}_{w}(X_i)$ for each treatment separately, following the steps below; for  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. 
+  \item \textbf{Compute doubly robust scores.} For weights  $\hat\xi_w(X_i)$, use assigned probabilities $1/|\ww|$. To estimate conditional means $\hat \mu_w(X_i)$, using \textit{all} data in $b$ in $b = 1, \dots, B-1$, for each treatment $w$:
 \begin{enumerate}
 \item Fit a random forest estimator on the observations assigned $w$. 
-\item For observations assigned $w$, calculate $\hat\mu_w(X_i, W_i = w)$ using out-of-bag predictions. 
-\item For observation not assigned $w$, calculate $\hat\mu_w(X_i, W_i \neq w)$ using regression forest predictions from the fitted model in step a. 
+\item For observations assigned $w$, calculate $\hat\mu_w(X_i)$ using out-of-bag predictions. 
+\item For observation \textit{not} assigned $w$, calculate $\hat\mu_w(X_i)$ using regression forest predictions from the fitted model in step a. 
 \end{enumerate}
-  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
-%  \item Separating the data into $k$ folds, fit optimal depth\textcolor{black}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+ Compute doubly robust scores $\hat{\Gamma}_{i,w}$ plugging the estimated nuisance components into (\ref{eq:DR}). 
+%  \item Compute doubly robust scores $\hat{\Gamma}_{i,w}$ substituting the estimated nuisance components into (\ref{eq:DR}). 
+%%  \item Separating the data into $k$ folds, fit optimal depth\textcolor{black}{-two} policy tree leaving out the $k$\textsuperscript{th} fold:
+%%    \begin{align*}
+%%      \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
+%%       \sum_{i \in \mathcal{I}_{-k}}
+%%      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
+%%       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
+%%    \end{align*}
+%%% Point-wise optimal random forest  
+%%  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
+%%    \begin{equation*}
+%%\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
+%%    \end{equation*}
+%  \item To evaluate the policies, take the average scores :
 %    \begin{align*}
-%      \hat{\pi}_{opt}^{-k} = \arg\max_{\pi \in \Pi}
-%       \sum_{i \in \mathcal{I}_{-k}}
-%      \langle \pi(X_{i}), \hat{\Gamma}_{i, \cdot} \rangle \\
-%       \text{where } \Pi \text{ is the class of depth-\textcolor{black}{two} policy trees.}
-%    \end{align*}
-%% Point-wise optimal random forest  
-%  \item Fit a point-wise optimal contextual policy $\hat{\pi}_{opt}$ by taking the maximum of predicted values at each point
-%    \begin{equation*}
-%\hat{\pi}_{x_i}  =     \argmax_{w} \hat{\mu}_{w}(x_i) 
-%    \end{equation*}
-  \item To evaluate the policies, take the average scores :
-    \begin{align*}
-          \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
-      \hat{V}(\hat{\pi}_{opt})  
-      %% Point-wise optimal random forest  
-      % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
-					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
-          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
-          \end{align*}
-%   \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
+%          \hat{V}({\pi}_{w})  &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i,w} \\
+%      \hat{V}(\hat{\pi}_{opt})  
+%      %% Point-wise optimal random forest  
+%      % &:= \frac{1}{N} \sum_{i}^N \hat{\Gamma}_{i, \hat{\pi}_{X_i}} 
+%					 &:= \frac{1}{K} \sum_{k}^K  \frac{1}{|\mathcal{I}_{-k}|} \sum_{i \in \mathcal{I}_{-k} }
+%          \langle \hat{\pi}_{opt}^{-k}(X_{t}), \hat{\Gamma}_{i, \cdot} \rangle
+%          \end{align*}
+%%   \item To learn and evaluate the best fixed policy on a dataset, we cannot simply take the treatment condition with the highest estimated value, as this will give us positive bias in expectation. To account for this, we use the approach described in Appendix~\ref{appendix:bestfixed}. 
 \end{enumerate}
+
+Complete steps 2 and 3 as described in Section~\ref{adaptivelearning}. 
 
 
 
