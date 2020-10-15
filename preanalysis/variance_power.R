@@ -1,9 +1,10 @@
 ## Power calculations to estimate variance
 # Goal: what is the desired sample size to get an estimate of the variance where
-# the width of the empirical 95% confidence interval is <= .1
+# the width of the empirical 95% confidence interval is <= .15
 require(ggplot2)
 set.seed(94305)
 nsims <- 1e4
+c <- .15
 
 # Assumptions ----
 # Sharing rates are 50/% for both true and false at baseline
@@ -32,18 +33,19 @@ df <- data.frame(size = ss,
                  U = df[3,],
                  W = df[3,]-df[2,])
 
-c <- .15
 ggplot(df, 
        aes(x = size, y = C)) +
   geom_point() +
   geom_point(aes(x = size, y = L)) +
+  geom_smooth(aes(x = size, y = L), se = FALSE, size = 0.5) +
   geom_point(aes(x = size, y = U)) +
-  geom_segment(aes(x = ss[min(which(W<2.25*c))], 
-                   y = L[min(which(W<2.25*c))], 
-                   xend = ss[min(which(W<2.25*c))], 
-                   yend = U[min(which(W<2.25*c))]), 
+  geom_smooth(aes(x = size, y = U), se = FALSE, size = 0.5) +
+  geom_segment(aes(x = ss[max(which(W>2.25*c))], 
+                   y = L[max(which(W>2.25*c))], 
+                   xend = ss[max(which(W>2.25*c))], 
+                   yend = U[max(which(W>2.25*c))]), 
                data = df, colour = 'blue', lty = 'dashed')
   
-ss[min(which(df$W<2.25*c))]
+ss[max(which(df$W>2.25*c))]
 
 
