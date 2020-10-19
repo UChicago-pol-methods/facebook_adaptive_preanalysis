@@ -664,7 +664,7 @@ We set these hyperparameters by learning from our pilot data of 1,500 observatio
 
 We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
 
-We refer to the heterogeneity ``ratio'' as the ratio of the value of the best contextual policy over the value of the best fixed policy (where the distribution of possible responses has been shifted to be greater than zero). A ratio of two would indicate that the best contextual policy returns response that is in expectation twice as large as response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
+We refer to the heterogeneity ``delta'' as the difference between the value of the best contextual policy and the best fixed policy, divided by the standard deviation of the best fixed policy. A delta of 0.5 would indicate that the best contextual policy returns response that is in expectation a half standard deviations higher than response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
 
 \paragraph{Data generating processes} 
@@ -672,7 +672,7 @@ The below procedures are bootstrapped 1,000 times.
 \begin{enumerate}
 %\item Define a vector of potential $\lambda$ values, \textcolor{red}{[TK, inclusive of zero]}. 
 \item  Sample $S=1,500$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
-\item Estimate heterogeneity ratios under each element of the vector of penalty factors:
+\item Estimate heterogeneity deltas under each element of the vector of penalty factors:
 \begin{enumerate}
 \item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.
 %\footnote{The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
@@ -697,13 +697,13 @@ The below procedures are bootstrapped 1,000 times.
     \begin{align}
       \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{M} \sum_m \hat{\mu}_{\hat{\pi}_{x^{(s)}}}(x^{(s)}) 
           \end{align}
-  \item Estimate the heterogeneity ratio as $\hat{V}(\hat{\pi}_{opt})/\hat{V}(\hat{\pi}_{w_{max}})$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates. 
+  \item Estimate the heterogeneity delta as $\left(\hat{V}(\hat{\pi}_{opt})-\hat{V}(\hat{\pi}_{w_{max}})\right)/\hat\sigma_{w_{max}}$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates, and $\hat\sigma_{w}$ is estimated as the standard deviation of the relevant response. 
 \end{enumerate}
 \item Search over the vector of potential penalty factors to find:
 \begin{enumerate}
-\item The factor with an associated heterogeneity ratio that is closest in absolute distance to 1.05. This will allow us to learn about the performance of our algorithm in a case with a very small amount of heterogeneity. 
+\item The factor with an associated heterogeneity delta that is closest in absolute distance to 0.05. This will allow us to learn about the performance of our algorithm in a case with a very small amount of heterogeneity. 
 \item The largest penalty factor within one standard deviation of cross validated error from no penalization. 
-\item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 1.05 and the above near-largest heterogeneity ratio, so that we have four equally spaced heterogeneity ratios. 
+\item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 0.05 and the above near-largest heterogeneity delta, so that we have four equally spaced heterogeneity deltas. 
 \end{enumerate}
 \end{enumerate}
 
@@ -740,151 +740,120 @@ $N$ & $=N^A + |\mathcal{I}_B| $\\
 \end{table}
 **Last batch size $|\mathcal{I}_B|$ is set at 2,500, to sufficiently power a one-sided hypothesis test, Hypothesis~\ref{eq:optctr}, where the optimal contextual policy is .15 standard deviations greater than the control policy. 
 
-\section{Power Calculations}
-To ensure the robustness of our adaptive design, we consider performance of our algorithm across a variety of simulated conditions with hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
+\section{Simulations}
+To ensure the robustness of our adaptive design, we consider performance of our algorithm wjtn hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
 \begin{itemize}
 \item \textbf{Relative size of the groups.} We allow the largest group to be 0.4, 0.6, and 0.8 share of the underlying population, with the two remaining groups approximately equally sized
 \item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership, over 3, 5, and 10 covariates. 
-\item \textbf{Heterogeneity ratio.} We vary the relative value of the best contextual policy to the best fixed policy to be 1.05, 1.5, or 1.95. 
+\item \textbf{Heterogeneity in the data.} We vary the relative value of the best contextual policy to the best fixed policy to be 0.02, 0.14, or .2.\footnote{These quantities were selected by setting the value of the best contextual policy as 1.05, 1.5, or 1.95 times greater than that of the best fixed policy, but in general, we prefer to present heterogeneity in terms of increases in standard deviations to ensure that this quantity is not dependent on shifts in the mean of the response function.} 
 \end{itemize}
 
-We simulate effect sizes that are equivalent to 0.6 in the scale of our response function. This would be the effect if respondents decreased their propensity to share misinformation stimuli by .1, and increased their propensity to share true information stimuli by .1. This is the magnitude of the average effect for the \textit{most effective treatment arm} within each group as compared to the control condition. Consequently, this is also the average treatment effect for the best contextual policy relative to the control. The average treatment effect for the best fixed policy then changes with heterogeneity ratios and relative group sizes, but it is strictly less than 0.6. 
+We simulate effect sizes that are equivalent to 0.6 in the scale of our response function. This would be the effect if respondents decreased their propensity to share misinformation stimuli by .1, and increased their propensity to share true information stimuli by .1. This is the magnitude of the average effect for the \textit{most effective treatment arm} within each group as compared to the control condition. Consequently, this is also the average treatment effect for the best contextual policy relative to the control. The average treatment effect for the best fixed policy then changes with heterogeneity deltas and relative group sizes, but it is strictly less than 0.6. 
 
 We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where their measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy, where the oracle policy would be the true best policy based on the simulated DGP. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
 
-A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}.
+A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. The features of the underlying DGPs primarily inform the value of the policy that is learned. Because we ensure that the value of the best contextual policy and the control policy are fixed across simulations, as we increase heterogeneity, all else equal, we have to decrease the value of the best fixed policy in regions where there is disagreement between the best contextual and the best fixed policy. Consequently, while the oracle contextual policy has the same value across simulations, the learned contextual policy may be of lower value in settings where there is more heterogeneity. Increasing number of predictive covariates also makes it harder for the algorithm to correctly learn group membership≈. 
+
 
 \FloatBarrier
 \subsection{Overall power}
-These simulations provide justification for the choice of design hyperparameters described in Table~\ref{tab:design}. We see that in many of the settings below, the adaptive algorithm achieves power of 0.8 before the random design. However, this is not always the case, and careful choice of design hyperparameters as described in Section~\ref{simulations} will help us to optimize for power. In the figures below, we marginalize over the choice of design hyperparameters; we then consider each hyperparameter in turn. 
+These simulations provide justification for the choice of design hyperparameters described in Table~\ref{tab:design}. We see that in the settings below, the adaptive algorithm achieves higher power than the random design at all timepoints; this is due to learning a higher value policy in the learning stage of the experiment, and in the evaluation stage, allocating treatment only to the policies of interest. Careful choice of design hyperparameters as described in Section~\ref{simulations} will help us to learn higher value policies, optimizing for power. 
+
+In the figures below, we marginalize over the choice of design hyperparameters; we then consider each hyperparameter in turn. Note that the x-axis below, we consider the size of the sample used to \textit{evaluate} the policies.  
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.05.png}
+%\caption{\textbf{Heterogeneity delta = 0.02:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\label{fig:power_control1.05}
+%\end{figure}\FloatBarrier
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.5.png}
+%\caption{\textbf{Heterogeneity delta = 0.14:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\label{fig:power_control1.5}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.95.png}
+%\caption{\textbf{Heterogeneity delta = 0/2:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\label{fig:power_control1.95}
+%\end{figure}
+
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.05.png}
-\caption{\textbf{Heterogeneity ratio = 1.05:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.02.png}
+\caption{\textbf{Heterogeneity delta:} 0.02. \\
+\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+\textbf{X-axis:} Sample used for evaluation.\\
+Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 \label{fig:power_control1.05}
 \end{figure}\FloatBarrier
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.5.png}
-\caption{\textbf{Heterogeneity ratio = 1.5:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.14.png}
+\caption{\textbf{Heterogeneity delta:} 0.14. \\
+\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+\textbf{X-axis:} Sample used for evaluation.\\
+Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 \label{fig:power_control1.5}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.95.png}
-\caption{\textbf{Heterogeneity ratio = 1.95:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.2.png}
+\caption{\textbf{Heterogeneity delta:} 0.20. \\
+\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+\textbf{X-axis:} Sample used for evaluation.\\
+ Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 \label{fig:power_control1.95}
 \end{figure}
 
-\subsection{Varying probability floor}
-We include probability floors in the adaptive algorithm. In the random algorithm, the floors are implicitly $ 1/ |\ww|$. In the figure below, we marginalize over the relative group size and the number of predictive covariates. Floors ensure that our weights are not too extreme when conducting estimation using inverse probability weights; floors that are too high reduce the algorithm's ability to exploit promising arms. In the figure below, we marginalize over the relative group size and the number of predictive covariates.  
+\subsection{Varying parameters of the adaptive algorithm}
+Aside from the last batch size, the design hyperparameters improve power by increasing the value of the estimated optimal policy. Note that the x-axis in the following figures, we consider the size of the sample used to \textit{learn} the policies. 
+
+We note that when there is very little heterogeneity in the data, we learn a better contextual policy using the randomly collected data. This may be because the adaptive algorithm exploits false leads, resulting in higher variance in the scores used for policy learning, without consequent benefit in more information on the best policies. 
+
+In these figures, we marginalize over the relative group size and the number of predictive covariates.  
+
+\subsubsection{Varying probability floor}
+We include probability floors in the adaptive algorithm. In the random algorithm, the floors are implicitly $ 1/ |\ww|$. Floors ensure that our weights are not too extreme when conducting estimation using inverse probability weights; floors that are too high reduce the algorithm's ability to exploit promising arms.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_floor.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. A floor of 1/40 = 0.025 represents the random design. }
-\label{fig:power_control_floor}
-\end{figure}
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.05_floor.png}
-%\caption{\textbf{Heterogeneity ratio = 1.05:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. }
-%\label{fig:power_control1.05_floor}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.5_floor.png}
-%\caption{\textbf{Heterogeneity ratio = 1.5:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. }
-%\label{fig:power_control1.5_floor}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.95_floor.png}
-%\caption{\textbf{Heterogeneity ratio = 1.95:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying probability floors}. Hues represent the probability floors. }
-%\label{fig:power_control1.95_floor}
-%\end{figure}
-
-
-
-\subsection{Varying first batch size}
-In the adaptive algorithm, we explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but reduces our ability to exploit promising arms. The random algorithm has no set first batch. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_initial_batch_prop.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying first batch size}. Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
-\label{fig:power_control_initial_batch_prop}
+\includegraphics[width=\textwidth]{figures/value_diff_control_floor.png}
+\caption{\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+\textbf{X-axis:} Sample used for policy learning.\\
+ Hues represent the probability floors. A floor of 1/40 = 0.025 represents the random design. }
+\label{fig:value_control_floor}
 \end{figure}
 
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.05_initial_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.05:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying first batch size}. Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
-%\label{fig:power_control1.05_initial_batch_prop}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.5_initial_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.5:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying first batch size}. Hues represent the proportion of the experiment assigned under random exploration in the first batch.  }
-%\label{fig:power_control1.5_initial_batch_prop}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.95_initial_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.95:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying first batch size}. Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
-%\label{fig:power_control1.95_initial_batch_prop}
-%\end{figure}
-
-
-%\subsection{Varying last batch size}
-%In the adaptive algorithm, we use the last batch for (nearly) on-policy evaluation. Allowing more time for exploration may allow us to learn a higher-value optimal policy, but a larger last batch means more precise estimation of the policy estimated. The random algorithm does no last-batch on-policy evaluation, but evaluates off-policy over the duration of the experiment. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_final_batch_prop.png}
-%\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent relative size of the last batch used for near on-policy assignment. }
-%\label{fig:power_control_final_batch_prop}
-%\end{figure}
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.05_final_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.05:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent the proportion of the experiment assigned on-policy in the last batch.}
-%\label{fig:power_control1.05_finall_batch_prop}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.5_final_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.5:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent the proportion of the experiment assigned on-policy in the last batch.}
-%\label{fig:power_control1.5_final_batch_prop}
-%\end{figure}
-%
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\textwidth]{figures/power_against_control_policy_1.95_final_batch_prop.png}
-%\caption{\textbf{Heterogeneity ratio = 1.95:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying last batch size}. Hues represent the proportion of the experiment assigned on-policy in the last batch.}
-%\label{fig:power_control1.95_final_batch_prop}
-%\end{figure}
-
-
-\subsection{Varying number of batches}
-In the adaptive algorithm, we update the assignment algorithm in batches; more batches move us closer to a fully online algorithm. However, frequent updating may be computationally or logistically costly. The random algorithm never updates. In the figure below, we marginalize over the relative group size and the number of predictive covariates. 
+\subsubsection{Varying first batch size}
+In the adaptive algorithm, we explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but reduces our ability to exploit promising arms. The random algorithm has no set first batch. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/power_against_control_policy_batches.png}
-\caption{Power for the hypothesis that the estimated optimal policy is not equal to the control policy, \textit{while varying the number of batches}. Hues represent the number of batches between the first and last batch.}
-\label{fig:power_control_batches}
+\includegraphics[width=\textwidth]{figures/value_diff_control_initial_batch_prop.png}
+\caption{\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+\textbf{X-axis:} Sample used for policy learning.\\ Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
+\label{fig:value_control_initial_batch_prop}
+\end{figure}
+
+\subsubsection{Varying number of batches}
+In the adaptive algorithm, we update the assignment algorithm in batches; more batches move us closer to a fully online algorithm. However, frequent updating may be computationally or logistically costly. The random algorithm never updates. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/value_diff_control_num_batches.png}
+\caption{ \textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+\textbf{X-axis:} Sample used for policy learning.\\ 
+Hues represent the number of batches between the first and last batch.}
+\label{fig:value_control_batches}
 \end{figure}
 
 
@@ -1225,7 +1194,7 @@ Objective for DGPs:
     \begin{itemize}
         \item number of covariates used to define clusters
         \item relative size of clusters
-        \item \textit{Heterogeneity ratio} (value of best contextual/best fixed policy)
+        \item \textit{Heterogeneity delta} (relative value of best contextual/best fixed policy)
     \end{itemize} 
 \end{itemize}
 
@@ -1244,7 +1213,7 @@ Requirements for DGPs:
     \item Parameter \begin{itemize}
         \item Number of useful covariates $p' \in \{3, 5, 10\}$ (i.e., covariates used to determine cluster membership)
         \item Largest cluster size ratio $c \in \{0.4, 0.6, 0.8\}$
-        \item Heterogeneity ratio $h \in \{1.05, 1.5, 1.95\}$
+        \item Heterogeneity delta $h \in \{0.02, 0.14, 0.2\}$
     \end{itemize}
     \item Generate large covariate matrix $\X'$ using correlated multivariate normal distribution, covariance matrix generated from $\frac{Beta(2,2) - 0.5}{2}$, where the dimension is $N \times p'$. We then add $p - p'$ columns of noise generated using a standard normal distribution to form the full covariate matrix $\X$.
     \item Use iterative KNN to group covariates observed into $k = 3$ clusters with cluster size [$N*c, \frac{N * (1-c)}{2}, \frac{N * (1-c)}{2}$], where $c$ = largest cluster size ratio
@@ -1254,11 +1223,11 @@ Requirements for DGPs:
 \begin{itemize}
    \item We generate rewards only relying on the first column of the covariate matrix $\X$, denoted as $X_1$
     \item Generate reward for best arm $w_{best}$ for each cluster $c_i,  \ i = 1, \dots, 3$, \[R_{w_{best, i}, c_i} = 0.6 - X_{1, c_i}\]
-    \item Reward for 2nd best arm, $w_{best_2}$ for each cluster $c_i,  i = 1, \dots, 3$, where we vary $\mu$ to search for the level of desired heterogeneity ratio $h$
+    \item Reward for 2nd best arm, $w_{best_2}$ for each cluster $c_i,  i = 1, \dots, 3$, where we vary $\mu$ to search for the level of desired heterogeneity delta $h$
     $$R_{w_{best_2, i}, c_i} = R_{w_{best, i}, c_i} + \epsilon_R $$ where $\epsilon_R \sim \mathcal{N}(\mu, 0.01), -0.6 \le \mu \le 0$. 
     \item Rewards for the rest of the arms
     $$R_{w, c_i} = -X_{1, c_i} \mbox{ for }  w \not\in \{w_{best, i}, w_{best_2, i}\}, i = 1, \dots, 3.$$
-    \item We vary $\mu$ to search for the level of desired heterogeneity ratio $h$.
+    \item We vary $\mu$ to search for the level of desired heterogeneity delta $h$.
         \item[$\Rightarrow$] Cluster membership defines groups over which there is heterogeneity, and we also have a separate lever to move the magnitude of the heterogeneity in treatment effects, which comes from how we vary the noise reward $\epsilon_R$ to add to the 2nd best arm. 
 \end{itemize}
 
