@@ -116,7 +116,7 @@ For this experiment, we focus on COVID-19 prevention and cure-related informatio
 \end{figure}
 % https://www.poynter.org/coronavirusfactsalliance/
 
-To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck websites for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is provided in Appendix~\ref{appendis:stimuli}.\footnote{In addition to realism of the study, we use actual stimuli circulating online to avoid manufacturing our own ``cures'' and adding to the spread of online misinformation. Given that we use real media posts, some of our respondents may be familiar with these stories. To examine whether people were differentially discerning \citep{nyhan2020facts} or had different sharing preferences because they had previously seen these stimuli, we ask respondents at the end of the survey whether they had previously seen the stimuli.}
+To collect stimuli we adopted several criteria to search for both false and true pieces of information related to coronavirus prevention techniques and COVID-19 cures. First, we searched AFP, Poynter, and AfricaCheck websites for any of this type of misinformation that had been checked by these organizations that appeared online in Kenya and Nigeria since the start of the pandemic in early March 2020. Second, we collected WHO myth-buster infographics that directly countered the misinformation items we found. We also collected prevention messaging from the Nigeria Center for Disease Control, National Emergency Response Committee in Kenya, and the Ministry of Health in both countries, as these are the main government entities combating the spread of the disease in these countries and official sources of information. Our full set of stimuli for each country is provided in Appendix~\ref{appendix:stimuli}.\footnote{In addition to realism of the study, we use actual stimuli circulating online to avoid manufacturing our own ``cures'' and adding to the spread of online misinformation. Given that we use real media posts, some of our respondents may be familiar with these stories. To examine whether people were differentially discerning \citep{nyhan2020facts} or had different sharing preferences because they had previously seen these stimuli, we ask respondents at the end of the survey whether they had previously seen the stimuli.}
 
 % People are more likely to endorse claims to which they have been exposed—at least absent effortful resistance (Gilbert, Tafarodi, and Malone 1993).
 
@@ -146,7 +146,7 @@ Advertisements will appear within Facebook or Instagram, offering users with the
 
 
 \subsection{Treatment}
-Drawing on the literature on experimental interventions to combat misinformation, we include several treatments designed to reduce the spread of misinformation online, which are targeted both at the respondent level and the headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}. 
+Drawing on the literature on experimental interventions to combat misinformation, we include several treatments designed to reduce the spread of misinformation online, which are targeted both at the respondent level and the headline level. This list of treatments also draws on real-world interventions that companies and platforms have instituted to combat misinformation. Treatments are presented in Table~\ref{tab:treatments}; further details are presented in Appendix~\ref{sec:treatments}. 
 
 Respondent-level treatments and headline-level treatments are implemented as separate factors, each of which has an empty baseline level that is the control. So respondents may be assigned the pure control condition, one of the respondent-level treatments but no headline-level treatment, one of the headline-level treatments but no respondent-level treatment, or one of the respondent-level treatments \textit{and} one of the headline-level treatments. 
 
@@ -288,7 +288,7 @@ This response function is the metric that we optimize for in our adaptive algori
 \subsubsection{Secondary Outcomes}
 Additionally, we measure secondary behavioral outcomes which allows us to further investigate the extent to which treatments may suppress the sharing of \textit{true} information.
 
-In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and at the end of the survey provide links to the \textit{true} information. For these true stimuli, we offer respondents the opportunity to actually share this information as a Facebook post, which has been created on our project Facebook page. We are able to measure whether respondents click on a button which opens a pop-up screen to share the post on Facebook, however, we cannot measure directly whether they then actually follow through to the second step and post the article on their own timeline. Consequently, we report only rates of clicking the initial share button. The response function here is measured as the percent of true stimili that the respondent said they wanted to share during the survey for which they later click the button to share on Facebook. (We do not differentiate between stimuli presented pre- and post- treatment here, since the behavioral response measurement for all stimuli is all post-treatment.) To provide some insight into the extent to which respondents followed up on an intention to share, we report the \textit{aggregate} number of times the associated post for each stimuli was shared. %We \textit{could} actually create a separate post for each treatment combination, and measure sharing that way, but this seems like overkill for a secondary outcome in an already complicated project.
+In order to obtain a behavioral measure of sharing, we collect the articles the respondent indicated they would like to share throughout the survey and at the end of the survey provide links to the \textit{true} information. For these true stimuli, we offer respondents the opportunity to actually share this information as a Facebook post, which has been created on our project Facebook page. We are able to measure whether respondents click on a button which opens a pop-up screen to share the post on Facebook, however, we cannot measure directly whether they then actually follow through to the second step and post the article on their own timeline. Consequently, we report only rates of clicking the initial share button. The response function here is measured as the percent of true stimuli that the respondent said they wanted to share during the survey for which they later click the button to share on Facebook. (We do not differentiate between stimuli presented pre- and post- treatment here, since the behavioral response measurement for all stimuli is all post-treatment.) To provide some insight into the extent to which respondents followed up on an intention to share, we report the \textit{aggregate} number of times the associated post for each stimuli was shared. %We \textit{could} actually create a separate post for each treatment combination, and measure sharing that way, but this seems like overkill for a secondary outcome in an already complicated project.
 
 At this point we also debrief respondents, informing them about the headlines they were shown that are false. Instead of allowing respondents to share these headlines, we provide links to tips for spotting misinformation online and also offer them the opportunity to share these tips on their timeline or on Messenger; we measure intention to share these tips as click-through-rates and aggregate number of shares of tips by treatment condition as well. 
 
@@ -302,7 +302,7 @@ At this point we also debrief respondents, informing them about the headlines th
 
 Our data is described by treatments $W_i \in \ww$\footnote{Our treatments are composed of two separate factors, but here we use $W$ to represent combined treatment conditions, i.e., the unique combination of one respondent-level and one headline-level treatment. Where we wish to explicitly differentiate, we use $W^R_i$ and $W^H_i$ for respondent- and headline-level treatments respectively. Each factor includes a baseline level absent intervention, and the cardinality $|\ww| = |\ww^H|\times |\ww^R|$.}; response,  $Y_i \in \RR$; and covariates, $X_i \in \xx$. 
 
-We assume the data is indexed by $i = 1, \dots, N$ where indexing represents the order in which respondents entered the experiment; this allows us to use $i$ to also represent relative chronological relationships in our sequential adaptive design. 
+The data is indexed by $i = 1, \dots, N$ where indexing represents the order in which respondents entered the experiment; this allows us to use $i$ to also represent relative chronological relationships in our sequential adaptive design. 
 
 We use potential outcome notation, where $Y_i(w)$ represents the potential outcome for respondent $i$ under treatment $w$.%, and by experimental design,  we have strong ignorability of potential outcomes to treatment conditional on observed covariates. 
 
@@ -317,7 +317,7 @@ In our setting, we will learn this policy, $\hat \pi$, and evaluate its value. T
 V(\pi) =  \E[Y(\pi(X_{i}))],
   \label{eq:policy_value}
 \end{align}
-where the expectation is taken over the distribution of $X$.\footnote{Here we will only consider deterministic policies, but for a random policy, the expectation will be taken over the joint distribution. }
+where the expectation is taken over the distribution of $X$.\footnote{Here we will only consider deterministic policies, but for a random policy, the expectation will be taken over the joint distribution of the covariates with the policy. }
 
 \subsection{Hypotheses}\label{hypotheses}
 
@@ -331,7 +331,7 @@ Our primary hypothesis is that we are able to estimate from the data an optimal 
   H_{0}: V(\pi_{opt}) = V(\pi_{w^{C}}) \qquad H_{a}:  V(\pi_{opt}) > V(\pi_{w^{C}})
 \end{align}
 \end{hypothesis}
-This is the hypothesis that we aim to optimize power for in our adaptive data collection. 
+This is the hypothesis that we aim to optimize power for. 
 
 We would also like to learn how much we gain by exploiting heterogeneity in the data. As secondary hypotheses, we propose that the optimal policy that we are able to estimate from the data improves over the best uniform respondent and headline level treatments; we learn these best uniform policies from the data, and test these hypotheses separately. 
 \setcounter{hypothesis}{2}
@@ -339,14 +339,14 @@ We would also like to learn how much we gain by exploiting heterogeneity in the 
   The best contextual policy that can be estimated from the data achieves higher value than the best uniform headline-level treatment, i.e., the fixed headline-level treatment with the highest associated value. 
   \label{eq:optheadline}
 \begin{align}
-  H_{0}: V(\pi_{opt}) = \argmax_{w^H} V(\pi_{w^H}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_{w^H} V(\pi_{w^H})
+  H_{0}: V(\pi_{opt}) = \max_{w^H} V(\pi_{w^H}) \qquad H_{a}:  V(\pi_{opt}) > \max_{w^H} V(\pi_{w^H})
 \end{align}
 \end{subhyp}
 
   \begin{subhyp}
  The best contextual policy that can be estimated from the data achieves higher value than the best uniform respondent-level treatment, i.e., the fixed respondent-level treatment with the highest associated value. 
 \begin{align}
-  H_{0}: V(\pi_{opt}) = \argmax_{w^R} V(\pi_{w^R}) \qquad H_{a}:  V(\pi_{opt}) > \argmax_{w^R} V(\pi_{w^R})
+  H_{0}: V(\pi_{opt}) = \max_{w^R} V(\pi_{w^R}) \qquad H_{a}:  V(\pi_{opt}) > \max_{w^R} V(\pi_{w^R})
 \end{align}
 \end{subhyp}
 
@@ -354,12 +354,12 @@ We discuss how we \textit{learn} these policies in Section~\ref{adaptivelearning
 %We test two secondary hypotheses regarding treatment effect heterogeneity. The literature on how age interacts with response to misinformation is not settled; \cite{wittenberg2020misinformation} note the attention given to age as an important moderator, and the finding that age correlates with propensity to share misinformation \citep[e.g.,]{guess2019less}, but echo the finding by \cite{amazeen2019reinforcing} that older respondents may be more likely to share fact-checks. Consequently, we test a two-sided hypothesis:
 
 
-\subsubsection{Heterogeneous treatment effects}\label{policieshte}
+\subsubsection{Heterogeneous response}\label{policieshte}
 
 While our main goal is to learn the best contextual policy -- and to see how this policy influences different types of people -- we also care about the outcome (reducing the spread of COVID-19 misinformation) and understanding which types of people are nudged toward this outcome by particular treatments. Therefore, we plan to examine how a few select treatments interact with particular covariates of interest. We do this in two ways - first by testing hypotheses particularly useful for industry and second by testing hypotheses driven by theoretical motivations, as described below.
 
-Hypotheses to inform industry practice:
-We will explore whether the following treatments and covariates have significant interaction terms. We select these treatments because these are currently, or were previously, used by social media companies including Facebook and Twitter. The below covariates were selected as those that social media companies directly collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. indicator for male) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). 
+\textbf{Hypotheses to inform industry practice:}
+We select the below treatments because these are currently, or were previously, used by social media companies including Facebook and Twitter. The below covariates were selected as those that social media companies directly collect or have access to, and therefore could more easily use for targeting interventions. For our covariates of interest we will divide these into two groups for any binary variables (i.e. indicator for male) and split on the median value for continuous variables to test two subgroups (i.e. age $\geq$ median and age $<$ median). 
 
 \textbf{Treatments:}
 \begin{itemize}
@@ -445,12 +445,12 @@ In addition to response heterogeneity, we also anticipate that certain types of 
 
 \subsection{Adaptive data collection}\label{adaptiveagent}
 
-To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatments, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the treatment space with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while continuing to improve outcomes over time \textit{within} the frame of the experiment. 
+To collect data with the objective of learning an optimal policy, we use a \textit{contextual bandit} algorithm, in which we sequentially update treatment assignment probabilities based on the observed history of treatment, response, and covariates. These types of algorithms navigate a tradeoff in \textit{exploration} of the response surface with \textit{exploitation} of those treatments which we have observed to be effective based on historical data. This allows us to continue to learn about treatment effect heterogeneity while improving outcomes over time \textit{within} the frame of the experiment. 
 
 We will use a version of linear Thompson sampling \citep{agrawal2013thompson}. Under Thompson sampling \citep{thompson1933likelihood,thompson1935theory}, treatment is assigned according to the Bayesian posterior probability that each treatment is best. In linear Thompson sampling, this is generalized to allow the outcome to be a linear function of covariates. Under this approach, we denote contexts associated with counterfactual potential outcomes as $x_{[w]}$, where $x$ is the observed covariate vector, augmented by the treatment indicator(s) consistent with treatment $W =w$, and potentially treatment covariate interactions; let this vector be of length $d$ for all $w \in \ww$. 
 
-We implement the linear model under the heuristic that it follows a Gaussian distribution, supposing that there is some unknown coefficient vector $\theta\in R^{d}$, such that the $\E[Y_i(w)|X_i = x] = x_{[w]}^\top \theta$. %\sim \mathcal{N}\left( x_{[w],i}^\top \theta, \nu\right)$.%\footnote{Note that the variance term here is different than the coefficient variance covariance matrix discussed below. We follow \cite{agrawal2013thompson} in setting $\nu$ as a term that accounts for the sample size, the dimensionality of the covariates, and the variance or bounding of the distribution; we note that in this implementation, it does not vary across treatment arms.} 
-We assign treatment under the adaptive agent as if the reward distribution were Gaussian, but, as \cite{agrawal2013thompson} note, we do not require the true reward distribution to be Gaussian for regret bounds to hold. 
+We implement the linear model supposing that there is some unknown coefficient vector $\theta\in R^{d}$, such that the $\E[Y_i(w)|X_i = x] = x_{[w]}^\top \theta$. %\sim \mathcal{N}\left( x_{[w],i}^\top \theta, \nu\right)$.%\footnote{Note that the variance term here is different than the coefficient variance covariance matrix discussed below. We follow \cite{agrawal2013thompson} in setting $\nu$ as a term that accounts for the sample size, the dimensionality of the covariates, and the variance or bounding of the distribution; we note that in this implementation, it does not vary across treatment arms.} 
+We assign treatment under the heuristic that the reward distribution is Gaussian, but, as \cite{agrawal2013thompson} note, we do not require the true reward distribution to be Gaussian for regret bounds to hold. 
 
 %We assume the variance is constant within arms, i.e., $\hat\V[Y(w)|X = x] = \sigma^2_w$. The conditional reward function is modeled as being distributed,
 %  \begin{align}
@@ -469,12 +469,11 @@ Our implementation roughly follows the balanced linear Thompson sampling algorit
 \item For equally sized batches $b = 2, \dots, B-1$:
 
 \begin{enumerate}
-   \item \label{step:fit} At the beginning of each batch, fit a ridge regression of the outcome regressed on treatment-augmented covariates; compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data. % .%
-% \footnote{We set M = $1,000$.}  
- This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta$ and variance, $\hat\V[\hat\theta]$.\footnote{
+   \item \label{step:fit} At the beginning of each batch, fit a ridge regression of the outcome regressed on observed treatment-augmented covariates; compute the minimum mean cross-validated error value of the penalization factor $\lambda^{CV}$ using the entire observed history of data. 
+    This model with penalty factor $\lambda^{CV}$ produces our estimate of the coefficient vector $\hat \theta$ and variance, $\hat\V[\hat\theta]$.\footnote{
 We use the below linear model for the length $d$ parameter vector $\theta$, 
 \begin{align*}
-{\mu}_w(X) & =
+\hat{Y}(W) | X & =
 			\sum_{w^R} 1\{W^R = w^R\}\beta_{w^R}  +
 			\sum_{w^H} 1\{W^H = w^H\}\beta_{w^H}  +\\ 
 			& \sum_{w^R} \sum_{w^H}1\{W^R = w^R\} \times 1\{W^H =  w^H\}\beta_{w^{R,H}} +  \\
@@ -492,12 +491,13 @@ We assume covariates are mean-centered and scaled to have sample variance of one
 
 For each observation $i$ in batch $b$,
 \begin{enumerate}
- \item Draw $M$ draws from $\tilde \theta ^{(m)} \sim \mathcal{N}\left(\hat \theta,\hat\V[\hat\theta]\right)$, and calculate the proportion of times each arm produced the maximum estimate under the covariate profile $x_i$:\footnote{We set $M = 1000$.}
+ \item Draw $M=1,000$ draws from $\tilde \theta ^{(m)} \sim \mathcal{N}\left(\hat \theta,\hat\V[\hat\theta]\right)$, and calculate the proportion of times each arm produced the maximum estimate under the counterfactual treatment augmented covariate profile  $x_{[w]i}$:
 				\begin{align}
 %    q_w(X_i) = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \argmax_w \{ x_i^\top \tilde \theta ^{(m)}_1, \dots, x_i^\top\tilde \theta_{|\ww|}^{(m)} \}  \right\}.
    q_w = \frac{1}{M} \sum_{m=1}^M 1\left\{ w = \underset{w}{\argmax} \{ x_{[1]i}^\top \tilde \theta ^{(m)}, \dots, x_{[|\ww|]i}^\top\tilde \theta^{(m)} \}  \right\}
-				\end{align}		
-\item These probabilities are constrained by a pre-determined probability floor, $p$, and rescaled to sum to one, giving us $e_{1}, \dots, e_{|\ww|}$. 
+				\end{align}
+	These are the raw Thompson sampling probabilities. 	
+\item In our algorithm, these probabilities are constrained by a pre-determined probability floor, $p$, and rescaled to sum to one, giving us $e_{1}, \dots, e_{|\ww|}$. 
 %				\begin{align}
 %     \tilde{q}_w & =\max\left\{q_w, p\right\} \\
 %    e_w& = \frac{ \tilde{q}_w(X_i)}{\sum\limits_{w }\tilde{q}_w(X_i) }. 
@@ -533,7 +533,7 @@ At the beginning of the batch,
   \item the pure control, 
   \item the best uniform headline level policy, with no respondent-level treatment, 
   \item the best uniform respondent-level policy, with no headline-level treatment, and
-  \item the best best contextual policy conditional on $x_i$, as determined by the policy tree object. 
+  \item the best contextual policy conditional on $x_i$, as determined by the policy tree object. 
   \end{itemize}
 \end{enumerate}
 \end{enumerate}
@@ -544,7 +544,7 @@ At the beginning of the batch,
 To learn the best uniform and contextual policies, we must conduct a preliminary evaluation on the adaptively collected data. We then use the last batch for final evaluation and hypothesis testing. To account for unequal treatment assignment probability, we use doubly robust scores $\Gamma_{i,w}$, as in (\ref{eq:DR}), following \cite{robins1994estimation}'s augmented inverse-propensity weighted scores, 
 
       \begin{align*}
-        \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \gamma_w(X_i)(Y_{i} - \mu_w(X_i)). \numberthis\label{eq:DR}\\
+        \Gamma_{i,w} = \mu_{w}(X_{i}) + 1 \{W_i = w \} \xi_w(X_i)(Y_{i} - \mu_w(X_i)). \numberthis\label{eq:DR}\\
          \mu_{w}(x)  = \E[Y_i(w) | X_i = x]
     \end{align*}
 
@@ -614,7 +614,7 @@ The data collected from this study may be used for eventual application of a con
 
 
 \subsection{Hypothesis testing and other analysis}
-To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate standard errors of the (differences in) policies using the standard deviations of the (differences in) relevant scores, and conduct frequentist hypothesis testing. 
+To evaluate the hypotheses from Section~\ref{hypotheses}, we estimate means and standard errors of the (differences in) policies using the averages and standard deviations of the (differences in) relevant scores, and conduct frequentist hypothesis testing. 
 
 For analysis regarding main effects and heterogeneity with respect to the best contextual and best uniform respondent- and headline-level policies, we use only the last batch of the data. %, calculating doubly robust scores as described in Appendix~\ref{randomlearning}. 
 
@@ -622,12 +622,12 @@ For analysis regarding main effects and heterogeneity with respect to pre-determ
 We note that this is different from the realized distribution of the other factor, as the adaptive design is intentionally unbalanced--and distributions of the \textit{other} factors will vary from level to level. We calculate these quantities by averaging across the relevant scores, and taking the standard deviations of the averages. 
 
 \subsubsection{Main effects of each factor level}\label{main}
-For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report average outcomes under each headline factor level and separately respondent factor level, marginalizing over a balanced distribution of levels of the other factor.
+For the primary response function as well as secondary outcomes discussed in Section~\ref{response}, we report average outcomes under each headline factor level and separately each respondent factor level, marginalizing over a balanced distribution of levels of the other factor.
 
 \subsubsection{Treatment effect heterogeneity}
 We report the policy tree object $\hat{\pi}_{opt}$ learned on the first $B-1$ batches of the data. In addition, we report the means and standard deviations of all covariates in each leaf in the evaluation split of the data. We note that absence of a given covariate in splitting does \textit{not} imply that the covariate is irrelevant for treatment effect heterogeneity, however, comparing the differences in covariate distributions across leaves can provide further insight into what may predict heterogeneous responses to treatment. 
 
-To test hypotheses regarding specific heterogeneous treatment effects, as described in Section~\ref{policieshte}, we again average across the relevant scores, and compare estimates across the two groups. Given that testing these treatment-covariate combinations will result in a large number of unique tests, we will adjust for multiple hypothesis testing for treatment effect heterogeneity by reporting tests under both Bonferroni and Benjamini-Hochberg corrections.
+To test hypotheses regarding specific heterogeneous response, as described in Section~\ref{policieshte}, we again average across the relevant scores, and compare estimates across the two groups. Given that testing these treatment-covariate combinations will result in a large number of unique tests, we will adjust for multiple hypothesis testing for response heterogeneity by reporting tests under both Bonferroni and Benjamini-Hochberg corrections.
 
 
 %\subsection{Conditional means model}\label{ridge}
@@ -662,9 +662,9 @@ To carry out implementation, the above description requires setting of several d
 
 We set these hyperparameters by learning from our pilot data of 1,500 observations from each country. In the pilot data, treatment is assigned uniformly at random. We conduct the below simulations \textit{separately} for each country, meaning that we may end up with meaningfully different designs in the two countries. 
 
-We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}) and using covariates in Appendix~\ref{appendix:covariates}, but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to generate heterogeneity that would plausibly exist in the true underlying populations. 
+We then simulate data generating processes (DGPs) based on the pilot data, with varying heterogeneity. We create these DGPs by fitting a model to each dataset following (\ref{eq:linear_model_full}), but instead of learning and applying the cross-validated penalty factor $\lambda^{CV}$, we generate models with varying complexity by over- and under-fitting to the data, imposing different penalty factors. In ridge regression, larger penalties will be associated with more parsimonious models, and less heterogeneity. Smaller penalties will be associated with more complex models, and consequently more heterogeneity. This approach allows us to simulate heterogeneity that would plausibly exist in the true underlying populations. 
 
-We refer to the heterogeneity ``delta'' as the difference between the value of the best contextual policy and the best fixed policy, divided by the standard deviation of the best fixed policy. A delta of 0.5 would indicate that the best contextual policy returns response that is in expectation a half standard deviations higher than response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
+We refer to the heterogeneity ``delta'' as the difference between the value of the best contextual policy and the best fixed policy, divided by the standard deviation of response under the best fixed policy. A delta of 0.5 would indicate that the best contextual policy returns response that is in expectation one half standard deviation higher than response under the best fixed policy. We can create a DGP with no heterogeneity by setting an arbitrarily large penalty factor, shrinking all treatment $\times$ covariate interactions to (effectively) zero. 
 
 
 \paragraph{Data generating processes} 
@@ -674,7 +674,7 @@ The below procedures are bootstrapped 1,000 times.
 \item  Sample $S=1,500$ observations with replacement from the empirical distribution of covariates in the pilot data; store this as $X^{(1)}, \dots,X^{(S)}$. 
 \item Estimate heterogeneity deltas under each element of the vector of penalty factors:
 \begin{enumerate}
-\item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor to generate conditional means models $\mu_{w}(X)$ for each treatment $w$.
+\item Fit the model (\ref{eq:linear_model_full}) to the pilot data under the relevant penalty factor $\lambda$ to generate a model of predicted response conditional on covariates $\hat{Y}(W) | X$ for each treatment $w$.
 %\footnote{The model is estimated using $L_{2}$ penalties for regularization, exclusive of the main treatment effects $\beta_{w}$. 
 %\begin{align*}
 %\hat{\mu}_w(X_{i}) & =
@@ -684,31 +684,27 @@ The below procedures are bootstrapped 1,000 times.
 %         \label{eq:linear_model_full}
 %\end{align*} 
 %}
-  \item Calculate conditional means $\mu_{w}(X^{(s)})$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(S)}$. 
-  \item Estimate and store values for fixed policies for each $w$
+  \item Calculate predictions $\hat{Y}(W) | X^{(s)}$ under the above fitted model conditional on covariates $X^{(1)}, \dots,X^{(S)}$ for each treatment $w$. 
+  \item Store values for fixed policies for each $w$
       \begin{align}
-          \hat{V}({\pi}_{w})  &:= \frac{1}{S} \sum_{s = 1}^S \mu_{w}(x^{(s)}) 
+          \hat{V}({\pi}_{w})  &:= \frac{1}{S} \sum_{s = 1}^S \hat{Y}(w) | X^{(s)}  
           \end{align}
-  \item Fit a point-wise optimal policy on the resampled data by taking the maximum conditional mean for each individual context $x^{(s)}$ 
-    \begin{equation}
-     \pi_{x^{(s)}} = \argmax_{ w } \mu_{w}(x^{(s)}) . 
-    \end{equation} 
-    \item Estimate and store value for the optimal policy:
+  \item Fit a point-wise optimal policy on the resampled data by taking the maximum conditional mean for each individual context $X^{(s)}$. Store the value for the optimal policy:
     \begin{align}
-      \hat{V}(\hat{\pi}_{opt})  &:= \frac{1}{M} \sum_m \hat{\mu}_{\hat{\pi}_{x^{(s)}}}(x^{(s)}) 
+      \hat{V}({\pi}_{opt})  &:= \frac{1}{S} \sum_{s = 1}^S \max_{ w } \hat{Y}(w) | X^{(s)}
           \end{align}
-  \item Estimate the heterogeneity delta as $\left(\hat{V}(\hat{\pi}_{opt})-\hat{V}(\hat{\pi}_{w_{max}})\right)/\hat\sigma_{w_{max}}$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates, and $\hat\sigma_{w}$ is estimated as the standard deviation of the relevant response. 
+  \item Compute the heterogeneity delta as $\left({V}({\pi}_{opt})-{V}({\pi}_{w_{max}})\right)/\hat\sigma_{w_{max}}$, where $w_{max}$ is the true best arm under the relevant conditional means model over the empirical distribution of covariates, and $\hat\sigma_{w}$ is the standard deviation of the relevant response \textit{in the pilot data}. 
 \end{enumerate}
 \item Search over the vector of potential penalty factors to find:
 \begin{enumerate}
-\item The factor with an associated heterogeneity delta that is closest in absolute distance to 0.05. This will allow us to learn about the performance of our algorithm in a case with a very small amount of heterogeneity. 
+\item The factor with an associated heterogeneity delta that is closest in absolute distance to 0.05. This will allow us to learn about the performance of our algorithm in a case with a small amount of heterogeneity. 
 \item The largest penalty factor within one standard deviation of cross validated error from no penalization. 
 \item The two penalties factors which minimize the absolute distance to 1/3 and 2/3 of the distance between 0.05 and the above near-largest heterogeneity delta, so that we have four equally spaced heterogeneity deltas. 
 \end{enumerate}
 \end{enumerate}
 
 \paragraph{Simulations}
-This then gives us four conditional mean models for \textit{each} bootstrap iteration. We then generate data from these models by sampling covariates from the empirical distribution from the pilot data and assigning response as the conditional mean from a given DGP + a noise term, where the noise term is based on the mean error between the fitted model and the pilot data, estimated separately for each treatment. 
+This then gives us four conditional mean models for \textit{each} bootstrap iteration. We then generate data from these models by sampling covariates from the empirical distribution from the pilot data and assigning potential outcomes as the conditional means from the given model + a noise term, where the noise term is based on the mean error between the fitted model and the pilot data, estimated separately for each treatment. 
 
 We run a series of simulated experiments using synthesized data from each of the DGPs, randomly applying hyperparameters from Table~\ref{tab:design}. 
 
@@ -738,13 +734,13 @@ $N$ & $=N^A + |\mathcal{I}_B| $\\
 \hline
 \end{tabular}
 \end{table}
-**Last batch size $|\mathcal{I}_B|$ is set at 2,500, to sufficiently power a one-sided hypothesis test, Hypothesis~\ref{eq:optctr}, where the optimal contextual policy is .15 standard deviations greater than the control policy. 
+**Last batch size $|\mathcal{I}_B|$ is set at 2,500, to sufficiently power a one-sided test of Hypothesis~\ref{eq:optctr}, where the optimal contextual policy is .15 standard deviations greater than the control policy. 
 
 \section{Simulations}
-To ensure the robustness of our adaptive design, we consider performance of our algorithm wjtn hypothetical data generating processes (DGPs). We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
+To ensure the robustness of our adaptive design, we consider performance of our algorithm under hypothetical data generating processes (DGPs). Here, we use a simplified version of the design, where we consider only unique treatment interventions, not factorial combinations. We assume that across the DGPs, there are three groups, and within each group, conditional on covariates, a different arm gives the highest reward. We then vary:
 \begin{itemize}
-\item \textbf{Relative size of the groups.} We allow the largest group to be 0.4, 0.6, and 0.8 share of the underlying population, with the two remaining groups approximately equally sized
-\item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership, over 3, 5, and 10 covariates. 
+\item \textbf{Relative size of the groups.} We allow the largest group to be 0.4, 0.6, and 0.8 share of the underlying population, with the two remaining groups approximately equally sized.
+%\item \textbf{Number of predictive covariates.} We vary the number of covariates used to predict group membership, over 3, 5, and 10 covariates. 
 \item \textbf{Heterogeneity in the data.} We vary the relative value of the best contextual policy to the best fixed policy to be 0.02, 0.14, or .2.\footnote{These quantities were selected by setting the value of the best contextual policy as 1.05, 1.5, or 1.95 times greater than that of the best fixed policy, but in general, we prefer to present heterogeneity in terms of increases in standard deviations to ensure that this quantity is not dependent on shifts in the mean of the response function.} 
 \end{itemize}
 
@@ -752,95 +748,87 @@ We simulate effect sizes that are equivalent to 0.6 in the scale of our response
 
 We selected this magnitude of effect for simulations based on the findings in \cite{pennycook2020fighting}, where their measured outcome is similarly sharing intentions. They find the difference in propensity to report sharing intentions between true and false stimuli expands from 0.050 to 0.142, or nearly .1. This is the average effect for a single fixed treatment condition; we hypothesize a somewhat greater widening for the \textit{oracle} contextual policy, where the oracle policy would be the true best policy based on the simulated DGP. That said, we do not expect to learn the oracle policy in practice, and in the simulations below, the value of the estimated policies fall short of this oracle policy. 
 
-A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. The features of the underlying DGPs primarily inform the value of the policy that is learned. Because we ensure that the value of the best contextual policy and the control policy are fixed across simulations, as we increase heterogeneity, all else equal, we have to decrease the value of the best fixed policy in regions where there is disagreement between the best contextual and the best fixed policy. Consequently, while the oracle contextual policy has the same value across simulations, the learned contextual policy may be of lower value in settings where there is more heterogeneity. Increasing number of predictive covariates also makes it harder for the algorithm to correctly learn group membership≈. 
+A brief overview of the design of DGPs implemented in these simulations is provided in Appendix~\ref{appendix:dgp}. The features of the underlying DGPs primarily inform the value of the policy that is learned. Because we ensure that the value of the best contextual policy and the control policy are fixed across simulations, as we increase heterogeneity, all else equal, we have to decrease the value of the best fixed policy in regions where there is disagreement between the best contextual and the best fixed policy. Consequently, while the oracle contextual policy has the same value across simulations, the learned contextual policy may be of lower value in settings where there is more heterogeneity. %Increasing number of predictive covariates also makes it harder for the algorithm to correctly learn group membership. 
 
 
 \FloatBarrier
 \subsection{Overall power}
-These simulations provide justification for the choice of design hyperparameters described in Table~\ref{tab:design}. We see that in the settings below, the adaptive algorithm achieves higher power than the random design at all timepoints; this is due to learning a higher value policy in the learning stage of the experiment, and in the evaluation stage, allocating treatment only to the policies of interest. Careful choice of design hyperparameters as described in Section~\ref{simulations} will help us to learn higher value policies, optimizing for power. 
+These simulations provide justification for the choice of design hyperparameters described in Table~\ref{tab:design}. We see that in the settings below, the adaptive algorithm achieves higher power than the random design at all timepoints; this is due to learning a higher value policy in the learning stage of the experiment, and in the evaluation stage, allocating treatment only to the policies of interest. 
 
-In the figures below, we marginalize over the choice of design hyperparameters; we then consider each hyperparameter in turn. Note that the x-axis below, we consider the size of the sample used to \textit{evaluate} the policies.  
+In the figures below, we marginalize over a balanced distribution of the choice of design hyperparameters; we then consider each hyperparameter in turn. Careful choice of design hyperparameters as described in Section~\ref{simulations} will help us to learn higher value policies, optimizing for power. Note that in the x-axis below, we consider the size of the sample used to \textit{evaluate} the policies.  
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest.png}
+\caption{
+%\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+%\textbf{X-axis:} Sample used for evaluation.\\
+Rows represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split.  Columns indicate heterogeneity delta. }
+\label{fig:power_control}
+\end{figure}\FloatBarrier
+
+%
 %\begin{figure}[ht]
 %\centering
-%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.05.png}
-%\caption{\textbf{Heterogeneity delta = 0.02:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.02.png}
+%\caption{\textbf{Heterogeneity delta:} 0.02. \\
+%\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+%\textbf{X-axis:} Sample used for evaluation.\\
+%Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 %\label{fig:power_control1.05}
 %\end{figure}\FloatBarrier
 %
 %\begin{figure}[H]
 %\centering
-%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.5.png}
-%\caption{\textbf{Heterogeneity delta = 0.14:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.14.png}
+%\caption{\textbf{Heterogeneity delta:} 0.14. \\
+%\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+%\textbf{X-axis:} Sample used for evaluation.\\
+%Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 %\label{fig:power_control1.5}
 %\end{figure}
 %
 %\begin{figure}[H]
 %\centering
-%\includegraphics[width=.9\textwidth]{figures/value_opt_ctr_diff_forest_1.95.png}
-%\caption{\textbf{Heterogeneity delta = 0/2:} Value of the estimated optimal policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
+%\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.2.png}
+%\caption{\textbf{Heterogeneity delta:} 0.20. \\
+%\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
+%\textbf{X-axis:} Sample used for evaluation.\\
+% Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
 %\label{fig:power_control1.95}
 %\end{figure}
 
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.02.png}
-\caption{\textbf{Heterogeneity delta:} 0.02. \\
-\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
-\textbf{X-axis:} Sample used for evaluation.\\
-Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
-\label{fig:power_control1.05}
-\end{figure}\FloatBarrier
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.14.png}
-\caption{\textbf{Heterogeneity delta:} 0.14. \\
-\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
-\textbf{X-axis:} Sample used for evaluation.\\
-Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
-\label{fig:power_control1.5}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=.9\textwidth]{figures/power_against_control_policy_forest_0.2.png}
-\caption{\textbf{Heterogeneity delta:} 0.20. \\
-\textbf{Y-axis:} Power for the hypothesis that the estimated optimal policy is not equal to the control policy. 
-\textbf{X-axis:} Sample used for evaluation.\\
- Power for the hypothesis that the estimated optimal policy is not equal to the control policy. Columns represent the relative group size, where a cluster size of 0.4 indicates the group for whom the best fixed arm is best is 0.4 share of the underlying population, and the two remaining groups are each equally split. Rows indicate the number of covariates used to define group clusters. }
-\label{fig:power_control1.95}
-\end{figure}
-
 \subsection{Varying parameters of the adaptive algorithm}
-Aside from the last batch size, the design hyperparameters improve power by increasing the value of the estimated optimal policy. Note that the x-axis in the following figures, we consider the size of the sample used to \textit{learn} the policies. 
+Aside from the last batch size, the design hyperparameters improve power by increasing the value of the estimated optimal policy. Note that in the x-axis in the following figures, we consider the size of the sample used to \textit{learn} the policies. 
 
 We note that when there is very little heterogeneity in the data, we learn a better contextual policy using the randomly collected data. This may be because the adaptive algorithm exploits false leads, resulting in higher variance in the scores used for policy learning, without consequent benefit in more information on the best policies. 
 
-In these figures, we marginalize over the relative group size and the number of predictive covariates.  
+In the below figures, we marginalize over the relative group size. % and the number of predictive covariates.  
 
 \subsubsection{Varying probability floor}
-We include probability floors in the adaptive algorithm. In the random algorithm, the floors are implicitly $ 1/ |\ww|$. Floors ensure that our weights are not too extreme when conducting estimation using inverse probability weights; floors that are too high reduce the algorithm's ability to exploit promising arms.
+We include probability floors in the adaptive algorithm. In the random algorithm, the floors are implicitly $ 1/ |\ww|$. Floors ensure that our weights are not too extreme when conducting estimation using inverse probability weights; floors that are too high may reduce the algorithm's ability to exploit promising arms.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/value_diff_control_floor.png}
-\caption{\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
-\textbf{X-axis:} Sample used for policy learning.\\
+\caption{
+%\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+%\textbf{X-axis:} Sample used for policy learning.\\
  Hues represent the probability floors. A floor of 1/40 = 0.025 represents the random design. }
 \label{fig:value_control_floor}
 \end{figure}
 
 
 \subsubsection{Varying first batch size}
-In the adaptive algorithm, we explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but reduces our ability to exploit promising arms. The random algorithm has no set first batch. 
+In the adaptive algorithm, we explore randomly in the first batch. A larger first batch may reduce extreme probabilities, but inhibits our ability to exploit promising arms. The random algorithm has no set first batch. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/value_diff_control_initial_batch_prop.png}
-\caption{\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
-\textbf{X-axis:} Sample used for policy learning.\\ Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
+\caption{
+%\textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+%\textbf{X-axis:} Sample used for policy learning.\\ 
+Hues represent the proportion of the experiment assigned under random exploration in the first batch. }
 \label{fig:value_control_initial_batch_prop}
 \end{figure}
 
@@ -850,8 +838,9 @@ In the adaptive algorithm, we update the assignment algorithm in batches; more b
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/value_diff_control_num_batches.png}
-\caption{ \textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
-\textbf{X-axis:} Sample used for policy learning.\\ 
+\caption{
+% \textbf{Y-axis:} Value of the difference between the estimated optimal policy and the control policy. 
+%\textbf{X-axis:} Sample used for policy learning.\\ 
 Hues represent the number of batches between the first and last batch.}
 \label{fig:value_control_batches}
 \end{figure}
@@ -893,13 +882,15 @@ For some continuous covariates that describe individual characteristics, such as
 The survey script is available at this link:\\
 \url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit#gid=366167997&range=A1}
 
-\subsection{Stimuli}\label{appendis:stimuli}
+\subsection{Stimuli}\label{appendix:stimuli}
 All of the stimuli used in the experiment are available at this link:\\
 \url{https://docs.google.com/spreadsheets/d/1ZEi8xU-TOZCZIQnDqq4VYjG5cWjIaWNyoKvPCjLL3fg/edit?usp=sharing}
 
 
-\subsection{Treatments}
+\subsection{Treatments}\label{sec:treatments}
 %\todo{Include mockups for headlines, full questions for respondent-level treatments, add deliberation stimuli and describe}
+Additional details for the treatments described in Table~\ref{tab:treatments} are provided below. 
+
 
 \subsubsection{Facebook Tips}\label{sec:fbtips}
 The script for the Facebook tips respondent-level treatment is as follows:
@@ -949,6 +940,18 @@ First Draft\\
 Africa Check\\
 AFP Fact Check
 
+%
+%\subsubsection{Video Treatment}
+%\label{sec:video}
+%Respondents are shown one of the following videos, produced by BBC:
+%
+%\begin{itemize}
+%\item \url{https://www.facebook.com/Vodcasts/videos/1322816708106278/}
+%\item \url{https://www.facebook.com/BBCnewsafrica/videos/3104356182956064/}
+%\item \url{https://www.facebook.com/BBCMediaActionNaija/videos/195932528440760/}
+%\end{itemize}
+
+
 \subsubsection{Accuracy and Deliberation Nudge Treatments}\label{sec:nudge}
 
 For both the accuracy and deliberation nudge treatments, respondents will see the below placebo headline and asked the nudge question about it. For the accuracy nudge respondents are asked to think about whether the headline is true. The deliberation nudge asks respondents to think about why they would either choose to share or not share this headline.
@@ -968,6 +971,8 @@ For both the accuracy and deliberation nudge treatments, respondents will see th
 \end{figure} 
 
 \FloatBarrier
+
+
 \subsubsection{Pledge Treatment}
 \label{sec:pledge}
 This treatment draws on the psychological evidence around commitment and consistency \citep{cialdini1987influence,costa2018walking}. Knowing that people, as much as possible, want to appear consistent with their prior words and actions, we want to see whether we can first get them to commit to an ``easy ask'' and then lead them down a path towards a public (or private) pledge.
@@ -1211,7 +1216,8 @@ Requirements for DGPs:
 \textbf{Generate Baseline Dataset ($N = 10,000, p = 15$)}
 \begin{itemize}
     \item Parameter \begin{itemize}
-        \item Number of useful covariates $p' \in \{3, 5, 10\}$ (i.e., covariates used to determine cluster membership)
+%        \item Number of useful covariates $p' \in \{3, 5, 10\}$ (i.e., covariates used to determine cluster membership)
+        \item Number of useful covariates $p' \in \{3, 5\}$ (i.e., covariates used to determine cluster membership)
         \item Largest cluster size ratio $c \in \{0.4, 0.6, 0.8\}$
         \item Heterogeneity delta $h \in \{0.02, 0.14, 0.2\}$
     \end{itemize}
