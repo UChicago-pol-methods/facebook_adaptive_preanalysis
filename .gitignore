@@ -322,3 +322,6 @@ cov_phl/data
 working
 .idea
 meetings
+admin
+bandit_model.pickle
+model.pickle
