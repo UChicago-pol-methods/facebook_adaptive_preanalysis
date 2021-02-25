@@ -9,7 +9,7 @@ c <- .15
 # Assumptions ----
 # Sharing rates are 50/% for both true and false at baseline
 # Assume maximum variance; true variance:
-var(sample(c(-2, 1), 1e5, replace = TRUE))
+var(sample(c(-4, 2), 1e5, replace = TRUE))
 
 # hypothetical sample size
 ss <- seq(500, 4000, 50)

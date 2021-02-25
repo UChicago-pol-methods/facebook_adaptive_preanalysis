@@ -331,3 +331,4 @@ analysis/figures
 analysis/tables
 analysis/data
 *.rds
+analysis/code/optpar.rda

@@ -1,6 +1,11 @@
 % USE: %\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
 
 \RequirePackage{etex}
+\RequirePackage{etoolbox}
+\AtEndPreamble{
+\RequirePackage[colorlinks=true, citecolor=blue]{hyperref}
+ }
+
 
 % Graphics
 \RequirePackage{graphicx}
@@ -51,7 +56,7 @@
 %\setkomafont{descriptionlabel}{\normalfont\bfseries} % article fonts
 
 % Bibliography and citation formatting
-\PassOptionsToPackage{hyphens}{url}\RequirePackage[colorlinks=true, citecolor=blue]{hyperref}
+\PassOptionsToPackage{hyphens}{url}
 
 \RequirePackage{nameref}
 \RequirePackage[round]{natbib} 
