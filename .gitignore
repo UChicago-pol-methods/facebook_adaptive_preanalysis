@@ -1,6 +1,7 @@
 # History files
 .Rhistory
 .Rapp.history
+.RData
 
 # User-specific files
 .Ruserdata
@@ -326,3 +327,7 @@ admin
 bandit_model.pickle
 model.pickle
 node_modules
+analysis/figures
+analysis/tables
+analysis/data
+*.rds
