@@ -331,4 +331,6 @@ analysis/figures
 analysis/tables
 analysis/data
 *.rds
-analysis/code/optpar.rda
+analysis/code/dataAnalysisAdaptive_files/figure-html
+analysis/code/dataAnalysisAdaptiveSecondary_files
+
