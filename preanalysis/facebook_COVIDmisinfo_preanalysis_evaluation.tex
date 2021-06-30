@@ -1,0 +1,59 @@
+\documentclass[letterpaper, 12pt, parskip=full,DIV=10]{scrartcl}
+% The next three lines are temporary, for todo notes, remove after notes are removed
+%\documentclass[letterpaper, 12pt, parskip=full,]{scrartcl}
+%\setlength{\marginparwidth}{4.5cm}
+%\usepackage[top=2.5cm, bottom=2.5cm, left=1.5cm, right=5cm]{geometry}
+
+\usepackage{soul} % for highlighting
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\tikzset{%
+  >={Latex[width=2mm,length=2mm]},
+  % Specifications for style of nodes:
+            base/.style = {rectangle, rounded corners, draw=black,
+                           minimum width=4cm, minimum height=1cm,
+                           text centered, font=\sffamily},
+  activityStarts/.style = {base, fill=blue!30},
+       startstop/.style = {base, fill=red!30},
+    activityRuns/.style = {base, fill=green!20},
+         process/.style = {base, minimum width=2.5cm, fill=orange!15},
+                          % font=\ttfamily},
+}
+
+% Title and Subtitle added in .tex file
+
+\title{Optimal Policies to Battle the Coronavirus ``Infodemic'' Among Social Media Users in Sub-Saharan Africa}
+\subtitle{Revisions to data collected for evaluation}
+\author{Molly Offer-Westort, Leah R. Rosenzweig, Susan Athey}
+\date{\today}
+
+\input{template_MOW.sty}
+
+\begin{document}%
+\normalsize%
+\maketitle%
+
+Following collection of the data under adaptive assignment, we made several changes to our evaluation plans:
+
+\begin{itemize}
+\item For \textbf{best uniform policies}, we collect both the best as well as the second best of the headline- and respondent-level treatments. We use the approach for learning best fixed policies as described in Section 5.1 of the pre-analysis plan, and, as described there, while we evaluate across a balanced distribution of background treatment assignment, we implement \textit{only} the uniform version of each policy. For headline-level treatments, the treatments implemented are the factcheck and related articles treatments. For the respondent-level treatments, the treatments implemented are the accuracy nudge and Facebook tips treatments. 
+\item For the \textbf{optimal contextual policy}, we determined 
+\begin{itemize}
+\item We would focus {only} on a contextual \textit{respondent}-level policy, to yield a better comparison between the best overall fixed treatment (accuracy, respondent-level) and a personalized contextual policy. Our initial approach crossed headline and respondent-level treatments, however, in comparing such a policy to the best uniform policy, it would not be straightforward to determine whether differences were due to personalization, or to the joint assignment of headline-level treatments in the contextual policy. 
+\item To better share data across treatment conditions, instead of estimating a random forest model separately under each condition, we use a multi-arm causal forest estimated across conditions, as implemented in \texttt{grf}'s \texttt{multi\_arm\_causal\_forest} function. In the evaluation data, then, we predict response under each unique (respondent-level) treatment, and take the maximum. For our causal forests, we set the best overall treatment, the accuracy nudge, as the reference level. 
+\item For a less granular policy, we restricted treatments assigned in the policy to the top four respondent-level treatment conditions: accuracy nudge, emotion suppression, Facebook tips, and video training. 
+\end{itemize}
+\end{itemize}
+
+In our evaluation split, we assign treatment to each observation with equal probability to:
+\begin{itemize}
+\item Pure control
+\item Related articles (pure headline-level)
+\item Factcheck (pure headline-level)
+\item Accuracy nudge (pure respondent-level)
+\item Facebook tips (pure respondent-level)
+\item Personalized respondent-level policy, as described above. 
+\end{itemize}
+We target 2,000 observations in each condition. 
+
+\end{document}
