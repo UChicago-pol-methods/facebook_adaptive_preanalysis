@@ -60,10 +60,6 @@ vignettes/*.pdf
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-# *.pdf
-
-## Generated if empty string is given at "Please type another file name for output:"
-.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
@@ -334,3 +330,8 @@ analysis/data
 analysis/code/dataAnalysisAdaptive_files/figure-html
 analysis/code/dataAnalysisAdaptiveSecondary_files
 
+*_files
+__pycache__
+liverun/testing_*
+*.mtc
+*.ptc
